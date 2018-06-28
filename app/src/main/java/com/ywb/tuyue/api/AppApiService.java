@@ -1,6 +1,7 @@
 package com.ywb.tuyue.api;
 
 
+import com.ywb.tuyue.entity.GameType;
 import com.ywb.tuyue.entity.TAdvert;
 import com.ywb.tuyue.entity.TUnlockAdvert;
 
@@ -32,7 +33,14 @@ public interface AppApiService {
      * 所有的广告详情页中的数据列表
      */
 
-    @GET("advert/getList") // http://192.168.1.6:8080/tuyue/api/advert/getList
+    @GET("advert/getList")
+    // http://192.168.1.6:8080/tuyue/api/advert/getList
     Observable<List<TAdvert>> getMainPage();
 
+    /**
+     * 游戏类别
+     * @return
+     */
+    @GET("gameType/getList")
+    Observable<List<GameType>> getGameType();
 }

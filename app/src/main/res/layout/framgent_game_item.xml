@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="10dp">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:cardCornerRadius="@dimen/dp_5">
+
+        <ImageView
+            android:id="@+id/iv_gamePic"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@mipmap/game" />
+    </android.support.v7.widget.CardView>
+    <TextView
+        android:id="@+id/tv_gameName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="植物大战僵尸"
+        android:textSize="@dimen/sp_16"
+        android:layout_marginTop="@dimen/dp_5"
+        android:layout_below="@+id/cardView"
+        android:gravity="center_horizontal"/>
+
+</RelativeLayout>

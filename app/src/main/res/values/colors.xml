@@ -56,7 +56,8 @@
     <color name="unlock_text_color">#b8a300</color>  <!--解锁屏字体颜色 -->
     <color name="transport_half">#50000000</color> <!--欢迎页中倒计时字体颜色-->
 
-
-
+    <!--导航 -->
+    <color name="my_black">#686868</color>
+    <color name="hint_color">#999999</color>
 
 </resources>

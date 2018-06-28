@@ -70,4 +70,9 @@
         <item name="android:layout_height">@dimen/item_height</item>
         <item name="android:background">@drawable/view_defulte_color</item>
     </style>
+
+    <!--游戏-->
+    <style name="TabLayoutTextStyle">
+        <item name="android:textSize">@dimen/sp_18</item>
+    </style>
 </resources>

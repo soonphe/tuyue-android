@@ -5,6 +5,7 @@ import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.ywb.tuyue.components.okhttp.HttpLoggingInterceptor;
 import com.ywb.tuyue.constants.IpConfig;
+import com.ywb.tuyue.entity.GameType;
 import com.ywb.tuyue.entity.TAdvert;
 import com.ywb.tuyue.entity.TUnlockAdvert;
 
@@ -28,6 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AppApi implements AppApiService {
     private AppApiService service;
+
     public AppApi(OkHttpClient mOkHttpClient) {
         Retrofit retrofit =
                 new Retrofit.Builder()
@@ -70,6 +72,7 @@ public class AppApi implements AppApiService {
     /**
      * 封装.subscribeOn(Schedulers.io()).
      * observeOn(AndroidSchedulers.mainThread());
+     *
      * @return
      */
     private ObservableTransformer bindUntil() {
@@ -86,6 +89,7 @@ public class AppApi implements AppApiService {
 
     /**
      * 根据id获取解锁屏页的广告
+     *
      * @param id
      * @return
      */
@@ -100,5 +104,14 @@ public class AppApi implements AppApiService {
     @Override
     public Observable<List<TAdvert>> getMainPage() {
         return service.getMainPage().compose(bindUntil());
+    }
+
+    /**
+     * 游戏类别
+     * @return
+     */
+    @Override
+    public Observable<List<GameType>> getGameType() {
+        return service.getGameType().compose(bindUntil());
     }
 }

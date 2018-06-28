@@ -110,7 +110,7 @@
         <activity android:name=".ui.food.FoodActivity" />
         <activity android:name=".ui.book.BookActivity" />
         <activity android:name=".ui.city.CityActivity" />
-        <activity android:name=".ui.subway.SubwayActivity"></activity>
+        <activity android:name=".ui.subway.SubwayActivity"/>
     </application>
 
 </manifest>

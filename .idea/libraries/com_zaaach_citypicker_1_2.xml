@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="com.zaaach:citypicker-1.2">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/citypicker-1.2.aar/1ae5aa77ee5feb8452f36dc813e09845/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/citypicker-1.2.aar/1ae5aa77ee5feb8452f36dc813e09845/jars/libs/AMap_Location_V3.5.0_20170731.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/citypicker-1.2.aar/1ae5aa77ee5feb8452f36dc813e09845/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.zaaach/citypicker/1.2/2993fe40b3fa9d5acfbc8030e7b5c9ee0055e6c1/citypicker-1.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

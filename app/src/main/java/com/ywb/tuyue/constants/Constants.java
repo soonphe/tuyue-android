@@ -16,6 +16,7 @@ public class Constants {
     public static final String page = "page";
     public static final String pageSize = "pageSize";
 
-
+    public static final String GAME_TYPE="game_type";
+    public static final String GAME_NAME="game_name";
 
 }

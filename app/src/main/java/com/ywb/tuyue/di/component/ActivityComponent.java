@@ -5,6 +5,7 @@ import android.app.Activity;
 import com.ywb.tuyue.di.PerActivity;
 import com.ywb.tuyue.di.module.ActivityModule;
 import com.ywb.tuyue.ui.advertise.AdvertiseDetailActivity;
+import com.ywb.tuyue.ui.game.GameActivity;
 import com.ywb.tuyue.ui.main.MainActivity;
 
 import com.ywb.tuyue.ui.splash.SplashActivity;
@@ -27,6 +28,7 @@ public interface ActivityComponent {
     /**
      * inject方法：将依赖需求方对象送到Component类中，注入所需对象
      * 注：inject方法的参数不能使用父类接受
+     *
      * @param activity
      */
 
@@ -38,7 +40,7 @@ public interface ActivityComponent {
 
     void inject(AdvertiseDetailActivity advertiseDetailActivity);//广告详情页
 
-
+    void inject(GameActivity activity);//游戏列表页
 
 
 }

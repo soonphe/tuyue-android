@@ -152,5 +152,6 @@ ext {
     externalOKIO = 'com.squareup.okio:okio:1.12.0'
     externalPagerSlidingTabStrip = 'com.astuetz:pagerslidingtabstrip:1.0.1'
 
-
+    //banner
+    externalNineoldAndroid= 'com.nineoldandroids:library:2.4.0'
 }
