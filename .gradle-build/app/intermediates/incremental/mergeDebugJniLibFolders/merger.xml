@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="E:\tuyue-android-master\app\libs"><file name="tbs_sdk_thirdapp_v3.2.0.1104_43200_sharewithdownload_withfilereader_withoutGame_obfs_20170609_115346.jar" path="E:\tuyue-android-master\app\libs\tbs_sdk_thirdapp_v3.2.0.1104_43200_sharewithdownload_withfilereader_withoutGame_obfs_20170609_115346.jar"/></source></dataSet><dataSet config="debug"><source path="E:\tuyue-android-master\app\src\debug\jniLibs"/></dataSet></merger>

@@ -1,0 +1,63 @@
+<resources>
+    <string name="app_name">TuYue</string>
+    <!--通用-->
+    <string name="developing">工程师正在拼命开发中,\n敬请期待……</string>
+    <string name="loading">加载中…</string>
+    <string name="error">Error</string>
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="grant_permission">请先授予应用相关权限</string>
+    <string name="login_account_hint">请输入账号</string>
+    <string name="login_password_hint">请输入密码</string>
+    <string name="copyright">Copyright © 2018 XX</string>
+    <string name="title_detail">详情</string>
+    <string name="mobile">手机号</string>
+    <string name="password_text">密码</string>
+    <string name="login_text">登录</string>
+    <string name="forget_pwd">忘记密码?</string>
+    <string name="captch_text">验证码</string>
+    <string name="please_captch">请输入验证码</string>
+    <string name="get_captch">获取验证码</string>
+    <string name="please_mobile">请输入手机号</string>
+    <string name="setting_password">设置密码</string>
+    <string name="confirm_password">确认密码</string>
+
+    <!-- Recyclerview -->
+    <string name="empty_data">点击或上拉加载更多</string>
+    <string name="more_data">更多加载中……</string>
+    <string name="nomore_data">(*￣ω￣) 没有更多了</string>
+    <string name="error_data">网络错误,点击重试</string>
+    <string name="error_gif">x or y bound size should be at least %1$dpx and file size should be no more than %2$sM</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <!-- MainActivity首页 -->
+    <string name="EMovieName">Cinema</string>
+    <string name="ZMovieName">影院</string>
+    <string name="EGameName">Game</string>
+    <string name="ZGameName">游戏</string>
+    <string name="EMusicName">Music</string>
+    <string name="ZMusicName">音乐</string>
+    <string name="EFoodName">Order</string>
+    <string name="ZFoodName">点餐</string>
+    <string name="EBookName">Book</string>
+    <string name="ZBookName">书吧</string>
+    <string name="ECityName">City</string>
+    <string name="ZCityName">城市</string>
+    <string name="ESubwayName">Suburban style</string>
+    <string name="ZSubwayName">成铁风采</string>
+
+    <!--各个模块的标题 -->
+    <string name="settings">设置</string>
+    <string name="cinema">影院</string>
+    <string name="game">游戏</string>
+    <string name="music">音乐</string>
+    <string name="order">点餐</string>
+    <string name="book">书吧</string>
+    <string name="city">城市</string>
+    <string name="subway">成铁风采</string>
+
+
+</resources>

@@ -1,0 +1,82 @@
+{
+    "logs": [
+        {
+            "outputFile": "E:\\tuyue-android-master\\.gradle-build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw720dp-v13\\values-sw720dp-v13.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\JuzhongJoy\\.gradle\\caches\\transforms-1\\files-1.1\\core-0.9.4.5.aar\\daa1626659fb5982f06c04e0056a099d\\res\\values-sw720dp-v13\\values-sw720dp-v13.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,97",
+                        "endColumns": "41,51",
+                        "endOffsets": "92,144"
+                    },
+                    "to": {
+                        "startLines": "3,5",
+                        "startColumns": "4,4",
+                        "startOffsets": "106,212",
+                        "endColumns": "41,51",
+                        "endOffsets": "143,259"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\JuzhongJoy\\.gradle\\caches\\transforms-1\\files-1.1\\bottomsheet-core-1.5.3.aar\\16d41af59e4fdc74b984b197e7fa1d84\\res\\values-sw720dp-v13\\values-sw720dp-v13.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,106",
+                        "endColumns": "50,63",
+                        "endOffsets": "101,165"
+                    },
+                    "to": {
+                        "startLines": "2,4",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,148",
+                        "endColumns": "50,63",
+                        "endOffsets": "101,207"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "F:\\tuyue-android-master\\.gradle-build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw720dp-v13\\values-sw720dp-v13.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\JuzhongJoy\\.gradle\\caches\\transforms-1\\files-1.1\\core-0.9.4.5.aar\\daa1626659fb5982f06c04e0056a099d\\res\\values-sw720dp-v13\\values-sw720dp-v13.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,97",
+                        "endColumns": "41,51",
+                        "endOffsets": "92,144"
+                    },
+                    "to": {
+                        "startLines": "3,5",
+                        "startColumns": "4,4",
+                        "startOffsets": "106,212",
+                        "endColumns": "41,51",
+                        "endOffsets": "143,259"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\JuzhongJoy\\.gradle\\caches\\transforms-1\\files-1.1\\bottomsheet-core-1.5.3.aar\\16d41af59e4fdc74b984b197e7fa1d84\\res\\values-sw720dp-v13\\values-sw720dp-v13.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,106",
+                        "endColumns": "50,63",
+                        "endOffsets": "101,165"
+                    },
+                    "to": {
+                        "startLines": "2,4",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,148",
+                        "endColumns": "50,63",
+                        "endOffsets": "101,207"
+                    }
+                }
+            ]
+        }
+    ]
+}

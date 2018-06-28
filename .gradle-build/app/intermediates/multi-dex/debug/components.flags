@@ -1,0 +1,131 @@
+-injars 'F:\tuyue-android-master\app\libs\tbs_sdk_thirdapp_v3.2.0.1104_43200_sharewithdownload_withfilereader_withoutGame_obfs_20170609_115346.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\multidex-1.0.2.aar\4cb1413e92161d953070f1460f1b537a\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\bottomsheet-commons-1.5.3.aar\9c3e609444e66c962140204cae5d78eb\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\bottomsheet-core-1.5.3.aar\16d41af59e4fdc74b984b197e7fa1d84\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\agentweb-1.2.6.aar\5039d97baf39eee84bc852a6e70f38ca\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\rollviewpager-1.2.9.aar\da2ae587bcc29ed57a3dfb05e93b2da0\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\bottomdialog-1.1.9.aar\1d79cae9e15f35ef307aa1976a8f8029\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\commons-0.9.4.5.aar\9be441ae5ddd7e5cecb40e060eaf4d9b\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\core-0.9.4.5.aar\daa1626659fb5982f06c04e0056a099d\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\support-v13-25.3.1.aar\97e6131e3d21707f9408744a4827d428\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\design-26.1.0.aar\e1125d25e508feea428525a0a3a88ac0\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\transition-26.1.0.aar\6b690aaec59fe52be959395b7bb8f082\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\8ac0b34e48ba1e6f87818ae1586c372a\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\recyclerview-animators-2.2.3.aar\0e0f004340cdc7adb3f0a41bb9a3f904\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\nice-spinner-1.3.1.aar\eba4462ab97eada45779fcc6afecd58b\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\library-1.2.0.aar\99312525eb624e86b9d4deca480155df\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\citypicker-1.2.aar\0125f5b2859180230c95ea3ec6b331ab\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\citypicker-1.2.aar\0125f5b2859180230c95ea3ec6b331ab\jars\libs\AMap_Location_V3.5.0_20170731.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\library-1.4.1.aar\d6346064ba83d5f8db30342259032e71\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.0.1.aar\c68a801f815d040a7ab4093ab2f7f871\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\cardview-v7-26.1.0.aar\3933c2d0158f296638831d0da3578c3e\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\0809036e3e6b48d9827af1dd87faa193\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\stetho-okhttp3-1.5.0.aar\01455580fe0dbb3f0e75ab10706c0278\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\stetho-1.5.0.aar\6f433978a13d5f2d095d14f2ca67dc96\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\banner-1.4.9.aar\957bf4ee19b6224eed53637263350147\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\modules-2\files-2.1\com.google.dagger\dagger\2.11\95037eaee68aa48021511972e9db9ba29916e1c9\dagger-2.11.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\logger-2.1.1.aar\5728734adbb2c6434343d4e9205bb1fc\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\rxpermissions-0.9.4.aar\6d0aab79b020d917b2602d044e7d329c\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\okserver-2.0.5.aar\0e0b5f4e2a068e0f1c7bb4f1e555d30f\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\okgo-3.0.4.aar\6991a28d62a7ac4cf429cfafcc789ebc\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\modules-2\files-2.1\com.github.bumptech.glide\glide\3.6.1\86b122e640af09b0723e1fa44083c354ba6d9089\glide-3.6.1.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\modules-2\files-2.1\org.greenrobot\eventbus\3.0.0\ddd99896e9569eaababbe81b35d80e1b91c4ad85\eventbus-3.0.0.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\modules-2\files-2.1\com.alibaba\fastjson\1.1.61.android\7c46412bedfe6c7f04d0003142ef51b4351f4cc9\fastjson-1.1.61.android.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\crashreport_upgrade-1.3.5.aar\5bdd81a4a5809c420be43b92bb9bd270\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\nativecrashreport-3.3.1.aar\0ce0864339d2434223cd02282766b1e4\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\butterknife-8.7.0.aar\c9331e80197da45a530c79629ced3c0a\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\rxandroid-2.0.1.aar\899b3122237381ed20b1859834d5dd34\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\modules-2\files-2.1\com.jakewharton.retrofit\retrofit2-rxjava2-adapter\1.0.0\e117362a2103f8ec01091ebd2f40aca4e1ada599\retrofit2-rxjava2-adapter-1.0.0.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\modules-2\files-2.1\io.reactivex.rxjava2\rxjava\2.1.1\99895d4dc6d79efbb74360f13c556d95533ad8f8\rxjava-2.1.1.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit2\converter-gson\2.1.0\aa557d71ead91cbf26e0c316a0f593d168303309\converter-gson-2.1.0.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit2\retrofit\2.3.0\bcacde6a8ccedcc56c127403d26b76072fe6214d\retrofit-2.3.0.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\core-1.4.0.aar\a3413b9771bab71183dd5f2db5b9452b\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\modules-2\files-2.1\com.mobsandgeeks\android-saripaar\2.0.3\abd8da523222180f9531768c62509edf6cd9b02e\android-saripaar-2.0.3.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\Luban-1.1.3.aar\ff4f0136900dd9dcb39e0182db46e589\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\utilcode-1.9.8.aar\ae2958d1820fb3c98eb5a33f99d78382\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\jpush-3.1.1.aar\d792c0d6a06386d4bdce327abdace584\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\jpush-3.1.1.aar\d792c0d6a06386d4bdce327abdace584\jars\libs\jpush-android-3.1.1.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\jcore-1.1.9.aar\bd463020a8c6eb20cb862cbb4079dc33\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\jcore-1.1.9.aar\bd463020a8c6eb20cb862cbb4079dc33\jars\libs\jcore-android-1.1.9.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\modules-2\files-2.1\com.github.SilenceDut\jpinyin\v1.0\cee108c24e97716026fa6e17bd2facd802e5981d\jpinyin-v1.0.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\RxTools-v1.7.7.3.aar\4a1824a3675a11c2008cf8cb24e0550f\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\RxTools-v1.7.7.3.aar\4a1824a3675a11c2008cf8cb24e0550f\jars\libs\alipaySdk-20170309.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\RxTools-v1.7.7.3.aar\4a1824a3675a11c2008cf8cb24e0550f\jars\libs\zip4j_1.3.2.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\RxTools-v1.7.7.3.aar\4a1824a3675a11c2008cf8cb24e0550f\jars\libs\zxing_core_3.0.1.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\BaseRecyclerViewAdapterHelper-2.9.30.aar\7ac0662ee042d26ce2c393c9a5e7f2e7\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\easyrecyclerview-4.2.1.aar\952afde3237f0ee94b2b70cd9b23dc9b\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\library-2.1.3.aar\4c9411c558511084866b14c0eb0e3f6e\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\circleimageview-2.1.0.aar\c0b5b909f02ff2589d932d104c052461\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\WheelPicker-1.5.6.aar\63f4939b357816dbdce6b9260559dd35\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\badgeview-1.1.3.aar\e85f2e8c5b649f7cd92862b1f69bb406\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\FlycoTabLayout_Lib-2.1.2.aar\6ccc7665f8d6352fb95eed606186118d\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\SmartRefreshLayout-1.0.5.1.aar\efac897c0e6e05e1ccfef753ac2e3514\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\SmartRefreshHeader-1.0.5.1.aar\46e1c802b3f71e9d50775e7f593ffa05\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\PhotoView-2.0.0.aar\070a350b7586bcfdd6b1bf71e266c21a\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\1d4d2214cd3c880abbed0a6fc41b8f1c\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-26.1.0.aar\af6591dfc6acc170265ad73422720914\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\support-fragment-27.0.1.aar\64a1fd3a2b94bf0ff528ec9225d6d075\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.0.1.aar\445bc4ae5490d1552fc70aa7296d2007\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.0.1.aar\dabbc0c225294367fa8126335dc0cc57\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.0.1.aar\922f0eb17cddc663106e1488414a970d\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.0.1.aar\a921d93b66d0050daf22cd6a83ad8b0a\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\support-compat-27.0.1.aar\7e10d6873be529b2746a2388224341b1\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\modules-2\files-2.1\com.jakewharton\butterknife-annotations\8.7.0\2637055420a2da406e3ea9920c2ff4aafd38c970\butterknife-annotations-8.7.0.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\modules-2\files-2.1\com.android.support\support-annotations\27.0.1\287742f1c6cea6d9126670e9f031890b0462362a\support-annotations-27.0.1.jar'(**.class)
+-injars 'D:\enviroment\sdk\extras\m2repository\com\android\support\constraint\constraint-layout-solver\1.0.2\constraint-layout-solver-1.0.2.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\modules-2\files-2.1\commons-cli\commons-cli\1.2\2bf96b7aa8b611c177d329452af1dc933e14501c\commons-cli-1.2.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\2.0.1\516c03b21d50a644d538de0f0369c620989cd8f0\jsr305-2.0.1.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.8.1\4d060ca3190df0eda4dc13415532a12e15ca5f11\okhttp-3.8.1.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\modules-2\files-2.1\javax.inject\javax.inject\1\6975da39a7040257bd51d21a231b76c915872d38\javax.inject-1.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\modules-2\files-2.1\org.reactivestreams\reactive-streams\1.0.0\14b8c877d98005ba3941c9257cfe09f6ed0e0d74\reactive-streams-1.0.0.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.7\751f548c85fa49f330cecbb1875893f971b33c4e\gson-2.7.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\Common-1.5.6.aar\c99da3979abd7855a7c65e5c5b96cbf4\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\library-1.0.4.aar\a4964d937fd27240223971fecf92e061\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\library-1.0.2.aar\2c1b924c7268ca7de3138ef38a6775b3\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.13.0\a9283170b7305c8d92d25aff02a6ab7e45d06cbe\okio-1.13.0.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\transforms-1\files-1.1\runtime-1.0.0.aar\4cba4a6656144a93d9cbea1e70b6de26\jars\classes.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\modules-2\files-2.1\android.arch.lifecycle\common\1.0.0\e414a4cb28434e25c4f6aa71426eb20cf4874ae9\common-1.0.0.jar'(**.class)
+-injars 'C:\Users\JuzhongJoy\.gradle\caches\modules-2\files-2.1\android.arch.core\common\1.0.0\a2d487452376193fc8c103dd2b9bd5f2b1b44563\common-1.0.0.jar'(**.class)
+-injars 'F:\tuyue-android-master\.gradle-build\matiss\intermediates\intermediate-jars\debug\classes.jar'(**.class)
+-injars 'F:\tuyue-android-master\.gradle-build\app\intermediates\classes\debug'(**.class)
+-outjars 'F:\tuyue-android-master\.gradle-build\app\intermediates\multi-dex\debug\componentClasses.jar'
+
+-libraryjars 'D:\enviroment\sdk\build-tools\26.0.3\lib\shrinkedAndroid.jar'
+
+-forceprocessing
+-dontoptimize
+-dontobfuscate
+-dontusemixedcaseclassnames
+-dontpreverify
+-dontnote **
+-dontwarn **
+-printconfiguration 'F:\tuyue-android-master\.gradle-build\app\intermediates\multi-dex\debug\components.flags'
+
+
+# Referenced at F:\tuyue-android-master\.gradle-build\app\intermediates\manifests\full\debug\AndroidManifest.xml:87
+-keep class com.ywb.tuyue.MyApplication {
+    <init>(...);
+}
+
+-keep public class * extends android.app.Instrumentation {
+    <init>();
+}
+
+-keep public class * extends android.app.Application {
+    <init>();
+    void attachBaseContext(android.content.Context);
+}
+
+-keep public class * extends android.app.backup.BackupAgent {
+    <init>();
+}
+
+-keep public class * extends java.lang.annotation.Annotation {
+    <fields>;
+    <methods>;
+}
+
+-keep class com.android.tools.ir.** {
+    <fields>;
+    <methods>;
+}

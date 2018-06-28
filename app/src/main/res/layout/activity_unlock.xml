@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.ywb.tuyue.ui.unlock.UnlockActivity">
+
+    <ImageView
+        android:id="@+id/unlock_bg_advert"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"/>
+
+    <com.ywb.tuyue.widget.CustomerUnlockView
+        android:id="@+id/unlock_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent">
+    </com.ywb.tuyue.widget.CustomerUnlockView>
+
+</android.support.constraint.ConstraintLayout>

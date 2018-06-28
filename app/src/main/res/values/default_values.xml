@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Basic——APPtitle -->
+    <dimen name="default_textSize">18sp</dimen>
+    <color name="default_textColor">#FFFFFF</color>
+    <bool name="default_showBack">false</bool>
+    <bool name="default_canFinish">true</bool>
+</resources>

@@ -1,0 +1,160 @@
+apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+
+
+android {
+    signingConfigs {
+        config {
+            keyPassword 'android'
+            storeFile file('debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+        }
+    }
+
+    compileSdkVersion externalCompileSdkVersion
+    buildToolsVersion externalBuildToolsVersion
+    defaultConfig {
+        applicationId "com.ywb.tuyue"
+        versionCode 51
+        versionName "51.0.1"
+        minSdkVersion 16
+        targetSdkVersion 26
+//        minSdkVersion externalMinSdkVersion
+//        targetSdkVersion externalTargetSdkVersion
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+
+        ndk{
+            //设置支持的so库架构，过滤 so文件
+            //音视频通话组件 CallLib 仅支持 armeabi-v7a 和 x86 架构 CPU：abiFilters "armeabi-v7a", "x86"
+            abiFilters "armeabi-v7a", "x86"
+//            abiFilters  'armeabi' , 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
+        //极光key
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : applicationId,
+                JPUSH_APPKEY : "abe53e64ceb62904be94dbf8", //JPush上注册的包名对应的appkey.
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+        ]
+    }
+    //recommend
+    dexOptions {
+        jumboMode = true
+    }
+
+    buildTypes {
+        release {
+            //不显示log
+            buildConfigField "boolean" ,"LOG_DEBUG" ,"false"
+            minifyEnabled false
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.config
+            proguardFiles 'proguard-rules.pro'
+        }
+    }
+
+    /*支持httpclient*/
+    useLibrary 'org.apache.http.legacy'
+    /*JDK*/
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+    sourceSets {
+        main {
+            jni.srcDirs = []
+            jniLibs.srcDirs = ['libs']
+            res.srcDirs = ['src/main/res']
+        }
+    }
+    packagingOptions {
+        exclude 'main/AndroidManifest.xml'
+        exclude 'main/res/values/strings.xml'
+    }
+}
+
+dependencies {
+    //base
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation externalJunit
+    //    androidTestImplementation externalAndroidTestRunner
+    androidTestImplementation(externalAndroidTestEspressoCore, {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    //option
+    implementation externalAndroidMultiDex
+    implementation externalAndroidSupportV4
+    implementation externalAndroidAppCompatV7
+    implementation externalAndroidDesign
+    implementation externalAndroidCardView
+    implementation externalAndroidConstrainLayout
+    //Tools library
+    implementation externalFacebookStetho
+    implementation externalFacebookStethoOkhttp
+    implementation externalYouthBanner
+    implementation externalGoogleDagger
+    annotationProcessor externalGoogleDaggerCompiler
+    implementation externalOrhanobutLogger
+    implementation externalRxpermissions2
+    implementation externalOkgo
+    implementation externalOkserver
+    implementation externalBumptechGlide
+    implementation externalGreenrobotEventbus
+    implementation externalAlibabaFastjson
+    implementation externalTencentBuglyCrashreport
+    implementation externalTencentBuglyNativecrashreport
+    implementation externalJakewhartonButterknife
+    annotationProcessor externalJakewhartonButterknifeCompiler
+    implementation externalRxjava2
+    implementation externalRxjava2Rxandroid
+    implementation externalRetrofit2
+    implementation externalRetrofit2ConverterGson
+    implementation externalRetrofit2Rxjava2Adapter
+    implementation externalLitepal
+    implementation externalSaripaar
+    implementation externalLuban
+    implementation externalBlankjUtilcode
+    //    provided externalLombok
+    //    implementation externalJavaxAnnotation
+    implementation externalJpush
+    implementation externalJcore
+    implementation externalPinyin
+    implementation externalRxTools
+    //View library
+    //    compile 'com.qmuiteam:qmui:1.0.0'
+    implementation externalFlipboardBottomsheet
+    implementation externalFlipboardBottomsheetCommons
+    implementation externalBaseRecyclerViewAdapterHelper
+    implementation externalJudeEasyrecyclerview
+    implementation externalWangAvi
+    implementation externalMaterialDialogs
+    implementation externalMaterialDialogsCommons
+    implementation externalJustAgentweb
+    implementation externalRecyclerviewAnimators
+    implementation externalJudeRollviewpager
+    implementation externalCircleimageview
+    implementation externalNiceSpinner
+    //    implementation externalBottomNavigationView
+    implementation externalRatingBar
+    //底部滚筒选择
+    implementation('cn.qqtheme.framework:WheelPicker:latest.release') {
+        exclude group: 'com.android.support'
+    }
+    implementation externalCitypicker
+    implementation externalBadgeView
+    implementation externalFlycoTabLayout
+    implementation externalSmartRefreshLayout
+    implementation externalSmartRefreshLayoutHeader
+    implementation externalBottomNavigationView
+    implementation externalPhotoView
+
+    implementation project(':matiss')
+//    implementation files('libs/tbs_sdk_thirdapp_v3.2.0.1104_43200_sharewithdownload_withfilereader_withoutGame_obfs_20170609_115346.jar')
+
+}

@@ -1,0 +1,22 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 默认状态（第一层） -->
+    <item>
+        <shape>
+            <solid android:color="@color/divider_recycle" />
+        </shape>
+    </item>
+    <!-- 只有底部有边框
+     因为第二层相对于View的底部上移一个dp所以第一层会露出一个dp的黑色所以给人一种只有底部边框的假象-->
+    <item android:bottom="1dp">
+        <shape>
+            <solid android:color="@color/white" />
+        </shape>
+    </item>
+
+    <!-- 点击效果 -->
+    <item>
+        <selector android:src="@drawable/view_defulte_color" />
+    </item>
+
+</layer-list>

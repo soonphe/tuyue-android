@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#099fde</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="defult_bg">#f2f2f2</color>
+    <color name="tab_select">#2fafe4</color>
+    <color name="text_orange">#ff7010</color>
+    <color name="devider_orange">#ffd4b7</color>
+    <color name="app_color">#0065b3</color>
+    <color name="title_normal">#b1b1b1</color>
+    <color name="title_selected">#114082</color>
+    <color name="text_red">#ff0000</color>
+    <color name="text_black">#33435c</color>
+    <color name="text_blue">#35aee5</color>
+    <color name="text_green">#3dbe02</color>
+    <color name="text_hint">#bcc2cc</color>
+    <color name="text_grey">#bab7b7</color>
+    <color name="text_deep_gray">#8d93a2</color>
+    <color name="radio_check">#03c401</color>
+    <color name="button_gray">#d3d3d3</color>
+    <color name="deivde_rect">#f2f2f2</color>
+    <color name="divider_recycle">#dddddd</color>
+    <color name="divider">#ffd2d2d2</color>
+
+    <color name="checking">#6cc955</color>
+    <color name="nocheck">#ff8f44</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="black_shallow">#5a5a5a</color>
+    <color name="transparent">#00000000</color>
+    <color name="transo">#0f000000</color>
+    <color name="text_dark">#a6a6a6</color>
+    <color name="default_color">#f7f7f7</color>
+    <color name="edit_hint_text">#ffacacac</color>
+    <color name="grid_itemdecoration">#267cbe</color>
+    <color name="swipe_color">#A6D1B6</color>
+    <color name="divider_color">#a6a6a6</color>
+    <color name="check_true">#ff7602</color>
+    <color name="check_false">#a2a2a3</color>
+    <color name="find_msg">#666666</color>
+    <color name="back_item">#e7e8ea</color>
+    <color name="text_color">#808080</color>
+    <color name="text_color_text">#333333</color>
+    <color name="view">#e6e6e6</color>
+    <color name="store_bg">#3ebcfe</color>
+    <color name="gray">#8c8c8c</color>
+
+
+
+
+
+    <!--途悦中使用到的颜色 -->
+    <color name="unlock_text_color">#b8a300</color>  <!--解锁屏字体颜色 -->
+    <color name="transport_half">#50000000</color> <!--欢迎页中倒计时字体颜色-->
+
+
+
+
+</resources>

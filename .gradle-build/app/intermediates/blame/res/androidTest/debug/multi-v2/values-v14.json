@@ -1,0 +1,90 @@
+{
+    "logs": [
+        {
+            "outputFile": "F:\\tuyue-android-master\\.gradle-build\\app\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-v14\\values-v14.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\JuzhongJoy\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.0.1.aar\\c68a801f815d040a7ab4093ab2f7f871\\res\\values-v14\\values-v14.xml",
+                    "from": {
+                        "startLines": "2,7,8,9,15",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "55,331,402,485,895",
+                        "endLines": "6,7,8,14,20",
+                        "endColumns": "12,70,82,12,12",
+                        "endOffsets": "326,397,480,890,1312"
+                    },
+                    "to": {
+                        "startLines": "2,14,15,16,22",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "55,852,923,1006,1416",
+                        "endLines": "6,14,15,21,27",
+                        "endColumns": "12,70,82,12,12",
+                        "endOffsets": "326,918,1001,1411,1833"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\JuzhongJoy\\.gradle\\caches\\transforms-1\\files-1.1\\bottomdialog-1.1.9.aar\\1d79cae9e15f35ef307aa1976a8f8029\\res\\values-v14\\values-v14.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "8",
+                        "endColumns": "16",
+                        "endOffsets": "571"
+                    },
+                    "to": {
+                        "startLines": "7",
+                        "startColumns": "4",
+                        "startOffsets": "331",
+                        "endLines": "13",
+                        "endColumns": "16",
+                        "endOffsets": "847"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "E:\\tuyue-android-master\\.gradle-build\\app\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-v14\\values-v14.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\JuzhongJoy\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.0.1.aar\\c68a801f815d040a7ab4093ab2f7f871\\res\\values-v14\\values-v14.xml",
+                    "from": {
+                        "startLines": "2,7,8,9,15",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "55,331,402,485,895",
+                        "endLines": "6,7,8,14,20",
+                        "endColumns": "12,70,82,12,12",
+                        "endOffsets": "326,397,480,890,1312"
+                    },
+                    "to": {
+                        "startLines": "2,14,15,16,22",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "55,852,923,1006,1416",
+                        "endLines": "6,14,15,21,27",
+                        "endColumns": "12,70,82,12,12",
+                        "endOffsets": "326,918,1001,1411,1833"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\JuzhongJoy\\.gradle\\caches\\transforms-1\\files-1.1\\bottomdialog-1.1.9.aar\\1d79cae9e15f35ef307aa1976a8f8029\\res\\values-v14\\values-v14.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "8",
+                        "endColumns": "16",
+                        "endOffsets": "571"
+                    },
+                    "to": {
+                        "startLines": "7",
+                        "startColumns": "4",
+                        "startOffsets": "331",
+                        "endLines": "13",
+                        "endColumns": "16",
+                        "endOffsets": "847"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,3 @@
+# Referenced at E:\tuyue-android-master\.gradle-build\app\intermediates\manifests\full\debug\AndroidManifest.xml:87
+-keep class com.ywb.tuyue.MyApplication { <init>(...); }
+

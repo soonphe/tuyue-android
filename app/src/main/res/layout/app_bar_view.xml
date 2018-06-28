@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/title_root"
+              android:layout_width="match_parent"
+              android:layout_height="60dp"
+              android:orientation="horizontal">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageButton
+            android:id="@+id/app_bar_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="?android:attr/selectableItemBackground"
+            android:minWidth="56dp"
+            android:scaleType="center"
+            android:src="@mipmap/icon_fanhui"
+            android:visibility="gone"/>
+        <!--fanhui-->
+        <!--back_jiantou-->
+        <!-- ic_arrow_l -->
+
+
+        <TextView
+            android:id="@+id/app_bar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="@string/developing"
+            android:visibility="gone"/>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/app_bar_btn1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                android:minWidth="50dp"
+                android:scaleType="center"
+                android:src="@mipmap/ic_home_txl"
+                android:visibility="gone"/>
+
+            <ImageButton
+                android:id="@+id/app_bar_btn2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                android:minWidth="50dp"
+                android:scaleType="center"
+                android:src="@mipmap/ic_home_txl"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/app_bar_right_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
+            android:minWidth="50dp"
+            android:text="rightText"
+            android:visibility="gone"/>
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="bottomsheet_is_tablet">true</bool>
+    <bool name="md_is_tablet">true</bool>
+    <dimen name="bottomsheet_default_sheet_width">480dp</dimen>
+    <dimen name="md_dialog_max_width">496dp</dimen>
+</resources>
