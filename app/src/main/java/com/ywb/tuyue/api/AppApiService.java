@@ -1,6 +1,7 @@
 package com.ywb.tuyue.api;
 
 
+import com.ywb.tuyue.entity.GameList;
 import com.ywb.tuyue.entity.GameType;
 import com.ywb.tuyue.entity.TAdvert;
 import com.ywb.tuyue.entity.TUnlockAdvert;
@@ -43,4 +44,11 @@ public interface AppApiService {
      */
     @GET("gameType/getList")
     Observable<List<GameType>> getGameType();
+
+    /**
+     * 游戏列表
+     * @return
+     */
+    @GET("game/getList")
+    Observable<List<GameList>> getGameList();
 }

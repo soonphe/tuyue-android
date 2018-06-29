@@ -44,12 +44,10 @@
       <sourceFolder url="file://$MODULE_DIR$/../.gradle-build/app/generated/source/apt/test/debug" isTestSource="true" generated="true" />
       <excludeFolder url="file://$MODULE_DIR$/../.gradle-build/app/intermediates/assets" />
       <excludeFolder url="file://$MODULE_DIR$/../.gradle-build/app/intermediates/blame" />
-      <excludeFolder url="file://$MODULE_DIR$/../.gradle-build/app/intermediates/check-manifest" />
       <excludeFolder url="file://$MODULE_DIR$/../.gradle-build/app/intermediates/classes" />
       <excludeFolder url="file://$MODULE_DIR$/../.gradle-build/app/intermediates/incremental" />
       <excludeFolder url="file://$MODULE_DIR$/../.gradle-build/app/intermediates/javaPrecompile" />
       <excludeFolder url="file://$MODULE_DIR$/../.gradle-build/app/intermediates/jniLibs" />
-      <excludeFolder url="file://$MODULE_DIR$/../.gradle-build/app/intermediates/lint" />
       <excludeFolder url="file://$MODULE_DIR$/../.gradle-build/app/intermediates/manifests" />
       <excludeFolder url="file://$MODULE_DIR$/../.gradle-build/app/intermediates/multi-dex" />
       <excludeFolder url="file://$MODULE_DIR$/../.gradle-build/app/intermediates/prebuild" />

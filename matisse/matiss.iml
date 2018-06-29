@@ -47,13 +47,11 @@
       <excludeFolder url="file://$MODULE_DIR$/../.gradle-build/matiss/intermediates/attr" />
       <excludeFolder url="file://$MODULE_DIR$/../.gradle-build/matiss/intermediates/blame" />
       <excludeFolder url="file://$MODULE_DIR$/../.gradle-build/matiss/intermediates/bundles" />
-      <excludeFolder url="file://$MODULE_DIR$/../.gradle-build/matiss/intermediates/check-manifest" />
       <excludeFolder url="file://$MODULE_DIR$/../.gradle-build/matiss/intermediates/classes" />
       <excludeFolder url="file://$MODULE_DIR$/../.gradle-build/matiss/intermediates/incremental" />
       <excludeFolder url="file://$MODULE_DIR$/../.gradle-build/matiss/intermediates/intermediate-jars" />
       <excludeFolder url="file://$MODULE_DIR$/../.gradle-build/matiss/intermediates/javaPrecompile" />
       <excludeFolder url="file://$MODULE_DIR$/../.gradle-build/matiss/intermediates/jniLibs" />
-      <excludeFolder url="file://$MODULE_DIR$/../.gradle-build/matiss/intermediates/lint" />
       <excludeFolder url="file://$MODULE_DIR$/../.gradle-build/matiss/intermediates/manifests" />
       <excludeFolder url="file://$MODULE_DIR$/../.gradle-build/matiss/intermediates/res" />
       <excludeFolder url="file://$MODULE_DIR$/../.gradle-build/matiss/intermediates/rs" />

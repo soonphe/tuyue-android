@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.ywb.tuyue.R;
 import com.ywb.tuyue.constants.Constants;
+import com.ywb.tuyue.ui.adapter.GameListAdapter;
 import com.ywb.tuyue.ui.mvp.BaseFragmentV4;
 
 import butterknife.BindView;
@@ -25,6 +26,8 @@ public class GameListFragment extends BaseFragmentV4{
 
     @BindView(R.id.gameList)
     RecyclerView mRecyclclerView;
+
+    GameListAdapter mGameListAdapter;
 
 
     @Override

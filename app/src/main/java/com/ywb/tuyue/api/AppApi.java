@@ -5,6 +5,7 @@ import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.ywb.tuyue.components.okhttp.HttpLoggingInterceptor;
 import com.ywb.tuyue.constants.IpConfig;
+import com.ywb.tuyue.entity.GameList;
 import com.ywb.tuyue.entity.GameType;
 import com.ywb.tuyue.entity.TAdvert;
 import com.ywb.tuyue.entity.TUnlockAdvert;
@@ -113,5 +114,10 @@ public class AppApi implements AppApiService {
     @Override
     public Observable<List<GameType>> getGameType() {
         return service.getGameType().compose(bindUntil());
+    }
+
+    @Override
+    public Observable<List<GameList>> getGameList() {
+        return service.getGameList().compose(bindUntil());
     }
 }

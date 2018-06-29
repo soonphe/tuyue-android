@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * Created by JuZhongJoy on 2018/6/28.
+ * 游戏类别
  */
 
 public class GameType {
