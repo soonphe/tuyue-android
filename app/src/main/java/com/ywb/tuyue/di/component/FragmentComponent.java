@@ -3,6 +3,7 @@ package com.ywb.tuyue.di.component;
 
 import com.ywb.tuyue.di.PerActivity;
 import com.ywb.tuyue.di.module.ActivityModule;
+import com.ywb.tuyue.ui.game.GameListFragment;
 import com.ywb.tuyue.ui.main.MainActivity;
 
 import dagger.Component;
@@ -15,6 +16,6 @@ import dagger.Component;
 @PerActivity
 @Component(dependencies = ApplicationComponent.class, modules = {ActivityModule.class})
 public interface FragmentComponent {
-
+void inject(GameListFragment gameListFragment);
 
 }

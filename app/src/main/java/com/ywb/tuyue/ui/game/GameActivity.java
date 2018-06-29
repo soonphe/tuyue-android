@@ -8,12 +8,11 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.ywb.tuyue.R;
-import com.ywb.tuyue.constants.Constants;
 import com.ywb.tuyue.entity.GameType;
 import com.ywb.tuyue.ui.main.MainActivity;
 import com.ywb.tuyue.ui.mvp.BaseActivity;
+import com.ywb.tuyue.utils.GlideUtils;
 import com.ywb.tuyue.widget.CustomViewPager;
 import com.ywb.tuyue.widget.bgabanner.BGABanner;
 import com.ywb.tuyue.widget.head.HeaderView;
@@ -45,7 +44,6 @@ public class GameActivity extends BaseActivity implements BGABanner.Adapter, BGA
     private List<GameListFragment> mGameListFragments = new ArrayList<>();  //列表页
     private List<String> mGameMenus = new ArrayList<>();  //导航
     private List<String> mGameMenusUrl = new ArrayList<>();  //里列表地址
-    private List<GameType> mGameTypes = new ArrayList<>();
 
     @Override
     public int bindLayout() {
@@ -79,6 +77,53 @@ public class GameActivity extends BaseActivity implements BGABanner.Adapter, BGA
         });
     }
 
+    /**
+     * 填充轮播图片
+     *
+     * @param banner
+     * @param view
+     * @param model
+     * @param position
+     */
+    @Override
+    public void fillBannerItem(BGABanner banner, View view, Object model, int position) {
+        GlideUtils.loadImageView(getContext(), mGameMenusUrl.get(position), (ImageView) view);
+    }
+
+    @Override
+    public void onBannerItemClick(BGABanner banner, View view, Object model, int position) {
+
+    }
+
+    @Override
+    public void doBusiness(Context mContext) {
+        mPresenterImp.getGameTypes();
+    }
+
+    @Override
+    public void initInjector() {
+        getComponent().inject(this);
+    }
+
+    /**
+     * 获取导行标题
+     *
+     * @param gameType
+     */
+    @Override
+    public void getGameTypeSuccess(List<GameType> gameType) {
+        if (gameType.size() > 0) {
+            for (GameType types : gameType) {
+                mGameMenus.add(types.getName());
+            }
+            setBanner();
+            setViewPager();
+        }
+    }
+
+    /**
+     * 设置banner轮播的数据、适配器、点击事件
+     */
     private void setBanner() {
         if (mGameMenusUrl != null && !mGameMenusUrl.isEmpty()) {
             mBanner.setData(mGameMenusUrl, null);
@@ -87,12 +132,17 @@ public class GameActivity extends BaseActivity implements BGABanner.Adapter, BGA
         mBanner.setOnItemClickListener(this);
     }
 
+    /**
+     * 设置游戏列表的导航
+     */
     private void setViewPager() {
-        mGameListFragments.clear();
+        if (mGameListFragments != null && mGameListFragments.size() > 0) {
+            mGameListFragments.clear();
+        }
+
         for (int i = 0; i < mGameMenus.size(); i++) {
-            mOperation.addParameter(Constants.GAME_TYPE, mGameTypes.get(i).getId());
-            mOperation.addParameter(Constants.GAME_NAME, mGameTypes.get(i).getName());
-            mGameListFragments.add(new GameListFragment());
+            GameListFragment gameListFragment = new GameListFragment();
+            mGameListFragments.add(gameListFragment);
         }
 
         mViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
@@ -122,37 +172,6 @@ public class GameActivity extends BaseActivity implements BGABanner.Adapter, BGA
         mPagerTab.setupWithViewPager(mViewPager);
     }
 
-    @Override
-    public void fillBannerItem(BGABanner banner, View view, Object model, int position) {
-        Glide.with(getContext()).load(R.drawable.test_02).into((ImageView) view);
-    }
-
-    @Override
-    public void onBannerItemClick(BGABanner banner, View view, Object model, int position) {
-
-    }
-
-    @Override
-    public void doBusiness(Context mContext) {
-        mPresenterImp.getGameTypes();
-    }
-
-    @Override
-    public void initInjector() {
-        getComponent().inject(this);
-    }
-
-    @Override
-    public void getGameTypeSuccess(List<GameType> gameType) {
-        mGameTypes = gameType;
-        if (gameType.size() > 0) {
-            for (GameType types : gameType) {
-                mGameMenus.add(types.getName());
-            }
-            setBanner();
-            setViewPager();
-        }
-    }
 
     @Override
     public void startLoading() {
@@ -168,4 +187,5 @@ public class GameActivity extends BaseActivity implements BGABanner.Adapter, BGA
     public void onError(String error) {
 
     }
+
 }

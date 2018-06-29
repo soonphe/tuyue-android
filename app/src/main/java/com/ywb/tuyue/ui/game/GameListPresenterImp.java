@@ -6,6 +6,8 @@ import com.ywb.tuyue.api.AppApi;
 import com.ywb.tuyue.di.PerActivity;
 import com.ywb.tuyue.ui.mvp.BasePresenter;
 
+import javax.inject.Inject;
+
 /**
  * Created by JuZhongJoy on 2018/6/29.
  */
@@ -15,11 +17,15 @@ public class GameListPresenterImp extends BasePresenter<GameListPresenter.GameLi
     private Context context;
     private AppApi api;
 
+    @Inject
     public GameListPresenterImp(Context context, AppApi appApi) {
         this.context = context;
         this.api = appApi;
     }
 
+    /**
+     * 获取游戏列表
+     */
     @Override
     public void getGameList() {
         mView.startLoading();

@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ywb.tuyue.R;
+import com.ywb.tuyue.entity.GameList;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,10 +25,10 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.HomeVi
 
     Context context;
     GameItem recOnitem;
-    List<String> list = new ArrayList<>();
+    List<GameList> list = new ArrayList<>();
     private HashMap<String, Boolean> states = new HashMap<String, Boolean>();//记录所有radiobutton被点击的状态
 
-    public void setdata(List<String> list) {
+    public void setdata(List<GameList> list) {
         this.list.clear();
         this.list = list;
         notifyDataSetChanged();
