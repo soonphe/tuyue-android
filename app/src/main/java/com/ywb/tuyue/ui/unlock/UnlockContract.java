@@ -1,6 +1,8 @@
 package com.ywb.tuyue.ui.unlock;
-import com.ywb.tuyue.entity.TUnlockAdvert;
+import com.ywb.tuyue.entity.TAdvertData;
+import com.ywb.tuyue.entity.TAdvertType;
 import com.ywb.tuyue.ui.mvp.BasePView;
+
 import java.util.List;
 
 /**
@@ -11,10 +13,12 @@ import java.util.List;
 public interface UnlockContract {
 
     interface UnlockView extends BasePView {
-        void getUnlockAdvertSuccess(TUnlockAdvert unlockAdvert);
+        void getAdvertTypeSuccess(List<TAdvertType> tAdvertType);
+        void getAdvertDataSuccess(List<TAdvertData> tAdvertData);
     }
 
     interface UnlockPresenter {
-        void getAdvert();
+        void getAdvertType();
+        void getAdvertData();
     }
 }

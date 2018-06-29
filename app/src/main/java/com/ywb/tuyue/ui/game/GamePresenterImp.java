@@ -24,6 +24,9 @@ public class GamePresenterImp extends BasePresenter<GamePresenter.GamePresenterS
         this.api = api;
     }
 
+    /**
+     * 获取类别数据
+     */
     @Override
     public void getGameTypes() {
         mView.startLoading();

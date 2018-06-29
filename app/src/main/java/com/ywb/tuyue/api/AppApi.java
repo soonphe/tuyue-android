@@ -7,8 +7,8 @@ import com.ywb.tuyue.components.okhttp.HttpLoggingInterceptor;
 import com.ywb.tuyue.constants.IpConfig;
 import com.ywb.tuyue.entity.GameList;
 import com.ywb.tuyue.entity.GameType;
-import com.ywb.tuyue.entity.TAdvert;
-import com.ywb.tuyue.entity.TUnlockAdvert;
+import com.ywb.tuyue.entity.TAdvertData;
+import com.ywb.tuyue.entity.TAdvertType;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -87,25 +87,25 @@ public class AppApi implements AppApiService {
         };
     }
 
-
     /**
-     * 根据id获取解锁屏页的广告
      *
-     * @param id
+     * 获取所有广告的类型
      * @return
      */
     @Override
-    public Observable<TUnlockAdvert> getUnlockAdvert(Integer id) {
-        return service.getUnlockAdvert(id).compose(bindUntil());
+    public Observable<List<TAdvertType>> getAdvertType() {
+        return service.getAdvertType().compose(bindUntil());
     }
 
     /**
-     * 广告详情页的数据
+     * 获取所有的广告数据
      */
     @Override
-    public Observable<List<TAdvert>> getMainPage() {
-        return service.getMainPage().compose(bindUntil());
+    public Observable<List<TAdvertData>> getTypeData() {
+        return service.getTypeData().compose(bindUntil());
     }
+
+
 
     /**
      * 游戏类别
@@ -116,6 +116,10 @@ public class AppApi implements AppApiService {
         return service.getGameType().compose(bindUntil());
     }
 
+    /**
+     * 游戏列表
+     * @return
+     */
     @Override
     public Observable<List<GameList>> getGameList() {
         return service.getGameList().compose(bindUntil());

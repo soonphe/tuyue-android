@@ -11,8 +11,13 @@ import android.view.View;
 
 import com.ywb.tuyue.R;
 import com.ywb.tuyue.constants.Constants;
+import com.ywb.tuyue.entity.GameList;
 import com.ywb.tuyue.ui.adapter.GameListAdapter;
 import com.ywb.tuyue.ui.mvp.BaseFragmentV4;
+
+import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 
@@ -22,17 +27,20 @@ import butterknife.BindView;
  */
 
 @SuppressLint("ValidFragment")
-public class GameListFragment extends BaseFragmentV4{
+public class GameListFragment extends BaseFragmentV4 implements GameListPresenter.GameListSuccess {
 
     @BindView(R.id.gameList)
     RecyclerView mRecyclclerView;
 
     GameListAdapter mGameListAdapter;
 
+    @Inject
+    GameListPresenterImp mGameListImp;
+
 
     @Override
     public void initInjector() {
-//        getComponent().inject(this);
+
     }
 
     @Override
@@ -43,17 +51,24 @@ public class GameListFragment extends BaseFragmentV4{
     @Override
     public void initParams(Bundle params) {
         String string = params.getString(Constants.GAME_TYPE);
-        String name=params.getString(Constants.GAME_NAME);
-        Log.i("====",string+",,,"+name);
+        String name = params.getString(Constants.GAME_NAME);
+        Log.i("====", string + ",,," + name);
     }
 
     @Override
     public void initView(View view) {
+        mGameListImp.attachView(this);
 
     }
 
     @Override
     public void doBusiness(Context mContext) {
+        mGameListImp.getGameList();
+    }
+
+    @Override
+    public void getGameListSuccess(List<GameList> gameLists) {
+
 
     }
 
@@ -61,4 +76,22 @@ public class GameListFragment extends BaseFragmentV4{
     public void lazyInitBusiness(Context mContext) {
 
     }
+
+
+    @Override
+    public void startLoading() {
+
+    }
+
+    @Override
+    public void endLoading() {
+
+    }
+
+    @Override
+    public void onError(String error) {
+
+    }
+
+
 }

@@ -21,6 +21,10 @@ public class IpConfig {
     public static String BASE_URL = HOST + "/tuyue/api/";
 
 
+    /*---------------------------------------------图片请求通用地址-------------------------------*/
+    public static String BASE_IMAGE_URL="http://"+SERVER_IP+"/upload";  //http://192.168.1.6/upload/img/20180628/1530178562.jpg
+
+
     //验证码等待时间
     public static int WAITETIME = 60;
     //基础请求分页

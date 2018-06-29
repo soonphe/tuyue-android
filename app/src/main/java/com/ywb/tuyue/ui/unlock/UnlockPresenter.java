@@ -17,19 +17,33 @@ import javax.inject.Inject;
 public class UnlockPresenter extends BasePresenter<UnlockContract.UnlockView> implements UnlockContract.UnlockPresenter {
     Context context;
     private AppApi api;
-
     @Inject
     public UnlockPresenter(Context context, AppApi accountApi) {
         this.context = context;
         this.api = accountApi;
     }
 
+
     @Override
-    public void getAdvert() {
+    public void getAdvertType() {
         mView.startLoading();
-        mDisposable.add(api.getUnlockAdvert(1).subscribe(adverts -> {
+        mDisposable.add(api.getAdvertType().subscribe(advertsType -> {
                     mView.endLoading();
-                    mView.getUnlockAdvertSuccess(adverts);
+                    mView.getAdvertTypeSuccess(advertsType);
+                },
+                throwable -> {
+                    mView.onError(throwable.getMessage());
+                    mView.endLoading();
+                }
+        ));
+    }
+
+    @Override
+    public void getAdvertData() {
+        mView.startLoading();
+        mDisposable.add(api.getTypeData().subscribe(advertsData -> {
+                    mView.endLoading();
+                    mView.getAdvertDataSuccess(advertsData);
                 },
                 throwable -> {
                     mView.onError(throwable.getMessage());

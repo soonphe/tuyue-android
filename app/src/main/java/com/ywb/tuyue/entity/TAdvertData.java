@@ -1,11 +1,12 @@
 package com.ywb.tuyue.entity;
 
 /**
- * Description: 所有广告实体类   主界面中广告详情页  游戏广告  电影广告  书吧广告
- * Created by wcystart on 2018/6/25.
+ * Description:解锁屏页面的实体类
+ * Created by wcystart on 2018/6/20.
  */
 
-public class TAdvert {
+public class TAdvertData {
+
     /**
      * id : 5
      * type : 1
@@ -99,4 +100,5 @@ public class TAdvert {
     public void setContent(String content) {
         this.content = content;
     }
+
 }

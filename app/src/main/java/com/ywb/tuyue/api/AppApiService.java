@@ -3,14 +3,13 @@ package com.ywb.tuyue.api;
 
 import com.ywb.tuyue.entity.GameList;
 import com.ywb.tuyue.entity.GameType;
-import com.ywb.tuyue.entity.TAdvert;
-import com.ywb.tuyue.entity.TUnlockAdvert;
+import com.ywb.tuyue.entity.TAdvertData;
+import com.ywb.tuyue.entity.TAdvertType;
 
 import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
-import retrofit2.http.Query;
 
 /**
  * @Author anna
@@ -19,24 +18,23 @@ import retrofit2.http.Query;
  */
 
 public interface AppApiService {
-
-
     /**
-     * 根据类别获取解锁屏页的广告
+     * 获取所有的广告类型
      *
      * @return
      */
-    @GET("advertType/getOne")
-    Observable<TUnlockAdvert> getUnlockAdvert(@Query("id") Integer id);
-
+    @GET("advertType/getList")
+    //Observable<TAdvertData> getUnlockAdvert(@Query("id") Integer id);
+    Observable<List<TAdvertType>> getAdvertType();
 
     /**
-     * 所有的广告详情页中的数据列表
+     * 获取所有的广告数据
      */
 
-    @GET("advert/getList")
-    // http://192.168.1.6:8080/tuyue/api/advert/getList
-    Observable<List<TAdvert>> getMainPage();
+    @GET("advert/getList") // http://192.168.1.6:8080/tuyue/api/advert/getList
+    Observable<List<TAdvertData>> getTypeData();
+
+
 
     /**
      * 游戏类别

@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import com.blankj.utilcode.util.LogUtils;
 import com.ywb.tuyue.R;
 import com.ywb.tuyue.entity.CardBean;
-import com.ywb.tuyue.entity.TAdvert;
+import com.ywb.tuyue.entity.TAdvertType;
 import com.ywb.tuyue.ui.advertise.AdvertiseDetailActivity;
 import com.ywb.tuyue.ui.book.BookActivity;
 import com.ywb.tuyue.ui.cinema.CinemaActivity;
@@ -34,7 +34,7 @@ import butterknife.OnClick;
  * @Date 2018-6-25  14.06
  * @Description 主界面
  */
-public class MainActivity extends BaseActivity implements MainContract.MainView {
+public class MainActivity extends BaseActivity {
     @BindView(R.id.header)
     HeaderView mHeader;
     @BindView(R.id.head_back)
@@ -61,8 +61,7 @@ public class MainActivity extends BaseActivity implements MainContract.MainView 
     Card2 mSubway; //成铁风采
     private static List<CardBean> cardBeans = new ArrayList<>();
     int[] cardIds = {R.id.movie, R.id.game, R.id.music, R.id.food, R.id.book,R.id.city,R.id.subway};
-    @Inject
-    MainPresenter mMainPresenter;
+
 
     @Override
     public int bindLayout() {
@@ -81,7 +80,7 @@ public class MainActivity extends BaseActivity implements MainContract.MainView 
 
     @Override
     public void initView(View view) {
-        mMainPresenter.attachView(this);
+
         mHeader.setLeftBtnVisiable(View.GONE);
         mHeader.setImgTitleOnly(R.drawable.main_title);
         mHeader.setRightBtnClickListsner(new View.OnClickListener() {
@@ -118,7 +117,7 @@ public class MainActivity extends BaseActivity implements MainContract.MainView 
     @Override
     public void doBusiness(Context mContext) {
         // TODO: 2018/6/25 处理业务逻辑
-        mMainPresenter.getMain();
+
     }
 
     @Override
@@ -169,29 +168,4 @@ public class MainActivity extends BaseActivity implements MainContract.MainView 
         }
     }
 
-    @Override
-    public void startLoading() {
-
-    }
-
-    @Override
-    public void endLoading() {
-
-    }
-
-    @Override
-    public void onError(String error) {
-
-    }
-
-    @Override
-    public void getMainSuccess(List<TAdvert> dataBeans) {
-        // TODO: 2018/6/27 网络请求回调成功
-        LogUtils.e(dataBeans.get(0).getTitle()+"///"); //途悦2
-        LogUtils.e(dataBeans.get(1).getTitle()+"///"); //途悦1
-        LogUtils.e(dataBeans.get(0).getPicurl()+"///"); // /pictures/20180511/1526026781.jpg///
-        LogUtils.e(dataBeans.get(1).getPicurl()+"///"); // /pictures/20180511/1526026819.jpg///
-        //将拿到的url进行数据库存储
-        //创建数据库
-    }
 }
