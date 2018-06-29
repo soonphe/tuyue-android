@@ -136,7 +136,7 @@ public class MainActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.advertise1://广告图标一
 
-                SQLiteDatabase db = Connector.getDatabase();//数据库创建完成
+              //  SQLiteDatabase db = Connector.getDatabase();//数据库创建完成
                 
                  mOperation.forwardAndFinish(AdvertiseDetailActivity.class,LEFT_RIGHT);
                 break;

@@ -5,6 +5,7 @@ import android.app.Activity;
 import com.ywb.tuyue.di.PerActivity;
 import com.ywb.tuyue.di.module.ActivityModule;
 import com.ywb.tuyue.ui.advertise.AdvertiseDetailActivity;
+import com.ywb.tuyue.ui.book.BookActivity;
 import com.ywb.tuyue.ui.game.GameActivity;
 import com.ywb.tuyue.ui.main.MainActivity;
 import com.ywb.tuyue.ui.splash.SplashActivity;
@@ -40,5 +41,7 @@ public interface ActivityComponent {
     void inject(AdvertiseDetailActivity advertiseDetailActivity);//广告详情页
 
     void inject(GameActivity activity);//游戏列表页
+
+    void inject(BookActivity bookActivity);//书吧页
 
 }

@@ -14,11 +14,19 @@ public class IpConfig {
 
     //http://192.168.1.6:8080/tuyue/api/advert/getList
     //http://192.168.1.6:8080/tuyue/api/sysUser/getList
+     /*---------------------------------------------本地请求地址192.168.1.6：8080-------------------------------*/
+//    public static String SERVER_IP = "192.168.1.6";
+//    public static String SERVER_PORT = "8080";
+//    public static String HOST = "http://" + SERVER_IP + ":" + SERVER_PORT;//服务器地址  http://192.168.1.6:8080
+//    public static String BASE_URL = HOST + "/tuyue/api/";
 
-    public static String SERVER_IP = "192.168.1.6";
-    public static String SERVER_PORT = "8080";
-    public static String HOST = "http://" + SERVER_IP + ":" + SERVER_PORT;//服务器地址  http://192.168.1.6:8080
+
+       /*-----------------------------------公网请求地址47.98.121.127:8081-------------------------------*/
+    public static String SERVER_IP = "47.98.121.127";
+    public static String SERVER_PORT = "8081";
+    public static String HOST = "http://" + SERVER_IP + ":" + SERVER_PORT;//服务器地址  http://47.98.121.127:8081
     public static String BASE_URL = HOST + "/tuyue/api/";
+
 
 
     /*---------------------------------------------图片请求通用地址-------------------------------*/

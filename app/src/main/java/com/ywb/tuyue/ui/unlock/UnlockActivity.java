@@ -50,7 +50,7 @@ public class UnlockActivity extends BaseActivity implements UnlockContract.Unloc
     @Override
     public void initParms(Bundle parms) {
          //parms.getString()
-        // TODO: 2018/6/20 接收参数 
+        // TODO: 2018/6/20 接收参数
     }
 
     @Override
@@ -127,15 +127,26 @@ public class UnlockActivity extends BaseActivity implements UnlockContract.Unloc
         // TODO: 2018/6/28  根据广告类型获取 相应的数据
         if(mAdvertTypes[0].equals(mTAdvertTypes.get(0).getName())){ //当前类型是解锁广告
             LogUtils.e(tAdvertData.get(0).getPicurl()+"////"); ///img/20180628/1530178562.jpg
+
             String imageUrl= IpConfig.BASE_IMAGE_URL+tAdvertData.get(0).getPicurl();//http://192.168.1.6/upload/img/20180628/1530178562.jpg
 
-            LogUtils.e(imageUrl+"////////////");
 
             GlideUtils.loadImageView(this,imageUrl,mUnlockAdvertImage);
         }
         if(mAdvertTypes[1].equals(mTAdvertTypes.get(1).getName())){ //当前是首页广告
-            //http://192.168.1.6/pictures/20180511/1526026921.jpg
-        }
+            //http://192.168.1.6/pictures/20180511/1526026921.jpg   <p><img src="//47.98.121.127/pictures/20180511/1526026792.jpg"></p>
+            //获取首页广告的两张图片的url
+            tAdvertData.get(1).getPicurl();
+            tAdvertData.get(1).getContent();
+            tAdvertData.get(1).getTitle();
 
+            tAdvertData.get(1).getType(); //获取广告的类型
+
+            LogUtils.e(tAdvertData.get(1).getPicurl()+"////////////");
+            LogUtils.e( tAdvertData.get(1).getContent()+"////////////"); //<p><img src="//47.98.121.127/pictures/20180511/1526026857.jpg"></p>////////////
+            LogUtils.e(tAdvertData.get(1).getTitle()+"////////////"); // 途悦1
+
+
+        }
     }
 }

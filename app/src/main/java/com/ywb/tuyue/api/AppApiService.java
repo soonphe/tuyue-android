@@ -5,6 +5,8 @@ import com.ywb.tuyue.entity.GameList;
 import com.ywb.tuyue.entity.GameType;
 import com.ywb.tuyue.entity.TAdvertData;
 import com.ywb.tuyue.entity.TAdvertType;
+import com.ywb.tuyue.entity.TBookData;
+import com.ywb.tuyue.entity.TBookType;
 
 import java.util.List;
 
@@ -49,4 +51,15 @@ public interface AppApiService {
      */
     @GET("game/getList")
     Observable<List<GameList>> getGameList();
+
+    /**
+     * 获取书籍类型列表
+     * @return
+     */
+    @GET("bookType/getList")
+    Observable<List<TBookType>> getBookType();
+
+    @GET("book/getList")
+    Observable<List<TBookData>> getBookData();
+
 }

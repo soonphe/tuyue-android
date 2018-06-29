@@ -8,7 +8,7 @@
 
     <!-- 用于设定所有的映射模型，配置对应的类 -->
     <list>
-        <mapping class="com.ywb.tuyue.entity.TAdvertType"></mapping>
+        <!--<mapping class="com.ywb.tuyue.entity.TAdvertType"></mapping>-->
     </list>
     <!--
             keep ：按类和字段名大小写作为表名和列名

@@ -9,6 +9,8 @@ import com.ywb.tuyue.entity.GameList;
 import com.ywb.tuyue.entity.GameType;
 import com.ywb.tuyue.entity.TAdvertData;
 import com.ywb.tuyue.entity.TAdvertType;
+import com.ywb.tuyue.entity.TBookData;
+import com.ywb.tuyue.entity.TBookType;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -123,5 +125,23 @@ public class AppApi implements AppApiService {
     @Override
     public Observable<List<GameList>> getGameList() {
         return service.getGameList().compose(bindUntil());
+    }
+
+    /**
+     * 书籍类型
+     * @return
+     */
+    @Override
+    public Observable<List<TBookType>> getBookType() {
+        return service.getBookType().compose(bindUntil());
+    }
+
+    /**
+     * 获取书籍数据
+     * @return
+     */
+    @Override
+    public Observable<List<TBookData>> getBookData() {
+        return service.getBookData().compose(bindUntil());
     }
 }
