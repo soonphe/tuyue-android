@@ -1,67 +1,40 @@
 package com.ywb.tuyue.vo;
 
+import com.ywb.tuyue.constants.Constants;
+
 /**
  * @Author soonphe
  * @Date 2018-03-29 21:05
- * @Descprition 公共分页查询条件
+ * @Descprition 公共分页查询条件——携带页码与页长
  */
 
 public class PCommonSearchVO {
 
-    private int page = 0;//页码
-    private int start = 0;//起始位置
-    private int length = 15;//每页条目数
-    private int total = 0;//总条目数
+    private int pageNum = 0;//页码
+    private int pageSize = Constants.PAGE_SIZE;//页长
 
-    public PCommonSearchVO(){
-
-    }
-    public PCommonSearchVO(int start){
-        this.start=start;
+    public PCommonSearchVO(int pageNum, int pageSize) {
+        this.pageNum = pageNum;
+        this.pageSize = pageSize;
     }
 
-    public PCommonSearchVO(int start,int length){
-        this.start=start;
-        this.length=length;
+    public PCommonSearchVO(int pageNum) {
+        this.pageNum = pageNum;
     }
 
-    public static PCommonSearchVO getInstance(int start) {
-        return new PCommonSearchVO(start);
+    public int getPageNum() {
+        return pageNum;
     }
 
-    public static PCommonSearchVO getInstance(int start,int length) {
-        return new PCommonSearchVO(start,length);
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
     }
 
-    public int getPage() {
-        return page;
+    public int getPageSize() {
+        return pageSize;
     }
 
-    public void setPage(int page) {
-        this.page = page;
-    }
-
-    public int getStart() {
-        return start;
-    }
-
-    public void setStart(int start) {
-        this.start = start;
-    }
-
-    public int getLength() {
-        return length;
-    }
-
-    public void setLength(int length) {
-        this.length = length;
-    }
-
-    public int getTotal() {
-        return total;
-    }
-
-    public void setTotal(int total) {
-        this.total = total;
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
     }
 }

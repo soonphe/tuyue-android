@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="colorPrimary">#099fde</color>
+    <!--<color name="colorPrimary">#00000000</color>-->
+    <!--<color name="colorPrimaryDark">#00000000</color>-->
+    <!--<color name="colorAccent">#00000000</color>-->
+    <color name="colorPrimary">#00000000</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
@@ -30,7 +33,8 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="black_shallow">#5a5a5a</color>
-    <color name="transparent">#00000000</color>
+    <color name="transparent">#00000000</color> <!-- 全透明 -->
+    <color name="transport_half">#50000000</color> <!-- 半透明 -->
     <color name="transo">#0f000000</color>
     <color name="text_dark">#a6a6a6</color>
     <color name="default_color">#f7f7f7</color>
@@ -54,7 +58,7 @@
 
     <!--途悦中使用到的颜色 -->
     <color name="unlock_text_color">#b8a300</color>  <!--解锁屏字体颜色 -->
-    <color name="transport_half">#50000000</color> <!--欢迎页中倒计时字体颜色-->
+
 
     <!--导航 -->
     <color name="my_black">#686868</color>

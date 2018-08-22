@@ -1,11 +1,10 @@
 package com.ywb.tuyue.ui.mvp;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 
 import com.blankj.utilcode.util.NetworkUtils;
-
-import org.litepal.LitePalApplication;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
@@ -18,8 +17,10 @@ import java.util.Stack;
  *
  * @version 1.0 继承LitePalApplication
  * 使用数据库：extends LitePalApplication 不能多继承TinkerApplication
+ * public abstract class BaseApplication extends LitePalApplication
+ * 这里使用litepal2，则可以直接继承Application
  */
-public abstract class BaseApplication extends LitePalApplication {
+public abstract class BaseApplication extends Application {
 
 //    /**
 //     参数1：tinkerFlags 表示Tinker支持的类型 dex only、library only or all suuport，default: TINKER_ENABLE_ALL

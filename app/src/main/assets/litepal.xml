@@ -1,21 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <litepal>
     <!--设置项目中数据库的名字 -->
-    <dbname value="tuyue" ></dbname>
+    <dbname value="tuyue_android" ></dbname>
 
     <!--用于设定数据库的版本号，每次你想要更新数据库，修改该值 -->
-    <version value="1" ></version>
+    <version value="20180822" ></version>
 
     <!-- 用于设定所有的映射模型，配置对应的类 -->
     <list>
-        <!--<mapping class="com.ywb.tuyue.entity.TAdvertType"></mapping>-->
+        <mapping class="com.ywb.tuyue.entity.TAdvertType"></mapping>
+        <mapping class="com.ywb.tuyue.entity.TAdvert"></mapping>
+        <mapping class="com.ywb.tuyue.entity.TVideoType"></mapping>
+        <mapping class="com.ywb.tuyue.entity.TVideo"></mapping>
+        <mapping class="com.ywb.tuyue.entity.TGameType"></mapping>
+        <mapping class="com.ywb.tuyue.entity.TGame"></mapping>
+        <mapping class="com.ywb.tuyue.entity.TBookType"></mapping>
+        <mapping class="com.ywb.tuyue.entity.TBook"></mapping>
+        <mapping class="com.ywb.tuyue.entity.TFoodType"></mapping>
+        <mapping class="com.ywb.tuyue.entity.TFood"></mapping>
+        <mapping class="com.ywb.tuyue.entity.TArticleType"></mapping>
+        <mapping class="com.ywb.tuyue.entity.TArticle"></mapping>
+        <mapping class="com.ywb.tuyue.entity.TVersion"></mapping>
+        <mapping class="com.ywb.tuyue.entity.TDataVersion"></mapping>
     </list>
     <!--
             keep ：按类和字段名大小写作为表名和列名
             upper ：将所有的类和字段名称以大写的方式作为表明和列名。
             lower ：将所有的类和字段名称以小写的方式作为表明和列名。
         -->
-    <cases value="keep" ></cases>
+    <!--<cases value="keep" ></cases>-->
     <!--
         external：如果设置external，数据库文件将储存在/storage/sdcard1/Android/data/应用包名/files/databases
                   如果是不想被别人查看的数据，最好不要设置external

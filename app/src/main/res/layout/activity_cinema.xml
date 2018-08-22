@@ -1,22 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
-    tools:context="com.ywb.tuyue.ui.settings.SettingsActivity">
+    android:background="@mipmap/bg"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
 
-    <com.ywb.tuyue.widget.head.HeaderView
-        android:id="@+id/header"
+
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="影院"
-        android:textSize="26sp"
-        />
-</RelativeLayout>
+        app:elevation="0dp">
+
+        <com.ywb.tuyue.widget.AppTitle
+            style="@style/title_style"
+            app:showBack="true"
+            app:canFinish="true"
+            app:centreText="影院"
+            app:centreTextColor="@color/white" />
+    </android.support.design.widget.AppBarLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_height"
+        android:background="@drawable/line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/movie_recycler_menu"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/transport_half" />
+
+        <com.ywb.tuyue.widget.MyViewPager
+            android:id="@+id/movie_pager"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="7" />
+    </LinearLayout>
+</LinearLayout>

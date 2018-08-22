@@ -1,11 +1,13 @@
 package com.ywb.tuyue.entity;
 
-/**
- * Description: 所有广告实体类   主界面中广告详情页  游戏广告  电影广告  书吧广告
- * Created by wcystart on 2018/6/25.
- */
+import org.litepal.crud.LitePalSupport;
 
-public class TAdvertType {
+/**
+ * @Author soonphe
+ * @Date 2018-08-21 09:48
+ * @Description 广告类型
+ */
+public class TAdvertType  extends LitePalSupport {
     /**
      * id : 1
      * name : 锁屏广告

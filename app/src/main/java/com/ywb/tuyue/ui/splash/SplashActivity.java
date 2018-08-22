@@ -1,11 +1,15 @@
 package com.ywb.tuyue.ui.splash;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import com.blankj.utilcode.util.BarUtils;
 import com.ywb.tuyue.R;
 import com.ywb.tuyue.ui.main.MainActivity;
 import com.ywb.tuyue.ui.mvp.BaseActivity;
+
 import java.util.Timer;
 import java.util.TimerTask;
 /**
@@ -30,6 +34,8 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     public void initView(View view) {
+
+        BarUtils.setStatusBarAlpha(this, 0);
         mCountDown=findViewById(R.id.splash_countdown);
         mCountDown.setOnClickListener(new View.OnClickListener() {
             //点击倒计时按钮也跳转到主界面，同时计时器消失
@@ -50,20 +56,14 @@ public class SplashActivity extends BaseActivity {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-
                 currentSecond--;
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mCountDown.setText(currentSecond + "秒跳过");
-                    }
-                });
+                runOnUiThread(() -> mCountDown.setText(currentSecond + "秒跳过"));
                 if (currentSecond == minTime) {
                     if(timer!=null){
                         timer.cancel();
                     }
 
-                    mOperation.forwardAndFinish(MainActivity.class,LEFT_RIGHT);
+                    mOperation.forwardAndFinish(MainActivity.class);
                 }
 
             }

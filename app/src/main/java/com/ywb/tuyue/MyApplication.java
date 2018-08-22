@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Build;
 import android.os.StrictMode;
+import android.support.annotation.RequiresApi;
 import android.support.multidex.MultiDex;
 import android.widget.Toast;
 
@@ -20,15 +21,17 @@ import com.tencent.bugly.beta.Beta;
 import com.tencent.bugly.beta.interfaces.BetaPatchListener;
 import com.tencent.bugly.beta.upgrade.UpgradeStateListener;
 import com.tencent.smtt.sdk.QbSdk;
-import com.ywb.tuyue.constants.IpConfig;
+import com.ywb.tuyue.constants.Constants;
 import com.ywb.tuyue.di.component.ApplicationComponent;
 import com.ywb.tuyue.di.component.DaggerApplicationComponent;
 import com.ywb.tuyue.di.module.ApplicationModule;
 import com.ywb.tuyue.ui.mvp.BaseApplication;
 
+import org.litepal.LitePal;
+
 import java.util.Locale;
 
-import static com.ywb.tuyue.constants.IpConfig.BUGLY_APPID;
+import static com.ywb.tuyue.constants.Constants.BUGLY_APPID;
 
 
 /**
@@ -46,7 +49,7 @@ public class MyApplication extends BaseApplication {
     static {
         //设置全局的Header构建器
         SmartRefreshLayout.setDefaultRefreshHeaderCreator((context, layout) -> {
-            layout.setPrimaryColorsId(R.color.colorPrimary, android.R.color.white);//全局设置主题颜色
+            layout.setPrimaryColorsId(R.color.colorPrimary, android.R.color.transparent);//全局设置主题颜色
             return new ClassicsHeader(context);//.setTimeFormat(new DynamicTimeFormat("更新于 %s"));//指定为经典Header，默认是 贝塞尔雷达Header
         });
         //设置全局的Footer构建器
@@ -66,6 +69,7 @@ public class MyApplication extends BaseApplication {
 //        Beta.installTinker();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
     public void onCreate() {
         super.onCreate();
@@ -90,6 +94,16 @@ public class MyApplication extends BaseApplication {
         //极光初始化
 //        JPushInterface.setDebugMode(true); 	// 设置开启日志,发布时请关闭日志
 //        JPushInterface.init(this);
+
+        //facebook调试工具
+        Stetho.initializeWithDefaults(this);
+        //初始化okgo
+        OkGo.getInstance().init(this);
+        //创建下载文件夹
+        FileUtils.createOrExistsDir(Constants.DOWNLOAD_PATH);
+        //初始化litepal数据库
+        LitePal.initialize(this);
+
 
         // 设置是否开启热更新能力，默认为true
         Beta.enableHotfix = true;
@@ -190,15 +204,12 @@ public class MyApplication extends BaseApplication {
             }
         });
 
-        //facebook调试工具
-        Stetho.initializeWithDefaults(this);
-        //初始化okgo
-        OkGo.getInstance().init(this);
-        //创建下载文件夹
-        FileUtils.createOrExistsDir(IpConfig.DOWNLOAD_PATH);
 
     }
 
+    /**
+     * 应用程序推出，移除所有activity
+     */
     @Override
     public void exit() {
         removeAllActivity();

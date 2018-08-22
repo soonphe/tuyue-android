@@ -5,13 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
-    tools:context="com.ywb.tuyue.ui.settings.SettingsActivity">
+    android:background="@mipmap/bg">
 
-    <com.ywb.tuyue.widget.head.HeaderView
-        android:id="@+id/header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <!--<com.ywb.tuyue.widget.head.HeaderView-->
+        <!--android:id="@+id/header"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,11 +19,12 @@
         android:orientation="vertical"
         android:layout_below="@+id/header">
 
-        <com.ywb.tuyue.widget.bgabanner.BGABanner
+        <com.youth.banner.Banner
             android:id="@+id/bookBanner"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            app:banner_isShowIndicator="true" />
+            android:layout_height="200dp">
+
+        </com.youth.banner.Banner>
 
         <android.support.design.widget.TabLayout
             android:id="@+id/bookTab"
@@ -44,9 +44,9 @@
             android:layout_marginTop="-2dp"
             android:background="@color/hint_color" />
 
-        <com.ywb.tuyue.widget.CustomViewPager
-            android:id="@+id/bookPager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+        <!--<com.ywb.tuyue.widget.CustomViewPager-->
+            <!--android:id="@+id/bookPager"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent" />-->
     </LinearLayout>
 </RelativeLayout>

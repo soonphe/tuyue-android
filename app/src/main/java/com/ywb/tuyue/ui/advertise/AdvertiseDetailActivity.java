@@ -5,12 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
 
+import com.blankj.utilcode.util.BarUtils;
 import com.ywb.tuyue.R;
-import com.ywb.tuyue.ui.main.MainActivity;
 import com.ywb.tuyue.ui.mvp.BaseActivity;
-import com.ywb.tuyue.utils.HTMLFormatUtils;
-import com.ywb.tuyue.widget.head.HeaderView;
-
 
 import butterknife.BindView;
 
@@ -24,8 +21,8 @@ public class AdvertiseDetailActivity extends BaseActivity {
 
     @BindView(R.id.ad_webview)
     WebView mAdWebview;
-    @BindView(R.id.header)
-    HeaderView mHeader;
+//    @BindView(R.id.header)
+//    HeaderView mHeader;
 
 
     @Override
@@ -40,14 +37,8 @@ public class AdvertiseDetailActivity extends BaseActivity {
 
     @Override
     public void initView(View view) {
-        mHeader.setTitle("广告一");
-        mHeader.setRightBtnVisiable(View.GONE);
-        mHeader.setLeftBtnClickListsner(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mOperation.forwardAndFinish(MainActivity.class,LEFT_RIGHT);
-            }
-        });
+
+        BarUtils.setStatusBarAlpha(this, 0);
 
         mAdWebview.getSettings().setJavaScriptEnabled(true); //启用JS
         mAdWebview.getSettings().setBlockNetworkImage(false);//解决图片不显示
@@ -60,7 +51,7 @@ public class AdvertiseDetailActivity extends BaseActivity {
 
     @Override
     public void doBusiness(Context mContext) {
-        // TODO: 2018/6/29 处理业务逻辑
+
     }
 
 

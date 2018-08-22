@@ -73,25 +73,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.splash.SplashActivity" />
-        <activity
-            android:name=".ui.main.MainActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:launchMode="singleTask"
-            android:screenOrientation="landscape"
-            android:windowSoftInputMode="stateHidden|adjustPan" />
-        <activity
-            android:name=".ui.unlock.UnlockActivity"
-            android:screenOrientation="landscape">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-                <!-- LAUNCHER -->
-                <category android:name="android.intent.category.HOME" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
         <activity
             android:name="com.zaaach.citypicker.CityPickerActivity"
             android:screenOrientation="portrait"
@@ -102,15 +84,48 @@
         <activity
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
             android:theme="@android:style/Theme.Translucent" />
-        <activity android:name=".ui.advertise.AdvertiseDetailActivity" />
-        <activity android:name=".ui.settings.SettingsActivity" />
-        <activity android:name=".ui.cinema.CinemaActivity" />
-        <activity android:name=".ui.game.GameActivity" />
-        <activity android:name=".ui.music.MusicActivity" />
-        <activity android:name=".ui.food.FoodActivity" />
-        <activity android:name=".ui.book.BookActivity" />
-        <activity android:name=".ui.city.CityActivity" />
-        <activity android:name=".ui.subway.SubwayActivity"/>
+
+        <activity android:name=".ui.splash.SplashActivity" />
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <!-- LAUNCHER -->
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.unlock.UnlockActivity"
+            android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".ui.advertise.AdvertiseDetailActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".ui.setting.SettingActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".ui.cinema.CinemaActivity"
+            android:screenOrientation="landscape" />
+        <!--<activity android:name=".ui.music.MusicActivity" />-->
+        <activity
+            android:name=".ui.food.FoodActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".ui.book.BookActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".ui.city.CityActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".ui.subway.SubwayActivity"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>

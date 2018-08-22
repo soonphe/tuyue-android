@@ -1,55 +1,64 @@
 package com.ywb.tuyue.entity;
 
-import java.util.List;
+import org.litepal.crud.LitePalSupport;
 
 /**
- * Description:书籍类型
- * Created by wcystart on 2018/6/29.
+ * @Author soonphe
+ * @Date 2018-08-21 09:48
+ * @Description 小说类型
  */
-
-public class TBookType {
-
+public class TBookType  extends LitePalSupport {
     /**
-     * resultCode : 200
-     * message : Success
-     * data : []
-     * ext :
+     * id : 1
+     * name : 锁屏广告
+     * createtime : 2018-06-22 14:22:24
+     * updatetime : 2018-06-22 14:26:59
+     * delflag : false
      */
 
-    private String resultCode;
-    private String message;
-    private String ext;
-    private List<?> data;
+    private int id;
+    private String name;
+    private String createtime;
+    private String updatetime;
+    private boolean delflag;
 
-    public String getResultCode() {
-        return resultCode;
+    public int getId() {
+        return id;
     }
 
-    public void setResultCode(String resultCode) {
-        this.resultCode = resultCode;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getMessage() {
-        return message;
+    public String getName() {
+        return name;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getExt() {
-        return ext;
+    public String getCreatetime() {
+        return createtime;
     }
 
-    public void setExt(String ext) {
-        this.ext = ext;
+    public void setCreatetime(String createtime) {
+        this.createtime = createtime;
     }
 
-    public List<?> getData() {
-        return data;
+    public String getUpdatetime() {
+        return updatetime;
     }
 
-    public void setData(List<?> data) {
-        this.data = data;
+    public void setUpdatetime(String updatetime) {
+        this.updatetime = updatetime;
+    }
+
+    public boolean isDelflag() {
+        return delflag;
+    }
+
+    public void setDelflag(boolean delflag) {
+        this.delflag = delflag;
     }
 }

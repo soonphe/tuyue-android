@@ -3,13 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
+    android:background="@mipmap/bg"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <com.ywb.tuyue.widget.head.HeaderView
-        android:id="@+id/header"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        app:elevation="0dp">
+
+        <com.ywb.tuyue.widget.AppTitle
+            android:id="@+id/app_title"
+            style="@style/title_style"
+            app:button1ImgSrc="@mipmap/main_title"
+            app:button2ImgSrc="@mipmap/icon_setting"
+            app:centreText=""
+            app:rightText="" />
+    </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
         android:id="@+id/iv_parentView"
@@ -24,17 +34,17 @@
         <ImageView
             android:id="@+id/advertise1"
             android:layout_width="0dp"
-            android:scaleType="fitXY"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:scaleType="fitXY" />
 
         <ImageView
             android:id="@+id/advertise2"
             android:layout_width="0dp"
-            android:scaleType="fitXY"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:layout_weight="1" />
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            android:scaleType="fitXY" />
 
     </LinearLayout>
 
@@ -52,39 +62,144 @@
         android:layout_marginTop="@dimen/dp_20"
         android:layout_weight="3">
 
-        <com.ywb.tuyue.widget.card.Card1
-            android:id="@+id/movie"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
 
-        <com.ywb.tuyue.widget.card.Card1
-            android:id="@+id/game"
+        <LinearLayout
+            android:id="@+id/ll_movie"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/dp_15"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:background="@mipmap/dianying"
+            android:gravity="bottom"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="影院"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_20" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="Cinema"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_15" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_game"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            android:background="@mipmap/game"
+            android:gravity="bottom"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="游戏"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_20" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="Cinema"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_15" />
+            </LinearLayout>
+
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginLeft="15dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <com.ywb.tuyue.widget.card.Card2
-                android:id="@+id/music"
+            <LinearLayout
+                android:id="@+id/ll_book"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:background="@mipmap/book"
+                android:gravity="center"
+                android:orientation="vertical">
 
 
-            <com.ywb.tuyue.widget.card.Card2
-                android:id="@+id/food"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="书吧"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_20" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="Book"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_15" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_food"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginTop="@dimen/dp_15"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:background="@mipmap/food"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="点餐"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_20" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="Order"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_15" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
@@ -94,11 +209,35 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <com.ywb.tuyue.widget.card.Card2
-                android:id="@+id/book"
+            <LinearLayout
+                android:id="@+id/ll_city"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:background="@mipmap/city"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="城市"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_20" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="Book"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_15" />
+
+
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -107,20 +246,35 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <com.ywb.tuyue.widget.card.Card2
-                    android:id="@+id/city"
+                <LinearLayout
+                    android:id="@+id/ll_subway"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    app:showIcon="false" />
+                    android:background="@mipmap/subway"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                <com.ywb.tuyue.widget.card.Card2
-                    android:id="@+id/subway"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:layout_weight="1"
-                    app:showIcon="false" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:text="城铁风采"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_20" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:text="Subway"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_15" />
+
+
+                </LinearLayout>
+
 
             </LinearLayout>
 

@@ -6,9 +6,11 @@ import com.ywb.tuyue.di.PerActivity;
 import com.ywb.tuyue.di.module.ActivityModule;
 import com.ywb.tuyue.ui.advertise.AdvertiseDetailActivity;
 import com.ywb.tuyue.ui.book.BookActivity;
-import com.ywb.tuyue.ui.game.GameActivity;
-import com.ywb.tuyue.ui.game.GamePlayActivity;
+import com.ywb.tuyue.ui.cinema.CinemaActivity;
+import com.ywb.tuyue.ui.game.game.GameActivity;
+import com.ywb.tuyue.ui.game.gameplay.GamePlayActivity;
 import com.ywb.tuyue.ui.main.MainActivity;
+import com.ywb.tuyue.ui.setting.SettingActivity;
 import com.ywb.tuyue.ui.splash.SplashActivity;
 import com.ywb.tuyue.ui.unlock.UnlockActivity;
 
@@ -39,11 +41,18 @@ public interface ActivityComponent {
 
     void inject(UnlockActivity unlockActivity);//解锁屏页
 
+    void inject(CinemaActivity cinemaActivity); //电影
+
+    void inject(BookActivity bookActivity);//书吧
+
     void inject(AdvertiseDetailActivity advertiseDetailActivity);//广告详情页
 
     void inject(GameActivity activity);//游戏列表页
+    void inject(GamePlayActivity gamePlayActivity); //玩游戏页面
 
-    void inject(BookActivity bookActivity);//书吧页
+    void inject(SettingActivity activity);
 
-    void inject(GamePlayActivity gamePlayActivity);
+
+
+
 }

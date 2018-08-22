@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="com.zaaach:citypicker-1.2">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/citypicker-1.2.aar/0125f5b2859180230c95ea3ec6b331ab/jars/libs/AMap_Location_V3.5.0_20170731.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/citypicker-1.2.aar/0125f5b2859180230c95ea3ec6b331ab/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/citypicker-1.2.aar/0125f5b2859180230c95ea3ec6b331ab/res" />
+      <root url="file://D:/Users/anna/.gradle/caches/transforms-1/files-1.1/citypicker-1.2.aar/4e37a0c1c1d5131d6be889c8c488bebe/res" />
+      <root url="jar://D:/Users/anna/.gradle/caches/transforms-1/files-1.1/citypicker-1.2.aar/4e37a0c1c1d5131d6be889c8c488bebe/jars/libs/AMap_Location_V3.5.0_20170731.jar!/" />
+      <root url="jar://D:/Users/anna/.gradle/caches/transforms-1/files-1.1/citypicker-1.2.aar/4e37a0c1c1d5131d6be889c8c488bebe/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.zaaach/citypicker/1.2/2993fe40b3fa9d5acfbc8030e7b5c9ee0055e6c1/citypicker-1.2-sources.jar!/" />
+      <root url="jar://D:/Users/anna/.gradle/caches/modules-2/files-2.1/com.zaaach/citypicker/1.2/2993fe40b3fa9d5acfbc8030e7b5c9ee0055e6c1/citypicker-1.2-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

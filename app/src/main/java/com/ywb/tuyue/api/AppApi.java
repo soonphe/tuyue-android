@@ -4,19 +4,28 @@ package com.ywb.tuyue.api;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.ywb.tuyue.components.okhttp.HttpLoggingInterceptor;
-import com.ywb.tuyue.constants.IpConfig;
-import com.ywb.tuyue.entity.GameList;
-import com.ywb.tuyue.entity.GameType;
-import com.ywb.tuyue.entity.TAdvertData;
+import com.ywb.tuyue.constants.Constants;
+import com.ywb.tuyue.entity.TAdvert;
 import com.ywb.tuyue.entity.TAdvertType;
-import com.ywb.tuyue.entity.TBookData;
+import com.ywb.tuyue.entity.TArticle;
+import com.ywb.tuyue.entity.TArticleType;
+import com.ywb.tuyue.entity.TBook;
 import com.ywb.tuyue.entity.TBookType;
+import com.ywb.tuyue.entity.TCity;
+import com.ywb.tuyue.entity.TCityArticle;
+import com.ywb.tuyue.entity.TDataVersion;
+import com.ywb.tuyue.entity.TFood;
+import com.ywb.tuyue.entity.TFoodType;
+import com.ywb.tuyue.entity.TGame;
+import com.ywb.tuyue.entity.TGameType;
+import com.ywb.tuyue.entity.TVersion;
+import com.ywb.tuyue.entity.TVideoType;
+import com.ywb.tuyue.vo.PCommonSearchVO;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -37,7 +46,7 @@ public class AppApi implements AppApiService {
         Retrofit retrofit =
                 new Retrofit.Builder()
                         .client(mOkHttpClient)
-                        .baseUrl(IpConfig.BASE_URL) //http://192.168.9.145:8080/api/
+                        .baseUrl(Constants.BASE_API_URL) //http://192.168.9.145:8080/api/
                         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                         .addConverterFactory(com.ywb.tuyue.components.retrofit.GsonConverterFactory.create())
                         .build();
@@ -67,7 +76,7 @@ public class AppApi implements AppApiService {
                         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                         //使用默认Gson解析
                         .addConverterFactory(GsonConverterFactory.create())
-//                        .addConverterFactory(com.connxun.wuye.components.retrofit.GsonConverterFactory.create())
+//                        .addConverterFactory(com.ywb.tuyue.components.retrofit.GsonConverterFactory.create())
                         .build();
         return retrofit.create(AppApiService.class);
     }
@@ -79,69 +88,91 @@ public class AppApi implements AppApiService {
      * @return
      */
     private ObservableTransformer bindUntil() {
-        return new ObservableTransformer() {
-            @Override
-            public ObservableSource apply(Observable upstream) {
-                return upstream.
-                        subscribeOn(Schedulers.io()).
-                        observeOn(AndroidSchedulers.mainThread());
-            }
-        };
+        return upstream -> upstream.
+                subscribeOn(Schedulers.io()).
+                observeOn(AndroidSchedulers.mainThread());
     }
 
-    /**
-     *
-     * 获取所有广告的类型
-     * @return
-     */
+
     @Override
     public Observable<List<TAdvertType>> getAdvertType() {
         return service.getAdvertType().compose(bindUntil());
     }
 
-    /**
-     * 获取所有的广告数据
-     */
     @Override
-    public Observable<List<TAdvertData>> getTypeData() {
-        return service.getTypeData().compose(bindUntil());
+    public Observable<List<TAdvert>> getAdvertList(int pCommonSearchVO) {
+        return service.getAdvertList(pCommonSearchVO).compose(bindUntil());
     }
 
-
-
-    /**
-     * 游戏类别
-     * @return
-     */
     @Override
-    public Observable<List<GameType>> getGameType() {
-        return service.getGameType().compose(bindUntil());
+    public Observable<List<TVideoType>> getVideoType() {
+        return null;
     }
 
-    /**
-     * 游戏列表
-     * @return
-     */
     @Override
-    public Observable<List<GameList>> getGameList() {
-        return service.getGameList().compose(bindUntil());
+    public Observable getVideoList(PCommonSearchVO pCommonSearchVO) {
+        return null;
     }
 
-    /**
-     * 书籍类型
-     * @return
-     */
+    @Override
+    public Observable<List<TGameType>> getGameType() {
+        return null;
+    }
+
+    @Override
+    public Observable<List<TGame>> getGameList() {
+        return null;
+    }
+
     @Override
     public Observable<List<TBookType>> getBookType() {
-        return service.getBookType().compose(bindUntil());
+        return null;
     }
 
-    /**
-     * 获取书籍数据
-     * @return
-     */
     @Override
-    public Observable<List<TBookData>> getBookData() {
-        return service.getBookData().compose(bindUntil());
+    public Observable<List<TBook>> getBookList() {
+        return null;
     }
+
+    @Override
+    public Observable<List<TFoodType>> getFoodType() {
+        return null;
+    }
+
+    @Override
+    public Observable<List<TFood>> getFoodList() {
+        return null;
+    }
+
+    @Override
+    public Observable<List<TCity>> getCityList() {
+        return null;
+    }
+
+    @Override
+    public Observable<List<TCityArticle>> getCityArticleList() {
+        return null;
+    }
+
+    @Override
+    public Observable<List<TArticleType>> getArticleType() {
+        return null;
+    }
+
+    @Override
+    public Observable<List<TArticle>> getArticleList() {
+        return null;
+    }
+
+    @Override
+    public Observable<TVersion> getVersion() {
+        return service.getVersion().compose(bindUntil());
+    }
+
+    @Override
+    public Observable<TDataVersion> getDataVersion() {
+        return service.getDataVersion().compose(bindUntil());
+    }
+
+
 }

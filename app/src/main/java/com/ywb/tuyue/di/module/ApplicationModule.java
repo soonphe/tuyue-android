@@ -8,7 +8,7 @@ import com.blankj.utilcode.util.CacheUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.ywb.tuyue.components.okhttp.HttpLoggingInterceptor;
-import com.ywb.tuyue.constants.IpConfig;
+import com.ywb.tuyue.constants.Constants;
 
 import java.util.concurrent.TimeUnit;
 
@@ -54,12 +54,12 @@ public class ApplicationModule {
         builder.addInterceptor(
                 chain -> {
                     Request originalRequest = chain.request();
-                    if (StringUtils.isEmpty(CacheUtils.getInstance().getString(IpConfig.USER_ID)+"") || StringUtils.isEmpty(CacheUtils.getInstance().getString(IpConfig.USER_TOKEN))) {
+                    if (StringUtils.isEmpty(CacheUtils.getInstance().getString(Constants.USER_ID)+"") || StringUtils.isEmpty(CacheUtils.getInstance().getString(Constants.USER_TOKEN))) {
                         return chain.proceed(originalRequest);
                     }
                     Request authorised = originalRequest.newBuilder()
-                            .addHeader("userId", CacheUtils.getInstance().getString(IpConfig.USER_ID).toString())
-                            .addHeader("token", CacheUtils.getInstance().getString(IpConfig.USER_TOKEN)+"")
+                            .addHeader("userId", CacheUtils.getInstance().getString(Constants.USER_ID).toString())
+                            .addHeader("token", CacheUtils.getInstance().getString(Constants.USER_TOKEN)+"")
                             .build();
                     return chain.proceed(authorised);
                 }

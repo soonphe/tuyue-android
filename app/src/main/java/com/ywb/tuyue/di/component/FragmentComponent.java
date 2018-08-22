@@ -3,8 +3,11 @@ package com.ywb.tuyue.di.component;
 
 import com.ywb.tuyue.di.PerActivity;
 import com.ywb.tuyue.di.module.ActivityModule;
-import com.ywb.tuyue.ui.game.GameListFragment;
-import com.ywb.tuyue.ui.main.MainActivity;
+import com.ywb.tuyue.ui.cinema.movie.MovieFragment;
+import com.ywb.tuyue.ui.cinema.video.VideoFragment;
+import com.ywb.tuyue.ui.setting.aboutus.AboutUsFragment;
+import com.ywb.tuyue.ui.setting.gaindata.GainDataFragment;
+import com.ywb.tuyue.ui.setting.version.VersionFragment;
 
 import dagger.Component;
 
@@ -16,6 +19,14 @@ import dagger.Component;
 @PerActivity
 @Component(dependencies = ApplicationComponent.class, modules = {ActivityModule.class})
 public interface FragmentComponent {
-void inject(GameListFragment gameListFragment);
+
+    //电影
+    void inject(MovieFragment fragment);
+    void inject(VideoFragment fragment);
+
+    //设置
+    void inject(AboutUsFragment fragment);
+    void inject(GainDataFragment fragment);
+    void inject(VersionFragment fragment);
 
 }

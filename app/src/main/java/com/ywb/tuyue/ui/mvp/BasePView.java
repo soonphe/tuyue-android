@@ -1,7 +1,9 @@
 package com.ywb.tuyue.ui.mvp;
 
 /**
- * Created by wushange on  2016/06/30.
+ * @Author soonphe
+ * @Date 2018-08-21 13:18
+ * @Description 全局加载与报错展示
  */
 public interface BasePView {
     void startLoading();
