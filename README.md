@@ -1,6 +1,5 @@
-### [应用宝下载地址](http://sj.qq.com/myapp/detail.htm?apkName=com.cxmp.cxcard)
 
-# 乐挑促销Android项目架构：
+# Android项目架构：
 
 + 网络及异步框架：okhttp3 + retrofit2 + rxjava2
 + RPC数据解析：gson
