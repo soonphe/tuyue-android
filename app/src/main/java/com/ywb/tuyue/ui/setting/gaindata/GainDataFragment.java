@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.ywb.tuyue.R;
 import com.ywb.tuyue.constants.Constants;
 import com.ywb.tuyue.entity.TAdvert;
@@ -38,23 +39,23 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
     @BindView(R.id.syncData)
     TextView syncData;
 
-    int advertVersion = 0;  //广告版本
-    int dataVersion = 0;    //数据版本
-
+    int advertVersion = 0;  //SP广告版本
+    int dataVersion = 0;    //SP数据版本
+    TDataVersion dbVersion; //本地数据库最新数据版本
 
     @Override
     public void startLoading() {
-
+        mOperation.showProgress("正在更新数据...", false);
     }
 
     @Override
     public void endLoading() {
-
+        mOperation.dissMissDialog();
     }
 
     @Override
     public void onError(String error) {
-
+        ToastUtils.showShort(error);
     }
 
     @Override
@@ -102,31 +103,44 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
 
     @Override
     public void getDataVersionSuccess(TDataVersion tDataVersion) {
-        //存储数据版本与广告版本表
-        tDataVersion.save();
+
+//        dbVersion = LitePal.order("id desc").limit(1).findFirst(TDataVersion.class);
+        dbVersion = tDataVersion;
         dataVersion = SPUtils.getInstance().getInt(Constants.DATA_VERSION, 0);
         advertVersion = SPUtils.getInstance().getInt(Constants.ADVERT_VERSION, 0);
         //判断数据版本和广告版本是否一致
-        if (tDataVersion.getAdvertversion() > advertVersion) {
-            presenter.getAdvertList();
+        if (tDataVersion.getAdvertversion() == advertVersion && tDataVersion.getDataversion() == dataVersion) {
+            LogUtils.e("当前已经是最新数据");
+            ToastUtils.showShort("当前已经是最新数据");
+        } else {
+            //分别判断更新广告版本和数据版本
+            if (tDataVersion.getAdvertversion() > advertVersion) {
+                LogUtils.e("准备更新广告版本");
+                presenter.getAdvertList();
+            }
+            if (tDataVersion.getDataversion() > dataVersion) {
+                LogUtils.e("准备更新数据版本");
+                presenter.getOrtherData();
+            }
         }
-//        if (tDataVersion.getDataversion() > dataVersion) {
-//            LogUtils.e("___数据版本大于当前版本");
-////            presenter.getDataVersion();
-//        }
+
+
     }
 
     @Override
     public void getAdvertSuccess(List<TAdvert> tAdvertList) {
-        //更新广告版本号
-//        SPUtils.getInstance().put(Constants.DATA_VERSION, advertVersion);
-        for (TAdvert tAdvert :
-                tAdvertList) {
-            if (!tAdvert.save()) {
-                LogUtils.e("广告数据保存失败" + tAdvert.getId() + tAdvert.getTitle());
-            } else {
-                LogUtils.e("广告数据保存成功" + tAdvert.getId() + tAdvert.getTitle());
-            }
-        }
+        //SP更新广告版本号
+        SPUtils.getInstance().put(Constants.ADVERT_VERSION, dbVersion.getAdvertversion());
+
+        ToastUtils.showShort("广告数据更新成功");
+    }
+
+    @Override
+    public void getOtherDataSuccess() {
+        //SP更新数据版本号
+        SPUtils.getInstance().put(Constants.DATA_VERSION, dbVersion.getDataversion());
+
+        LogUtils.e("其他数据同步成功");
+
     }
 }

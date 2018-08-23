@@ -36,6 +36,25 @@ public class TBook  extends LitePalSupport {
     private boolean delflag;
     private String typename;
 
+    private String downloadPic; //图片地址
+    private String downloadFile;    //压缩包地址
+
+    public String getDownloadPic() {
+        return downloadPic;
+    }
+
+    public void setDownloadPic(String downloadPic) {
+        this.downloadPic = downloadPic;
+    }
+
+    public String getDownloadFile() {
+        return downloadFile;
+    }
+
+    public void setDownloadFile(String downloadFile) {
+        this.downloadFile = downloadFile;
+    }
+
     public int getId() {
         return id;
     }

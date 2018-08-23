@@ -32,7 +32,8 @@ public class MenuAdapter extends BaseQuickAdapter<PMenu, BaseViewHolder> {
     @Override
     protected void convert(BaseViewHolder helper, PMenu item) {
         if (item.getMenuId() == 0) {
-            helper.setBackgroundRes(R.id.item_menu,R.color.transparent);
+            helper.setBackgroundRes(R.id.item_menu,R.color.text_red);
+//            helper.setBackgroundColor(R.id.item_menu, Color.parseColor("#ff0000"));
         }
         helper.setText(R.id.menu_content, item.getName());
     }

@@ -1,6 +1,5 @@
 package com.ywb.tuyue.entity;
 
-import org.litepal.annotation.Column;
 import org.litepal.crud.LitePalSupport;
 
 /**
@@ -24,7 +23,6 @@ public class TAdvert extends LitePalSupport {
      * content : <p><img src="http://192.168.1.6/upload/img/20180802/1533192019.jpg"></p>
      * typename : 锁屏广告
      */
-    @Column(unique = true, defaultValue = "unknown")
     private int id;
     private int typeid;
     private String title;
@@ -36,6 +34,25 @@ public class TAdvert extends LitePalSupport {
     private boolean delflag;
     private String content;
     private String typename;
+
+    private String downloadPic; //图片下载地址
+    private String downloadContent; //富文本下载地址
+
+    public String getDownloadContent() {
+        return downloadContent;
+    }
+
+    public void setDownloadContent(String downloadContent) {
+        this.downloadContent = downloadContent;
+    }
+
+    public String getDownloadPic() {
+        return downloadPic;
+    }
+
+    public void setDownloadPic(String downloadPic) {
+        this.downloadPic = downloadPic;
+    }
 
     public int getId() {
         return id;

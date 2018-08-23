@@ -7,7 +7,7 @@ import org.litepal.crud.LitePalSupport;
  * @Date 2018-08-21 09:54
  * @Descprition 城铁文章
  */
-public class TArticle  extends LitePalSupport {
+public class TArticle extends LitePalSupport {
 
     /**
      * id : 12
@@ -36,6 +36,34 @@ public class TArticle  extends LitePalSupport {
     private String pathfile;
     private String content;
     private String typename;
+
+    private String downloadPic; //图片下载地址
+    private String downloadFile;    //视频文件下载地址
+    private String downloadContent; //富文本图片下载地址
+
+    public String getDownloadPic() {
+        return downloadPic;
+    }
+
+    public void setDownloadPic(String downloadPic) {
+        this.downloadPic = downloadPic;
+    }
+
+    public String getDownloadFile() {
+        return downloadFile;
+    }
+
+    public void setDownloadFile(String downloadFile) {
+        this.downloadFile = downloadFile;
+    }
+
+    public String getDownloadContent() {
+        return downloadContent;
+    }
+
+    public void setDownloadContent(String downloadContent) {
+        this.downloadContent = downloadContent;
+    }
 
     public int getId() {
         return id;

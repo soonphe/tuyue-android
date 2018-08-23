@@ -34,6 +34,25 @@ public class TCityArticle  extends LitePalSupport {
     private String updatetime;
     private String content;
 
+    private String downloadPic; //图片地址
+    private String downloadContent;    //富文本地址
+
+    public String getDownloadPic() {
+        return downloadPic;
+    }
+
+    public void setDownloadPic(String downloadPic) {
+        this.downloadPic = downloadPic;
+    }
+
+    public String getDownloadContent() {
+        return downloadContent;
+    }
+
+    public void setDownloadContent(String downloadContent) {
+        this.downloadContent = downloadContent;
+    }
+
     public int getId() {
         return id;
     }

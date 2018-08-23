@@ -36,6 +36,16 @@ public class TFood  extends LitePalSupport {
     private Boolean delflag;
     private String typename;
 
+    private String downloadPic; //图片地址
+
+    public String getDownloadPic() {
+        return downloadPic;
+    }
+
+    public void setDownloadPic(String downloadPic) {
+        this.downloadPic = downloadPic;
+    }
+
     public int getId() {
         return id;
     }

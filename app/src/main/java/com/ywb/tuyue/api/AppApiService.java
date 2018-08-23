@@ -15,8 +15,8 @@ import com.ywb.tuyue.entity.TFoodType;
 import com.ywb.tuyue.entity.TGame;
 import com.ywb.tuyue.entity.TGameType;
 import com.ywb.tuyue.entity.TVersion;
+import com.ywb.tuyue.entity.TVideo;
 import com.ywb.tuyue.entity.TVideoType;
-import com.ywb.tuyue.vo.PCommonSearchVO;
 
 import java.util.List;
 
@@ -34,6 +34,7 @@ public interface AppApiService {
 
     /**
      * 获取广告类型
+     *
      * @return
      */
     @GET("advertType/getList")
@@ -41,6 +42,7 @@ public interface AppApiService {
 
     /**
      * 获取所有的广告数据
+     *
      * @return
      */
     @GET("advert/getList")
@@ -48,6 +50,7 @@ public interface AppApiService {
 
     /**
      * 获取视频类型
+     *
      * @return
      */
     @GET("videoType/getList")
@@ -55,10 +58,11 @@ public interface AppApiService {
 
     /**
      * 获取所有视频
+     *
      * @return
      */
     @GET("video/getList")
-    Observable getVideoList(PCommonSearchVO pCommonSearchVO);
+    Observable<List<TVideo>> getVideoList(@Query("pageSize") int pageSize);
 
     /**
      * 获取游戏类别
@@ -74,7 +78,7 @@ public interface AppApiService {
      * @return
      */
     @GET("game/getList")
-    Observable<List<TGame>> getGameList();
+    Observable<List<TGame>> getGameList(@Query("pageSize") int pageSize);
 
     /**
      * 获取书籍类型列表
@@ -90,7 +94,7 @@ public interface AppApiService {
      * @return
      */
     @GET("book/getList")
-    Observable<List<TBook>> getBookList();
+    Observable<List<TBook>> getBookList(@Query("pageSize") int pageSize);
 
     /**
      * 获取菜单类型列表
@@ -106,7 +110,7 @@ public interface AppApiService {
      * @return
      */
     @GET("food/getList")
-    Observable<List<TFood>> getFoodList();
+    Observable<List<TFood>> getFoodList(@Query("pageSize") int pageSize);
 
     /**
      * 获取所有城市
@@ -114,7 +118,7 @@ public interface AppApiService {
      * @return
      */
     @GET("city/getList")
-    Observable<List<TCity>> getCityList();
+    Observable<List<TCity>> getCityList(@Query("pageSize") int pageSize);
 
     /**
      * 获取城市文章列表
@@ -122,7 +126,7 @@ public interface AppApiService {
      * @return
      */
     @GET("cityArticle/getList")
-    Observable<List<TCityArticle>> getCityArticleList();
+    Observable<List<TCityArticle>> getCityArticleList(@Query("typeId") int typeId, @Query("pageSize") int pageSize);
 
     /**
      * 获取城铁文章类型列表
@@ -138,7 +142,7 @@ public interface AppApiService {
      * @return
      */
     @GET("article/getList")
-    Observable<List<TArticle>> getArticleList();
+    Observable<List<TArticle>> getArticleList( @Query("pageSize") int pageSize);
 
     /**
      * 获取APK最新版本

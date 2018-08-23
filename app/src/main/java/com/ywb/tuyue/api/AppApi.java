@@ -19,8 +19,8 @@ import com.ywb.tuyue.entity.TFoodType;
 import com.ywb.tuyue.entity.TGame;
 import com.ywb.tuyue.entity.TGameType;
 import com.ywb.tuyue.entity.TVersion;
+import com.ywb.tuyue.entity.TVideo;
 import com.ywb.tuyue.entity.TVideoType;
-import com.ywb.tuyue.vo.PCommonSearchVO;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -106,63 +106,64 @@ public class AppApi implements AppApiService {
 
     @Override
     public Observable<List<TVideoType>> getVideoType() {
-        return null;
+        return service.getVideoType().compose(bindUntil());
     }
 
     @Override
-    public Observable getVideoList(PCommonSearchVO pCommonSearchVO) {
-        return null;
+    public Observable<List<TVideo>> getVideoList(int pageSize) {
+        return service.getVideoList(pageSize).compose(bindUntil());
     }
 
     @Override
     public Observable<List<TGameType>> getGameType() {
-        return null;
+        return service.getGameType().compose(bindUntil());
     }
 
     @Override
-    public Observable<List<TGame>> getGameList() {
-        return null;
+    public Observable<List<TGame>> getGameList(int pageSize) {
+        return service.getGameList(pageSize).compose(bindUntil());
     }
 
     @Override
     public Observable<List<TBookType>> getBookType() {
-        return null;
+        return service.getBookType().compose(bindUntil());
     }
 
     @Override
-    public Observable<List<TBook>> getBookList() {
-        return null;
+    public Observable<List<TBook>> getBookList(int pageSize) {
+        return service.getBookList(pageSize).compose(bindUntil());
     }
 
     @Override
     public Observable<List<TFoodType>> getFoodType() {
-        return null;
+        return service.getFoodType().compose(bindUntil());
     }
 
     @Override
-    public Observable<List<TFood>> getFoodList() {
-        return null;
+    public Observable<List<TFood>> getFoodList(int pageSize) {
+        return service.getFoodList(pageSize).compose(bindUntil());
     }
 
     @Override
-    public Observable<List<TCity>> getCityList() {
-        return null;
+    public Observable<List<TCity>> getCityList(int pageSize) {
+        return service.getCityList(pageSize).compose(bindUntil());
     }
 
     @Override
-    public Observable<List<TCityArticle>> getCityArticleList() {
-        return null;
+    public Observable<List<TCityArticle>> getCityArticleList(int typeId, int pageSize) {
+        return service.getCityArticleList(typeId,pageSize).compose(bindUntil());
     }
 
     @Override
     public Observable<List<TArticleType>> getArticleType() {
-        return null;
+        return service.getArticleType().compose(bindUntil());
     }
 
     @Override
-    public Observable<List<TArticle>> getArticleList() {
-        return null;
+    public Observable<List<TArticle>> getArticleList(int pageSize) {
+        return service.getArticleList(pageSize).compose(bindUntil());
     }
+
 
     @Override
     public Observable<TVersion> getVersion() {

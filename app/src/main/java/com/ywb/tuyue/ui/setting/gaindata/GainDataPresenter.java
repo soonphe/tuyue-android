@@ -1,13 +1,41 @@
 package com.ywb.tuyue.ui.setting.gaindata;
 
+import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.StringUtils;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.FileCallback;
+import com.lzy.okgo.model.Progress;
+import com.lzy.okgo.model.Response;
 import com.ywb.tuyue.api.AppApi;
+import com.ywb.tuyue.constants.Constants;
 import com.ywb.tuyue.di.PerActivity;
+import com.ywb.tuyue.entity.TAdvert;
+import com.ywb.tuyue.entity.TArticle;
+import com.ywb.tuyue.entity.TBook;
+import com.ywb.tuyue.entity.TCity;
+import com.ywb.tuyue.entity.TCityArticle;
+import com.ywb.tuyue.entity.TDataVersion;
+import com.ywb.tuyue.entity.TFood;
+import com.ywb.tuyue.entity.TGame;
+import com.ywb.tuyue.entity.TVideo;
 import com.ywb.tuyue.ui.mvp.BasePresenter;
+import com.ywb.tuyue.utils.HTMLFormatUtils;
+
+import org.litepal.LitePal;
+import org.litepal.crud.LitePalSupport;
+
+import java.io.File;
+import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
+
+import static com.ywb.tuyue.constants.Constants.DOWNLOAD_COUNT;
+
 @PerActivity
-public class GainDataPresenter extends BasePresenter<GainDataContract.View> implements GainDataContract.Presenter{
+public class GainDataPresenter extends BasePresenter<GainDataContract.View> implements GainDataContract.Presenter {
 
     private AppApi api;
 
@@ -19,7 +47,12 @@ public class GainDataPresenter extends BasePresenter<GainDataContract.View> impl
     @Override
     public void getDataVersion() {
         mDisposable.add(api.getDataVersion().subscribe(list -> {
+                    if (LitePal.findFirst(TDataVersion.class) != null) {
+                        LitePal.deleteAll(TDataVersion.class);
+                    }
+                    list.save();
                     mView.getDataVersionSuccess(list);
+
                 },
                 throwable -> mView.onError(throwable.getMessage()))
         );
@@ -28,9 +61,198 @@ public class GainDataPresenter extends BasePresenter<GainDataContract.View> impl
     @Override
     public void getAdvertList() {
         mDisposable.add(api.getAdvertList(1000).subscribe(list -> {
+                    if (LitePal.findFirst(TAdvert.class) != null) {
+                        LitePal.deleteAll(TAdvert.class);
+                    }
+                    LitePal.saveAll(list);
+                    for (TAdvert advert : list) {
+                        downloadFile(advert, 0, Constants.BASE_IMAGE_URL + advert.getPicurl());
+                        downloadFile(advert, 1, HTMLFormatUtils.getImgStr(advert.getContent()));
+
+                    }
                     mView.getAdvertSuccess(list);
                 },
                 throwable -> mView.onError(throwable.getMessage()))
         );
     }
+
+    @Override
+    public void getOrtherData() {
+        mView.startLoading();
+        SPUtils.getInstance().put(DOWNLOAD_COUNT, 0);
+        mDisposable.add(
+                Observable.mergeArray(
+                        api.getAdvertType(),
+                        api.getVideoType(),
+                        api.getVideoList(1000),
+                        api.getGameType(),
+                        api.getGameList(1000),
+                        api.getBookType(),
+                        api.getBookList(1000),
+                        api.getFoodType(),
+                        api.getFoodList(1000),
+                        api.getCityList(1000),
+                        api.getCityArticleList(-1, 1000),
+                        api.getArticleType(),
+                        api.getArticleList(1000))
+                        .subscribe((List<? extends LitePalSupport> list) -> {
+                                    SPUtils.getInstance().put(DOWNLOAD_COUNT, SPUtils.getInstance().getInt(DOWNLOAD_COUNT, 0) + 1);
+                                    //删除对应的数据库表文件
+                                    if (list.size() > 0) {
+                                        LitePal.deleteAll(list.get(0).getClass());
+                                    }
+                                    for (LitePalSupport object : list) {
+                                        //存储所有结果集
+                                        object.save();
+                                        /**
+                                         * 下载所有文件
+                                         * type:0图片,1文件
+                                         */
+                                        if (object instanceof TVideo) {
+                                            downloadFile(object, 0, Constants.BASE_IMAGE_URL + ((TVideo) object).getPosterurl());
+                                            downloadFile(object, 1, Constants.BASE_IMAGE_URL + ((TVideo) object).getFilepath());
+                                        } else if (object instanceof TGame) {
+                                            downloadFile(object, 0, Constants.BASE_IMAGE_URL + ((TGame) object).getPicurl());
+                                            downloadFile(object, 1, Constants.BASE_IMAGE_URL + ((TGame) object).getFilepath());
+                                        } else if (object instanceof TBook) {
+                                            if (!StringUtils.isEmpty(((TBook) object).getPicurl())) {
+                                                downloadFile(object, 0, Constants.BASE_IMAGE_URL + ((TBook) object).getPicurl());
+                                            }
+                                            if (!StringUtils.isEmpty(((TBook) object).getFilepath())) {
+                                                downloadFile(object, 1, Constants.BASE_IMAGE_URL + ((TBook) object).getFilepath());
+                                            }
+                                        } else if (object instanceof TFood) {
+                                            downloadFile(object, 0, Constants.BASE_IMAGE_URL + ((TFood) object).getPicurl());
+                                        } else if (object instanceof TCity) {
+                                            downloadFile(object, 0, Constants.BASE_IMAGE_URL + ((TCity) object).getPicurl());
+                                            downloadFile(object, 1, HTMLFormatUtils.getImgStr(((TCity) object).getContent()));
+                                        } else if (object instanceof TCityArticle) {
+                                            downloadFile(object, 0, Constants.BASE_IMAGE_URL + ((TCityArticle) object).getPicurl());
+                                            downloadFile(object, 1, HTMLFormatUtils.getImgStr(((TCityArticle) object).getContent()).split(",")[0]);
+                                        }else if (object instanceof TArticle) {
+                                            downloadFile(object, 0, Constants.BASE_IMAGE_URL + ((TArticle) object).getPicurl());
+                                            if (((TArticle) object).getClassify() == 0) {
+                                                downloadFile(object, 1, HTMLFormatUtils.getImgStr(((TArticle) object).getContent()));
+                                            } else {
+                                                downloadFile(object, 2, Constants.BASE_IMAGE_URL + ((TArticle) object).getPathfile());
+                                            }
+                                        }
+
+                                    }
+                                    if (SPUtils.getInstance().getInt(DOWNLOAD_COUNT, 0) % 13 == 0) {
+                                        mView.endLoading();
+                                        mView.getOtherDataSuccess();
+                                    }
+                                },
+                                throwable -> mView.onError(throwable.getMessage()))
+        );
+    }
+
+
+    public void downloadFile(LitePalSupport object, int type, String downpath) {
+
+        OkGo.<File>get(downpath)
+                .tag(this)
+                .execute(new FileCallback() {
+                    @Override
+                    public void onSuccess(Response<File> response) {
+                        LogUtils.e("获取到的文件路径为：" + response.body().getPath());
+                        if (object instanceof TAdvert) {
+                            LogUtils.e("设置广告文件");
+                            if (type == 0) {
+                                ((TAdvert) object).setDownloadPic(response.body().getPath());
+                            } else {
+                                ((TAdvert) object).setDownloadContent(response.body().getPath());
+                            }
+                            (object).update(((TAdvert) object).getId());
+                        } else if (object instanceof TVideo) {
+                            LogUtils.e("设置视频文件");
+                            if (type == 0) {
+                                ((TVideo) object).setDownloadPic(response.body().getPath());
+                            } else {
+                                ((TVideo) object).setDownloadFile(response.body().getPath());
+                            }
+                            (object).update(((TVideo) object).getId());
+                        } else if (object instanceof TGame) {
+                            if (type == 0) {
+                                LogUtils.e("设置游戏图片");
+                                ((TGame) object).setDownloadPic(response.body().getPath());
+                            } else {
+                                LogUtils.e("设置游戏文件路径");
+                                ((TGame) object).setDownloadFile(response.body().getPath());
+                            }
+                            (object).update(((TGame) object).getId());
+                        } else if (object instanceof TBook) {
+                            if (type == 0) {
+                                LogUtils.e("设置书吧图片");
+                                ((TBook) object).setDownloadPic(response.body().getPath());
+                            } else {
+                                LogUtils.e("设置书吧文件");
+                                ((TBook) object).setDownloadFile(response.body().getPath());
+                            }
+                            (object).update(((TBook) object).getId());
+                        } else if (object instanceof TFood) {
+                            LogUtils.e("设置点餐文件");
+                            ((TFood) object).setDownloadPic(response.body().getPath());
+                            (object).update(((TFood) object).getId());
+                        } else if (object instanceof TCity) {
+                            LogUtils.e("设置城市文件");
+                            if (type == 0) {
+                                ((TCity) object).setDownloadPic(response.body().getPath());
+                            } else {
+                                ((TCity) object).setDownloadContent(response.body().getPath());
+                            }
+                            (object).update(((TCity) object).getId());
+                        } else if (object instanceof TCityArticle) {
+                            LogUtils.e("设置城市文件");
+                            if (type == 0) {
+                                ((TCityArticle) object).setDownloadPic(response.body().getPath());
+                            } else {
+                                ((TCityArticle) object).setDownloadContent(response.body().getPath());
+                            }
+                            (object).update(((TCityArticle) object).getId());
+                        } else if (object instanceof TArticle) {
+                            LogUtils.e("设置城铁文件");
+                            if (type == 0) {
+                                ((TArticle) object).setDownloadPic(response.body().getPath());
+                            } else {
+                                ((TArticle) object).setDownloadFile(response.body().getPath());
+                            }
+                            (object).update(((TArticle) object).getId());
+                        }
+                    }
+
+                    @Override
+                    public void downloadProgress(Progress progress) {
+                        if (progress.fraction * 100 % 10 == 0) {
+                            LogUtils.e("当前进度" + progress.fraction * 100 + "%");
+                        }
+                        //回调下载进度
+                        super.downloadProgress(progress);
+
+                    }
+
+                    @Override
+                    public void onError(Response<File> response) {
+                        LogUtils.e("下载报错" + response.body().getName() + ",相关类:" + object.toString());
+                        super.onError(response);
+                    }
+                });
+
+        //使用okserver download下载文件
+//        GetRequest<File> request = OkGo.<File>get(Constants.BASE_IMAGE_URL + downpath);
+//        DownloadTask task = OkDownload.request("task",request)
+////                .priority()   //优先级
+////                .folder() //存储文件夹
+////                .fileName() //存储文件名
+//                .extra1()
+//                .extra2()
+//                .extra3()
+//                .save()
+//                .register();
+//        //启动下载任务
+//        task.start();
+    }
+
+
 }

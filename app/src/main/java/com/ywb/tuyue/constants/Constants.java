@@ -19,7 +19,7 @@ public class Constants {
     public static String HOST = "http://" + SERVER_IP + ":" + SERVER_PORT;//服务器地址
     public static String BASE_URL = HOST + "/tuyue/";  // /ltcx/
     public static String BASE_API_URL = BASE_URL + "api/";
-    public static String BASE_IMAGE_URL = HOST + "/upload";
+    public static String BASE_IMAGE_URL = "http://" + LOCAL_SERVER_IP + "/upload";
 
     //1905电影数据地址
     public static String MOVIE_1905_URL = "http://192.168.1.6:8087/index.php/Home/Interface/index?class=HallUse&method=getVideoList";
@@ -45,6 +45,7 @@ public class Constants {
     public static String LAST_WEATHER = "LAST_WEATHER"; //天气
     public static final String ADVERT_VERSION= "ADVERT_VERSION";    //广告版本
     public static final String DATA_VERSION = "DATA_VERSION";   //数据版本
+    public static final String DOWNLOAD_COUNT = "DOWNLOAD_COUNT";   //数据版本
 
 
     /**
