@@ -1,10 +1,11 @@
-package com.ywb.tuyue.ui.cinema.movie;
+package com.ywb.tuyue.ui.video.movie;
 
 
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
+import com.ywb.tuyue.R;
 import com.ywb.tuyue.entity.TVideo;
 import com.ywb.tuyue.ui.mvp.BaseFragmentV4;
 
@@ -39,7 +40,7 @@ public class MovieFragment extends BaseFragmentV4 implements MovieContract.View 
 
     @Override
     public int bindLayout() {
-        return 0;
+        return R.layout.fragment_video;
     }
 
     @Override

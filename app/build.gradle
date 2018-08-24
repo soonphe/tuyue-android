@@ -126,6 +126,9 @@ dependencies {
     implementation externalJcore
     implementation externalPinyin
     implementation externalRxTools
+    implementation externalJiaoziVideoPlayer
+    implementation externalJsoup
+
     //View library
     //    compile 'com.qmuiteam:qmui:1.0.0'
     implementation externalFlipboardBottomsheet
@@ -133,6 +136,7 @@ dependencies {
     implementation externalBaseRecyclerViewAdapterHelper
     implementation externalJudeEasyrecyclerview
     implementation externalWangAvi
+    implementation externalNineoldAndroid
     implementation externalMaterialDialogs
     implementation externalMaterialDialogsCommons
     implementation externalJustAgentweb
@@ -155,10 +159,7 @@ dependencies {
     implementation externalPhotoView
 
     implementation project(':matiss')
+    implementation project(':1905DrmServiceLib')
 //    implementation files('libs/tbs_sdk_thirdapp_v3.2.0.1104_43200_sharewithdownload_withfilereader_withoutGame_obfs_20170609_115346.jar')
 
-    implementation externalNineoldAndroid
-
-    //导入jsoup来解析html
-    implementation externalJsoup
 }

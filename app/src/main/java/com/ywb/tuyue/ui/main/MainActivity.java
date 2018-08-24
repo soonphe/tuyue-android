@@ -12,7 +12,7 @@ import com.blankj.utilcode.util.BarUtils;
 import com.ywb.tuyue.R;
 import com.ywb.tuyue.ui.advertise.AdvertiseDetailActivity;
 import com.ywb.tuyue.ui.book.BookActivity;
-import com.ywb.tuyue.ui.cinema.CinemaActivity;
+import com.ywb.tuyue.ui.video.CinemaActivity;
 import com.ywb.tuyue.ui.city.CityActivity;
 import com.ywb.tuyue.ui.food.FoodActivity;
 import com.ywb.tuyue.ui.game.game.GameActivity;

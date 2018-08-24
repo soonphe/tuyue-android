@@ -3,8 +3,8 @@ package com.ywb.tuyue.di.component;
 
 import com.ywb.tuyue.di.PerActivity;
 import com.ywb.tuyue.di.module.ActivityModule;
-import com.ywb.tuyue.ui.cinema.movie.MovieFragment;
-import com.ywb.tuyue.ui.cinema.video.VideoFragment;
+import com.ywb.tuyue.ui.video.movie.MovieFragment;
+import com.ywb.tuyue.ui.video.video.VideoFragment;
 import com.ywb.tuyue.ui.setting.aboutus.AboutUsFragment;
 import com.ywb.tuyue.ui.setting.gaindata.GainDataFragment;
 import com.ywb.tuyue.ui.setting.version.VersionFragment;

@@ -1,4 +1,4 @@
-package com.ywb.tuyue.ui.cinema;
+package com.ywb.tuyue.ui.video;
 
 
 import android.content.Context;
@@ -14,8 +14,8 @@ import com.ywb.tuyue.R;
 import com.ywb.tuyue.entity.PMenu;
 import com.ywb.tuyue.ui.adapter.MenuAdapter;
 import com.ywb.tuyue.ui.adapter.ViewPagerAdapter;
-import com.ywb.tuyue.ui.cinema.movie.MovieFragment;
-import com.ywb.tuyue.ui.cinema.video.VideoFragment;
+import com.ywb.tuyue.ui.video.movie.MovieFragment;
+import com.ywb.tuyue.ui.video.video.VideoFragment;
 import com.ywb.tuyue.ui.mvp.BaseActivity;
 import com.ywb.tuyue.widget.MyViewPager;
 

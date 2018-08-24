@@ -7,16 +7,16 @@
     android:background="@mipmap/bg">
 
     <!--<com.ywb.tuyue.widget.head.HeaderView-->
-        <!--android:id="@+id/header"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content" />-->
+    <!--android:id="@+id/header"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content" />-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/header"
         android:background="@color/white"
-        android:orientation="vertical"
-        android:layout_below="@+id/header">
+        android:orientation="vertical">
 
         <com.youth.banner.Banner
             android:id="@+id/banner_Game"
@@ -43,9 +43,24 @@
             android:layout_marginTop="-2dp"
             android:background="@color/hint_color" />
 
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/sm_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                android:overScrollMode="never"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" />
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
         <!--<com.ywb.tuyue.widget.CustomViewPager-->
-            <!--android:id="@+id/pager"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent" />-->
+        <!--android:id="@+id/pager"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent" />-->
     </LinearLayout>
 </RelativeLayout>

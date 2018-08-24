@@ -10,10 +10,12 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.SimpleTarget;
 
+import java.io.File;
+
 /**
  * @Author anna
  * @Date 2017-12-07 11:50
- * @Description 
+ * @Description
  */
 public class GlideUtils {
 
@@ -32,6 +34,11 @@ public class GlideUtils {
     //默认加载
     public static void loadImageView(Context mContext, String path, ImageView mImageView) {
         Glide.with(mContext).load(path).into(mImageView);
+    }
+
+    //加载本地图片
+    public static void loadLocalImageView(Context mContext, String path, ImageView mImageView) {
+        Glide.with(mContext).load(new File(path + "")).into(mImageView);
     }
 
     //加载指定大小

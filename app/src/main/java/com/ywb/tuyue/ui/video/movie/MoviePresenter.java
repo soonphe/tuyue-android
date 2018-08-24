@@ -1,4 +1,4 @@
-package com.ywb.tuyue.ui.cinema.movie;
+package com.ywb.tuyue.ui.video.movie;
 
 import com.ywb.tuyue.api.AppApi;
 import com.ywb.tuyue.di.PerActivity;

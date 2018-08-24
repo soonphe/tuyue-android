@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg"
+    android:keepScreenOn="true"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:elevation="0dp">
+
+        <com.ywb.tuyue.widget.AppTitle
+            style="@style/title_style"
+            app:showBack="true"
+            app:canFinish="true"
+            app:centreText="影院"
+            app:centreTextColor="@color/white" />
+    </android.support.design.widget.AppBarLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_height"
+        android:background="@drawable/line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/transport_half"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:padding="@dimen/dp_20">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/movie_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="速度与激情8"
+                        android:textColor="#FFFFF8F9"
+                        android:textSize="@dimen/sp_25" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/movie_director"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_40"
+                    android:text="导演:F·加里·格雷"
+                    android:textColor="#FFA7ACB6"
+                    android:textSize="@dimen/sp_18" />
+
+                <TextView
+                    android:id="@+id/movie_actor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:text="主演:F·加里·格雷执导、范·迪塞尔、道恩·强森、杰森·斯坦森、查理兹·塞隆"
+                    android:textColor="#FFA7ACB6"
+                    android:textSize="@dimen/sp_18" />
+
+                <ScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:overScrollMode="never"
+                    android:scrollbars="none">
+
+                    <TextView
+                        android:id="@+id/movie_introduct"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="犯罪道有的灾难考验着最个飞车米歇尔·罗德里格兹饰）共度蜜月，布莱恩与米娅退出了赛车界，这支曾环游世界的顶级飞车家族队伍的生活正渐趋平淡。然而，一位神秘女子塞弗（查理兹·塞隆饰）的出现，她引诱多米尼克·托莱多走上犯罪道路，令整个队伍卷入信任与背叛的危机，生死患难的情义面临瓦解崩溃，前所未有的灾难考验着最个飞车家族[3]  犯罪道有的灾难考验着最个飞车米歇尔·罗德里格兹饰）共度蜜月，布莱恩与米娅退出了赛车界，这支曾环游世界的顶级飞车家族队伍的生活正渐趋平淡。然而，一位神秘女子塞弗（查理兹·塞隆饰）的出现，她引诱多米尼克·托莱多走上犯罪道路，令整个队伍卷入信任与背叛的危机，生死患难的情义面临瓦解崩溃，患难的情义面临瓦解崩溃，前所未有的灾难考验着最个飞车家患难的情义面临瓦解崩溃，前所未有的灾难考验着最个飞车家患难的情义面临瓦解崩溃，前所未有的灾难考验着最个飞车家患难的情义面临瓦解崩溃，前所未有的灾难考验着最个飞车家前所未有的灾难考验着最个飞车家族[3]  。。"
+                        android:textColor="#FFA7ACB6"
+                        android:textSize="@dimen/sp_18" />
+                </ScrollView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/dp_60"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_40"
+            android:layout_weight="2.5">
+
+            <cn.jzvd.JZVideoPlayerStandard
+                android:id="@+id/videoplayer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>
+

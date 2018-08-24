@@ -1,4 +1,4 @@
-package com.ywb.tuyue.ui.cinema;
+package com.ywb.tuyue.ui.video;
 
 import com.ywb.tuyue.ui.mvp.BasePView;
 

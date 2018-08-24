@@ -1,2 +1,2 @@
-include ':app', ':matiss'
+include ':app', ':matiss', ':1905DrmServiceLib'
 project(':matiss').projectDir = new File('matisse')
