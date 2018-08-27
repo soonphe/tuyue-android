@@ -43,16 +43,20 @@ public class Constants {
     public static String USER_TELEPHONE = "USER_TELEPHONE";
     public static String USER_BADGENUMBER = "USER_BADGENUMBER"; //消息模块 badge数量
     public static String LAST_WEATHER = "LAST_WEATHER"; //天气
+
     public static final String ADVERT_VERSION = "ADVERT_VERSION";    //广告版本
     public static final String DATA_VERSION = "DATA_VERSION";   //数据版本
     public static final String DOWNLOAD_COUNT = "DOWNLOAD_COUNT";   //下载模块次数——13次
+
+    public static final String GAME_UNZIP = "GAME_UNZIP";   //游戏解压路径
 
 
     /**
      * 项目根SD卡目录
      **/
     public static final String PROJECT_ROOT = "tuyue";
-    public static final String SDPATH = SDCardUtils.getSDCardPaths().toString();
+    public static final String SDPATHLIST = SDCardUtils.getSDCardPaths().toString();
+    public static final String SDPATH = SDPATHLIST.substring(1,SDPATHLIST.length()-1);
     public static final String DOWNLOAD_PATH = SDPATH + "/download" + "/"+ PROJECT_ROOT;
 
     //图片压缩地址

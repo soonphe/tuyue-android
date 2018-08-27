@@ -134,4 +134,6 @@ public class VideoPlayerActivity extends BaseActivity implements VideoPlayerCont
         getComponent().inject(this);
     }
 
+
+
 }

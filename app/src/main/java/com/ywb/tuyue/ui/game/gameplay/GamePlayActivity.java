@@ -2,10 +2,30 @@ package com.ywb.tuyue.ui.game.gameplay;
 
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.view.View;
+import android.widget.FrameLayout;
 
+import com.blankj.utilcode.util.BarUtils;
+import com.blankj.utilcode.util.EmptyUtils;
+import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.StringUtils;
+import com.just.library.AgentWeb;
+import com.ywb.tuyue.R;
+import com.ywb.tuyue.constants.Constants;
+import com.ywb.tuyue.entity.TGame;
 import com.ywb.tuyue.ui.mvp.BaseActivity;
+import com.ywb.tuyue.utils.UnZip;
+import com.ywb.tuyue.widget.AppTitle;
+
+import org.litepal.LitePal;
+
+import butterknife.BindView;
+
+import static com.ywb.tuyue.constants.Constants.GAME_UNZIP;
 
 /**
  * @Author soonphe
@@ -14,9 +34,19 @@ import com.ywb.tuyue.ui.mvp.BaseActivity;
  */
 public class GamePlayActivity extends BaseActivity implements GamePlayContract.View {
 
+    @BindView(R.id.app_title_id)
+    AppTitle appTitle;
+    @BindView(R.id.fl_web)
+    FrameLayout flWeb;
+
+    //video的ID
+    int id;
+    TGame tGame;
+    String mUrl;
+
     @Override
     public int bindLayout() {
-        return 0;
+        return R.layout.activity_game_play;
     }
 
     @Override
@@ -24,19 +54,54 @@ public class GamePlayActivity extends BaseActivity implements GamePlayContract.V
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void initView(View view) {
+        BarUtils.setStatusBarAlpha(this, 0);
+        //取传过来的分类ID
+        if (EmptyUtils.isNotEmpty(mOperation.getParameter("game"))) {
+            id = (int) mOperation.getParameter("game");
+        }
+        tGame = LitePal.find(TGame.class, id);
+
+        //判断是否需要解压
+        if (StringUtils.isEmpty(SPUtils.getInstance().getString(GAME_UNZIP + tGame.getId(),""))) {
+            //解压压缩包(压缩包路径，解压后路径)
+            try {
+                UnZip.UnZipFolder(tGame.getDownloadFile(), "/storage/emulated/0/download/" + "game" + tGame.getId());
+                SPUtils.getInstance().put(GAME_UNZIP + tGame.getId(), "/storage/emulated/0/download/" + "game" + tGame.getId());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        //拼接本地路径
+        mUrl = "file://" + SPUtils.getInstance().getString(GAME_UNZIP + tGame.getId(),"");
+
+        //初始化webview
+        AgentWeb web = AgentWeb.with(this)//传入Activity
+                .setAgentWebParent(flWeb, new FrameLayout.LayoutParams(-1, -1))//传入AgentWeb 的父控件 ，如果父控件为 RelativeLayout ， 那么第二参数需要传入 RelativeLayout.LayoutParams
+                .useDefaultIndicator()// 使用默认进度条
+                .defaultProgressBarColor() // 使用默认进度条颜色
+                .setReceivedTitleCallback((view1, title) -> appTitle.setTitle(title)) //设置 Web 页面的 title 回调
+                .createAgentWeb()//
+                .ready()
+                .go(mUrl == null || mUrl.length() == 0 ? "" : mUrl);
+        web.getAgentWebSettings().getWebSettings().setSupportZoom(true);
 
     }
 
     @Override
     public void doBusiness(Context mContext) {
 
+        LogUtils.e("通过util获取到的sd卡路径：", Constants.DOWNLOAD_PATH);
+        LogUtils.e("通过环境获取到的sd卡路径：", Constants.SAVED_IMAGE_DIR_PATH);
+
+
     }
 
     @Override
     public void initInjector() {
-
+        getComponent().inject(this);
     }
 
     @Override
@@ -53,4 +118,5 @@ public class GamePlayActivity extends BaseActivity implements GamePlayContract.V
     public void onError(String error) {
 
     }
+
 }

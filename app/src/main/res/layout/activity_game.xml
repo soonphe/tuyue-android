@@ -4,12 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/bg">
+    android:background="@mipmap/bg"
+    android:fitsSystemWindows="true">
 
-    <!--<com.ywb.tuyue.widget.head.HeaderView-->
-    <!--android:id="@+id/header"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content" />-->
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:elevation="0dp">
+
+        <com.ywb.tuyue.widget.AppTitle
+            style="@style/title_style"
+            app:showBack="true"
+            app:canFinish="true"
+            app:centreText="电玩"
+            app:centreTextColor="@color/white" />
+    </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

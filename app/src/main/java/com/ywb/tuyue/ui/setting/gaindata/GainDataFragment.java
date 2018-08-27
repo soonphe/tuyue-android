@@ -110,16 +110,15 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
         advertVersion = SPUtils.getInstance().getInt(Constants.ADVERT_VERSION, 0);
         //判断数据版本和广告版本是否一致
         if (tDataVersion.getAdvertversion() == advertVersion && tDataVersion.getDataversion() == dataVersion) {
-            LogUtils.e("当前已经是最新数据");
             ToastUtils.showShort("当前已经是最新数据");
         } else {
             //分别判断更新广告版本和数据版本
             if (tDataVersion.getAdvertversion() > advertVersion) {
-                LogUtils.e("准备更新广告版本");
+                LogUtils.e("更新广告版本");
                 presenter.getAdvertList();
             }
             if (tDataVersion.getDataversion() > dataVersion) {
-                LogUtils.e("准备更新数据版本");
+                LogUtils.e("更新数据版本");
                 presenter.getOrtherData();
             }
         }

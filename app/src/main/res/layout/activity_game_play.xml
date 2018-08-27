@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/rootView"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/bg"
     android:orientation="vertical"
-    android:overScrollMode="never">
+    android:fitsSystemWindows="true">
 
-    <com.ywb.tuyue.widget.head.HeaderView
-        android:id="@+id/title"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-</RelativeLayout>
+        android:layout_height="wrap_content"
+        app:elevation="0dp">
+
+        <com.ywb.tuyue.widget.AppTitle
+            style="@style/title_style"
+            app:showBack="true"
+            app:canFinish="true"
+            app:centreText="电玩"
+            app:centreTextColor="@color/white" />
+    </android.support.design.widget.AppBarLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_web"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+</LinearLayout>

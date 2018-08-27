@@ -111,6 +111,9 @@ ext {
     externalMaterialDialogsCommons = 'com.afollestad.material-dialogs:commons:0.9.4.5'
     // webView
     externalJustAgentweb = 'com.just.agentweb:agentweb:1.2.6'
+    // 基于腾讯x5内核agentweb
+    externalJustAgentwebX5 = 'com.just.agentwebX5:agentwebX5:2.0.0'
+
     // recyclerview-animators 动画
     externalRecyclerviewAnimators = 'jp.wasabeef:recyclerview-animators:2.2.3'
     // 滑动rollviewpager

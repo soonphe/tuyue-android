@@ -6,7 +6,7 @@
               android:orientation="vertical">
 
 
-    <cn.connxun.train.widget.AppTitle
+    <com.ywb.tuyue.widget.AppTitle
         style="@style/title_style"
         app:canFinish="true"
         app:centreText="@string/loading"

@@ -117,6 +117,13 @@
             android:name=".ui.videoplayer.VideoPlayerActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="landscape" />
+        <activity
+            android:name=".ui.game.game.GameActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".ui.game.gameplay.GamePlayActivity"
+            android:screenOrientation="landscape" />
+
         <!--<activity android:name=".ui.music.MusicActivity" />-->
         <activity
             android:name=".ui.food.FoodActivity"
