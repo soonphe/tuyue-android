@@ -10,12 +10,10 @@ import android.widget.FrameLayout;
 
 import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.EmptyUtils;
-import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.just.library.AgentWeb;
 import com.ywb.tuyue.R;
-import com.ywb.tuyue.constants.Constants;
 import com.ywb.tuyue.entity.TGame;
 import com.ywb.tuyue.ui.mvp.BaseActivity;
 import com.ywb.tuyue.utils.UnZip;
@@ -65,7 +63,7 @@ public class GamePlayActivity extends BaseActivity implements GamePlayContract.V
         tGame = LitePal.find(TGame.class, id);
 
         //判断是否需要解压
-        if (StringUtils.isEmpty(SPUtils.getInstance().getString(GAME_UNZIP + tGame.getId(),""))) {
+        if (StringUtils.isEmpty(SPUtils.getInstance().getString(GAME_UNZIP + tGame.getId(), ""))) {
             //解压压缩包(压缩包路径，解压后路径)
             try {
                 UnZip.UnZipFolder(tGame.getDownloadFile(), "/storage/emulated/0/download/" + "game" + tGame.getId());
@@ -74,8 +72,8 @@ public class GamePlayActivity extends BaseActivity implements GamePlayContract.V
                 e.printStackTrace();
             }
         }
-        //拼接本地路径
-        mUrl = "file://" + SPUtils.getInstance().getString(GAME_UNZIP + tGame.getId(),"");
+        //拼接本地路径（需要添加前缀 file://）
+        mUrl = "file://" + SPUtils.getInstance().getString(GAME_UNZIP + tGame.getId(), "") + "/index.html";
 
         //初始化webview
         AgentWeb web = AgentWeb.with(this)//传入Activity
@@ -92,10 +90,6 @@ public class GamePlayActivity extends BaseActivity implements GamePlayContract.V
 
     @Override
     public void doBusiness(Context mContext) {
-
-        LogUtils.e("通过util获取到的sd卡路径：", Constants.DOWNLOAD_PATH);
-        LogUtils.e("通过环境获取到的sd卡路径：", Constants.SAVED_IMAGE_DIR_PATH);
-
 
     }
 

@@ -1,5 +1,7 @@
 package com.ywb.tuyue.entity;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.litepal.crud.LitePalSupport;
 
 /**
@@ -20,7 +22,9 @@ public class TGame  extends LitePalSupport {
      * updatetime : 2018-06-28 18:09:40
      * delflag : null
      */
-
+    @SerializedName("id")   //真实ID
+    private int tid;
+    @SerializedName("myid")
     private int id;
     private int typeid;
     private String name;
@@ -32,6 +36,14 @@ public class TGame  extends LitePalSupport {
 
     private String downloadPic; //图片地址
     private String downloadFile;    //压缩包地址
+
+    public int getTid() {
+        return tid;
+    }
+
+    public void setTid(int tid) {
+        this.tid = tid;
+    }
 
     public String getDownloadPic() {
         return downloadPic;

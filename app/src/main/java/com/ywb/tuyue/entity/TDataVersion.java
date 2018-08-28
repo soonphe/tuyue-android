@@ -1,5 +1,7 @@
 package com.ywb.tuyue.entity;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.litepal.crud.LitePalSupport;
 
 /**
@@ -17,11 +19,21 @@ public class TDataVersion  extends LitePalSupport {
      * dataversion : 4
      * updatetime : 2018-08-16 17:32:38
      */
-
+    @SerializedName("id")   //真实ID
+    private int tid;
+    @SerializedName("myid")
     private int id;
     private int advertversion;
     private int dataversion;
     private String updatetime;
+
+    public int getTid() {
+        return tid;
+    }
+
+    public void setTid(int tid) {
+        this.tid = tid;
+    }
 
     public int getId() {
         return id;

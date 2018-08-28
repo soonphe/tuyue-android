@@ -1,5 +1,6 @@
 package com.ywb.tuyue.ui.setting.gaindata;
 
+import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
@@ -33,6 +34,7 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 
 import static com.ywb.tuyue.constants.Constants.DOWNLOAD_COUNT;
+import static com.ywb.tuyue.constants.Constants.DOWNLOAD_PATH;
 
 @PerActivity
 public class GainDataPresenter extends BasePresenter<GainDataContract.View> implements GainDataContract.Presenter {
@@ -96,7 +98,9 @@ public class GainDataPresenter extends BasePresenter<GainDataContract.View> impl
                         api.getArticleType(),
                         api.getArticleList(1000))
                         .subscribe((List<? extends LitePalSupport> list) -> {
+
                                     SPUtils.getInstance().put(DOWNLOAD_COUNT, SPUtils.getInstance().getInt(DOWNLOAD_COUNT, 0) + 1);
+                                    LogUtils.e("下载完成：" + SPUtils.getInstance().getInt(DOWNLOAD_COUNT, 0));
                                     //删除对应的数据库表文件
                                     if (list.size() > 0) {
                                         LitePal.deleteAll(list.get(0).getClass());
@@ -129,7 +133,7 @@ public class GainDataPresenter extends BasePresenter<GainDataContract.View> impl
                                         } else if (object instanceof TCityArticle) {
                                             downloadFile(object, 0, Constants.BASE_IMAGE_URL + ((TCityArticle) object).getPicurl());
                                             downloadFile(object, 1, HTMLFormatUtils.getImgStr(((TCityArticle) object).getContent()).split(",")[0]);
-                                        }else if (object instanceof TArticle) {
+                                        } else if (object instanceof TArticle) {
                                             downloadFile(object, 0, Constants.BASE_IMAGE_URL + ((TArticle) object).getPicurl());
                                             if (((TArticle) object).getClassify() == 0) {
                                                 downloadFile(object, 1, HTMLFormatUtils.getImgStr(((TArticle) object).getContent()));
@@ -151,93 +155,165 @@ public class GainDataPresenter extends BasePresenter<GainDataContract.View> impl
 
     public void downloadFile(LitePalSupport object, int type, String downpath) {
 
-        OkGo.<File>get(downpath)
-                .tag(this)
-                .execute(new FileCallback() {
-                    @Override
-                    public void onSuccess(Response<File> response) {
-                        LogUtils.e("获取到的文件路径为：" + response.body().getPath());
-                        if (object instanceof TAdvert) {
-                            LogUtils.e("设置广告文件");
-                            if (type == 0) {
-                                ((TAdvert) object).setDownloadPic(response.body().getPath());
-                            } else {
-                                ((TAdvert) object).setDownloadContent(response.body().getPath());
+
+        String localFilePath = DOWNLOAD_PATH + downpath.substring(downpath.lastIndexOf("/"), downpath.length());
+        //判断本地文件是否存在
+        if (FileUtils.isFileExists(localFilePath)) {
+            LogUtils.e("本地文件存在");
+            if (object instanceof TAdvert) {
+                LogUtils.e("设置广告文件");
+                if (type == 0) {
+                    ((TAdvert) object).setDownloadPic(localFilePath);
+                } else {
+                    ((TAdvert) object).setDownloadContent(localFilePath);
+                }
+                (object).update(((TAdvert) object).getId());
+            } else if (object instanceof TVideo) {
+                LogUtils.e("设置视频文件");
+                if (type == 0) {
+                    ((TVideo) object).setDownloadPic(localFilePath);
+                } else {
+                    ((TVideo) object).setDownloadFile(localFilePath);
+                }
+                (object).update(((TVideo) object).getId());
+            } else if (object instanceof TGame) {
+                if (type == 0) {
+                    LogUtils.e("设置游戏图片");
+                    ((TGame) object).setDownloadPic(localFilePath);
+                } else {
+                    LogUtils.e("设置游戏文件路径");
+                    ((TGame) object).setDownloadFile(localFilePath);
+                }
+                (object).update(((TGame) object).getId());
+            } else if (object instanceof TBook) {
+                if (type == 0) {
+                    LogUtils.e("设置书吧图片");
+                    ((TBook) object).setDownloadPic(localFilePath);
+                } else {
+                    LogUtils.e("设置书吧文件");
+                    ((TBook) object).setDownloadFile(localFilePath);
+                }
+                (object).update(((TBook) object).getId());
+            } else if (object instanceof TFood) {
+                LogUtils.e("设置点餐文件");
+                ((TFood) object).setDownloadPic(localFilePath);
+                (object).update(((TFood) object).getId());
+            } else if (object instanceof TCity) {
+                LogUtils.e("设置城市文件");
+                if (type == 0) {
+                    ((TCity) object).setDownloadPic(localFilePath);
+                } else {
+                    ((TCity) object).setDownloadContent(localFilePath);
+                }
+                (object).update(((TCity) object).getId());
+            } else if (object instanceof TCityArticle) {
+                LogUtils.e("设置城市文件");
+                if (type == 0) {
+                    ((TCityArticle) object).setDownloadPic(localFilePath);
+                } else {
+                    ((TCityArticle) object).setDownloadContent(localFilePath);
+                }
+                (object).update(((TCityArticle) object).getId());
+            } else if (object instanceof TArticle) {
+                LogUtils.e("设置城铁文件");
+                if (type == 0) {
+                    ((TArticle) object).setDownloadPic(localFilePath);
+                } else {
+                    ((TArticle) object).setDownloadFile(localFilePath);
+                }
+                (object).update(((TArticle) object).getId());
+            }
+
+        } else {
+            OkGo.<File>get(downpath)
+                    .tag(this)
+                    .execute(new FileCallback() {
+                        @Override
+                        public void onSuccess(Response<File> response) {
+                            LogUtils.e("获取到的文件路径为：" + response.body().getPath());
+                            if (object instanceof TAdvert) {
+                                LogUtils.e("设置广告文件");
+                                if (type == 0) {
+                                    ((TAdvert) object).setDownloadPic(response.body().getPath());
+                                } else {
+                                    ((TAdvert) object).setDownloadContent(response.body().getPath());
+                                }
+                                (object).update(((TAdvert) object).getId());
+                            } else if (object instanceof TVideo) {
+                                LogUtils.e("设置视频文件");
+                                if (type == 0) {
+                                    ((TVideo) object).setDownloadPic(response.body().getPath());
+                                } else {
+                                    ((TVideo) object).setDownloadFile(response.body().getPath());
+                                }
+                                (object).update(((TVideo) object).getId());
+                            } else if (object instanceof TGame) {
+                                if (type == 0) {
+                                    LogUtils.e("设置游戏图片");
+                                    ((TGame) object).setDownloadPic(response.body().getPath());
+                                } else {
+                                    LogUtils.e("设置游戏文件路径");
+                                    ((TGame) object).setDownloadFile(response.body().getPath());
+                                }
+                                (object).update(((TGame) object).getId());
+                            } else if (object instanceof TBook) {
+                                if (type == 0) {
+                                    LogUtils.e("设置书吧图片");
+                                    ((TBook) object).setDownloadPic(response.body().getPath());
+                                } else {
+                                    LogUtils.e("设置书吧文件");
+                                    ((TBook) object).setDownloadFile(response.body().getPath());
+                                }
+                                (object).update(((TBook) object).getId());
+                            } else if (object instanceof TFood) {
+                                LogUtils.e("设置点餐文件");
+                                ((TFood) object).setDownloadPic(response.body().getPath());
+                                (object).update(((TFood) object).getId());
+                            } else if (object instanceof TCity) {
+                                LogUtils.e("设置城市文件");
+                                if (type == 0) {
+                                    ((TCity) object).setDownloadPic(response.body().getPath());
+                                } else {
+                                    ((TCity) object).setDownloadContent(response.body().getPath());
+                                }
+                                (object).update(((TCity) object).getId());
+                            } else if (object instanceof TCityArticle) {
+                                LogUtils.e("设置城市文件");
+                                if (type == 0) {
+                                    ((TCityArticle) object).setDownloadPic(response.body().getPath());
+                                } else {
+                                    ((TCityArticle) object).setDownloadContent(response.body().getPath());
+                                }
+                                (object).update(((TCityArticle) object).getId());
+                            } else if (object instanceof TArticle) {
+                                LogUtils.e("设置城铁文件");
+                                if (type == 0) {
+                                    ((TArticle) object).setDownloadPic(response.body().getPath());
+                                } else {
+                                    ((TArticle) object).setDownloadFile(response.body().getPath());
+                                }
+                                (object).update(((TArticle) object).getId());
                             }
-                            (object).update(((TAdvert) object).getId());
-                        } else if (object instanceof TVideo) {
-                            LogUtils.e("设置视频文件");
-                            if (type == 0) {
-                                ((TVideo) object).setDownloadPic(response.body().getPath());
-                            } else {
-                                ((TVideo) object).setDownloadFile(response.body().getPath());
-                            }
-                            (object).update(((TVideo) object).getId());
-                        } else if (object instanceof TGame) {
-                            if (type == 0) {
-                                LogUtils.e("设置游戏图片");
-                                ((TGame) object).setDownloadPic(response.body().getPath());
-                            } else {
-                                LogUtils.e("设置游戏文件路径");
-                                ((TGame) object).setDownloadFile(response.body().getPath());
-                            }
-                            (object).update(((TGame) object).getId());
-                        } else if (object instanceof TBook) {
-                            if (type == 0) {
-                                LogUtils.e("设置书吧图片");
-                                ((TBook) object).setDownloadPic(response.body().getPath());
-                            } else {
-                                LogUtils.e("设置书吧文件");
-                                ((TBook) object).setDownloadFile(response.body().getPath());
-                            }
-                            (object).update(((TBook) object).getId());
-                        } else if (object instanceof TFood) {
-                            LogUtils.e("设置点餐文件");
-                            ((TFood) object).setDownloadPic(response.body().getPath());
-                            (object).update(((TFood) object).getId());
-                        } else if (object instanceof TCity) {
-                            LogUtils.e("设置城市文件");
-                            if (type == 0) {
-                                ((TCity) object).setDownloadPic(response.body().getPath());
-                            } else {
-                                ((TCity) object).setDownloadContent(response.body().getPath());
-                            }
-                            (object).update(((TCity) object).getId());
-                        } else if (object instanceof TCityArticle) {
-                            LogUtils.e("设置城市文件");
-                            if (type == 0) {
-                                ((TCityArticle) object).setDownloadPic(response.body().getPath());
-                            } else {
-                                ((TCityArticle) object).setDownloadContent(response.body().getPath());
-                            }
-                            (object).update(((TCityArticle) object).getId());
-                        } else if (object instanceof TArticle) {
-                            LogUtils.e("设置城铁文件");
-                            if (type == 0) {
-                                ((TArticle) object).setDownloadPic(response.body().getPath());
-                            } else {
-                                ((TArticle) object).setDownloadFile(response.body().getPath());
-                            }
-                            (object).update(((TArticle) object).getId());
                         }
-                    }
 
-                    @Override
-                    public void downloadProgress(Progress progress) {
-                        if (progress.fraction * 100 % 10 == 0) {
-                            LogUtils.e("当前进度" + progress.fraction * 100 + "%");
+                        @Override
+                        public void downloadProgress(Progress progress) {
+                            if (progress.fraction * 100 % 10 == 0) {
+                                LogUtils.e("当前进度" + progress.fraction * 100 + "%");
+                            }
+                            //回调下载进度
+                            super.downloadProgress(progress);
+
                         }
-                        //回调下载进度
-                        super.downloadProgress(progress);
 
-                    }
+                        @Override
+                        public void onError(Response<File> response) {
+                            LogUtils.e("下载报错" + response.body().getName() + ",相关类:" + object.toString());
+                            super.onError(response);
+                        }
+                    });
+        }
 
-                    @Override
-                    public void onError(Response<File> response) {
-                        LogUtils.e("下载报错" + response.body().getName() + ",相关类:" + object.toString());
-                        super.onError(response);
-                    }
-                });
 
         //使用okserver download下载文件
 //        GetRequest<File> request = OkGo.<File>get(Constants.BASE_IMAGE_URL + downpath);

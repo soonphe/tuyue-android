@@ -122,8 +122,6 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
                 presenter.getOrtherData();
             }
         }
-
-
     }
 
     @Override

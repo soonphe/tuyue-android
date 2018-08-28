@@ -11,14 +11,14 @@ import android.widget.LinearLayout;
 import com.blankj.utilcode.util.BarUtils;
 import com.ywb.tuyue.R;
 import com.ywb.tuyue.ui.advertise.AdvertiseDetailActivity;
-import com.ywb.tuyue.ui.book.BookActivity;
+import com.ywb.tuyue.ui.article.ArticleActivity;
+import com.ywb.tuyue.ui.book.book.BookActivity;
 import com.ywb.tuyue.ui.video.CinemaActivity;
-import com.ywb.tuyue.ui.city.CityActivity;
+import com.ywb.tuyue.ui.city.city.CityActivity;
 import com.ywb.tuyue.ui.food.FoodActivity;
 import com.ywb.tuyue.ui.game.game.GameActivity;
 import com.ywb.tuyue.ui.mvp.BaseActivity;
 import com.ywb.tuyue.ui.setting.SettingActivity;
-import com.ywb.tuyue.ui.subway.SubwayActivity;
 import com.ywb.tuyue.widget.AppTitle;
 
 import butterknife.BindView;
@@ -127,7 +127,7 @@ public class MainActivity extends BaseActivity {
                 mOperation.forward(CityActivity.class);
                 break;
             case R.id.ll_subway:
-                mOperation.forward(SubwayActivity.class);
+                mOperation.forward(ArticleActivity.class);
                 break;
 
         }

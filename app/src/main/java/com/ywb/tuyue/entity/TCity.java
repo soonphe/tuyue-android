@@ -1,6 +1,8 @@
 package com.ywb.tuyue.entity;
 
 
+import com.google.gson.annotations.SerializedName;
+
 import org.litepal.crud.LitePalSupport;
 
 /**
@@ -20,7 +22,9 @@ public class TCity extends LitePalSupport {
      * delflag : false
      * content : <p class="ql-align-justify" style="text-align: center;"><img src="http://192.168.1.6/upload/img/20180731/1533024831.png" style="max-width:100%;"><br></p>
      */
-
+    @SerializedName("id")   //真实ID
+    private int tid;
+    @SerializedName("myid")
     private int id;
     private String name;
     private String picurl;
@@ -32,6 +36,14 @@ public class TCity extends LitePalSupport {
 
     private String downloadPic; //图片地址
     private String downloadContent; //富文本地址
+
+    public int getTid() {
+        return tid;
+    }
+
+    public void setTid(int tid) {
+        this.tid = tid;
+    }
 
     public String getDownloadPic() {
         return downloadPic;

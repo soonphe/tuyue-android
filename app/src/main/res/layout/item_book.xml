@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:cardCornerRadius="@dimen/dp_5">
+        <ImageView
+            android:id="@+id/book_list_icon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY" />
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/book_list_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="从你的世界路过"
+        android:textColor="#6b6b6b"
+        android:textSize="@dimen/sp_18" />
+
+    <TextView
+        android:id="@+id/book_list_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="饶雪"
+        android:textColor="@color/hint_color"
+        android:textSize="@dimen/sp_14" />
+
+</LinearLayout>

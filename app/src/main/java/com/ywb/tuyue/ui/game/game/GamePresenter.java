@@ -4,6 +4,7 @@ import com.ywb.tuyue.api.AppApi;
 import com.ywb.tuyue.di.PerActivity;
 import com.ywb.tuyue.entity.TAdvert;
 import com.ywb.tuyue.entity.TGame;
+import com.ywb.tuyue.entity.TGameType;
 import com.ywb.tuyue.ui.mvp.BasePresenter;
 
 import org.litepal.LitePal;
@@ -38,9 +39,22 @@ public class GamePresenter extends BasePresenter<GameContract.View> implements G
     }
 
     @Override
-    public void getGameList() {
-        //获取游戏列表
+    public void getTypeList() {
+        //获取类型列表
+        List<TGameType> list = LitePal.findAll(TGameType.class);
+        if (list.size() > 0) {
+            mView.getTypeListSuccess(list);
+        } else {
+            mView.getTypeListSuccess(new ArrayList<>());
+        }
+    }
+
+    @Override
+    public void getGameList(int gameid) {
+        //获取全部游戏列表
         List<TGame> list = LitePal.findAll(TGame.class);
+        //按类型获取游戏列表
+//        List<TGame> list = LitePal.where("typeid = ?", gameid+"").find(TGame.class);
         if (list.size() > 0) {
             mView.getGameListSuccess(list);
         } else {

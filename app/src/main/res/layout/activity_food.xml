@@ -1,21 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/bg">
+    android:orientation="vertical"
+    android:background="@mipmap/bg"
+    android:fitsSystemWindows="true">
 
-    <!--<com.ywb.tuyue.widget.head.HeaderView-->
-        <!--android:id="@+id/header"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content" />-->
-    <TextView
-        android:layout_width="wrap_content"
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="点餐"
-        android:textSize="26sp"
-        />
-</RelativeLayout>
+        app:elevation="0dp">
+
+        <com.ywb.tuyue.widget.AppTitle
+            style="@style/title_style"
+            app:showBack="true"
+            app:canFinish="true"
+            app:centreText="点餐"
+            app:centreTextColor="@color/white" />
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/header"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <!--<android.support.design.widget.TabLayout-->
+            <!--android:id="@+id/foodPagerTab"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:tabIndicatorColor="#FFFF2645"-->
+            <!--app:tabIndicatorHeight="@dimen/dp_5"-->
+            <!--app:tabMaxWidth="100dp"-->
+            <!--app:tabMode="scrollable"-->
+            <!--app:tabSelectedTextColor="#FFFF2645"-->
+            <!--app:tabTextAppearance="@style/TabLayoutTextStyle"-->
+            <!--app:tabTextColor="@color/my_black" />-->
+
+        <com.flyco.tablayout.CommonTabLayout
+            android:id="@+id/tl_2"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="@color/defult_bg"
+            app:tl_indicator_bounce_enable="false"
+            app:tl_indicator_color="#FFFF2645"
+            app:tl_textSelectColor="#FFFF2645"
+            app:tl_textUnselectColor="#66000000"
+            app:tl_textsize="18sp"
+            app:tl_tab_width="100dp"
+            app:tl_underline_color="#DDDDDD"
+            app:tl_underline_height="1dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginTop="-2dp"
+            android:background="@color/hint_color" />
+
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/sm_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:overScrollMode="never"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" />
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    </LinearLayout>
+</LinearLayout>

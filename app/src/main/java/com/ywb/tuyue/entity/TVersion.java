@@ -1,5 +1,7 @@
 package com.ywb.tuyue.entity;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.litepal.crud.LitePalSupport;
 
 /**
@@ -19,13 +21,23 @@ public class TVersion  extends LitePalSupport {
      * filepath : /apk/tuyue5801.apk
      * createtime : 2018-07-13 09:43:15
      */
-
+    @SerializedName("id")   //真实ID
+    private int tid;
+    @SerializedName("myid")
     private int id;
     private String versioncode;
     private String name;
     private String content;
     private String filepath;
     private String createtime;
+
+    public int getTid() {
+        return tid;
+    }
+
+    public void setTid(int tid) {
+        this.tid = tid;
+    }
 
     public int getId() {
         return id;

@@ -1,5 +1,7 @@
 package com.ywb.tuyue.entity;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.litepal.crud.LitePalSupport;
 
 /**
@@ -23,6 +25,9 @@ public class TAdvert extends LitePalSupport {
      * content : <p><img src="http://192.168.1.6/upload/img/20180802/1533192019.jpg"></p>
      * typename : 锁屏广告
      */
+    @SerializedName("id")   //真实ID
+    private int tid;
+    @SerializedName("myid")
     private int id;
     private int typeid;
     private String title;
@@ -37,6 +42,14 @@ public class TAdvert extends LitePalSupport {
 
     private String downloadPic; //图片下载地址
     private String downloadContent; //富文本下载地址
+
+    public int getTid() {
+        return tid;
+    }
+
+    public void setTid(int tid) {
+        this.tid = tid;
+    }
 
     public String getDownloadContent() {
         return downloadContent;

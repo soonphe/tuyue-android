@@ -1,5 +1,7 @@
 package com.ywb.tuyue.entity;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.litepal.crud.LitePalSupport;
 
 /**
@@ -23,7 +25,9 @@ public class TArticle extends LitePalSupport {
      * content : <p><img src="http://192.168.1.6/upload/img/20180731/1533006204.png"></p>
      * typename : 旅客须知
      */
-
+    @SerializedName("id")   //真实ID
+    private int tid;
+    @SerializedName("myid")
     private int id;
     private int typeid;
     private String title;
@@ -40,6 +44,14 @@ public class TArticle extends LitePalSupport {
     private String downloadPic; //图片下载地址
     private String downloadFile;    //视频文件下载地址
     private String downloadContent; //富文本图片下载地址
+
+    public int getTid() {
+        return tid;
+    }
+
+    public void setTid(int tid) {
+        this.tid = tid;
+    }
 
     public String getDownloadPic() {
         return downloadPic;

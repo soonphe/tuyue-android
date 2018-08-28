@@ -1,5 +1,7 @@
 package com.ywb.tuyue.entity;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.litepal.crud.LitePalSupport;
 
 /**
@@ -15,12 +17,22 @@ public class TArticleType  extends LitePalSupport {
      * updatetime : 2018-06-22 14:26:59
      * delflag : false
      */
-
+    @SerializedName("id")   //真实ID
+    private int tid;
+    @SerializedName("myid")
     private int id;
     private String name;
     private String createtime;
     private String updatetime;
     private boolean delflag;
+
+    public int getTid() {
+        return tid;
+    }
+
+    public void setTid(int tid) {
+        this.tid = tid;
+    }
 
     public int getId() {
         return id;

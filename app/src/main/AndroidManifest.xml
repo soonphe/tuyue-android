@@ -126,16 +126,25 @@
 
         <!--<activity android:name=".ui.music.MusicActivity" />-->
         <activity
+            android:name=".ui.book.book.BookActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".ui.book.bookread.BookreadActivity"
+            android:screenOrientation="landscape" />
+        <activity
             android:name=".ui.food.FoodActivity"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".ui.book.BookActivity"
+            android:name=".ui.city.city.CityActivity"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".ui.city.CityActivity"
+            android:name=".ui.city.citydetail.CitydetailActivity"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".ui.subway.SubwayActivity"
+            android:name=".ui.city.cityarticle.CityArticleActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".ui.article.ArticleActivity"
             android:screenOrientation="landscape" />
     </application>
 

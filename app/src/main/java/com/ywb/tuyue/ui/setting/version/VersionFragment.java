@@ -10,7 +10,7 @@ import com.ywb.tuyue.ui.mvp.BaseFragmentV4;
 
 
 /**
- * @Author soonphe
+ * @Author AboutUsFragment
  * @Date 2018-08-22 11:52
  * @Description 设置-版本
  */
