@@ -1,4 +1,4 @@
-package com.ywb.tuyue.ui.city.cityarticle;
+package com.ywb.tuyue.ui.article.article;
 
 
 import android.content.Context;
@@ -10,7 +10,7 @@ import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.EmptyUtils;
 import com.just.library.AgentWeb;
 import com.ywb.tuyue.R;
-import com.ywb.tuyue.entity.TCityArticle;
+import com.ywb.tuyue.entity.TArticle;
 import com.ywb.tuyue.ui.mvp.BaseActivity;
 import com.ywb.tuyue.widget.AppTitle;
 
@@ -19,7 +19,7 @@ import org.litepal.LitePal;
 import butterknife.BindView;
 
 
-public class CityArticleActivity extends BaseActivity implements CityArticleContract.View {
+public class ArticleContentActivity extends BaseActivity implements ArticleContentContract.View {
 
     @BindView(R.id.app_title_id)
     AppTitle appTitle;
@@ -28,7 +28,7 @@ public class CityArticleActivity extends BaseActivity implements CityArticleCont
 
     //video的ID
     int id;
-    TCityArticle tGame;
+    TArticle tArticle;
 
     @Override
     public void startLoading() {
@@ -59,20 +59,20 @@ public class CityArticleActivity extends BaseActivity implements CityArticleCont
     public void initView(View view) {
         BarUtils.setStatusBarAlpha(this, 0);
         //取传过来的分类ID
-        if (EmptyUtils.isNotEmpty(mOperation.getParameter("cityarticle"))) {
-            id = (int) mOperation.getParameter("cityarticle");
+        if (EmptyUtils.isNotEmpty(mOperation.getParameter("article"))) {
+            id = (int) mOperation.getParameter("article");
         }
-        tGame = LitePal.where("tid = ?", id + "").findFirst(TCityArticle.class);
+        tArticle = LitePal.find(TArticle.class,id);
 
         //初始化webview
         AgentWeb web = AgentWeb.with(this)//传入Activity
                 .setAgentWebParent(flWeb, new FrameLayout.LayoutParams(-1, -1))//传入AgentWeb 的父控件 ，如果父控件为 RelativeLayout ， 那么第二参数需要传入 RelativeLayout.LayoutParams
                 .useDefaultIndicator()// 使用默认进度条
                 .defaultProgressBarColor() // 使用默认进度条颜色
-                .setReceivedTitleCallback((view1, title) -> appTitle.setTitle(tGame.getTitle())) //设置 Web 页面的 title 回调
+                .setReceivedTitleCallback((view1, title) -> appTitle.setTitle(tArticle.getTitle())) //设置 Web 页面的 title 回调
                 .createAgentWeb()//
                 .ready()
-                .go("file://"+tGame.getDownloadContent());
+                .go("file://"+tArticle.getDownloadFile());
         web.getAgentWebSettings().getWebSettings().setSupportZoom(true);
     }
 

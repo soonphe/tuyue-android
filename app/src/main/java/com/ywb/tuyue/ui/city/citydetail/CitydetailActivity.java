@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.EmptyUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
@@ -96,7 +97,8 @@ public class CitydetailActivity extends BaseActivity implements CitydetailContra
         if (EmptyUtils.isNotEmpty(mOperation.getParameter("city"))) {
             id = (int) mOperation.getParameter("city");
         }
-        tCity = LitePal.find(TCity.class, id);
+        LogUtils.e("接受传过来的来城市ID:" + id);
+        tCity = LitePal.where("tid = ?", id + "").findFirst(TCity.class);
         appTitle.setTitle(tCity.getName());
 
         for (int i = 0; i < mTitles.length; i++) {
@@ -125,7 +127,7 @@ public class CitydetailActivity extends BaseActivity implements CitydetailContra
         rvList.setNestedScrollingEnabled(false);
 
         cityArticleAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            mOperation.addParameter("cityarticle", ((TCityArticle) adapter.getItem(position)).getId());
+            mOperation.addParameter("cityarticle", ((TCityArticle) adapter.getItem(position)).getTid());
             mOperation.forward(CityArticleActivity.class);
         });
     }

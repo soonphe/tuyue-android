@@ -1,13 +1,18 @@
 package com.ywb.tuyue.ui.setting.gaindata;
 
+import android.net.Uri;
+
+import com.blankj.utilcode.util.DeviceUtils;
 import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.FileCallback;
 import com.lzy.okgo.model.Progress;
 import com.lzy.okgo.model.Response;
+import com.micro.player.service.DrmService;
 import com.ywb.tuyue.api.AppApi;
 import com.ywb.tuyue.constants.Constants;
 import com.ywb.tuyue.di.PerActivity;
@@ -19,6 +24,7 @@ import com.ywb.tuyue.entity.TCityArticle;
 import com.ywb.tuyue.entity.TDataVersion;
 import com.ywb.tuyue.entity.TFood;
 import com.ywb.tuyue.entity.TGame;
+import com.ywb.tuyue.entity.TMovie;
 import com.ywb.tuyue.entity.TVideo;
 import com.ywb.tuyue.ui.mvp.BasePresenter;
 import com.ywb.tuyue.utils.HTMLFormatUtils;
@@ -79,7 +85,7 @@ public class GainDataPresenter extends BasePresenter<GainDataContract.View> impl
     }
 
     @Override
-    public void getOrtherData() {
+    public void getOtherData() {
         mView.startLoading();
         SPUtils.getInstance().put(DOWNLOAD_COUNT, 0);
         mDisposable.add(
@@ -152,14 +158,51 @@ public class GainDataPresenter extends BasePresenter<GainDataContract.View> impl
         );
     }
 
+    @Override
+    public void getMovieData() {
+        mDisposable.add(api.getMovieList().subscribe(result -> {
+                    if (LitePal.findFirst(TMovie.class) != null) {
+                        LitePal.deleteAll(TMovie.class);
+                    }
+                    List<TMovie> list = result.getData().getData().getVideos();
+                    LogUtils.e("当前list大小：" + list.size());
+                    LitePal.saveAll(list);
+
+                    //获取drm服务对象
+                    DrmService drmService = DrmService.getService();
+                    boolean isStartService = drmService.startService();
+                    if (!drmService.initDrmdecoder()) {  // 初始化
+                        ToastUtils.showShort("解密模块启动失败，请重启电视盒子或联系管理员");
+                    }
+                    for (TMovie tMovie : list) {
+                        //根据位置获取当前点击的视频播放url
+                        Uri uri = null;
+                        if (isStartService) {
+                            //获取的url为已解密的直接可播放地址
+                            uri = DrmService.getService().getUrl(
+                                    tMovie.getSave_name(),
+                                    DeviceUtils.getMacAddress(), //传入一个房间或者是盒子的唯一标识
+                                    "192.168.1.6",//服务器端的ip
+                                    "" //订单标识
+                            );
+                        }
+                        LogUtils.e("要下载的视频文件地址" + uri.toString());
+                        downloadFile(tMovie, 0, tMovie.getFace_pic() + "");
+                        downloadFile(tMovie, 1, uri.toString() + "");
+                    }
+                    mView.getMovieDataSuccess(list);
+                },
+                throwable -> mView.onError(throwable.getMessage()))
+        );
+    }
+
 
     public void downloadFile(LitePalSupport object, int type, String downpath) {
-
-
+        //截取最后的文件名和尾缀
         String localFilePath = DOWNLOAD_PATH + downpath.substring(downpath.lastIndexOf("/"), downpath.length());
         //判断本地文件是否存在
         if (FileUtils.isFileExists(localFilePath)) {
-            LogUtils.e("本地文件存在");
+            LogUtils.e("本地文件存在" + localFilePath);
             if (object instanceof TAdvert) {
                 LogUtils.e("设置广告文件");
                 if (type == 0) {
@@ -222,6 +265,14 @@ public class GainDataPresenter extends BasePresenter<GainDataContract.View> impl
                     ((TArticle) object).setDownloadFile(localFilePath);
                 }
                 (object).update(((TArticle) object).getId());
+            } else if (object instanceof TMovie) {
+                LogUtils.e("直接设置1905电影文件");
+                if (type == 0) {
+                    ((TMovie) object).setDownloadPic(localFilePath);
+                } else {
+                    ((TMovie) object).setDownloadFile(localFilePath);
+                }
+                (object).update(((TMovie) object).getId());
             }
 
         } else {
@@ -293,13 +344,23 @@ public class GainDataPresenter extends BasePresenter<GainDataContract.View> impl
                                     ((TArticle) object).setDownloadFile(response.body().getPath());
                                 }
                                 (object).update(((TArticle) object).getId());
+                            } else if (object instanceof TMovie) {
+                                LogUtils.e("打印body文件："+response.body().toString());
+                                LogUtils.e("设置1905电影文件");
+                                if (type == 0) {
+                                    ((TMovie) object).setDownloadPic(response.body().getPath());
+                                } else {
+                                    ((TMovie) object).setDownloadFile(response.body().getPath());
+                                }
+                                (object).update(((TMovie) object).getId());
                             }
                         }
 
                         @Override
                         public void downloadProgress(Progress progress) {
-                            if (progress.fraction * 100 % 10 == 0) {
-                                LogUtils.e("当前进度" + progress.fraction * 100 + "%");
+                            if (progress.fraction * 100 % 5 == 0) {
+//                                LogUtils.e("当前进度" + progress.fraction * 100 + "%");
+                                LogUtils.e("当前进度" + String.valueOf(Math.round(progress.fraction * 100)) + "%");
                             }
                             //回调下载进度
                             super.downloadProgress(progress);

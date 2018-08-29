@@ -6,6 +6,7 @@ import com.ywb.tuyue.di.PerActivity;
 import com.ywb.tuyue.di.module.ActivityModule;
 import com.ywb.tuyue.ui.advertise.AdvertiseDetailActivity;
 import com.ywb.tuyue.ui.article.ArticleActivity;
+import com.ywb.tuyue.ui.article.article.ArticleContentActivity;
 import com.ywb.tuyue.ui.book.book.BookActivity;
 import com.ywb.tuyue.ui.book.bookread.BookreadActivity;
 import com.ywb.tuyue.ui.city.city.CityActivity;
@@ -66,6 +67,7 @@ public interface ActivityComponent {
     void inject(CityArticleActivity cityArticleActivity);//城市文章
 
     void inject(ArticleActivity articleActivity);//文章
+    void inject(ArticleContentActivity articleContentActivity);//文章富文本
 
     void inject(SettingActivity activity);  //设置界面
 

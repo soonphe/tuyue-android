@@ -84,7 +84,6 @@ public class VideoFragment extends BaseFragmentV4 implements VideoContract.View 
     public void doBusiness(Context mContext) {
         presenter.getVideoList();
 
-
     }
 
     @Override

@@ -14,6 +14,7 @@ import com.ywb.tuyue.entity.TFood;
 import com.ywb.tuyue.entity.TFoodType;
 import com.ywb.tuyue.entity.TGame;
 import com.ywb.tuyue.entity.TGameType;
+import com.ywb.tuyue.entity.TMovieBean;
 import com.ywb.tuyue.entity.TVersion;
 import com.ywb.tuyue.entity.TVideo;
 import com.ywb.tuyue.entity.TVideoType;
@@ -31,6 +32,14 @@ import retrofit2.http.Query;
  */
 
 public interface AppApiService {
+
+    /**
+     * 获取1905电影列表
+     *
+     * @return
+     */
+    @GET("Home/Interface/index?class=HallUse&method=getVideoList")
+    Observable<TMovieBean> getMovieList();
 
     /**
      * 获取广告类型

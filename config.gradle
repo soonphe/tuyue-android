@@ -144,6 +144,10 @@ ext {
     externalBottomNavigationView = 'me.shaohui:bottomdialog:1.1.9'
     //星星评价
     externalRatingBar = 'me.zhanghai.android.materialratingbar:library:1.2.0'
+    //小说阅读
+    externalTxtReader = 'com.github.bifan-wei:HwTxtReader:V1.3.9'
+    //PDF阅读
+    externalPDF='com.github.barteksc:android-pdf-viewer:3.0.0-beta.5'
 
     //else
 //    externalAndroidAsyncHttp = 'com.loopj.android:android-async-http:1.4.9'

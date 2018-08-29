@@ -18,6 +18,7 @@ import com.ywb.tuyue.entity.TFood;
 import com.ywb.tuyue.entity.TFoodType;
 import com.ywb.tuyue.entity.TGame;
 import com.ywb.tuyue.entity.TGameType;
+import com.ywb.tuyue.entity.TMovieBean;
 import com.ywb.tuyue.entity.TVersion;
 import com.ywb.tuyue.entity.TVideo;
 import com.ywb.tuyue.entity.TVideoType;
@@ -93,6 +94,11 @@ public class AppApi implements AppApiService {
                 observeOn(AndroidSchedulers.mainThread());
     }
 
+
+    @Override
+    public Observable<TMovieBean> getMovieList() {
+        return getDynamicAppApi("http://192.168.1.6:8087/index.php/").getMovieList().compose(bindUntil());
+    }
 
     @Override
     public Observable<List<TAdvertType>> getAdvertType() {

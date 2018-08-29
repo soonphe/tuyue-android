@@ -146,6 +146,9 @@
         <activity
             android:name=".ui.article.ArticleActivity"
             android:screenOrientation="landscape" />
+        <activity
+            android:name=".ui.article.article.ArticleContentActivity"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>

@@ -2,6 +2,8 @@ package com.ywb.tuyue.ui.article;
 
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +21,7 @@ import com.ywb.tuyue.entity.TArticle;
 import com.ywb.tuyue.entity.TArticleType;
 import com.ywb.tuyue.entity.TabEntity;
 import com.ywb.tuyue.ui.adapter.ArticleAdapter;
+import com.ywb.tuyue.ui.article.article.ArticleContentActivity;
 import com.ywb.tuyue.ui.mvp.BaseActivity;
 
 import java.util.ArrayList;
@@ -27,6 +30,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import cn.jzvd.JZVideoPlayerStandard;
 
 
 /**
@@ -85,9 +89,35 @@ public class ArticleActivity extends BaseActivity implements ArticleContract.Vie
         rvList.setAdapter(articleAdapter);
         rvList.setNestedScrollingEnabled(false);
         articleAdapter.setOnItemClickListener((adapter, view1, position) -> {
-//            mOperation.addParameter("book", ((TBook) adapter.getItem(position)).getId());
-//            mOperation.forward(BookreadActivity.class);
+            TArticle tArticle = ((TArticle) adapter.getItem(position));
+            //如果为视频直接全屏播放
+            if (tArticle.getClassify() == 1){
+                JZVideoPlayerStandard.startFullscreen(this,
+                        JZVideoPlayerStandard.class,
+                        tArticle.getDownloadFile() + "",
+                        tArticle.getTitle());
+            }else{
+                mOperation.addParameter("article", ((TArticle) adapter.getItem(position)).getId());
+                mOperation.forward(ArticleContentActivity.class);
+            }
         });
+    }
+
+    /**
+     * 避免切换为竖屏
+     *
+     * @param newConfig
+     */
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            LogUtils.e(TAG, "竖屏");
+        }
+//        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+//            LogUtils.e(TAG, "横屏");
+//        }
     }
 
     @Override

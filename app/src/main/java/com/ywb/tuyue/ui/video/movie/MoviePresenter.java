@@ -2,8 +2,13 @@ package com.ywb.tuyue.ui.video.movie;
 
 import com.ywb.tuyue.api.AppApi;
 import com.ywb.tuyue.di.PerActivity;
+import com.ywb.tuyue.entity.TMovie;
 import com.ywb.tuyue.ui.mvp.BasePresenter;
-import com.ywb.tuyue.vo.PCommonSearchVO;
+
+import org.litepal.LitePal;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -18,11 +23,13 @@ public class MoviePresenter extends BasePresenter<MovieContract.View> implements
     }
 
     @Override
-    public void getVideoList(PCommonSearchVO pCommonSearchVO) {
-//        mDisposable.add(api.getVideoList(pCommonSearchVO).subscribe(list -> {
-//                    mView.getVideoListSuccess(list);
-//                },
-//                throwable -> mView.onError(throwable.getMessage()))
-//        );
+    public void getMovieList( ) {
+
+        List<TMovie> list = LitePal.findAll(TMovie.class);
+        if (list.size() > 0) {
+            mView.getMovieListSuccess(list);
+        } else {
+            mView.getMovieListSuccess(new ArrayList<>());
+        }
     }
 }

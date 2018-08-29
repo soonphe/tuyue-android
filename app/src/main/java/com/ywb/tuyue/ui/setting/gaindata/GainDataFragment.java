@@ -2,6 +2,7 @@ package com.ywb.tuyue.ui.setting.gaindata;
 
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -13,7 +14,10 @@ import com.ywb.tuyue.R;
 import com.ywb.tuyue.constants.Constants;
 import com.ywb.tuyue.entity.TAdvert;
 import com.ywb.tuyue.entity.TDataVersion;
+import com.ywb.tuyue.entity.TMovie;
 import com.ywb.tuyue.ui.mvp.BaseFragmentV4;
+
+import org.litepal.LitePal;
 
 import java.util.List;
 
@@ -104,6 +108,8 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
     @Override
     public void getDataVersionSuccess(TDataVersion tDataVersion) {
 
+        //这里调用初始化litepal
+        SQLiteDatabase db = LitePal.getDatabase();
 //        dbVersion = LitePal.order("id desc").limit(1).findFirst(TDataVersion.class);
         dbVersion = tDataVersion;
         dataVersion = SPUtils.getInstance().getInt(Constants.DATA_VERSION, 0);
@@ -119,9 +125,12 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
             }
             if (tDataVersion.getDataversion() > dataVersion) {
                 LogUtils.e("更新数据版本");
-                presenter.getOrtherData();
+                presenter.getOtherData();
             }
         }
+        // TODO: 2018-08-29 将来要放到数据版本中
+        presenter.getMovieData();
+
     }
 
     @Override
@@ -136,6 +145,13 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
     public void getOtherDataSuccess() {
         //SP更新数据版本号
         SPUtils.getInstance().put(Constants.DATA_VERSION, dbVersion.getDataversion());
+
+        LogUtils.e("其他数据同步成功");
+
+    }
+
+    @Override
+    public void getMovieDataSuccess(List<TMovie> list) {
 
         LogUtils.e("其他数据同步成功");
 

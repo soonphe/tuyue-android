@@ -157,6 +157,8 @@ dependencies {
     implementation externalSmartRefreshLayoutHeader
     implementation externalBottomNavigationView
     implementation externalPhotoView
+    implementation externalTxtReader
+    implementation externalPDF
 
     implementation project(':matiss')
     implementation project(':1905DrmServiceLib')

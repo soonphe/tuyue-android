@@ -13,6 +13,7 @@ import com.blankj.utilcode.util.EmptyUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.bumptech.glide.Glide;
 import com.ywb.tuyue.R;
+import com.ywb.tuyue.entity.TMovie;
 import com.ywb.tuyue.entity.TVideo;
 import com.ywb.tuyue.ui.mvp.BaseActivity;
 
@@ -42,6 +43,7 @@ public class VideoPlayerActivity extends BaseActivity implements VideoPlayerCont
     //video的ID
     int id;
     TVideo tVideo;
+    TMovie tMovie;
 
 
     @Override
@@ -76,21 +78,40 @@ public class VideoPlayerActivity extends BaseActivity implements VideoPlayerCont
         //取传过来的分类ID
         if (EmptyUtils.isNotEmpty(mOperation.getParameter("video"))) {
             id = (int) mOperation.getParameter("video");
+            tVideo = LitePal.find(TVideo.class, id);
+            movieName.setText(tVideo.getName());
+            movieDirector.setText(tVideo.getDirector());
+            movieActor.setText(tVideo.getActor());
+            movieIntroduct.setText(tVideo.getProfile());
+
+            videoplayer.setUp(tVideo.getDownloadFile() + "",
+                    JZVideoPlayerStandard.SCREEN_WINDOW_NORMAL,
+                    tVideo.getName() + "");
+            //设置视频第一帧缩略图
+            Glide.with(this)
+                    .load(tVideo.getDownloadPic())
+                    .into(videoplayer.thumbImageView);
+
         }
-        tVideo = LitePal.find(TVideo.class, id);
+        if (EmptyUtils.isNotEmpty(mOperation.getParameter("movie"))) {
+            id = (int) mOperation.getParameter("movie");
+            tMovie = LitePal.find(TMovie.class, id);
+            movieName.setText(tMovie.getFile_name());
+            movieDirector.setText(tMovie.getDirect());
+            movieActor.setText(tMovie.getStarring());
+            movieIntroduct.setText(tMovie.getDrama_cn());
 
-        movieName.setText(tVideo.getName());
-        movieDirector.setText(tVideo.getDirector());
-        movieActor.setText(tVideo.getActor());
-        movieIntroduct.setText(tVideo.getProfile());
+            videoplayer.setUp(tMovie.getDownloadFile() + "",
+                    JZVideoPlayerStandard.SCREEN_WINDOW_NORMAL,
+                    tMovie.getFile_name() + "");
+            //设置视频第一帧缩略图
+            Glide.with(this)
+                    .load(tMovie.getDownloadPic())
+                    .into(videoplayer.thumbImageView);
+        }
 
-        videoplayer.setUp(tVideo.getDownloadFile() + "",
-                JZVideoPlayerStandard.SCREEN_WINDOW_NORMAL,
-                tVideo.getName() + "");
-        //设置视频第一帧缩略图
-        Glide.with(this)
-                .load(tVideo.getDownloadPic())
-                .into(videoplayer.thumbImageView);
+
+
     }
 
     @Override
