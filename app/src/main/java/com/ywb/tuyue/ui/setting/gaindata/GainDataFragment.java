@@ -2,7 +2,6 @@ package com.ywb.tuyue.ui.setting.gaindata;
 
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -16,8 +15,6 @@ import com.ywb.tuyue.entity.TAdvert;
 import com.ywb.tuyue.entity.TDataVersion;
 import com.ywb.tuyue.entity.TMovie;
 import com.ywb.tuyue.ui.mvp.BaseFragmentV4;
-
-import org.litepal.LitePal;
 
 import java.util.List;
 
@@ -108,8 +105,6 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
     @Override
     public void getDataVersionSuccess(TDataVersion tDataVersion) {
 
-        //这里调用初始化litepal
-        SQLiteDatabase db = LitePal.getDatabase();
 //        dbVersion = LitePal.order("id desc").limit(1).findFirst(TDataVersion.class);
         dbVersion = tDataVersion;
         dataVersion = SPUtils.getInstance().getInt(Constants.DATA_VERSION, 0);

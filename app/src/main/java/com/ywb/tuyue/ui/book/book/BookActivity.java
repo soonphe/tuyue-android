@@ -23,6 +23,7 @@ import com.ywb.tuyue.entity.TBook;
 import com.ywb.tuyue.entity.TBookType;
 import com.ywb.tuyue.entity.TabEntity;
 import com.ywb.tuyue.ui.adapter.BookAdapter;
+import com.ywb.tuyue.ui.advert.advertise.AdvertContentActivity;
 import com.ywb.tuyue.ui.book.bookread.BookreadActivity;
 import com.ywb.tuyue.ui.mvp.BaseActivity;
 
@@ -91,10 +92,8 @@ public class BookActivity extends BaseActivity implements BookContract.BookView 
 
         banner.setOnBannerListener(position ->
         {
-            LogUtils.e("点击了轮播图" + list.get(position).toString());
-//            if (banners.get(position).getState() == 1) {
-//                BannerDetailsActivity.launch(mContext, banners.get(position).getBannerUrl());
-//            }
+            mOperation.addParameter("advert", list.get(position).getId());
+            mOperation.forward(AdvertContentActivity.class);
         });
     }
 

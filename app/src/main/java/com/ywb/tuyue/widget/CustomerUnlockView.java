@@ -118,9 +118,9 @@ public class CustomerUnlockView extends View {
         paint = new Paint();
         paint.setAntiAlias(true);//抗锯齿
 
-        leftBitmap = BitmapUtls.getBitmapFromAsset(context, "mipmap-xhdpi/icon_key.png");
-        rightBitmap = BitmapUtls.getBitmapFromAsset(context, "mipmap-xhdpi/icon_unlock.png");
-        roadBitmap = BitmapUtls.getBitmapFromAsset(context, "mipmap-xhdpi/bg_lock_road.png");
+        leftBitmap = BitmapUtls.getBitmapFromAsset(context, "icon_key.png");
+        rightBitmap = BitmapUtls.getBitmapFromAsset(context, "icon_unlock.png");
+        roadBitmap = BitmapUtls.getBitmapFromAsset(context, "bg_lock_road.png");
 
         //设置缩放比例 屏幕的一半
         float scale = (screenWidth >> 1) * 1.0f / roadBitmap.getWidth();

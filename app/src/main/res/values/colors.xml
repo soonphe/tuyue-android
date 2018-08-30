@@ -64,4 +64,14 @@
     <color name="my_black">#686868</color>
     <color name="hint_color">#999999</color>
 
+    <!--注册-->
+    <color name="registRed">#FF2645</color>
+    <color name="registBlack">#000000</color>
+    <color name="registGenderGray">#999999</color>
+    <color name="registWhite">#FFFFFF</color>
+    <color name="registLine">#E5E5E5</color>
+    <color name="registYearDefalut">#484848</color>
+    <color name="registHintColor">#BCBCBC</color>
+    <color name="registCode">#D2D2D2</color>
+
 </resources>

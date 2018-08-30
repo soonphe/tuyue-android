@@ -3,6 +3,7 @@ package com.ywb.tuyue.ui.mvp;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import com.ywb.tuyue.di.component.ActivityComponent;
 import com.ywb.tuyue.di.component.ApplicationComponent;
 import com.ywb.tuyue.di.component.DaggerActivityComponent;
 import com.ywb.tuyue.di.module.ActivityModule;
+import com.ywb.tuyue.receiver.ScreenOnReceiver;
 import com.ywb.tuyue.utils.ActivityManager;
 
 import java.io.InputStream;
@@ -56,6 +58,8 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
 
     protected ActivityComponent mActivityComponent;
     private static boolean enableNightMode = false;
+
+    private ScreenOnReceiver mScreenOnReceiver; //解锁屏广播  无论用户在看哪个模块，只要按下锁屏，在开屏时 从第一个页面开始展示
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +102,23 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         if (!isCanScreenshot) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
         }
+
+        //注册锁屏广播
+        if (mScreenOnReceiver == null) {
+            mScreenOnReceiver = new ScreenOnReceiver();
+        }
+        registerScreenBroadcastReceiver(); //注册锁屏广播
     }
+    /**
+     * 注册锁屏的广播
+     */
+    private void registerScreenBroadcastReceiver() {
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Intent.ACTION_SCREEN_OFF);
+        filter.addAction(Intent.ACTION_SCREEN_ON);
+        registerReceiver(mScreenOnReceiver, filter);
+    }
+
 
     @Override
     public void config(Bundle savedInstanceState) {
@@ -178,6 +198,8 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         if(compositeDisposable!=null){
             compositeDisposable.clear();
         }
+
+        unregisterReceiver(mScreenOnReceiver);//LS:重点！
 
     }
     @Override

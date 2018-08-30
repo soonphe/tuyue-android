@@ -21,14 +21,11 @@
             app:centreTextColor="@color/white" />
     </android.support.design.widget.AppBarLayout>
 
-    <!--<com.ywb.tuyue.widget.head.HeaderView-->
-        <!--android:id="@+id/header"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content" />-->
 
-    <WebView
-        android:id="@+id/ad_webview"
+    <FrameLayout
+        android:id="@+id/fl_web"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
+
 </LinearLayout>

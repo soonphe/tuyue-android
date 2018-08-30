@@ -4,7 +4,7 @@ import android.app.Activity;
 
 import com.ywb.tuyue.di.PerActivity;
 import com.ywb.tuyue.di.module.ActivityModule;
-import com.ywb.tuyue.ui.advertise.AdvertiseDetailActivity;
+import com.ywb.tuyue.ui.advert.advertise.AdvertContentActivity;
 import com.ywb.tuyue.ui.article.ArticleActivity;
 import com.ywb.tuyue.ui.article.article.ArticleContentActivity;
 import com.ywb.tuyue.ui.book.book.BookActivity;
@@ -49,7 +49,7 @@ public interface ActivityComponent {
 
     void inject(UnlockActivity unlockActivity);//解锁屏页
 
-    void inject(AdvertiseDetailActivity advertiseDetailActivity);//广告详情页
+    void inject(AdvertContentActivity advertContentActivity);//广告详情页
 
     void inject(CinemaActivity cinemaActivity); //电影
     void inject(VideoPlayerActivity videoPlayerActivity); //视频播放界面

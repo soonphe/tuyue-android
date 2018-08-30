@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="800dp"
+    android:layout_height="match_parent"
+    android:background="@drawable/dialog_cornor_bg"
+    android:fitsSystemWindows="true"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/registerText"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="注册"
+        android:textColor="@color/registBlack"
+        android:textSize="25sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/registerText"
+        android:background="@color/registLine" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/registerText"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:gravity="center">
+
+            <RelativeLayout
+                android:id="@+id/llGender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dp">
+
+                <CheckBox
+                    android:id="@+id/ck_man"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/gender_man"
+                    android:button="@null" />
+                    <!--android:background="@drawable/icon_man"-->
+
+                <CheckBox
+                    android:id="@+id/ck_woman"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="80dp"
+                    android:layout_toRightOf="@+id/ck_man"
+                    android:background="@drawable/gender_woman"
+                    android:button="@null" />
+                    <!--android:background="@drawable/icon_women"-->
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/llGender"
+                android:layout_marginTop="30dp">
+
+                <CheckBox
+                    android:id="@+id/ck_below20"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:button="@null"
+                    android:gravity="bottom"
+                    android:text="20岁以下"
+                    android:textColor="@color/registYearDefalut"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/iv_below20"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_toRightOf="@+id/ck_below20"
+                    android:src="@drawable/ic_selected"
+                    android:visibility="invisible" />
+
+                <CheckBox
+                    android:id="@+id/ck_twentyTofourth"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/ck_below20"
+                    android:layout_marginLeft="105dp"
+                    android:layout_toRightOf="@+id/ck_below20"
+                    android:button="@null"
+                    android:gravity="bottom"
+                    android:text="20-40岁"
+                    android:textColor="@color/registYearDefalut"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/iv_twentyTofourth"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_toRightOf="@+id/ck_twentyTofourth"
+                    android:src="@drawable/ic_selected"
+                    android:visibility="invisible" />
+
+                <CheckBox
+                    android:id="@+id/ck_fourthToSixty"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ck_below20"
+                    android:layout_marginTop="30dp"
+                    android:button="@null"
+                    android:gravity="bottom"
+                    android:text="40-60岁"
+                    android:textColor="@color/registYearDefalut"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/iv_fourthToSixty"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/ck_fourthToSixty"
+                    android:layout_toRightOf="@+id/ck_fourthToSixty"
+                    android:src="@drawable/ic_selected"
+                    android:visibility="invisible" />
+
+                <CheckBox
+                    android:id="@+id/ck_aboveSixty"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/ck_twentyTofourth"
+                    android:layout_alignTop="@+id/ck_fourthToSixty"
+                    android:button="@null"
+                    android:text="60岁以上"
+                    android:textColor="@color/registYearDefalut"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/iv_aboveSixty"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/ck_fourthToSixty"
+                    android:layout_toRightOf="@+id/ck_aboveSixty"
+                    android:src="@drawable/ic_selected"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_regist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@+id/rl_year"
+                android:layout_below="@+id/rl_year"
+                android:layout_marginRight="15dp">
+
+                <EditText
+                    android:id="@+id/et_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/view"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/white"
+                    android:hint="请输入您的手机号"
+                    android:inputType="phone"
+                    android:maxLength="11"
+                    android:paddingLeft="2dp"
+                    android:textColorHint="@color/registHintColor"
+                    android:textSize="18sp" />
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/et_phone"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginTop="7dp"
+                    android:background="@color/registLine" />
+
+                <EditText
+                    android:id="@+id/et_Code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/view"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginRight="160dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/registWhite"
+                    android:hint="关注微信公众号获取激活码"
+                    android:paddingLeft="2dp"
+                    android:textColorHint="@color/registHintColor"
+                    android:textSize="18sp"
+                    android:inputType="number"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/et_Code"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginTop="7dp"
+                    android:background="@color/registLine" />
+
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/QRCode"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="70dp"
+                android:src="@mipmap/erweima" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/QRCode"
+                android:layout_alignRight="@+id/QRCode"
+                android:layout_below="@+id/QRCode"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:text="微信扫码关注途悦公众号获取更多资讯"
+                android:textColor="@color/registGenderGray"
+                android:textSize="15sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bt_Save"
+        android:layout_width="260dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/regist_button"
+        android:text="确定"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp" />
+
+</RelativeLayout>
