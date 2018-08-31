@@ -275,14 +275,15 @@ public class Operation {
      * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
      */
     @SuppressLint("ResourceAsColor")
-    public MaterialDialog showCustomerDialog(String content, int view) {
+    public MaterialDialog showCustomerDialog(String content, int view,boolean wrapInScrollView) {
         dismissAlert();
         //是否允许自定义布局滑动
-        boolean wrapInScrollView = false;
+//        boolean wrapInScrollView = false;
         return dialog = new MaterialDialog.Builder(mContext)
 //                .content(content)
 //                .positiveText(R.string.ok)
 //                .negativeText(R.string.cancel)
+                .autoDismiss(false)
                 .customView(view, wrapInScrollView)
                 .backgroundColor(R.color.transparent)
                 .show();

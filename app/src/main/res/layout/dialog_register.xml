@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="800dp"
-    android:layout_height="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:background="@drawable/dialog_cornor_bg"
     android:fitsSystemWindows="true"
-    android:gravity="center">
+    android:gravity="center"
+    android:orientation="vertical"
+    >
 
     <TextView
-        android:id="@+id/registerText"
-        android:layout_width="match_parent"
+        android:layout_width="400dp"
         android:layout_height="50dp"
         android:gravity="center_horizontal|center_vertical"
         android:text="注册"
@@ -18,13 +19,11 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@+id/registerText"
         android:background="@color/registLine" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/registerText"
         android:orientation="horizontal">
 
         <RelativeLayout
@@ -41,17 +40,18 @@
 
                 <CheckBox
                     android:id="@+id/ck_man"
-                    android:layout_width="150dp"
-                    android:layout_height="50dp"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
                     android:background="@drawable/gender_man"
                     android:button="@null" />
                     <!--android:background="@drawable/icon_man"-->
 
                 <CheckBox
                     android:id="@+id/ck_woman"
-                    android:layout_width="150dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="80dp"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="30dp"
                     android:layout_toRightOf="@+id/ck_man"
                     android:background="@drawable/gender_woman"
                     android:button="@null" />
@@ -63,87 +63,94 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/llGender"
+                android:paddingLeft="10dp"
                 android:layout_marginTop="30dp">
 
                 <CheckBox
                     android:id="@+id/ck_below20"
-                    android:layout_width="120dp"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:button="@null"
                     android:gravity="bottom"
+                    android:drawableRight="@drawable/age_check"
                     android:text="20岁以下"
                     android:textColor="@color/registYearDefalut"
                     android:textSize="18sp" />
 
-                <ImageView
-                    android:id="@+id/iv_below20"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_toRightOf="@+id/ck_below20"
-                    android:src="@drawable/ic_selected"
-                    android:visibility="invisible" />
+                <!--<ImageView-->
+                    <!--android:id="@+id/iv_below20"-->
+                    <!--android:layout_width="30dp"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:layout_toRightOf="@+id/ck_below20"-->
+                    <!--android:src="@drawable/ic_selected"-->
+                    <!--android:visibility="invisible" />-->
 
                 <CheckBox
                     android:id="@+id/ck_twentyTofourth"
-                    android:layout_width="120dp"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@+id/ck_below20"
-                    android:layout_marginLeft="105dp"
+                    android:layout_marginLeft="40dp"
                     android:layout_toRightOf="@+id/ck_below20"
+                    android:drawableRight="@drawable/age_check"
                     android:button="@null"
                     android:gravity="bottom"
                     android:text="20-40岁"
                     android:textColor="@color/registYearDefalut"
                     android:textSize="18sp" />
 
-                <ImageView
-                    android:id="@+id/iv_twentyTofourth"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_toRightOf="@+id/ck_twentyTofourth"
-                    android:src="@drawable/ic_selected"
-                    android:visibility="invisible" />
+                <!--<ImageView-->
+                    <!--android:id="@+id/iv_twentyTofourth"-->
+                    <!--android:layout_width="30dp"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:layout_toRightOf="@+id/ck_twentyTofourth"-->
+                    <!--android:src="@drawable/ic_selected"-->
+                    <!--android:visibility="invisible" />-->
 
                 <CheckBox
                     android:id="@+id/ck_fourthToSixty"
-                    android:layout_width="120dp"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/ck_below20"
-                    android:layout_marginTop="30dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@+id/ck_twentyTofourth"
+                    android:drawableRight="@drawable/age_check"
                     android:button="@null"
                     android:gravity="bottom"
                     android:text="40-60岁"
                     android:textColor="@color/registYearDefalut"
                     android:textSize="18sp" />
 
-                <ImageView
-                    android:id="@+id/iv_fourthToSixty"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignTop="@+id/ck_fourthToSixty"
-                    android:layout_toRightOf="@+id/ck_fourthToSixty"
-                    android:src="@drawable/ic_selected"
-                    android:visibility="invisible" />
+                <!--<ImageView-->
+                    <!--android:id="@+id/iv_fourthToSixty"-->
+                    <!--android:layout_width="30dp"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:layout_alignTop="@+id/ck_fourthToSixty"-->
+                    <!--android:layout_toRightOf="@+id/ck_fourthToSixty"-->
+                    <!--android:src="@drawable/ic_selected"-->
+                    <!--android:visibility="invisible" />-->
 
                 <CheckBox
                     android:id="@+id/ck_aboveSixty"
-                    android:layout_width="120dp"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/ck_twentyTofourth"
                     android:layout_alignTop="@+id/ck_fourthToSixty"
+                    android:drawableRight="@drawable/age_check"
                     android:button="@null"
                     android:text="60岁以上"
                     android:textColor="@color/registYearDefalut"
                     android:textSize="18sp" />
 
-                <ImageView
-                    android:id="@+id/iv_aboveSixty"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignTop="@+id/ck_fourthToSixty"
-                    android:layout_toRightOf="@+id/ck_aboveSixty"
-                    android:src="@drawable/ic_selected"
-                    android:visibility="invisible" />
+                <!--<ImageView-->
+                    <!--android:id="@+id/iv_aboveSixty"-->
+                    <!--android:layout_width="30dp"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:layout_alignTop="@+id/ck_fourthToSixty"-->
+                    <!--android:layout_toRightOf="@+id/ck_aboveSixty"-->
+                    <!--android:src="@drawable/ic_selected"-->
+                    <!--android:visibility="invisible" />-->
             </RelativeLayout>
 
             <RelativeLayout
@@ -151,14 +158,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignRight="@+id/rl_year"
+                android:layout_marginTop="20dp"
                 android:layout_below="@+id/rl_year"
+                android:paddingLeft="10dp"
                 android:layout_marginRight="15dp">
 
                 <EditText
                     android:id="@+id/et_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/view"
                     android:layout_marginTop="10dp"
                     android:background="@android:color/white"
                     android:hint="请输入您的手机号"
@@ -173,7 +181,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_below="@+id/et_phone"
-                    android:layout_marginLeft="60dp"
                     android:layout_marginTop="7dp"
                     android:background="@color/registLine" />
 
@@ -182,8 +189,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/view"
-                    android:layout_marginLeft="60dp"
-                    android:layout_marginRight="160dp"
+
                     android:layout_marginTop="20dp"
                     android:background="@color/registWhite"
                     android:hint="关注微信公众号获取激活码"
@@ -196,7 +202,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_below="@+id/et_Code"
-                    android:layout_marginLeft="60dp"
                     android:layout_marginTop="7dp"
                     android:background="@color/registLine" />
 
@@ -217,8 +222,8 @@
                 android:layout_width="170dp"
                 android:layout_height="170dp"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="70dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="40dp"
                 android:src="@mipmap/erweima" />
 
 
@@ -228,7 +233,7 @@
                 android:layout_alignLeft="@+id/QRCode"
                 android:layout_alignRight="@+id/QRCode"
                 android:layout_below="@+id/QRCode"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:text="微信扫码关注途悦公众号获取更多资讯"
                 android:textColor="@color/registGenderGray"
@@ -240,12 +245,11 @@
         android:id="@+id/bt_Save"
         android:layout_width="260dp"
         android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/regist_button"
         android:text="确定"
         android:textColor="#FFFFFF"
         android:textSize="25sp" />
 
-</RelativeLayout>
+</LinearLayout>

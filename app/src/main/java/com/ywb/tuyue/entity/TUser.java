@@ -1,12 +1,14 @@
 package com.ywb.tuyue.entity;
 
+import org.litepal.crud.LitePalSupport;
+
 /**
  * @Author soonphe
  * @Date 2018-08-30 18:03
  * @Descprition 平板注册用户
  */
 
-public class TUser {
+public class TUser extends LitePalSupport {
 
 
     /**
@@ -38,6 +40,14 @@ public class TUser {
     private String remark;
     private String sex;
     private String updatetime;
+
+    public TUser(String age, String createtime, String imcode, String phone, String sex) {
+        this.age = age;
+        this.createtime = createtime;
+        this.imcode = imcode;
+        this.phone = phone;
+        this.sex = sex;
+    }
 
     public String getAge() {
         return age;
