@@ -10,7 +10,9 @@ import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.StringUtils;
 import com.ywb.tuyue.R;
+import com.ywb.tuyue.constants.Constants;
 import com.ywb.tuyue.entity.TAdvert;
 import com.ywb.tuyue.entity.TOpen;
 import com.ywb.tuyue.ui.advert.AdvertContract;
@@ -39,7 +41,7 @@ public class UnlockActivity extends BaseActivity implements AdvertContract.View,
     @Inject
     AdvertPresenter advertPresenter;
     @Inject
-    UnlockPresenter mUnlockPresenter;
+    UnlockPresenter presenter;
 
     @BindView(R.id.unlock_bg_advert)
     ImageView unlockBgAdvert;
@@ -76,7 +78,7 @@ public class UnlockActivity extends BaseActivity implements AdvertContract.View,
     public void initView(View view) {
         BarUtils.setStatusBarAlpha(this, 0);
         advertPresenter.attachView(this);
-        mUnlockPresenter.attachView(this);
+        presenter.attachView(this);
 
         unlockView.setOnLockListener(isLocked -> {
             if (isLocked) {
@@ -94,24 +96,34 @@ public class UnlockActivity extends BaseActivity implements AdvertContract.View,
                     SPUtils.getInstance().put(NETWORK_AVAILABLE, true);
                     SPUtils.getInstance().put(IS_MOBILE, false);
                 }
-                //这里调用初始化litepal
-                SQLiteDatabase db = LitePal.getDatabase();
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");// HH:mm:ss
-                String now = simpleDateFormat.format(new Date(System.currentTimeMillis()));
-                //判断今天是否创建过Topen数据
-                TOpen tOpen = LitePal.where("createdate = ?", now + "").findFirst(TOpen.class);
-                if (tOpen == null) {
-                    tOpen = new TOpen();
-                    tOpen.setCreatedate(now);
-                    tOpen.setIsmobile(SPUtils.getInstance().getBoolean(IS_MOBILE));
+                String phone = SPUtils.getInstance().getString(Constants.REGIST_PHONE, "");
+                //判断这里是否存在用户，如果存在则要记录本次解锁数据
+                if (!StringUtils.isEmpty(phone)) {
+                    //这里调用初始化litepal
+                    SQLiteDatabase db = LitePal.getDatabase();
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");// HH:mm:ss
+                    String now = simpleDateFormat.format(new Date(System.currentTimeMillis()));
+                    //判断今天是否创建过Topen数据
+                    TOpen tOpen = LitePal.where("createdate = ?", now + "").findFirst(TOpen.class);
+                    if (tOpen == null) {
+                        tOpen = new TOpen();
+                        tOpen.setCreatedate(now);
+                        tOpen.setIsmobile(SPUtils.getInstance().getBoolean(IS_MOBILE));
 //                    tOpen.setImcode(PhoneUtils.getIMEI() + "");
-                    tOpen.setImcode(DeviceUtils.getUniqueId(this) + "");
-                    tOpen.setOpenlock(1);
-                } else {
-                    LogUtils.e("当前解锁次数" + tOpen.getOpenlock());
-                    tOpen.setOpenlock(tOpen.getOpenlock() + 1);
+                        tOpen.setImcode(DeviceUtils.getUniqueId(this) + "");
+                        tOpen.setOpenlock(1);
+                    } else {
+                        LogUtils.e("当前解锁次数" + tOpen.getOpenlock());
+                        tOpen.setOpenlock(tOpen.getOpenlock() + 1);
+                    }
+                    boolean result = tOpen.save();
+                    //判断当前网络可用且用户数据保存成功
+                    if (SPUtils.getInstance().getBoolean(NETWORK_AVAILABLE) && result) {
+                        List<TOpen> list=LitePal.findAll(TOpen.class);
+                        //上传所有数据
+                        presenter.uploadData(list);
+                    }
                 }
-                tOpen.save();
 
                 mOperation.forwardAndFinish(SplashActivity.class);
             }
@@ -126,9 +138,12 @@ public class UnlockActivity extends BaseActivity implements AdvertContract.View,
 
     @Override
     public void getAdvertListSuccess(List<TAdvert> list) {
-        //这里只选取最新的1张
-        GlideUtils.loadImageView(this,
-                list.get(0).getDownloadPic(), unlockBgAdvert);
+        if (list.size()>0){
+            //这里只选取最新的1张
+            GlideUtils.loadImageView(this,
+                    list.get(0).getDownloadPic(), unlockBgAdvert);
+        }
+
     }
 
     @Override
@@ -137,4 +152,8 @@ public class UnlockActivity extends BaseActivity implements AdvertContract.View,
     }
 
 
+    @Override
+    public void uploadDataSuccess() {
+        LogUtils.e("数据上传成功");
+    }
 }

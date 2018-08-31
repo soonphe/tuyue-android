@@ -118,12 +118,15 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, M
 
     @Override
     public void getAdvertListSuccess(List<TAdvert> list) {
-        this.list = list;
-        //这里只选取最新的两张图片
-        GlideUtils.loadImageView(this,
-                list.get(0).getDownloadPic(), advertise1);
-        GlideUtils.loadImageView(this,
-                list.get(1).getDownloadPic(), advertise2);
+        if (list.size()>0){
+            this.list = list;
+            //这里只选取最新的两张图片
+            GlideUtils.loadImageView(this,
+                    list.get(0).getDownloadPic(), advertise1);
+            GlideUtils.loadImageView(this,
+                    list.get(1).getDownloadPic(), advertise2);
+        }
+
     }
 
 
@@ -283,7 +286,7 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, M
                 SPUtils.getInstance().put(Constants.REGIST_PHONE, phone);
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// HH:mm:ss
                 String now = simpleDateFormat.format(new Date(System.currentTimeMillis()));
-                //判断今天是否创建过Tuser数据
+                //判断今天是否创建过此phone的Tuser数据
                 TUser tUser = LitePal.where("phone = ? and createtime = ?", phone, now).findFirst(TUser.class);
                 if (tUser == null) {
                     tUser = new TUser(age[0] + "",

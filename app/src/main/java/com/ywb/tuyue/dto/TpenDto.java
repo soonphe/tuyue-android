@@ -1,30 +1,18 @@
-package com.ywb.tuyue.entity;
-
-import org.litepal.crud.LitePalSupport;
+package com.ywb.tuyue.dto;
 
 /**
  * @Author soonphe
- * @Date 2018-08-30 15:22
- * @Descprition 解锁统计
+ * @Date 2018-08-31 19:12
+ * @Descprition
  */
 
-public class TOpen extends LitePalSupport {
-
-
-    /**
-     * createdate : 2018-08-30T06:17:30.551Z
-     * id : 0
-     * imcode : string
-     * ismobile : true
-     * openlock : 0
-     */
+public class TpenDto {
 
     private String createdate;
     private int id;
     private String imcode;
     private boolean ismobile;
     private int openlock;
-
 
     public String getCreatedate() {
         return createdate;

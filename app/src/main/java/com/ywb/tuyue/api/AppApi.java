@@ -19,6 +19,9 @@ import com.ywb.tuyue.entity.TFoodType;
 import com.ywb.tuyue.entity.TGame;
 import com.ywb.tuyue.entity.TGameType;
 import com.ywb.tuyue.entity.TMovieBean;
+import com.ywb.tuyue.entity.TOpen;
+import com.ywb.tuyue.entity.TStats;
+import com.ywb.tuyue.entity.TUser;
 import com.ywb.tuyue.entity.TVersion;
 import com.ywb.tuyue.entity.TVideo;
 import com.ywb.tuyue.entity.TVideoType;
@@ -179,6 +182,21 @@ public class AppApi implements AppApiService {
     @Override
     public Observable<TDataVersion> getDataVersion() {
         return service.getDataVersion().compose(bindUntil());
+    }
+
+    @Override
+    public Observable<Object> uploadUser(TUser tUser) {
+        return service.uploadUser(tUser).compose(bindUntil());
+    }
+
+    @Override
+    public Observable<Object> uploadOpen(List<TOpen> list) {
+        return service.uploadOpen(list).compose(bindUntil());
+    }
+
+    @Override
+    public Observable<Object> uploadClick(List<TStats> list) {
+        return service.uploadClick(list).compose(bindUntil());
     }
 
 

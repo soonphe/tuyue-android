@@ -15,6 +15,9 @@ import com.ywb.tuyue.entity.TFoodType;
 import com.ywb.tuyue.entity.TGame;
 import com.ywb.tuyue.entity.TGameType;
 import com.ywb.tuyue.entity.TMovieBean;
+import com.ywb.tuyue.entity.TOpen;
+import com.ywb.tuyue.entity.TStats;
+import com.ywb.tuyue.entity.TUser;
 import com.ywb.tuyue.entity.TVersion;
 import com.ywb.tuyue.entity.TVideo;
 import com.ywb.tuyue.entity.TVideoType;
@@ -22,7 +25,10 @@ import com.ywb.tuyue.entity.TVideoType;
 import java.util.List;
 
 import io.reactivex.Observable;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
@@ -151,7 +157,7 @@ public interface AppApiService {
      * @return
      */
     @GET("article/getList")
-    Observable<List<TArticle>> getArticleList( @Query("pageSize") int pageSize);
+    Observable<List<TArticle>> getArticleList(@Query("pageSize") int pageSize);
 
     /**
      * 获取APK最新版本
@@ -168,6 +174,33 @@ public interface AppApiService {
      */
     @GET("dataVersion/selectTopOne")
     Observable<TDataVersion> getDataVersion();
+
+    /**
+     * 用户数据上传
+     * @param tUser
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept:  application/json"})
+    @POST("user/add")
+    Observable<Object> uploadUser(@Body TUser tUser);
+
+    /**
+     * 解锁数据上传
+     * @param list
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept:  application/json"})
+    @POST("open/addList")
+    Observable<Object> uploadOpen(@Body List<TOpen> list);
+
+    /**
+     * 点击停留上传
+     * @param list
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept:  application/json"})
+    @POST("stats/addList")
+    Observable<Object> uploadClick(@Body List<TStats> list);
 
 
 }
