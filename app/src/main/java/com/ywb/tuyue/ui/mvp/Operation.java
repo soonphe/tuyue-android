@@ -363,13 +363,14 @@ public class Operation {
                 .show();
     }
 
-    public void showBasicDialog(String title, String content, String positiveText, String negativeText) {
+    public void showBasicDialog(String title, String content, String positiveText, String negativeText , MaterialDialog.SingleButtonCallback singleButtonCallback) {
         dismissAlert();
         dialog = new MaterialDialog.Builder(mContext)
                 .title(title)
                 .content(content)
                 .positiveText(positiveText)
                 .negativeText(negativeText)
+                .onPositive(singleButtonCallback)
                 .show();
     }
 

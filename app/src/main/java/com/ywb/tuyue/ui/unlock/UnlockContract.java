@@ -1,6 +1,6 @@
 package com.ywb.tuyue.ui.unlock;
 
-import com.ywb.tuyue.entity.TOpen;
+import com.ywb.tuyue.entity.TStats;
 import com.ywb.tuyue.ui.mvp.BasePView;
 
 import java.util.List;
@@ -13,10 +13,10 @@ import java.util.List;
 public interface UnlockContract {
 
     interface UnlockView extends BasePView {
-        void uploadDataSuccess();
+
     }
 
     interface UnlockPresenter {
-        void uploadData(List<TOpen> list);
+
     }
 }

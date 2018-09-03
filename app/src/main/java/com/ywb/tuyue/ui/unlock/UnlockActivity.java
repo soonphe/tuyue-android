@@ -11,12 +11,15 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
+import com.blankj.utilcode.util.TimeUtils;
 import com.ywb.tuyue.R;
 import com.ywb.tuyue.constants.Constants;
 import com.ywb.tuyue.entity.TAdvert;
-import com.ywb.tuyue.entity.TOpen;
+import com.ywb.tuyue.entity.TStats;
 import com.ywb.tuyue.ui.advert.AdvertContract;
 import com.ywb.tuyue.ui.advert.AdvertPresenter;
+import com.ywb.tuyue.ui.data.DataContract;
+import com.ywb.tuyue.ui.data.DataPresenter;
 import com.ywb.tuyue.ui.mvp.BaseActivity;
 import com.ywb.tuyue.ui.splash.SplashActivity;
 import com.ywb.tuyue.utils.DeviceUtils;
@@ -36,10 +39,12 @@ import butterknife.BindView;
 import static com.ywb.tuyue.constants.Constants.IS_MOBILE;
 import static com.ywb.tuyue.constants.Constants.NETWORK_AVAILABLE;
 
-public class UnlockActivity extends BaseActivity implements AdvertContract.View, UnlockContract.UnlockView {
+public class UnlockActivity extends BaseActivity implements AdvertContract.View, DataContract.View, UnlockContract.UnlockView {
 
     @Inject
     AdvertPresenter advertPresenter;
+    @Inject
+    DataPresenter dataPresenter;
     @Inject
     UnlockPresenter presenter;
 
@@ -78,6 +83,7 @@ public class UnlockActivity extends BaseActivity implements AdvertContract.View,
     public void initView(View view) {
         BarUtils.setStatusBarAlpha(this, 0);
         advertPresenter.attachView(this);
+        dataPresenter.attachView(this);
         presenter.attachView(this);
 
         unlockView.setOnLockListener(isLocked -> {
@@ -101,27 +107,16 @@ public class UnlockActivity extends BaseActivity implements AdvertContract.View,
                 if (!StringUtils.isEmpty(phone)) {
                     //这里调用初始化litepal
                     SQLiteDatabase db = LitePal.getDatabase();
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");// HH:mm:ss
-                    String now = simpleDateFormat.format(new Date(System.currentTimeMillis()));
-                    //判断今天是否创建过Topen数据
-                    TOpen tOpen = LitePal.where("createdate = ?", now + "").findFirst(TOpen.class);
-                    if (tOpen == null) {
-                        tOpen = new TOpen();
-                        tOpen.setCreatedate(now);
-                        tOpen.setIsmobile(SPUtils.getInstance().getBoolean(IS_MOBILE));
-//                    tOpen.setImcode(PhoneUtils.getIMEI() + "");
-                        tOpen.setImcode(DeviceUtils.getUniqueId(this) + "");
-                        tOpen.setOpenlock(1);
-                    } else {
-                        LogUtils.e("当前解锁次数" + tOpen.getOpenlock());
+                    //判断该手机号是否创建过统计数据——有数据则解锁+1
+                    TStats tOpen = LitePal.where("phone = ?", phone + "").order("id desc").findFirst(TStats.class);
+                    if (tOpen != null) {
                         tOpen.setOpenlock(tOpen.getOpenlock() + 1);
-                    }
-                    boolean result = tOpen.save();
-                    //判断当前网络可用且用户数据保存成功
-                    if (SPUtils.getInstance().getBoolean(NETWORK_AVAILABLE) && result) {
-                        List<TOpen> list=LitePal.findAll(TOpen.class);
-                        //上传所有数据
-                        presenter.uploadData(list);
+                        boolean result = tOpen.save();
+                        //判断当前网络可用且用户数据保存成功
+                        if (SPUtils.getInstance().getBoolean(NETWORK_AVAILABLE) && result) {
+                            //上传所有数据
+                            dataPresenter.uploadData(tOpen);
+                        }
                     }
                 }
 
@@ -138,7 +133,7 @@ public class UnlockActivity extends BaseActivity implements AdvertContract.View,
 
     @Override
     public void getAdvertListSuccess(List<TAdvert> list) {
-        if (list.size()>0){
+        if (list.size() > 0) {
             //这里只选取最新的1张
             GlideUtils.loadImageView(this,
                     list.get(0).getDownloadPic(), unlockBgAdvert);

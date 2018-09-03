@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -16,10 +17,12 @@ import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
+import com.blankj.utilcode.util.TimeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ywb.tuyue.R;
 import com.ywb.tuyue.constants.Constants;
 import com.ywb.tuyue.entity.TAdvert;
+import com.ywb.tuyue.entity.TStats;
 import com.ywb.tuyue.entity.TUser;
 import com.ywb.tuyue.ui.advert.AdvertContract;
 import com.ywb.tuyue.ui.advert.AdvertPresenter;
@@ -27,6 +30,8 @@ import com.ywb.tuyue.ui.advert.advertise.AdvertContentActivity;
 import com.ywb.tuyue.ui.article.ArticleActivity;
 import com.ywb.tuyue.ui.book.book.BookActivity;
 import com.ywb.tuyue.ui.city.city.CityActivity;
+import com.ywb.tuyue.ui.data.DataContract;
+import com.ywb.tuyue.ui.data.DataPresenter;
 import com.ywb.tuyue.ui.food.FoodActivity;
 import com.ywb.tuyue.ui.game.game.GameActivity;
 import com.ywb.tuyue.ui.mvp.BaseActivity;
@@ -47,15 +52,20 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.ywb.tuyue.constants.Constants.IS_MOBILE;
+import static com.ywb.tuyue.constants.Constants.NETWORK_AVAILABLE;
+
 /**
  * @Author soonphe
  * @Date 2018-08-30 10:37
  * @Description 首页
  */
-public class MainActivity extends BaseActivity implements AdvertContract.View, MainContract.View {
+public class MainActivity extends BaseActivity implements AdvertContract.View, DataContract.View, MainContract.View {
 
     @Inject
     AdvertPresenter advertPresenter;
+    @Inject
+    DataPresenter dataPresenter;
     @Inject
     MainPresenter presenter;
 
@@ -65,8 +75,6 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, M
     ImageView advertise1;
     @BindView(R.id.advertise2)
     ImageView advertise2;
-    @BindView(R.id.iv_parentView)
-    LinearLayout ivParentView;
     @BindView(R.id.ll_movie)
     LinearLayout llMovie;
     @BindView(R.id.ll_game)
@@ -81,7 +89,6 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, M
     LinearLayout llSubway;
 
     List<TAdvert> list;
-    boolean result = false;
 
     @Override
     public int bindLayout() {
@@ -104,6 +111,7 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, M
 
         BarUtils.setStatusBarAlpha(this, 0);
         advertPresenter.attachView(this);
+        dataPresenter.attachView(this);
         presenter.attachView(this);
 
         advertise1.setImageResource(R.mipmap.main_header_01);
@@ -118,7 +126,7 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, M
 
     @Override
     public void getAdvertListSuccess(List<TAdvert> list) {
-        if (list.size()>0){
+        if (list.size() > 0) {
             this.list = list;
             //这里只选取最新的两张图片
             GlideUtils.loadImageView(this,
@@ -140,15 +148,21 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, M
         super.onResume();
     }
 
-    @OnClick({R.id.advertise1, R.id.advertise2, R.id.iv_parentView, R.id.ll_movie, R.id.ll_game,
-            R.id.ll_book, R.id.ll_food, R.id.ll_city, R.id.ll_subway, R.id.app_bar_btn2})
-    public void onViewClicked(View view) {
-        String phone = SPUtils.getInstance().getString(Constants.REGIST_PHONE, "");
+    /**
+     * 不需要用户验证的模块
+     *
+     * @param view
+     */
+    @OnClick({R.id.app_bar_btn2, R.id.advertise1, R.id.advertise2})
+    public void onClicked(View view) {
         switch (view.getId()) {
             case R.id.app_bar_btn2:
                 mOperation.forward(SettingActivity.class);
                 break;
             case R.id.advertise1:
+                // TODO: 2018-09-03 这里需要提供测试用户数据清除
+                //清空用户手机号
+                SPUtils.getInstance().remove(Constants.REGIST_PHONE);
                 mOperation.addParameter("advert", list.get(0).getId());
                 mOperation.forward(AdvertContentActivity.class);
                 break;
@@ -156,49 +170,86 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, M
                 mOperation.addParameter("advert", list.get(1).getId());
                 mOperation.forward(AdvertContentActivity.class);
                 break;
-            case R.id.iv_parentView:
-                mOperation.forward(AdvertContentActivity.class);
-                break;
-            case R.id.ll_movie:
-                if (StringUtils.isEmpty(phone)) {
-                    onDialog(CinemaActivity.class);
-                } else {
-                    mOperation.forward(CinemaActivity.class);
-                }
-                break;
-            case R.id.ll_game:
-                if (StringUtils.isEmpty(phone)) {
-                    onDialog(GameActivity.class);
-                } else {
-                    mOperation.forward(GameActivity.class);
-                }
-                break;
-            case R.id.ll_book:
-                if (StringUtils.isEmpty(phone)) {
-                    onDialog(BookActivity.class);
-                } else {
-                    mOperation.forward(BookActivity.class);
-                }
-                break;
-            case R.id.ll_food:
-                mOperation.forward(FoodActivity.class);
-                break;
-            case R.id.ll_city:
-                mOperation.forward(CityActivity.class);
-                break;
-            case R.id.ll_subway:
-                mOperation.forward(ArticleActivity.class);
-                break;
-
         }
+    }
+
+    /**
+     * 需要用户验证的模块
+     *
+     * @param view
+     */
+    @OnClick({R.id.ll_movie, R.id.ll_game, R.id.ll_book, R.id.ll_food, R.id.ll_city, R.id.ll_subway})
+    public void onViewClicked(View view) {
+        String phone = SPUtils.getInstance().getString(Constants.REGIST_PHONE, "");
+
+        //获取该手机号最新一条统计信息
+        TStats tStats = LitePal.where("phone = ? ", phone).order("id desc").findFirst(TStats.class);
+        //判断用户注册是否过期&&数据库不存在此手机号
+        if (StringUtils.isEmpty(phone) || tStats == null) {
+            //如果没有数据，则直接弹窗注册
+            onDialog();
+        } else {
+            switch (view.getId()) {
+                case R.id.ll_movie:
+                    //更新统计信息+跳转activity
+                    tStats.setMovies(tStats.getMovies() + 1);
+                    forwardActivity(tStats, CinemaActivity.class);
+                    break;
+                case R.id.ll_game:
+                    tStats.setGame(tStats.getGame() + 1);
+                    forwardActivity(tStats, GameActivity.class);
+                    break;
+                case R.id.ll_book:
+                    tStats.setBook(tStats.getBook() + 1);
+                    forwardActivity(tStats, BookActivity.class);
+                    break;
+                case R.id.ll_food:
+                    tStats.setFood(tStats.getFood() + 1);
+                    forwardActivity(tStats, FoodActivity.class);
+                    break;
+                case R.id.ll_city:
+                    tStats.setCity(tStats.getCity() + 1);
+                    forwardActivity(tStats, CityActivity.class);
+                    break;
+                case R.id.ll_subway:
+                    tStats.setSubway(tStats.getSubway() + 1);
+                    forwardActivity(tStats, ArticleActivity.class);
+                    break;
+            }
+        }
+    }
+
+    /**
+     * 跳转activity+保存统计数据
+     *
+     * @param activity
+     */
+    public void forwardActivity(TStats tStats, Class activity) {
+        boolean result = tStats.save();
+        //判断当前网络可用且统计数据保存成功
+        if ( result) {
+            //上传所有数据
+            dataPresenter.uploadData(tStats);
+        }
+        mOperation.forward(activity);
+    }
+
+    @Override
+    public void uploadDataSuccess() {
+        LogUtils.e("统计数据上传成功");
+    }
+
+    @Override
+    public void uploadUserSuccess() {
+        LogUtils.e("用户数据上传成功");
     }
 
     /**
      * 展示注册对话框
      */
-    public void onDialog(Class activity) {
-        String[] gender = {""};//1男2女
-        String[] age = {""};//0：20以下，1:20-40，2:40-60,3:60以上
+    public void onDialog() {
+        int[] gender = {0};//1男2女
+        int[] age = {0};//0：20以下，1:20-40，2:40-60,3:60以上
 
         MaterialDialog materialDialog = mOperation
                 .showCustomerDialog("", R.layout.dialog_register, true);
@@ -232,40 +283,40 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, M
         chMan.setOnClickListener(v -> {
             chMan.setChecked(true);
             chWoman.setChecked(false);
-            gender[0] = "1";
+            gender[0] = 1;
         });
         chWoman.setOnClickListener(v -> {
             chWoman.setChecked(true);
             chMan.setChecked(false);
-            gender[0] = "2";
+            gender[0] = 2;
         });
         below20.setOnClickListener(v -> {
             below20.setChecked(true);
             twentyTofourth.setChecked(false);
             fourthToSixty.setChecked(false);
             aboveSixty.setChecked(false);
-            age[0] = "0";
+            age[0] = 0;
         });
         twentyTofourth.setOnClickListener(v -> {
             below20.setChecked(false);
             twentyTofourth.setChecked(true);
             fourthToSixty.setChecked(false);
             aboveSixty.setChecked(false);
-            age[0] = "1";
+            age[0] = 1;
         });
         fourthToSixty.setOnClickListener(v -> {
             below20.setChecked(false);
             twentyTofourth.setChecked(false);
             fourthToSixty.setChecked(true);
             aboveSixty.setChecked(false);
-            age[0] = "2";
+            age[0] = 2;
         });
         aboveSixty.setOnClickListener(v -> {
             below20.setChecked(false);
             twentyTofourth.setChecked(false);
             fourthToSixty.setChecked(false);
             aboveSixty.setChecked(true);
-            age[0] = "3";
+            age[0] = 3;
         });
 
         button.setOnClickListener(v -> {
@@ -281,25 +332,41 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, M
                 return;
             }
             //微信验证码
-            if ("973570".equals(code) || "217560".equals(code) || "285973".equals(phone)
-                    || "579134".equals(code) || "497186".equals(code)) {
+            if ("973570".equals(code)
+                    || "217560".equals(code)
+                    || "285973".equals(code)
+                    || "579134".equals(code)
+                    || "497186".equals(code)) {
                 SPUtils.getInstance().put(Constants.REGIST_PHONE, phone);
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// HH:mm:ss
-                String now = simpleDateFormat.format(new Date(System.currentTimeMillis()));
-                //判断今天是否创建过此phone的Tuser数据
-                TUser tUser = LitePal.where("phone = ? and createtime = ?", phone, now).findFirst(TUser.class);
-                if (tUser == null) {
-                    tUser = new TUser(age[0] + "",
-                            now + "",
-                            DeviceUtils.getUniqueId(this) + "",
-                            phone + "",
-                            gender[0] + "");
-                    if (tUser.save()) {
-                        LogUtils.e("用户数据保存成功");
+
+                String date = TimeUtils.millis2String(System.currentTimeMillis(),
+                        new SimpleDateFormat("yyyy-MM-dd"));
+                String dataAndTime = TimeUtils.millis2String(System.currentTimeMillis());
+                //新建用户数据并保存
+                TUser tUser = new TUser(
+                        age[0],
+                        dataAndTime + "",
+                        DeviceUtils.getUniqueId(this) + "",
+                        phone + "",
+                        gender[0]
+                );
+                if (tUser.save()) {
+                    SPUtils.getInstance().put(Constants.REGIST_PHONE, phone + "");
+                    if (SPUtils.getInstance().getBoolean(NETWORK_AVAILABLE)) {
+                        //上传所有数据
+                        presenter.uploadUser(tUser);
                     }
+                    //用户注册成功后创建统计数据
+                    TStats stats = new TStats();
+                    stats.setPhone(phone);
+                    stats.setRegtime(dataAndTime);
+                    stats.setCreatedate(date);
+                    stats.setIsmobile(SPUtils.getInstance().getBoolean(IS_MOBILE));
+                    stats.setImcode(DeviceUtils.getUniqueId(this) + "");
+                    stats.save();
                 }
+
                 materialDialog.cancel();
-                mOperation.forward(activity);
             } else {
                 ToastUtils.showShort("验证码不正确，请重新输入");
             }

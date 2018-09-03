@@ -54,6 +54,7 @@ public class Constants {
     public static final String USER_BADGENUMBER = "USER_BADGENUMBER"; //消息模块 badge数量
     public static final String LAST_WEATHER = "LAST_WEATHER"; //天气
 
+    public static final String APK_VERSION = "APK_VERSION";   //APK版本
     public static final String ADVERT_VERSION = "ADVERT_VERSION";    //广告版本
     public static final String DATA_VERSION = "DATA_VERSION";   //数据版本
     public static final String DOWNLOAD_COUNT = "DOWNLOAD_COUNT";   //下载模块次数——13次

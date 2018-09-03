@@ -2,22 +2,35 @@ package com.ywb.tuyue.ui.video;
 
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateUtils;
 import android.view.View;
 
+import com.blankj.utilcode.constant.TimeConstants;
 import com.blankj.utilcode.util.BarUtils;
+import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.StringUtils;
+import com.blankj.utilcode.util.TimeUtils;
 import com.jude.easyrecyclerview.decoration.SpaceDecoration;
 import com.ywb.tuyue.R;
+import com.ywb.tuyue.constants.Constants;
 import com.ywb.tuyue.entity.PMenu;
+import com.ywb.tuyue.entity.TStats;
 import com.ywb.tuyue.ui.adapter.MenuAdapter;
 import com.ywb.tuyue.ui.adapter.ViewPagerAdapter;
+import com.ywb.tuyue.ui.data.DataContract;
+import com.ywb.tuyue.ui.data.DataPresenter;
 import com.ywb.tuyue.ui.video.movie.MovieFragment;
 import com.ywb.tuyue.ui.video.video.VideoFragment;
 import com.ywb.tuyue.ui.mvp.BaseActivity;
 import com.ywb.tuyue.widget.MyViewPager;
+
+import org.litepal.LitePal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,16 +39,21 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 
+import static com.blankj.utilcode.util.CacheUtils.SEC;
+import static com.ywb.tuyue.constants.Constants.NETWORK_AVAILABLE;
+
 
 /**
  * @Author soonphe
  * @Date 2018-08-21 17:30
  * @Description 影视
  */
-public class CinemaActivity extends BaseActivity implements CinemaContract.View {
+public class CinemaActivity extends BaseActivity implements CinemaContract.View, DataContract.View {
 
     @Inject
     CinemaPresenter presenter;
+    @Inject
+    DataPresenter dataPresenter;
 
     @BindView(R.id.movie_recycler_menu)
     RecyclerView movieRecyclerMenu;
@@ -47,6 +65,7 @@ public class CinemaActivity extends BaseActivity implements CinemaContract.View 
     private int menuChecked = 0;
     private List<Fragment> mCinemaFragments = new ArrayList<>();    //viewpager fragment集合
     List<PMenu> pMenus = new ArrayList<>(); //左部菜单集合
+    private long mMovieTime;//模块停留时长
 
     @Override
     public void startLoading() {
@@ -76,8 +95,10 @@ public class CinemaActivity extends BaseActivity implements CinemaContract.View 
 
     @Override
     public void initView(View view) {
-        presenter.attachView(this);
         BarUtils.setStatusBarAlpha(this, 0);
+        presenter.attachView(this);
+        dataPresenter.attachView(this);
+        mMovieTime = System.currentTimeMillis();
         mCinemaFragments.add(new MovieFragment());
         mCinemaFragments.add(new VideoFragment());
         moviePager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), mCinemaFragments));
@@ -117,5 +138,31 @@ public class CinemaActivity extends BaseActivity implements CinemaContract.View 
         getComponent().inject(this);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
 
+        //停留时长统计:单位S
+        long movieTime = TimeUtils.getTimeSpan(mMovieTime, System.currentTimeMillis(), TimeConstants.SEC);
+        String phone = SPUtils.getInstance().getString(Constants.REGIST_PHONE, "");
+        //判断这里是否存在用户，如果存在则要记录数据
+        if (!StringUtils.isEmpty(phone)) {
+            //判断今天是否创建过统计数据——有数据则更新数据+1
+            TStats tOpen = LitePal.where("phone = ?", phone + "").order("id desc").findFirst(TStats.class);
+            if (tOpen != null) {
+                tOpen.setMoviestime((int) (tOpen.getMoviestime() + movieTime));
+                boolean result = tOpen.save();
+                //判断当前网络可用且用户数据保存成功
+                if (result) {
+                    //上传所有数据
+                    dataPresenter.uploadData(tOpen);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void uploadDataSuccess() {
+        LogUtils.e("电影停留上传成功");
+    }
 }

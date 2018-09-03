@@ -14,6 +14,7 @@ import com.ywb.tuyue.constants.Constants;
 import com.ywb.tuyue.entity.TAdvert;
 import com.ywb.tuyue.entity.TDataVersion;
 import com.ywb.tuyue.entity.TMovie;
+import com.ywb.tuyue.entity.TVersion;
 import com.ywb.tuyue.ui.mvp.BaseFragmentV4;
 
 import java.util.List;
@@ -22,6 +23,8 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+
+import static com.ywb.tuyue.constants.Constants.NETWORK_AVAILABLE;
 
 /**
  * @Author soonphe
@@ -40,6 +43,7 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
     @BindView(R.id.syncData)
     TextView syncData;
 
+    int apkVersion = 0;  //APK广告版本
     int advertVersion = 0;  //SP广告版本
     int dataVersion = 0;    //SP数据版本
     TDataVersion dbVersion; //本地数据库最新数据版本
@@ -97,10 +101,16 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.syncData:
-                presenter.getDataVersion();
+                //判断当前网络可用——可用则上传
+                if (SPUtils.getInstance().getBoolean(NETWORK_AVAILABLE)) {
+                    presenter.getDataVersion();
+                } else {
+                    ToastUtils.showShort("请检查网络是否连接");
+                }
                 break;
         }
     }
+
 
     @Override
     public void getDataVersionSuccess(TDataVersion tDataVersion) {
@@ -123,7 +133,8 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
                 presenter.getOtherData();
             }
         }
-        // TODO: 2018-08-29 将来要放到数据版本中
+
+        //获取1905数据
         presenter.getMovieData();
 
     }

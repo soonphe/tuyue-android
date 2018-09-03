@@ -17,6 +17,7 @@ import com.ywb.tuyue.ui.adapter.ViewPagerAdapter;
 import com.ywb.tuyue.ui.mvp.BaseActivity;
 import com.ywb.tuyue.ui.setting.aboutus.AboutUsFragment;
 import com.ywb.tuyue.ui.setting.gaindata.GainDataFragment;
+import com.ywb.tuyue.ui.setting.network.NetworkFragment;
 import com.ywb.tuyue.ui.setting.version.VersionFragment;
 import com.ywb.tuyue.widget.MyViewPager;
 
@@ -81,6 +82,7 @@ public class SettingActivity extends BaseActivity implements SettingContract.Vie
         BarUtils.setStatusBarAlpha(this, 0);
         mFragments.add(new GainDataFragment());
         mFragments.add(new VersionFragment());
+        mFragments.add(new NetworkFragment());
         mFragments.add(new AboutUsFragment());
         mypager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), mFragments));
         mypager.setOffscreenPageLimit(2); //设置ViewPager的缓存界面数，每一侧的界面数(默认是缓存相邻的)

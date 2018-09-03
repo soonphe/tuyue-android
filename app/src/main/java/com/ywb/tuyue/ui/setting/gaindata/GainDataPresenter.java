@@ -25,9 +25,11 @@ import com.ywb.tuyue.entity.TDataVersion;
 import com.ywb.tuyue.entity.TFood;
 import com.ywb.tuyue.entity.TGame;
 import com.ywb.tuyue.entity.TMovie;
+import com.ywb.tuyue.entity.TVersion;
 import com.ywb.tuyue.entity.TVideo;
 import com.ywb.tuyue.ui.mvp.BasePresenter;
 import com.ywb.tuyue.utils.HTMLFormatUtils;
+import com.ywb.tuyue.utils.LocalPathUtils;
 
 import org.litepal.LitePal;
 import org.litepal.crud.LitePalSupport;
@@ -186,7 +188,6 @@ public class GainDataPresenter extends BasePresenter<GainDataContract.View> impl
                                     "" //订单标识
                             );
                         }
-                        LogUtils.e("要下载的视频文件地址" + uri.toString());
                         downloadFile(tMovie, 0, tMovie.getFace_pic() + "");
                         downloadFile(tMovie, 1, uri.toString() + "");
                     }
@@ -266,19 +267,27 @@ public class GainDataPresenter extends BasePresenter<GainDataContract.View> impl
                 }
                 (object).update(((TArticle) object).getId());
             } else if (object instanceof TMovie) {
-                LogUtils.e("直接设置1905电影文件");
                 if (type == 0) {
+                    LogUtils.e("直接设置1905电影封面");
                     ((TMovie) object).setDownloadPic(localFilePath);
                 } else {
+                    LogUtils.e("直接设置1905电影文件");
                     ((TMovie) object).setDownloadFile(localFilePath);
                 }
                 (object).update(((TMovie) object).getId());
             }
 
         } else {
+            String destFileName = null;
+            /**
+             * 1905需要设置电影返回名称，否则保存为ts文件
+             */
+            if ((object instanceof TMovie)) {
+                destFileName = LocalPathUtils.getFileName(downpath);
+            }
             OkGo.<File>get(downpath)
                     .tag(this)
-                    .execute(new FileCallback() {
+                    .execute(new FileCallback(destFileName) {
                         @Override
                         public void onSuccess(Response<File> response) {
                             LogUtils.e("获取到的文件路径为：" + response.body().getPath());
@@ -345,12 +354,17 @@ public class GainDataPresenter extends BasePresenter<GainDataContract.View> impl
                                 }
                                 (object).update(((TArticle) object).getId());
                             } else if (object instanceof TMovie) {
-                                LogUtils.e("打印body文件："+response.body().toString());
-                                LogUtils.e("设置1905电影文件");
                                 if (type == 0) {
+                                    LogUtils.e("设置1905电影封图片");
                                     ((TMovie) object).setDownloadPic(response.body().getPath());
                                 } else {
-                                    ((TMovie) object).setDownloadFile(response.body().getPath());
+                                    LogUtils.e("设置1905电影文件" +
+                                            response.body().toString() +
+                                            "____" +
+                                            response.body().getAbsolutePath() +
+                                            "____" +
+                                            response.body().getPath());
+                                    ((TMovie) object).setDownloadFile(response.body().toString());
                                 }
                                 (object).update(((TMovie) object).getId());
                             }

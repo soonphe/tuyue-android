@@ -15,7 +15,6 @@ import com.ywb.tuyue.entity.TFoodType;
 import com.ywb.tuyue.entity.TGame;
 import com.ywb.tuyue.entity.TGameType;
 import com.ywb.tuyue.entity.TMovieBean;
-import com.ywb.tuyue.entity.TOpen;
 import com.ywb.tuyue.entity.TStats;
 import com.ywb.tuyue.entity.TUser;
 import com.ywb.tuyue.entity.TVersion;
@@ -182,25 +181,26 @@ public interface AppApiService {
      */
     @Headers({"Content-Type: application/json", "Accept:  application/json"})
     @POST("user/add")
-    Observable<Object> uploadUser(@Body TUser tUser);
+    Observable<Object> uploadUser(@Query("captcher") String captcher, @Body TUser tUser);
 
     /**
-     * 解锁数据上传
+     * 统计数据上传
      * @param list
      * @return
      */
     @Headers({"Content-Type: application/json", "Accept:  application/json"})
-    @POST("open/addList")
-    Observable<Object> uploadOpen(@Body List<TOpen> list);
+    @POST("stats/add")
+    Observable<Object> uploadStats(@Body TStats list);
 
     /**
-     * 点击停留上传
+     * 统计数据上传
      * @param list
      * @return
      */
     @Headers({"Content-Type: application/json", "Accept:  application/json"})
     @POST("stats/addList")
-    Observable<Object> uploadClick(@Body List<TStats> list);
+    Observable<Object> uploadStatsList(@Body List<TStats> list);
+
 
 
 }

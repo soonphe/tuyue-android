@@ -9,20 +9,30 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.blankj.utilcode.constant.TimeConstants;
 import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.StringUtils;
+import com.blankj.utilcode.util.TimeUtils;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.jude.easyrecyclerview.decoration.SpaceDecoration;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.ywb.tuyue.R;
+import com.ywb.tuyue.constants.Constants;
 import com.ywb.tuyue.entity.TArticle;
 import com.ywb.tuyue.entity.TArticleType;
+import com.ywb.tuyue.entity.TStats;
 import com.ywb.tuyue.entity.TabEntity;
 import com.ywb.tuyue.ui.adapter.ArticleAdapter;
 import com.ywb.tuyue.ui.article.article.ArticleContentActivity;
+import com.ywb.tuyue.ui.data.DataContract;
+import com.ywb.tuyue.ui.data.DataPresenter;
 import com.ywb.tuyue.ui.mvp.BaseActivity;
+
+import org.litepal.LitePal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,12 +46,14 @@ import cn.jzvd.JZVideoPlayerStandard;
 /**
  * @Author soonphe
  * @Date 2018-08-28 19:11
- * @Description 城市文章
+ * @Description 文章Activity
  */
-public class ArticleActivity extends BaseActivity implements ArticleContract.View {
+public class ArticleActivity extends BaseActivity implements ArticleContract.View, DataContract.View {
 
     @Inject
     ArticlePresenter presenter;
+    @Inject
+    DataPresenter dataPresenter;
 
     @BindView(R.id.tl_2)
     CommonTabLayout tl2;
@@ -52,6 +64,7 @@ public class ArticleActivity extends BaseActivity implements ArticleContract.Vie
 
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
     private ArticleAdapter articleAdapter;
+    private long stayTime;//模块停留时长
 
     @Override
     public void startLoading() {
@@ -82,6 +95,8 @@ public class ArticleActivity extends BaseActivity implements ArticleContract.Vie
     public void initView(View view) {
         BarUtils.setStatusBarAlpha(this, 0);
         presenter.attachView(this);
+        dataPresenter.attachView(this);
+        stayTime = System.currentTimeMillis();
 
         articleAdapter = new ArticleAdapter(R.layout.item_article);
         rvList.setLayoutManager(new GridLayoutManager(getContext(), 2));
@@ -159,5 +174,34 @@ public class ArticleActivity extends BaseActivity implements ArticleContract.Vie
     public void initInjector() {
         getComponent().inject(this);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        //停留时长统计:单位S
+        long stayDataTime = TimeUtils.getTimeSpan(stayTime, System.currentTimeMillis(), TimeConstants.SEC);
+        String phone = SPUtils.getInstance().getString(Constants.REGIST_PHONE, "");
+        //判断这里是否存在用户，如果存在则要记录数据
+        if (!StringUtils.isEmpty(phone)) {
+            //判断今天是否创建过统计数据——有数据则更新数据+1
+            TStats tOpen = LitePal.where("phone = ?", phone + "").order("id desc").findFirst(TStats.class);
+            if (tOpen != null) {
+                tOpen.setSubwaytime((int) (tOpen.getSubwaytime() + stayDataTime));
+                boolean result = tOpen.save();
+                //判断当前网络可用且用户数据保存成功
+                if (result) {
+                    //上传所有数据
+                    dataPresenter.uploadData(tOpen);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void uploadDataSuccess() {
+        LogUtils.e("书吧停留上传成功");
+    }
+
 
 }

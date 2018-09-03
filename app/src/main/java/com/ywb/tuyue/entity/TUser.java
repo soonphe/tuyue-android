@@ -1,5 +1,6 @@
 package com.ywb.tuyue.entity;
 
+import org.litepal.annotation.Column;
 import org.litepal.crud.LitePalSupport;
 
 /**
@@ -26,22 +27,24 @@ public class TUser extends LitePalSupport {
      * sex : string
      * updatetime : 2018-08-30T06:17:30.635Z
      */
+    private int id;
+    private String phone;
+    private String imcode;
+    @Column(nullable = false, defaultValue = "0")
+    private int age;
+    @Column(nullable = false, defaultValue = "0")
+    private int sex;
 
-    private String age;
     private String avatar;
     private String city;
-    private String createtime;
-    private boolean delflag;
-    private int id;
-    private String imcode;
     private String nickname;
-    private String phone;
     private String realname;
     private String remark;
-    private String sex;
+    private String createtime;
     private String updatetime;
+    private boolean delflag;
 
-    public TUser(String age, String createtime, String imcode, String phone, String sex) {
+    public TUser(int age, String createtime, String imcode, String phone, int sex) {
         this.age = age;
         this.createtime = createtime;
         this.imcode = imcode;
@@ -49,12 +52,20 @@ public class TUser extends LitePalSupport {
         this.sex = sex;
     }
 
-    public String getAge() {
+    public int getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(int age) {
         this.age = age;
+    }
+
+    public int getSex() {
+        return sex;
+    }
+
+    public void setSex(int sex) {
+        this.sex = sex;
     }
 
     public String getAvatar() {
@@ -135,14 +146,6 @@ public class TUser extends LitePalSupport {
 
     public void setRemark(String remark) {
         this.remark = remark;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
     }
 
     public String getUpdatetime() {

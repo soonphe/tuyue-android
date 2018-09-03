@@ -1,5 +1,6 @@
 package com.ywb.tuyue.entity;
 
+import org.litepal.annotation.Column;
 import org.litepal.crud.LitePalSupport;
 
 /**
@@ -34,25 +35,42 @@ public class TStats extends LitePalSupport {
      * subwaytime : 0
      */
 
-    private int book;
-    private int booktime;
-    private int city;
-    private int citytime;
-    private String createdate;
-    private int food;
-    private int foodtime;
-    private int game;
-    private int gametime;
     private int id;
-    private String imcode;
-    private boolean ismobile;
-    private int movies;
-    private int moviestime;
-    private int music;
-    private int musictime;
+    private String createdate;//创建时间yyyy-MM-dd
     private String phone;
-    private String regtime;
+    private String imcode;
+    private String regtime; //注册时间yyyy-MM-dd HH:mm:ss
+    private boolean ismobile;
+
+    @Column(nullable = false, defaultValue = "1")   //创建时默认解锁一次
+    private int openlock;
+    @Column(nullable = false, defaultValue = "0")
+    private int book;
+    @Column(nullable = false, defaultValue = "0")
+    private int booktime;
+    @Column(nullable = false, defaultValue = "0")
+    private int city;
+    @Column(nullable = false, defaultValue = "0")
+    private int citytime;
+    @Column(nullable = false, defaultValue = "0")
+    private int food;
+    @Column(nullable = false, defaultValue = "0")
+    private int foodtime;
+    @Column(nullable = false, defaultValue = "0")
+    private int game;
+    @Column(nullable = false, defaultValue = "0")
+    private int gametime;
+    @Column(nullable = false, defaultValue = "0")
+    private int movies;
+    @Column(nullable = false, defaultValue = "0")
+    private int moviestime;
+    @Column(nullable = false, defaultValue = "0")
+    private int music;
+    @Column(nullable = false, defaultValue = "0")
+    private int musictime;
+    @Column(nullable = false, defaultValue = "0")
     private int subway;
+    @Column(nullable = false, defaultValue = "0")
     private int subwaytime;
 
     public int getBook() {
@@ -93,6 +111,14 @@ public class TStats extends LitePalSupport {
 
     public void setCreatedate(String createdate) {
         this.createdate = createdate;
+    }
+
+    public int getOpenlock() {
+        return openlock;
+    }
+
+    public void setOpenlock(int openlock) {
+        this.openlock = openlock;
     }
 
     public int getFood() {

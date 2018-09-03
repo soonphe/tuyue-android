@@ -4,7 +4,7 @@
     <dbname value="tuyue_new_db" ></dbname>
 
     <!--用于设定数据库的版本号，每次你想要更新数据库，修改该值 -->
-    <version value="2018083102" ></version>
+    <version value="2018090302" ></version>
 
     <!-- 用于设定所有的映射模型，配置对应的类 -->
     <list>
@@ -25,7 +25,6 @@
         <mapping class="com.ywb.tuyue.entity.TVersion"></mapping>
         <mapping class="com.ywb.tuyue.entity.TDataVersion"></mapping>
         <mapping class="com.ywb.tuyue.entity.TMovie"></mapping>
-        <mapping class="com.ywb.tuyue.entity.TOpen"></mapping>
         <mapping class="com.ywb.tuyue.entity.TStats"></mapping>
         <mapping class="com.ywb.tuyue.entity.TUser"></mapping>
     </list>
