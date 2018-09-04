@@ -113,7 +113,7 @@ public class UnlockActivity extends BaseActivity implements AdvertContract.View,
                         tOpen.setOpenlock(tOpen.getOpenlock() + 1);
                         boolean result = tOpen.save();
                         //判断当前网络可用且用户数据保存成功
-                        if (SPUtils.getInstance().getBoolean(NETWORK_AVAILABLE) && result) {
+                        if ( result) {
                             //上传所有数据
                             dataPresenter.uploadData(tOpen);
                         }

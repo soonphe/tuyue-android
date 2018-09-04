@@ -17,6 +17,7 @@ import com.ywb.tuyue.ui.adapter.ViewPagerAdapter;
 import com.ywb.tuyue.ui.mvp.BaseActivity;
 import com.ywb.tuyue.ui.setting.aboutus.AboutUsFragment;
 import com.ywb.tuyue.ui.setting.gaindata.GainDataFragment;
+import com.ywb.tuyue.ui.setting.hotspot.HotspotFragment;
 import com.ywb.tuyue.ui.setting.network.NetworkFragment;
 import com.ywb.tuyue.ui.setting.version.VersionFragment;
 import com.ywb.tuyue.widget.MyViewPager;
@@ -83,15 +84,18 @@ public class SettingActivity extends BaseActivity implements SettingContract.Vie
         mFragments.add(new GainDataFragment());
         mFragments.add(new VersionFragment());
         mFragments.add(new NetworkFragment());
+        mFragments.add(new HotspotFragment());
         mFragments.add(new AboutUsFragment());
         mypager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), mFragments));
-        mypager.setOffscreenPageLimit(2); //设置ViewPager的缓存界面数，每一侧的界面数(默认是缓存相邻的)
+        mypager.setOffscreenPageLimit(5); //设置ViewPager的缓存界面数，每一侧的界面数(默认是缓存相邻的)
         mypager.setCurrentItem(0);
 
         //创建左部菜单
         pMenus.add(new PMenu(0, "数据同步"));
         pMenus.add(new PMenu(1, "系统版本"));
-        pMenus.add(new PMenu(2, "关于我们"));
+        pMenus.add(new PMenu(2, "网络设置"));
+        pMenus.add(new PMenu(4, "热点设置"));
+        pMenus.add(new PMenu(5, "关于我们"));
         menuAdapter = new MenuAdapter(R.layout.item_menu, pMenus);
         recyclerMenu.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerMenu.addItemDecoration(new SpaceDecoration(1));

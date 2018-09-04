@@ -6,8 +6,11 @@ import android.content.Intent;
 import android.os.CountDownTimer;
 import android.util.Log;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
+import com.ywb.tuyue.MyApplication;
 import com.ywb.tuyue.constants.Constants;
+import com.ywb.tuyue.ui.mvp.BaseActivity;
 import com.ywb.tuyue.ui.unlock.UnlockActivity;
 
 /**
@@ -16,7 +19,6 @@ import com.ywb.tuyue.ui.unlock.UnlockActivity;
  * @Description 监听开屏/锁屏
  */
 public class ScreenOnReceiver extends BroadcastReceiver {
-    private Context mContext;
     /**
      * 锁屏时间超过5分钟，进入主页面页面弹出注册页面
      */
@@ -36,17 +38,21 @@ public class ScreenOnReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
-        mContext = context;
+
         if (Intent.ACTION_SCREEN_ON.equals(action)) {
             Log.e("onReceive()", "---开屏---");
             //如果倒计时在走，取消
             if (timer != null) {
                 timer.cancel();
             }
-
-//            if (!AppManager.getAppManager().currentActivity().getClass().getName().contains("SplashActivity")) {
+            if (!context.getClass().getName().contains("UnlockActivity")) {
+                LogUtils.e("当前页面的activity不是UnlockActivity");
                 Intent i = new Intent(context, UnlockActivity.class);
                 context.startActivity(i);
+            }
+//            if (!AppManager.getAppManager().currentActivity().getClass().getName().contains("SplashActivity")) {
+//                Intent i = new Intent(context, UnlockActivity.class);
+//                context.startActivity(i);
 //            }
         } else if (Intent.ACTION_SCREEN_OFF.equals(action)) {
             // 锁屏
@@ -55,7 +61,7 @@ public class ScreenOnReceiver extends BroadcastReceiver {
 //            String time = SPUtils.getInstance().getString( Constants.REGIST, "");
 //            if (!TextUtils.isEmpty(time)) {
 //                if (Long.parseLong(time) > 0) {
-                    timer.start();
+            timer.start();
 //                }
 //            }
 //            //锁屏后取消热点设置中的返回按钮

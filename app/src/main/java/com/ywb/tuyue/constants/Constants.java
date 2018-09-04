@@ -57,10 +57,19 @@ public class Constants {
     public static final String APK_VERSION = "APK_VERSION";   //APK版本
     public static final String ADVERT_VERSION = "ADVERT_VERSION";    //广告版本
     public static final String DATA_VERSION = "DATA_VERSION";   //数据版本
-    public static final String DOWNLOAD_COUNT = "DOWNLOAD_COUNT";   //下载模块次数——13次
+    public static final String DOWNLOAD_COUNT = "DOWNLOAD_COUNT";   //电影下载部数
+    public static final String CURRENT_DOWNLOAD_COUNT = "CURRENT_DOWNLOAD_COUNT";   //当前下载次数
 
     public static final String GAME_UNZIP = "GAME_UNZIP";   //游戏解压路径
 
+
+    //管理员密码
+    public static final String ADMIN = "218069";
+
+    public static final String SWITCH_BTN_STATE = "switch_btn_state";
+    public static final String WIFI_STATE_CONNECT = "已连接";
+    public static final String WIFI_STATE_ON_CONNECTING = "正在连接";
+    public static final String WIFI_STATE_UNCONNECT = "未连接";
 
     /**
      * 项目根SD卡目录

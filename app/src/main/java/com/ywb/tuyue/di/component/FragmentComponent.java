@@ -3,6 +3,8 @@ package com.ywb.tuyue.di.component;
 
 import com.ywb.tuyue.di.PerActivity;
 import com.ywb.tuyue.di.module.ActivityModule;
+import com.ywb.tuyue.ui.setting.hotspot.HotspotFragment;
+import com.ywb.tuyue.ui.setting.network.NetworkFragment;
 import com.ywb.tuyue.ui.video.movie.MovieFragment;
 import com.ywb.tuyue.ui.video.video.VideoFragment;
 import com.ywb.tuyue.ui.setting.aboutus.AboutUsFragment;
@@ -28,5 +30,7 @@ public interface FragmentComponent {
     void inject(AboutUsFragment fragment);
     void inject(GainDataFragment fragment);
     void inject(VersionFragment fragment);
+    void inject(NetworkFragment fragment);
+    void inject(HotspotFragment fragment);
 
 }

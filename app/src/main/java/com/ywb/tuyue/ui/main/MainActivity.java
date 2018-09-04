@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.blankj.utilcode.util.BarUtils;
+import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
@@ -320,7 +321,7 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, D
         });
 
         button.setOnClickListener(v -> {
-
+            KeyboardUtils.hideSoftInput(this);
             String phone = etPhone.getText().toString();
             String code = etCode.getText().toString();
             //管理员账户
@@ -352,10 +353,9 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, D
                 );
                 if (tUser.save()) {
                     SPUtils.getInstance().put(Constants.REGIST_PHONE, phone + "");
-                    if (SPUtils.getInstance().getBoolean(NETWORK_AVAILABLE)) {
-                        //上传所有数据
-                        presenter.uploadUser(tUser);
-                    }
+                    //上传所有数据
+                    presenter.uploadUser(tUser);
+
                     //用户注册成功后创建统计数据
                     TStats stats = new TStats();
                     stats.setPhone(phone);

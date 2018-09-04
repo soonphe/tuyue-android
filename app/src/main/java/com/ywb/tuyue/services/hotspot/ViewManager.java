@@ -43,7 +43,7 @@ public class ViewManager {
                 windowManager.removeView(floatBall);
 
                 Intent intent = new Intent();
-                ComponentName cn = new ComponentName("com.connxun.ltcx",
+                ComponentName cn = new ComponentName("com.ywb.tuyue",
                         "com.ywb.tuyue.ui.main.MainActivity");
                 intent.setComponent(cn);
                 context.startActivity(intent);

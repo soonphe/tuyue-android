@@ -74,4 +74,10 @@
     <color name="registHintColor">#BCBCBC</color>
     <color name="registCode">#D2D2D2</color>
 
+    <color name="menu_text_normal">#FFA7ACB6</color>
+    <color name="menu_checked">#FFFF2645</color>
+    <color name="menu_text_checked">#FFFFF8F9</color>
+    <color name="transport">#00000000</color>
+    <color name="wifi_green">#25be56</color>
+
 </resources>

@@ -3,6 +3,7 @@ package com.ywb.tuyue.ui.setting.gaindata;
 import com.ywb.tuyue.entity.TAdvert;
 import com.ywb.tuyue.entity.TDataVersion;
 import com.ywb.tuyue.entity.TMovie;
+import com.ywb.tuyue.entity.TStats;
 import com.ywb.tuyue.entity.TVersion;
 import com.ywb.tuyue.ui.mvp.BasePView;
 
@@ -18,7 +19,11 @@ public class GainDataContract {
 
         void getOtherDataSuccess();
 
-        void getMovieDataSuccess(List<TMovie> tMovie);
+        void getMovieDataSuccess();
+
+        void uploadUserDataSuccess();
+
+        void uploadStatsDataSuccess();
     }
 
     interface Presenter {
@@ -35,6 +40,10 @@ public class GainDataContract {
         //获取1905电影数据
         void getMovieData();
 
+        //上传用户数据
+        void uploadUserData();
 
+        //上传用户数据
+        void uploadStatsData();
     }
 }

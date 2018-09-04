@@ -148,6 +148,8 @@ ext {
     externalTxtReader = 'com.github.bifan-wei:HwTxtReader:V1.3.9'
     //PDF阅读
     externalPDF='com.github.barteksc:android-pdf-viewer:3.0.0-beta.5'
+    //switchButton
+    externalSwitchButton='com.github.zcweng:switch-button:0.0.3@aar'
 
     //else
 //    externalAndroidAsyncHttp = 'com.loopj.android:android-async-http:1.4.9'

@@ -66,4 +66,18 @@
         android:textColor="@color/text_red"
         android:textSize="@dimen/sp_14" />
 
+    <TextView
+        android:id="@+id/uploadData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/btn_red_shape_no_solid"
+        android:paddingBottom="8dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="8dp"
+        android:text="上传数据"
+        android:textColor="@color/text_red"
+        android:textSize="@dimen/sp_14" />
+
 </LinearLayout>

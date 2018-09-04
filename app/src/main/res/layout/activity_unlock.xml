@@ -11,6 +11,7 @@
         android:id="@+id/unlock_bg_advert"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:src="@mipmap/unlock_bg"
         android:scaleType="fitXY" />
 
     <com.ywb.tuyue.widget.CustomerUnlockView

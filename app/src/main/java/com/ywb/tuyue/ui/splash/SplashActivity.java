@@ -67,10 +67,12 @@ public class SplashActivity extends BaseActivity implements AdvertContract.View 
 
     @Override
     public void getAdvertListSuccess(List<TAdvert> list) {
+        if (list.size()>0){
+            //这里只选取最新的1张
+            GlideUtils.loadImageView(this,
+                    list.get(0).getDownloadPic(), ivFlash);
+        }
 
-        //这里只选取最新的1张
-        GlideUtils.loadImageView(this,
-                list.get(0).getDownloadPic(), ivFlash);
 
         //处理倒计时逻辑，倒计时4s之后自动跳到主界面
         timer.schedule(new TimerTask() {

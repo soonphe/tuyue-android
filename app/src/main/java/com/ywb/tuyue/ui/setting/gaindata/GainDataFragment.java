@@ -42,6 +42,8 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
     TextView tvAdvertVersion;
     @BindView(R.id.syncData)
     TextView syncData;
+    @BindView(R.id.uploadData)
+    TextView uploadData;
 
     int apkVersion = 0;  //APK广告版本
     int advertVersion = 0;  //SP广告版本
@@ -97,13 +99,23 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
         getComponent().inject(this);
     }
 
-    @OnClick({R.id.syncData})
+    @OnClick({R.id.syncData, R.id.uploadData})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.syncData:
                 //判断当前网络可用——可用则上传
                 if (SPUtils.getInstance().getBoolean(NETWORK_AVAILABLE)) {
                     presenter.getDataVersion();
+                } else {
+                    ToastUtils.showShort("请检查网络是否连接");
+                }
+                break;
+            case R.id.uploadData:
+                //点击上传数据库数据
+                if (SPUtils.getInstance().getBoolean(NETWORK_AVAILABLE)) {
+                    //先后上传用户数据与统计数据
+                    presenter.uploadUserData();
+                    presenter.uploadStatsData();
                 } else {
                     ToastUtils.showShort("请检查网络是否连接");
                 }
@@ -120,8 +132,11 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
         dataVersion = SPUtils.getInstance().getInt(Constants.DATA_VERSION, 0);
         advertVersion = SPUtils.getInstance().getInt(Constants.ADVERT_VERSION, 0);
         //判断数据版本和广告版本是否一致
+        this.startLoading();
         if (tDataVersion.getAdvertversion() == advertVersion && tDataVersion.getDataversion() == dataVersion) {
             ToastUtils.showShort("当前已经是最新数据");
+            presenter.getAdvertList();
+            presenter.getOtherData();
         } else {
             //分别判断更新广告版本和数据版本
             if (tDataVersion.getAdvertversion() > advertVersion) {
@@ -133,7 +148,6 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
                 presenter.getOtherData();
             }
         }
-
         //获取1905数据
         presenter.getMovieData();
 
@@ -152,14 +166,23 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
         //SP更新数据版本号
         SPUtils.getInstance().put(Constants.DATA_VERSION, dbVersion.getDataversion());
 
-        LogUtils.e("其他数据同步成功");
+        ToastUtils.showShort("其他数据更新成功");
+    }
+
+    @Override
+    public void getMovieDataSuccess() {
+
+        ToastUtils.showShort("电影数据更新成功");
 
     }
 
     @Override
-    public void getMovieDataSuccess(List<TMovie> list) {
+    public void uploadUserDataSuccess() {
+        LogUtils.e("用户数据上传成功");
+    }
 
-        LogUtils.e("其他数据同步成功");
-
+    @Override
+    public void uploadStatsDataSuccess() {
+        LogUtils.e("统计数据上传成功");
     }
 }
