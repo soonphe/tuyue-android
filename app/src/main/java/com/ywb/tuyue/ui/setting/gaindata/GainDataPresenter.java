@@ -418,7 +418,7 @@ public class GainDataPresenter extends BasePresenter<GainDataContract.View> impl
 
                             //回调下载进度
                             super.downloadProgress(progress);
-                            LogUtils.i(progress.fileName + progress.currentSize + "下载广告封面进度为：" + progress.fraction * 100 + "%");
+                            LogUtils.i(progress.fileName + progress.currentSize + "下载进度为：" + progress.fraction * 100 + "%");
 
                         }
 

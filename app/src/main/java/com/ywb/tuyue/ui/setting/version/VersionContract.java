@@ -8,7 +8,7 @@ public class VersionContract {
     interface View extends BasePView {
         void getVersionSuccess(TVersion tVersion);
 
-        void downloadApkSuccess();
+        void downloadApkSuccess(String filepath);
     }
 
     interface Presenter {
@@ -16,6 +16,6 @@ public class VersionContract {
         void getVersion();
 
         //下载APK
-        void downloadApk(String downpath);
+        void downloadApk(TVersion tVersion);
     }
 }

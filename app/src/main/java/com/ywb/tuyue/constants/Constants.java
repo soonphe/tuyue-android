@@ -18,8 +18,8 @@ public class Constants {
     public static final String SERVER_PORT = "8081";  //8087
     public static final String HOST = "http://" + SERVER_IP + ":" + SERVER_PORT;//服务器地址
     public static final String BASE_URL = HOST + "/tuyue/";  // /ltcx/
-    public static final String BASE_API_URL = BASE_URL + "api/";
-    public static final String BASE_IMAGE_URL = "http://" + LOCAL_SERVER_IP + "/upload";
+    public static final String BASE_API_URL = BASE_URL + "api/";    //API请求地址
+    public static final String BASE_IMAGE_URL = "http://" + LOCAL_SERVER_IP + "/upload";    //文件下载地址
 
     //1905电影数据地址
     public static final String MOVIE_1905_URL = "http://192.168.1.6:8087/index.php/Home/Interface/index?class=HallUse&method=getVideoList";

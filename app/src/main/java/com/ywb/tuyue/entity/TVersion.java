@@ -10,7 +10,7 @@ import org.litepal.crud.LitePalSupport;
  * @Descprition 版本信息
  */
 
-public class TVersion  extends LitePalSupport {
+public class TVersion extends LitePalSupport {
 
 
     /**
@@ -30,6 +30,15 @@ public class TVersion  extends LitePalSupport {
     private String content;
     private String filepath;
     private String createtime;
+    private String downloadFile;    //文件地址
+
+    public String getDownloadFile() {
+        return downloadFile;
+    }
+
+    public void setDownloadFile(String downloadFile) {
+        this.downloadFile = downloadFile;
+    }
 
     public int getTid() {
         return tid;

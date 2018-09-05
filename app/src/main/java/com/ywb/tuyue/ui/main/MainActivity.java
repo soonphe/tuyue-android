@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -45,16 +44,15 @@ import com.ywb.tuyue.widget.AppTitle;
 import org.litepal.LitePal;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.ywb.tuyue.constants.Constants.IS_MOBILE;
-import static com.ywb.tuyue.constants.Constants.NETWORK_AVAILABLE;
 
 /**
  * @Author soonphe
@@ -189,6 +187,9 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, D
         if (StringUtils.isEmpty(phone) || tStats == null) {
             //如果没有数据，则直接弹窗注册
             onDialog();
+            //隐藏软键盘
+//            setTouchDissIm(true);
+
         } else {
             switch (view.getId()) {
                 case R.id.ll_movie:
@@ -228,7 +229,7 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, D
     public void forwardActivity(TStats tStats, Class activity) {
         boolean result = tStats.save();
         //判断当前网络可用且统计数据保存成功
-        if ( result) {
+        if (result) {
             //上传所有数据
             dataPresenter.uploadData(tStats);
         }
@@ -255,23 +256,21 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, D
         MaterialDialog materialDialog = mOperation
                 .showCustomerDialog("", R.layout.dialog_register, true);
         //不允许点击外侧关闭
-        materialDialog.setCanceledOnTouchOutside(false);
-        //设置关闭监听
-//        materialDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-//            @Override
-//            public void onCancel(DialogInterface dialog) {
-////                KeyboardUtils.toggleSoftInput();
-//                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-//                //如果window上view获取焦点 && view不为空
-//                if(imm.isActive()&&getCurrentFocus()!=null){
-//                    //拿到view的token 不为空
-//                    if (getCurrentFocus().getWindowToken()!=null) {
-//                        //表示软键盘窗口总是隐藏，除非开始时以SHOW_FORCED显示。
-//                        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-//                    }
+//        materialDialog.setCanceledOnTouchOutside(false);
+        //        设置关闭监听
+        materialDialog.setOnCancelListener(dialog -> {
+            KeyboardUtils.hideSoftInput(this);
+//            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+//            //如果window上view获取焦点 && view不为空
+//            if (imm.isActive() && getCurrentFocus() != null) {
+//                //拿到view的token 不为空
+//                if (getCurrentFocus().getWindowToken() != null) {
+//                    //表示软键盘窗口总是隐藏，除非开始时以SHOW_FORCED显示。
+//                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 //                }
 //            }
-//        });
+        });
+
         CheckBox chMan = materialDialog.getCustomView().findViewById(R.id.ck_man);
         CheckBox chWoman = materialDialog.getCustomView().findViewById(R.id.ck_woman);
         CheckBox below20 = materialDialog.getCustomView().findViewById(R.id.ck_below20);
@@ -325,7 +324,7 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, D
             String phone = etPhone.getText().toString();
             String code = etCode.getText().toString();
             //管理员账户
-            if ("111111".equals(phone)) {
+            if ("111111" .equals(phone)) {
                 materialDialog.cancel();
                 return;
             } else if (phone.length() != 11 || code.length() != 6) {
@@ -333,11 +332,11 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, D
                 return;
             }
             //微信验证码
-            if ("973570".equals(code)
-                    || "217560".equals(code)
-                    || "285973".equals(code)
-                    || "579134".equals(code)
-                    || "497186".equals(code)) {
+            if ("973570" .equals(code)
+                    || "217560" .equals(code)
+                    || "285973" .equals(code)
+                    || "579134" .equals(code)
+                    || "497186" .equals(code)) {
                 SPUtils.getInstance().put(Constants.REGIST_PHONE, phone);
 
                 String date = TimeUtils.millis2String(System.currentTimeMillis(),
@@ -391,4 +390,10 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, D
     }
 
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 }

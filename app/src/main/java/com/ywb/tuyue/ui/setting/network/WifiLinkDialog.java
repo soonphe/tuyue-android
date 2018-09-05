@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.KeyboardUtils;
 import com.ywb.tuyue.R;
 import com.ywb.tuyue.utils.WifiSupport;
 
@@ -125,13 +126,13 @@ public class WifiLinkDialog extends Dialog implements View.OnClickListener {
                 } else {
                     WifiSupport.addNetWork(tempConfig, getContext());
                 }
+                KeyboardUtils.hideSoftInput(this.mView);
                 dismiss();
                 break;
             }
             case R.id.btn_cancel: {
-
+                KeyboardUtils.hideSoftInput(this.mView);
                 dismiss(); //点击取消按钮，dailog消失
-
                 break;
             }
         }

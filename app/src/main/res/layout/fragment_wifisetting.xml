@@ -14,28 +14,22 @@
         android:padding="10dp">
 
         <TextView
-            android:id="@+id/title_wifi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:drawablePadding="5dp"
+            android:drawableRight="@mipmap/icon_wifi1"
             android:text="无线局域网列表"
             android:textColor="@color/black"
             android:textSize="18sp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-            android:layout_toRightOf="@+id/title_wifi"
-            android:src="@drawable/icon_wifi1" />
 
         <com.suke.widget.SwitchButton
             android:id="@+id/switch_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"
+            app:sb_checked="true" />
 
     </RelativeLayout>
 

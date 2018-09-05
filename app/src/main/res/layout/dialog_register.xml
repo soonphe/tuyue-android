@@ -5,8 +5,7 @@
     android:background="@drawable/dialog_cornor_bg"
     android:fitsSystemWindows="true"
     android:gravity="center"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="400dp"
@@ -77,14 +76,6 @@
                     android:textColor="@color/registYearDefalut"
                     android:textSize="18sp" />
 
-                <!--<ImageView-->
-                    <!--android:id="@+id/iv_below20"-->
-                    <!--android:layout_width="30dp"-->
-                    <!--android:layout_height="30dp"-->
-                    <!--android:layout_toRightOf="@+id/ck_below20"-->
-                    <!--android:src="@drawable/ic_selected"-->
-                    <!--android:visibility="invisible" />-->
-
                 <CheckBox
                     android:id="@+id/ck_twentyTofourth"
                     android:layout_width="80dp"
@@ -98,14 +89,6 @@
                     android:text="20-40岁"
                     android:textColor="@color/registYearDefalut"
                     android:textSize="18sp" />
-
-                <!--<ImageView-->
-                    <!--android:id="@+id/iv_twentyTofourth"-->
-                    <!--android:layout_width="30dp"-->
-                    <!--android:layout_height="30dp"-->
-                    <!--android:layout_toRightOf="@+id/ck_twentyTofourth"-->
-                    <!--android:src="@drawable/ic_selected"-->
-                    <!--android:visibility="invisible" />-->
 
                 <CheckBox
                     android:id="@+id/ck_fourthToSixty"
@@ -122,15 +105,6 @@
                     android:textColor="@color/registYearDefalut"
                     android:textSize="18sp" />
 
-                <!--<ImageView-->
-                    <!--android:id="@+id/iv_fourthToSixty"-->
-                    <!--android:layout_width="30dp"-->
-                    <!--android:layout_height="30dp"-->
-                    <!--android:layout_alignTop="@+id/ck_fourthToSixty"-->
-                    <!--android:layout_toRightOf="@+id/ck_fourthToSixty"-->
-                    <!--android:src="@drawable/ic_selected"-->
-                    <!--android:visibility="invisible" />-->
-
                 <CheckBox
                     android:id="@+id/ck_aboveSixty"
                     android:layout_width="80dp"
@@ -143,14 +117,6 @@
                     android:textColor="@color/registYearDefalut"
                     android:textSize="18sp" />
 
-                <!--<ImageView-->
-                    <!--android:id="@+id/iv_aboveSixty"-->
-                    <!--android:layout_width="30dp"-->
-                    <!--android:layout_height="30dp"-->
-                    <!--android:layout_alignTop="@+id/ck_fourthToSixty"-->
-                    <!--android:layout_toRightOf="@+id/ck_aboveSixty"-->
-                    <!--android:src="@drawable/ic_selected"-->
-                    <!--android:visibility="invisible" />-->
             </RelativeLayout>
 
             <RelativeLayout
@@ -189,7 +155,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/view"
-
                     android:layout_marginTop="20dp"
                     android:background="@color/registWhite"
                     android:hint="关注微信公众号获取激活码"

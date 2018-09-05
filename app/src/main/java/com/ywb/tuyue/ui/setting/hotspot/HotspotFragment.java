@@ -6,17 +6,28 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
+import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.KeyboardUtils;
+import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.ywb.tuyue.R;
 import com.ywb.tuyue.constants.Constants;
 import com.ywb.tuyue.services.hotspot.ServiceUtil;
 import com.ywb.tuyue.ui.mvp.BaseFragmentV4;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
+
+import static com.ywb.tuyue.constants.Constants.NETWORK_AVAILABLE;
 
 
 /**
@@ -25,9 +36,13 @@ import com.ywb.tuyue.ui.mvp.BaseFragmentV4;
  * @Description 设置-热点设置
  */
 public class HotspotFragment extends BaseFragmentV4 implements HotspotContract.View {
-    EditText mSetHotPassword;
-    RelativeLayout mRootView;
-    TextView mJumpSettings;
+
+    @BindView(R.id.setHotPassword)
+    EditText setHotPassword;
+    @BindView(R.id.jumpSetting)
+    TextView jumpSetting;
+    @BindView(R.id.hot_spot_rootView)
+    LinearLayout hotSpotRootView;
 
     @Override
     public int bindLayout() {
@@ -41,38 +56,31 @@ public class HotspotFragment extends BaseFragmentV4 implements HotspotContract.V
 
     @Override
     public void initView(View view) {
-        mSetHotPassword= (EditText) findViewById(R.id.setHotPassword);
-        mRootView= (RelativeLayout) findViewById(R.id.hot_spot_rootView);
-        mJumpSettings= (TextView) findViewById(R.id.jumpSetting);
 
-        //输入密码进入系统设置界面   给系统设置界面添加一个返回键
-        mJumpSettings.setOnClickListener(v -> {
-            String inputPassword = mSetHotPassword.getText().toString().trim();
-            if (TextUtils.isEmpty(inputPassword)) {
-                Toast.makeText(getContext(), "请输入密码！", Toast.LENGTH_SHORT).show();// //218069
-                return;
-            }
-            if (!inputPassword.equals(Constants.ADMIN)) {
-                Toast.makeText(getContext(), "密码不正确！", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            startSetting();
-            startService();
-        });
-
-        mRootView.setOnClickListener(v -> {
-            dismiss(mRootView);
-        });
     }
 
-    //隐藏键盘
-    public void dismiss(View view) {
-        try {
-            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-            // 强制隐藏软键盘
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }catch (Exception e){
-            e.printStackTrace();
+    @OnClick({R.id.jumpSetting,R.id.hot_spot_rootView})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.jumpSetting:
+                String inputPassword = setHotPassword.getText().toString().trim();
+                if (TextUtils.isEmpty(inputPassword)) {
+                    Toast.makeText(getContext(), "请输入密码！", Toast.LENGTH_SHORT).show();// //218069
+                    return;
+                }
+                if (!inputPassword.equals(Constants.ADMIN)) {
+                    Toast.makeText(getContext(), "密码不正确！", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                //进入设置界面
+                startSetting();
+                //启动返回按钮service
+                startService();
+                break;
+            case R.id.hot_spot_rootView:
+                //隐藏软键盘
+                KeyboardUtils.hideSoftInput(this.getContext());
+                break;
         }
     }
 
@@ -80,6 +88,7 @@ public class HotspotFragment extends BaseFragmentV4 implements HotspotContract.V
      * 启动service
      */
     private void startService() {
+
         ServiceUtil.startService(getContext());
     }
 
@@ -120,4 +129,7 @@ public class HotspotFragment extends BaseFragmentV4 implements HotspotContract.V
     public void onError(String error) {
 
     }
+
+
+
 }

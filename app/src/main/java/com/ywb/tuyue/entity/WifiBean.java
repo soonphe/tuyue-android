@@ -1,10 +1,10 @@
 package com.ywb.tuyue.entity;
 
 /**
- * Created by JuZhongJoy on 2018/7/12.
- * wifi实体类
+ * @Author soonphe
+ * @Date 2018-08-22 11:01
+ * @Description wifi实体
  */
-
 public class WifiBean implements Comparable<WifiBean> {
     private String wifiName;
     private String level;
