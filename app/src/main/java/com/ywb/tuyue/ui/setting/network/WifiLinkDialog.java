@@ -131,8 +131,8 @@ public class WifiLinkDialog extends Dialog implements View.OnClickListener {
                 break;
             }
             case R.id.btn_cancel: {
-                KeyboardUtils.hideSoftInput(this.mView);
                 dismiss(); //点击取消按钮，dailog消失
+                KeyboardUtils.hideSoftInput(this.mView);
                 break;
             }
         }

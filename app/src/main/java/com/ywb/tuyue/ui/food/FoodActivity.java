@@ -28,6 +28,7 @@ import com.ywb.tuyue.ui.adapter.FoodAdapter;
 import com.ywb.tuyue.ui.data.DataContract;
 import com.ywb.tuyue.ui.data.DataPresenter;
 import com.ywb.tuyue.ui.mvp.BaseActivity;
+import com.ywb.tuyue.widget.AppTitle;
 
 import org.litepal.LitePal;
 
@@ -51,6 +52,8 @@ public class FoodActivity extends BaseActivity implements FoodContract.View, Dat
     @Inject
     DataPresenter dataPresenter;
 
+    @BindView(R.id.app_title_id)
+    AppTitle appTitle;
     @BindView(R.id.tl_2)
     CommonTabLayout tl2;
     @BindView(R.id.rv_list)
@@ -148,6 +151,8 @@ public class FoodActivity extends BaseActivity implements FoodContract.View, Dat
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        appTitle.getStatusLine().unregisterBroadcast();
+
 
         //停留时长统计:单位S
         long stayDataTime = TimeUtils.getTimeSpan(stayTime, System.currentTimeMillis(), TimeConstants.SEC);

@@ -31,13 +31,15 @@ import org.litepal.LitePal;
 
 import java.util.Locale;
 
+import cn.jpush.android.api.JPushInterface;
+
 import static com.ywb.tuyue.constants.Constants.BUGLY_APPID;
 
 
 /**
- * @Author
+ * @Author soonphe
  * @Date 2017-12-01 15:13
- * @Description 
+ * @Description Application
  */
 public class MyApplication extends BaseApplication {
 
@@ -92,8 +94,8 @@ public class MyApplication extends BaseApplication {
         //blankJ 工具类init
         Utils.init(this);
         //极光初始化
-//        JPushInterface.setDebugMode(true); 	// 设置开启日志,发布时请关闭日志
-//        JPushInterface.init(this);
+        JPushInterface.setDebugMode(false); 	// 设置开启日志,发布时请关闭日志
+        JPushInterface.init(this);
 
         //facebook调试工具
         Stetho.initializeWithDefaults(this);

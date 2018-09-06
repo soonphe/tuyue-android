@@ -56,7 +56,6 @@ public class HotspotFragment extends BaseFragmentV4 implements HotspotContract.V
 
     @Override
     public void initView(View view) {
-
     }
 
     @OnClick({R.id.jumpSetting,R.id.hot_spot_rootView})

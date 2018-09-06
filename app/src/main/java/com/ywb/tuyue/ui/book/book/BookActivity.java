@@ -35,6 +35,7 @@ import com.ywb.tuyue.ui.book.bookread.BookreadActivity;
 import com.ywb.tuyue.ui.data.DataContract;
 import com.ywb.tuyue.ui.data.DataPresenter;
 import com.ywb.tuyue.ui.mvp.BaseActivity;
+import com.ywb.tuyue.widget.AppTitle;
 
 import org.litepal.LitePal;
 
@@ -52,6 +53,8 @@ public class BookActivity extends BaseActivity implements BookContract.BookView,
     @Inject
     DataPresenter dataPresenter;
 
+    @BindView(R.id.app_title_id)
+    AppTitle appTitle;
     @BindView(R.id.bookBanner)
     Banner banner;
     @BindView(R.id.tl_2)
@@ -183,6 +186,7 @@ public class BookActivity extends BaseActivity implements BookContract.BookView,
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        appTitle.getStatusLine().unregisterBroadcast();
 
         //停留时长统计:单位S
         long stayDataTime = TimeUtils.getTimeSpan(stayTime, System.currentTimeMillis(), TimeConstants.SEC);

@@ -1,6 +1,8 @@
 package com.ywb.tuyue.api;
 
 
+import com.ywb.tuyue.dto.TStatsDto;
+import com.ywb.tuyue.dto.TUserDto;
 import com.ywb.tuyue.entity.TAdvert;
 import com.ywb.tuyue.entity.TAdvertType;
 import com.ywb.tuyue.entity.TArticle;
@@ -181,7 +183,7 @@ public interface AppApiService {
      */
     @Headers({"Content-Type: application/json", "Accept:  application/json"})
     @POST("user/add")
-    Observable<Object> uploadUser(@Query("captcher") String captcher, @Body TUser tUser);
+    Observable<Object> uploadUser(@Query("captcher") String captcher, @Body TUserDto tUser);
 
     /**
      * 统计数据上传
@@ -190,7 +192,7 @@ public interface AppApiService {
      */
     @Headers({"Content-Type: application/json", "Accept:  application/json"})
     @POST("stats/add")
-    Observable<Object> uploadStats(@Body TStats list);
+    Observable<Object> uploadStats(@Body TStatsDto list);
 
     /**
      * 统计数据上传
@@ -199,7 +201,7 @@ public interface AppApiService {
      */
     @Headers({"Content-Type: application/json", "Accept:  application/json"})
     @POST("stats/addList")
-    Observable<Object> uploadStatsList(@Body List<TStats> list);
+    Observable<Object> uploadStatsList(@Body List<TStatsDto> list);
 
 
 

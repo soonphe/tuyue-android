@@ -35,6 +35,7 @@ import com.ywb.tuyue.ui.data.DataContract;
 import com.ywb.tuyue.ui.data.DataPresenter;
 import com.ywb.tuyue.ui.game.gameplay.GamePlayActivity;
 import com.ywb.tuyue.ui.mvp.BaseActivity;
+import com.ywb.tuyue.widget.AppTitle;
 
 import org.litepal.LitePal;
 
@@ -59,6 +60,8 @@ public class GameActivity extends BaseActivity implements GameContract.View, Dat
     @Inject
     DataPresenter dataPresenter;
 
+    @BindView(R.id.app_title_id)
+    AppTitle appTitle;
     @BindView(R.id.banner_Game)
     Banner banner;
 //    @BindView(R.id.pagerTab)
@@ -190,6 +193,7 @@ public class GameActivity extends BaseActivity implements GameContract.View, Dat
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        appTitle.getStatusLine().unregisterBroadcast();
 
         //停留时长统计:单位S
         long stayDataTime = TimeUtils.getTimeSpan(stayTime, System.currentTimeMillis(), TimeConstants.SEC);

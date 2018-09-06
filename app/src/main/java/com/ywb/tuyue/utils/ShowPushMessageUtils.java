@@ -36,16 +36,9 @@ public class ShowPushMessageUtils {
             Dialog dialog = new Dialog(context, R.style.pushDialog);
             View view = LayoutInflater.from(context).inflate(R.layout.push_dialog, null, false);
             ImageView imageView = view.findViewById(R.id.push_image);
-            System.out.println("开始下载图片了！！！！" + "/////////////////////////");
             GlideUtils.loadImageView(context.getApplicationContext(), message, imageView);
-            System.out.println("推送广告图片下载成功！！！！" + "/////////////////////////");
             ImageView cancel = view.findViewById(R.id.iv_cancle);
-            cancel.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialog.dismiss();
-                }
-            });
+            cancel.setOnClickListener(v -> dialog.dismiss());
             dialog.setContentView(view);
             dialog.setCanceledOnTouchOutside(false);
             dialog.setCancelable(false);

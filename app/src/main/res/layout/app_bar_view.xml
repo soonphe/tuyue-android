@@ -3,8 +3,12 @@
               android:id="@+id/title_root"
               android:layout_width="match_parent"
               android:layout_height="60dp"
-              android:orientation="horizontal">
+              android:orientation="vertical">
 
+    <com.ywb.tuyue.widget.head.CustomStatusBar
+        android:id="@+id/status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <RelativeLayout
         android:layout_width="match_parent"

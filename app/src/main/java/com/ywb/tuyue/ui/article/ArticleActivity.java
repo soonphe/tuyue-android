@@ -31,6 +31,7 @@ import com.ywb.tuyue.ui.article.article.ArticleContentActivity;
 import com.ywb.tuyue.ui.data.DataContract;
 import com.ywb.tuyue.ui.data.DataPresenter;
 import com.ywb.tuyue.ui.mvp.BaseActivity;
+import com.ywb.tuyue.widget.AppTitle;
 
 import org.litepal.LitePal;
 
@@ -55,6 +56,8 @@ public class ArticleActivity extends BaseActivity implements ArticleContract.Vie
     @Inject
     DataPresenter dataPresenter;
 
+    @BindView(R.id.app_title_id)
+    AppTitle appTitle;
     @BindView(R.id.tl_2)
     CommonTabLayout tl2;
     @BindView(R.id.rv_list)
@@ -178,6 +181,7 @@ public class ArticleActivity extends BaseActivity implements ArticleContract.Vie
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        appTitle.getStatusLine().unregisterBroadcast();
 
         //停留时长统计:单位S
         long stayDataTime = TimeUtils.getTimeSpan(stayTime, System.currentTimeMillis(), TimeConstants.SEC);
@@ -202,6 +206,8 @@ public class ArticleActivity extends BaseActivity implements ArticleContract.Vie
     public void uploadDataSuccess() {
         LogUtils.e("书吧停留上传成功");
     }
+
+
 
 
 }

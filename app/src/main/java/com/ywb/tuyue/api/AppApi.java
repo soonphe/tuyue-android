@@ -5,6 +5,8 @@ import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.ywb.tuyue.components.okhttp.HttpLoggingInterceptor;
 import com.ywb.tuyue.constants.Constants;
+import com.ywb.tuyue.dto.TStatsDto;
+import com.ywb.tuyue.dto.TUserDto;
 import com.ywb.tuyue.entity.TAdvert;
 import com.ywb.tuyue.entity.TAdvertType;
 import com.ywb.tuyue.entity.TArticle;
@@ -184,17 +186,17 @@ public class AppApi implements AppApiService {
     }
 
     @Override
-    public Observable<Object> uploadUser(String captcher,TUser tUser) {
+    public Observable<Object> uploadUser(String captcher,TUserDto tUser) {
         return service.uploadUser( captcher,tUser).compose(bindUntil());
     }
 
     @Override
-    public Observable<Object> uploadStats(TStats list) {
+    public Observable<Object> uploadStats(TStatsDto list) {
         return service.uploadStats(list).compose(bindUntil());
     }
 
     @Override
-    public Observable<Object> uploadStatsList(List<TStats> list) {
+    public Observable<Object> uploadStatsList(List<TStatsDto> list) {
         return service.uploadStatsList(list).compose(bindUntil());
     }
 

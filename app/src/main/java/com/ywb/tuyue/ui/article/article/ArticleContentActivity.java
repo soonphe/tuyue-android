@@ -85,4 +85,11 @@ public class ArticleContentActivity extends BaseActivity implements ArticleConte
     public void initInjector() {
         getComponent().inject(this);
     }
+
+    @Override
+    protected void onDestroy() {
+
+        super.onDestroy();
+        appTitle.getStatusLine().unregisterBroadcast();
+    }
 }

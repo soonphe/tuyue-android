@@ -24,6 +24,7 @@ import com.ywb.tuyue.ui.city.citydetail.CitydetailActivity;
 import com.ywb.tuyue.ui.data.DataContract;
 import com.ywb.tuyue.ui.data.DataPresenter;
 import com.ywb.tuyue.ui.mvp.BaseActivity;
+import com.ywb.tuyue.widget.AppTitle;
 
 import org.litepal.LitePal;
 
@@ -46,6 +47,8 @@ public class CityActivity extends BaseActivity implements CityContract.View, Dat
     @Inject
     DataPresenter dataPresenter;
 
+    @BindView(R.id.app_title_id)
+    AppTitle appTitle;
     @BindView(R.id.rv_list)
     RecyclerView rvList;
     @BindView(R.id.sm_refresh)
@@ -120,6 +123,7 @@ public class CityActivity extends BaseActivity implements CityContract.View, Dat
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        appTitle.getStatusLine().unregisterBroadcast();
 
         //停留时长统计:单位S
         long stayDataTime = TimeUtils.getTimeSpan(stayTime, System.currentTimeMillis(), TimeConstants.SEC);

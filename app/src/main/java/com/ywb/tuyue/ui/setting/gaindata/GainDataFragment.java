@@ -14,8 +14,10 @@ import com.ywb.tuyue.constants.Constants;
 import com.ywb.tuyue.entity.TAdvert;
 import com.ywb.tuyue.entity.TDataVersion;
 import com.ywb.tuyue.entity.TMovie;
+import com.ywb.tuyue.entity.TStats;
 import com.ywb.tuyue.entity.TVersion;
 import com.ywb.tuyue.ui.mvp.BaseFragmentV4;
+import com.ywb.tuyue.utils.DeviceUtils;
 
 import java.util.List;
 
@@ -24,6 +26,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.ywb.tuyue.constants.Constants.IS_MOBILE;
 import static com.ywb.tuyue.constants.Constants.NETWORK_AVAILABLE;
 
 /**
@@ -115,6 +118,32 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
                 if (SPUtils.getInstance().getBoolean(NETWORK_AVAILABLE)) {
                     //先后上传用户数据与统计数据
                     presenter.uploadUserData();
+
+//                    TStats stats = new TStats();
+//                    stats.setPhone("ceshi1");
+//                    stats.setRegtime("2018-09-04 14:56:50");
+//                    stats.setCreatedate("2018-09-04");
+//                    stats.setIsmobile(SPUtils.getInstance().getBoolean(IS_MOBILE));
+//                    stats.setImcode(DeviceUtils.getUniqueId(getContext()) + "");
+//                    stats.save();
+//
+//                    TStats stats1 = new TStats();
+//                    stats1.setPhone("ceshi1");
+//                    stats1.setRegtime("2018-09-05 14:56:50");
+//                    stats1.setCreatedate("2018-09-05");
+//                    stats1.setIsmobile(SPUtils.getInstance().getBoolean(IS_MOBILE));
+//                    stats1.setImcode(DeviceUtils.getUniqueId(getContext()) + "");
+//                    stats1.setBook(100);
+//                    stats1.save();
+//
+//                    TStats stats12 = new TStats();
+//                    stats12.setPhone("ceshi1");
+//                    stats12.setRegtime("2018-09-05 16:56:50");
+//                    stats12.setCreatedate("2018-09-05");
+//                    stats12.setIsmobile(SPUtils.getInstance().getBoolean(IS_MOBILE));
+//                    stats12.setImcode(DeviceUtils.getUniqueId(getContext()) + "");
+//                    stats12.setBook(200);
+//                    stats12.save();
                     presenter.uploadStatsData();
                 } else {
                     ToastUtils.showShort("请检查网络是否连接");

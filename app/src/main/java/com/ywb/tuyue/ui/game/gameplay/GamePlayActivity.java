@@ -113,4 +113,9 @@ public class GamePlayActivity extends BaseActivity implements GamePlayContract.V
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        appTitle.getStatusLine().unregisterBroadcast();
+    }
 }

@@ -20,6 +20,7 @@ import com.ywb.tuyue.ui.setting.gaindata.GainDataFragment;
 import com.ywb.tuyue.ui.setting.hotspot.HotspotFragment;
 import com.ywb.tuyue.ui.setting.network.NetworkFragment;
 import com.ywb.tuyue.ui.setting.version.VersionFragment;
+import com.ywb.tuyue.widget.AppTitle;
 import com.ywb.tuyue.widget.MyViewPager;
 
 import java.util.ArrayList;
@@ -40,6 +41,8 @@ public class SettingActivity extends BaseActivity implements SettingContract.Vie
     @Inject
     SettingPresenter presenter;
 
+    @BindView(R.id.app_title_id)
+    AppTitle appTitle;
     @BindView(R.id.recycler_menu)
     RecyclerView recyclerMenu;
     @BindView(R.id.mypager)
@@ -79,8 +82,10 @@ public class SettingActivity extends BaseActivity implements SettingContract.Vie
     @Override
     public void initView(View view) {
 
-        presenter.attachView(this);
         BarUtils.setStatusBarAlpha(this, 0);
+        setTouchDissIm(true);
+
+        presenter.attachView(this);
         mFragments.add(new GainDataFragment());
         mFragments.add(new VersionFragment());
         mFragments.add(new NetworkFragment());
@@ -126,4 +131,9 @@ public class SettingActivity extends BaseActivity implements SettingContract.Vie
         getComponent().inject(this);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        appTitle.getStatusLine().unregisterBroadcast();
+    }
 }

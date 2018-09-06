@@ -83,6 +83,7 @@ public class NetworkFragment extends BaseFragmentV4 implements NetworkContract.V
     @SuppressLint("CheckResult")
     @Override
     public void initView(View view) {
+
         mAdapter = new WifiListAdapter(R.layout.item_wifi_list); //传一个item的布局
         mRecyWifiList.setHasFixedSize(true);//当我们确定Item的改变不会影响RecyclerView的宽高的时候可以设置setHasFixedSize(true)，并通过Adapter的增删改插方法去刷新RecyclerView
         mRecyWifiList.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -161,13 +162,20 @@ public class NetworkFragment extends BaseFragmentV4 implements NetworkContract.V
                     }
                 }
         );
+        //Context通过getSystemService获取wifimanager
+        mWifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        //注册广播
+        mWifiReceiver = new WifiBroadcastReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);//监听wifi是开关变化的状态
+        filter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);//监听wifi连接状态广播,是否连接了一个有效路由
+        filter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);//监听wifi列表变化（开启一个热点或者关闭一个热点）
+        getActivity().registerReceiver(mWifiReceiver, filter);
         //判断系统wifi是否开启
         if (!NetworkUtils.getWifiEnabled()) {
             mSwitchButton.setChecked(false);
         } else {
             mSwitchButton.setChecked(true);
-            //Context通过getSystemService获取wifimanager
-            mWifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
             //初始化wifi列表
             sortScaResult();
         }
@@ -176,13 +184,7 @@ public class NetworkFragment extends BaseFragmentV4 implements NetworkContract.V
     @Override
     public void onResume() {
         super.onResume();
-        //注册广播
-        mWifiReceiver = new WifiBroadcastReceiver();
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);//监听wifi是开关变化的状态
-        filter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);//监听wifi连接状态广播,是否连接了一个有效路由
-        filter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);//监听wifi列表变化（开启一个热点或者关闭一个热点）
-        getActivity().registerReceiver(mWifiReceiver, filter);
+
     }
 
     @Override
@@ -248,7 +250,9 @@ public class NetworkFragment extends BaseFragmentV4 implements NetworkContract.V
                      */
                     case WifiManager.WIFI_STATE_DISABLED: {
                         LogUtils.e("已经关闭");
-                        sortScaResult();
+//                        sortScaResult();
+                        mWifiList.clear();
+                        mAdapter.setNewData(mWifiList);
                         mSwitchButton.setChecked(false);
                         break;
                     }

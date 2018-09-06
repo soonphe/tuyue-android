@@ -77,4 +77,13 @@ public class AdvertContentActivity extends BaseActivity {
 
 //        getComponent().inject(this);
     }
+
+    @Override
+    protected void onDestroy() {
+
+        super.onDestroy();
+        appTitle.getStatusLine().unregisterBroadcast();
+    }
+
+
 }

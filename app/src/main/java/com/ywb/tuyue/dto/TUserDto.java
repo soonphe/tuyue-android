@@ -1,5 +1,7 @@
 package com.ywb.tuyue.dto;
 
+import com.ywb.tuyue.entity.TUser;
+
 import org.litepal.annotation.Column;
 
 /**
@@ -15,6 +17,14 @@ public class TUserDto {
     private int age;
     private int sex;
     private String createtime;
+
+    public TUserDto(TUser tUser) {
+        this.phone = tUser.getPhone();
+        this.imcode = tUser.getImcode();
+        this.age = tUser.getAge();
+        this.sex = tUser.getSex();
+        this.createtime = tUser.getCreatetime();
+    }
 
     public String getPhone() {
         return phone;

@@ -149,4 +149,10 @@ public class CitydetailActivity extends BaseActivity implements CitydetailContra
             cityArticleAdapter.setNewData(list);
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        appTitle.getStatusLine().unregisterBroadcast();
+    }
 }

@@ -85,4 +85,10 @@ public class CityArticleActivity extends BaseActivity implements CityArticleCont
     public void initInjector() {
         getComponent().inject(this);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        appTitle.getStatusLine().unregisterBroadcast();
+    }
 }

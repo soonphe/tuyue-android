@@ -61,6 +61,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
 
     private ScreenOnReceiver mScreenOnReceiver; //解锁屏广播  无论用户在看哪个模块，只要按下锁屏，在开屏时 从第一个页面开始展示
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -200,7 +201,6 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         }
 
         unregisterReceiver(mScreenOnReceiver);//LS:重点！
-
     }
     @Override
     public void destroy() {

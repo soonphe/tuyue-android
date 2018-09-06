@@ -1,10 +1,22 @@
 package com.ywb.tuyue.ui.main;
 
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.v4.content.LocalBroadcastManager;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -34,13 +46,17 @@ import com.ywb.tuyue.ui.data.DataContract;
 import com.ywb.tuyue.ui.data.DataPresenter;
 import com.ywb.tuyue.ui.food.FoodActivity;
 import com.ywb.tuyue.ui.game.game.GameActivity;
+import com.ywb.tuyue.ui.jpush.ExampleUtil;
 import com.ywb.tuyue.ui.mvp.BaseActivity;
 import com.ywb.tuyue.ui.setting.SettingActivity;
 import com.ywb.tuyue.ui.video.CinemaActivity;
 import com.ywb.tuyue.utils.DeviceUtils;
 import com.ywb.tuyue.utils.GlideUtils;
+import com.ywb.tuyue.utils.ShowPushMessageUtils;
 import com.ywb.tuyue.widget.AppTitle;
+import com.ywb.tuyue.widget.head.HeaderView;
 
+import org.json.JSONObject;
 import org.litepal.LitePal;
 
 import java.text.SimpleDateFormat;
@@ -53,6 +69,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.ywb.tuyue.constants.Constants.IS_MOBILE;
+import static com.ywb.tuyue.constants.Constants.NETWORK_AVAILABLE;
 
 /**
  * @Author soonphe
@@ -88,6 +105,7 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, D
     LinearLayout llSubway;
 
     List<TAdvert> list;
+    public static boolean isForeground = false; //receiver接收消息时使用
 
     @Override
     public int bindLayout() {
@@ -109,13 +127,15 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, D
     public void initView(View view) {
 
         BarUtils.setStatusBarAlpha(this, 0);
+        setTouchDissIm(true);
         advertPresenter.attachView(this);
         dataPresenter.attachView(this);
         presenter.attachView(this);
 
-        advertise1.setImageResource(R.mipmap.main_header_01);
-        advertise2.setImageResource(R.mipmap.main_header_02);
+//        advertise1.setImageResource(R.mipmap.main_header_01);
+//        advertise2.setImageResource(R.mipmap.main_header_02);
 
+        registerMessageReceiver();  // used for receive msg
     }
 
     @Override
@@ -139,11 +159,14 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, D
 
     @Override
     protected void onDestroy() {
+
         super.onDestroy();
+        appTitle.getStatusLine().unregisterBroadcast();
     }
 
     @Override
     protected void onResume() {
+        isForeground = true;
         super.onResume();
     }
 
@@ -187,8 +210,6 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, D
         if (StringUtils.isEmpty(phone) || tStats == null) {
             //如果没有数据，则直接弹窗注册
             onDialog();
-            //隐藏软键盘
-//            setTouchDissIm(true);
 
         } else {
             switch (view.getId()) {
@@ -256,20 +277,11 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, D
         MaterialDialog materialDialog = mOperation
                 .showCustomerDialog("", R.layout.dialog_register, true);
         //不允许点击外侧关闭
-//        materialDialog.setCanceledOnTouchOutside(false);
+        materialDialog.setCanceledOnTouchOutside(false);
         //        设置关闭监听
-        materialDialog.setOnCancelListener(dialog -> {
-            KeyboardUtils.hideSoftInput(this);
-//            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//            //如果window上view获取焦点 && view不为空
-//            if (imm.isActive() && getCurrentFocus() != null) {
-//                //拿到view的token 不为空
-//                if (getCurrentFocus().getWindowToken() != null) {
-//                    //表示软键盘窗口总是隐藏，除非开始时以SHOW_FORCED显示。
-//                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-//                }
-//            }
-        });
+//        materialDialog.setOnCancelListener(dialog -> {
+//            KeyboardUtils.hideSoftInput(this);
+//        });
 
         CheckBox chMan = materialDialog.getCustomView().findViewById(R.id.ck_man);
         CheckBox chWoman = materialDialog.getCustomView().findViewById(R.id.ck_woman);
@@ -320,7 +332,7 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, D
         });
 
         button.setOnClickListener(v -> {
-            KeyboardUtils.hideSoftInput(this);
+            KeyboardUtils.hideSoftInput(v);
             String phone = etPhone.getText().toString();
             String code = etCode.getText().toString();
             //管理员账户
@@ -389,11 +401,58 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, D
 
     }
 
+    //for receive customer msg from jpush server
+    private MessageReceiver mMessageReceiver;
+    public static final String MESSAGE_RECEIVED_ACTION = "com.ywb.tuyue.ui.main.MESSAGE_RECEIVED_ACTION";
+    public static final String KEY_TITLE = "title";
+    public static final String KEY_MESSAGE = "message";
+    public static final String KEY_EXTRAS = "extras";
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    /**
+     * 注册接受广播
+     */
+    public void registerMessageReceiver() {
+        mMessageReceiver = new MessageReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.setPriority(IntentFilter.SYSTEM_HIGH_PRIORITY);
+        filter.addAction(MESSAGE_RECEIVED_ACTION);
+        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, filter);
     }
+
+    public class MessageReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            try {
+                if (MESSAGE_RECEIVED_ACTION.equals(intent.getAction())) {
+                    String message = intent.getStringExtra(KEY_MESSAGE);
+                    String extras = intent.getStringExtra(KEY_EXTRAS);
+                    if (!ExampleUtil.isEmpty(message)) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(message);
+                            String picurl = jsonObject.getString("picurl");
+                            if (!picurl.contains("http")) {
+                                picurl = Constants.BASE_IMAGE_URL + picurl;
+                            }
+                            String name = jsonObject.getString("name");
+                            int id = jsonObject.getInt("id");
+                            if (SPUtils.getInstance().getBoolean(NETWORK_AVAILABLE)) {
+                                ShowPushMessageUtils.showPushDialog(
+                                        MainActivity.this,
+                                        picurl + "",
+                                        isForeground == true, isFinishing());
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }
+            } catch (Exception e) {
+            }
+        }
+    }
+
+
 }

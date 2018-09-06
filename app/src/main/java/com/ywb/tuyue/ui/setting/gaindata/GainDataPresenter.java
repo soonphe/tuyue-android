@@ -16,6 +16,8 @@ import com.micro.player.service.DrmService;
 import com.ywb.tuyue.api.AppApi;
 import com.ywb.tuyue.constants.Constants;
 import com.ywb.tuyue.di.PerActivity;
+import com.ywb.tuyue.dto.TStatsDto;
+import com.ywb.tuyue.dto.TUserDto;
 import com.ywb.tuyue.entity.TAdvert;
 import com.ywb.tuyue.entity.TArticle;
 import com.ywb.tuyue.entity.TBook;
@@ -37,6 +39,7 @@ import org.litepal.LitePal;
 import org.litepal.crud.LitePalSupport;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -196,11 +199,13 @@ public class GainDataPresenter extends BasePresenter<GainDataContract.View> impl
 
     @Override
     public void uploadUserData() {
+        mView.startLoading();
         //获取所有未上传过的用户数据
         List<TUser> list = LitePal.where("delflag = ?", "0").find(TUser.class);
         if (list.size() > 0) {
             for (TUser tUser : list) {
-                mDisposable.add(api.uploadUser("973570", tUser).subscribe(obj -> {
+                TUserDto tUserDto = new TUserDto(tUser);
+                mDisposable.add(api.uploadUser("973570", tUserDto).subscribe(obj -> {
                             //上传成功后更新数据状态码
                             tUser.setDelflag(true);
                             tUser.update(tUser.getId());
@@ -220,10 +225,15 @@ public class GainDataPresenter extends BasePresenter<GainDataContract.View> impl
         //获取所有统计数据
         List<TStats> list = LitePal.findAll(TStats.class);
         if (list.size() > 0) {
-
-            mDisposable.add(api.uploadStatsList(list).subscribe(obj -> {
+            List<TStatsDto> dtoList = new ArrayList<>();
+            for (TStats tStats : list) {
+                TStatsDto tStatsDto = new TStatsDto(tStats);
+                dtoList.add(tStatsDto);
+            }
+            mDisposable.add(api.uploadStatsList(dtoList).subscribe(obj -> {
                         //①上传成功后删除除最新数据之外的所有数据
                         //②不删除，保留所有数据
+                        mView.endLoading();
                         mView.uploadStatsDataSuccess();
 
                     },

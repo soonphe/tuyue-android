@@ -158,4 +158,10 @@ public class BookreadActivity extends BaseActivity implements BookreadContract.V
                 break;
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        appTitle.getStatusLine().unregisterBroadcast();
+    }
 }

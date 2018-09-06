@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.StringRes;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,8 @@ import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.ywb.tuyue.R;
 import com.ywb.tuyue.utils.ResourceUtils;
+import com.ywb.tuyue.utils.StatusBarUtil;
+import com.ywb.tuyue.widget.head.CustomStatusBar;
 
 
 /**自定义Title
@@ -26,6 +29,7 @@ import com.ywb.tuyue.utils.ResourceUtils;
 
 public class AppTitle extends RelativeLayout implements View.OnClickListener, View.OnLongClickListener{
 
+    private Context mContext;
     private ImageButton  appBarBack;
     private TextView     appBarTitle;
     private ImageButton  appBarBtn1;
@@ -33,10 +37,13 @@ public class AppTitle extends RelativeLayout implements View.OnClickListener, Vi
     private TextView     appBarRightTv;
     private LinearLayout titleRoot;
 
+    private CustomStatusBar statusLine;
+
     private boolean canFinish = true;
 
     public AppTitle(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mContext=context;
         initView(context);
         initAttrs(context, attrs);
 
@@ -45,6 +52,7 @@ public class AppTitle extends RelativeLayout implements View.OnClickListener, Vi
 
     private void initView(Context context) {
         LayoutInflater.from(context).inflate(R.layout.app_bar_view, this);
+        statusLine = findViewById(R.id.status_bar);
         titleRoot = (LinearLayout) findViewById(R.id.title_root);
         appBarBack = (ImageButton) findViewById(R.id.app_bar_back);
         appBarTitle = (TextView) findViewById(R.id.app_bar_title);
@@ -64,6 +72,16 @@ public class AppTitle extends RelativeLayout implements View.OnClickListener, Vi
         appBarBtn1.setOnLongClickListener(this);
         appBarBtn2.setOnLongClickListener(this);
         appBarRightTv.setOnLongClickListener(this);
+
+        double statusBarHeight = Math.ceil(25 * mContext.getResources().getDisplayMetrics().density);
+        Log.e("状态栏高度", statusBarHeight + "");
+        if (statusBarHeight > 25) {
+            statusLine.setVisibility(View.GONE);
+            StatusBarUtil.immersive((Activity) mContext);
+            StatusBarUtil.buildStatuSpace(mContext, statusLine);
+        } else {
+            statusLine.setVisibility(View.VISIBLE);
+        }
 
 
     }
@@ -223,4 +241,7 @@ public class AppTitle extends RelativeLayout implements View.OnClickListener, Vi
         return canFinish;
     }
 
+    public CustomStatusBar getStatusLine() {
+        return statusLine;
+    }
 }

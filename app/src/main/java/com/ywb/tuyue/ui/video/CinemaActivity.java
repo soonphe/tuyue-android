@@ -28,6 +28,7 @@ import com.ywb.tuyue.ui.data.DataPresenter;
 import com.ywb.tuyue.ui.video.movie.MovieFragment;
 import com.ywb.tuyue.ui.video.video.VideoFragment;
 import com.ywb.tuyue.ui.mvp.BaseActivity;
+import com.ywb.tuyue.widget.AppTitle;
 import com.ywb.tuyue.widget.MyViewPager;
 
 import org.litepal.LitePal;
@@ -55,6 +56,8 @@ public class CinemaActivity extends BaseActivity implements CinemaContract.View,
     @Inject
     DataPresenter dataPresenter;
 
+    @BindView(R.id.app_title_id)
+    AppTitle appTitle;
     @BindView(R.id.movie_recycler_menu)
     RecyclerView movieRecyclerMenu;
     @BindView(R.id.movie_pager)
@@ -141,6 +144,8 @@ public class CinemaActivity extends BaseActivity implements CinemaContract.View,
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        appTitle.getStatusLine().unregisterBroadcast();
+
 
         //停留时长统计:单位S
         long movieTime = TimeUtils.getTimeSpan(mMovieTime, System.currentTimeMillis(), TimeConstants.SEC);
