@@ -184,7 +184,7 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, D
             case R.id.advertise1:
                 // TODO: 2018-09-03 这里需要提供测试用户数据清除
                 //清空用户手机号
-                SPUtils.getInstance().remove(Constants.REGIST_PHONE);
+//                SPUtils.getInstance().remove(Constants.REGIST_PHONE);
                 mOperation.addParameter("advert", list.get(0).getId());
                 mOperation.forward(AdvertContentActivity.class);
                 break;
@@ -374,6 +374,7 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, D
                     stats.setCreatedate(date);
                     stats.setIsmobile(SPUtils.getInstance().getBoolean(IS_MOBILE));
                     stats.setImcode(DeviceUtils.getUniqueId(this) + "");
+                    stats.setOpenlock(1);   //默认解锁次数为1
                     stats.save();
                 }
 

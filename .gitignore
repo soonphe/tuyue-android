@@ -12,3 +12,5 @@ gradlew.bat
 /captures
 .externalNativeBuild
 
+app/release/
+
