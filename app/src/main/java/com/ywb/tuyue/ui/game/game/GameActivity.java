@@ -119,7 +119,7 @@ public class GameActivity extends BaseActivity implements GameContract.View, Dat
         rvList.setNestedScrollingEnabled(false);
 
         gameAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            mOperation.addParameter("game", ((TGame) adapter.getItem(position)).getId());
+            mOperation.addParameter("game", ((TGame) adapter.getItem(position)).getTid());
             mOperation.forward(GamePlayActivity.class);
         });
     }

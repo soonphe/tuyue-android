@@ -106,7 +106,7 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.syncData:
-                //判断当前网络可用——可用则上传
+                //判断当前网络可用
                 if (SPUtils.getInstance().getBoolean(NETWORK_AVAILABLE)) {
                     presenter.getDataVersion();
                 } else {
@@ -163,7 +163,7 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
         //判断数据版本和广告版本是否一致
         this.startLoading();
         if (tDataVersion.getAdvertversion() == advertVersion && tDataVersion.getDataversion() == dataVersion) {
-            ToastUtils.showShort("当前已经是最新数据");
+            //这里应该弹出最新数据的提示
             presenter.getAdvertList();
             presenter.getOtherData();
         } else {
@@ -187,22 +187,19 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
         //SP更新广告版本号
         SPUtils.getInstance().put(Constants.ADVERT_VERSION, dbVersion.getAdvertversion());
 
-        ToastUtils.showShort("广告数据更新成功");
+        LogUtils.e("广告数据更新成功");
     }
 
     @Override
     public void getOtherDataSuccess() {
         //SP更新数据版本号
         SPUtils.getInstance().put(Constants.DATA_VERSION, dbVersion.getDataversion());
-
-        ToastUtils.showShort("其他数据更新成功");
+        LogUtils.e("其他数据更新成功");
     }
 
     @Override
     public void getMovieDataSuccess() {
-
-        ToastUtils.showShort("电影数据更新成功");
-
+        LogUtils.e("电影数据更新成功");
     }
 
     @Override

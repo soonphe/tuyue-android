@@ -108,6 +108,24 @@
             android:layout_marginTop="@dimen/dp_40"
             android:layout_weight="2.5">
 
+            <ImageView
+                android:id="@+id/my_custom_advert"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:clickable="true"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/my_custom_second"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@color/transport_half"
+                android:padding="10dp"
+                android:visibility="gone"
+                android:textColor="@color/white" />
+
             <cn.jzvd.JZVideoPlayerStandard
                 android:id="@+id/videoplayer"
                 android:layout_width="match_parent"

@@ -151,7 +151,6 @@ public class GainDataPresenter extends BasePresenter<GainDataContract.View> impl
                                             }
                                         }
                                     }
-                                    mView.getOtherDataSuccess();
                                 },
                                 throwable -> mView.onError(throwable.getMessage()))
         );
@@ -189,9 +188,8 @@ public class GainDataPresenter extends BasePresenter<GainDataContract.View> impl
                         }
                         downloadFile(tMovie, 0, tMovie.getFace_pic() + "");
                         downloadFile(tMovie, 1, uri.toString() + "");
-                        mView.getMovieDataSuccess();
-
                     }
+                    mView.getMovieDataSuccess();
                 },
                 throwable -> mView.onError(throwable.getMessage()))
         );
@@ -319,8 +317,18 @@ public class GainDataPresenter extends BasePresenter<GainDataContract.View> impl
                 } else {
                     LogUtils.e("直接设置1905电影文件");
                     ((TMovie) object).setDownloadFile(localFilePath);
+
+                    int count = SPUtils.getInstance().getInt(DOWNLOAD_COUNT, 0);
+                    int currencount = SPUtils.getInstance().getInt(CURRENT_DOWNLOAD_COUNT, 0);
+                    if (currencount < count) {
+                        SPUtils.getInstance().put(CURRENT_DOWNLOAD_COUNT, currencount + 1);
+                    } else {
+                        mView.endLoading();
+                    }
                 }
+
                 (object).update(((TMovie) object).getId());
+
             }
 
         } else {
@@ -411,31 +419,34 @@ public class GainDataPresenter extends BasePresenter<GainDataContract.View> impl
                                             "____" +
                                             response.body().getPath());
                                     ((TMovie) object).setDownloadFile(response.body().toString());
+
+                                    int count = SPUtils.getInstance().getInt(DOWNLOAD_COUNT, 0);
+                                    int currencount = SPUtils.getInstance().getInt(CURRENT_DOWNLOAD_COUNT, 0);
+                                    if (currencount < count) {
+                                        SPUtils.getInstance().put(CURRENT_DOWNLOAD_COUNT, currencount + 1);
+                                    } else {
+                                        mView.endLoading();
+                                    }
                                 }
                                 (object).update(((TMovie) object).getId());
-                                int count = SPUtils.getInstance().getInt(DOWNLOAD_COUNT, 0);
-                                int currencount = SPUtils.getInstance().getInt(CURRENT_DOWNLOAD_COUNT, 0);
-                                if (currencount < count) {
-                                    SPUtils.getInstance().put(CURRENT_DOWNLOAD_COUNT, currencount + 1);
-                                } else {
-                                    mView.endLoading();
-                                }
+
                             }
                         }
 
                         @Override
                         public void downloadProgress(Progress progress) {
-
+                            LogUtils.e(progress.fileName +
+                                    progress.currentSize +
+                                    "下载进度为：" + progress.fraction * 100 + "%");
                             //回调下载进度
                             super.downloadProgress(progress);
-                            LogUtils.i(progress.fileName + progress.currentSize + "下载进度为：" + progress.fraction * 100 + "%");
 
                         }
 
                         @Override
                         public void onError(Response<File> response) {
-                            LogUtils.e("下载报错" + response.body().getName() + ",相关类:" + object.toString());
-//                            super.onError(response);
+                            LogUtils.e("下载报错,相关类:" + object.getClass() + object.toString());
+                            super.onError(response);
                         }
                     });
 

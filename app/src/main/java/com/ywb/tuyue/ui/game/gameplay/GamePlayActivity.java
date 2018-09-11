@@ -14,6 +14,7 @@ import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.just.library.AgentWeb;
 import com.ywb.tuyue.R;
+import com.ywb.tuyue.entity.TCityArticle;
 import com.ywb.tuyue.entity.TGame;
 import com.ywb.tuyue.ui.mvp.BaseActivity;
 import com.ywb.tuyue.utils.UnZip;
@@ -56,24 +57,24 @@ public class GamePlayActivity extends BaseActivity implements GamePlayContract.V
     @Override
     public void initView(View view) {
         BarUtils.setStatusBarAlpha(this, 0);
-        //取传过来的分类ID
+        //取传过来的ID
         if (EmptyUtils.isNotEmpty(mOperation.getParameter("game"))) {
             id = (int) mOperation.getParameter("game");
         }
-        tGame = LitePal.find(TGame.class, id);
+        tGame = LitePal.where("tid = ?", id + "").findFirst(TGame.class);
 
         //判断是否需要解压
-        if (StringUtils.isEmpty(SPUtils.getInstance().getString(GAME_UNZIP + tGame.getId(), ""))) {
+        if (StringUtils.isEmpty(SPUtils.getInstance().getString(GAME_UNZIP + tGame.getTid(), ""))) {
             //解压压缩包(压缩包路径，解压后路径)
             try {
-                UnZip.UnZipFolder(tGame.getDownloadFile(), "/storage/emulated/0/download/" + "game" + tGame.getId());
-                SPUtils.getInstance().put(GAME_UNZIP + tGame.getId(), "/storage/emulated/0/download/" + "game" + tGame.getId());
+                UnZip.UnZipFolder(tGame.getDownloadFile(), "/storage/emulated/0/download/" + "game" + tGame.getTid());
+                SPUtils.getInstance().put(GAME_UNZIP + tGame.getTid(), "/storage/emulated/0/download/" + "game" + tGame.getTid());
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         //拼接本地路径（需要添加前缀 file://）
-        mUrl = "file://" + SPUtils.getInstance().getString(GAME_UNZIP + tGame.getId(), "") + "/index.html";
+        mUrl = "file://" + SPUtils.getInstance().getString(GAME_UNZIP + tGame.getTid(), "") + "/index.html";
 
         //初始化webview
         AgentWeb web = AgentWeb.with(this)//传入Activity

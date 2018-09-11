@@ -157,7 +157,7 @@
                     android:layout_below="@+id/view"
                     android:layout_marginTop="20dp"
                     android:background="@color/registWhite"
-                    android:hint="关注微信公众号获取激活码"
+                    android:hint="解锁码"
                     android:paddingLeft="2dp"
                     android:textColorHint="@color/registHintColor"
                     android:textSize="18sp"
@@ -200,7 +200,7 @@
                 android:layout_below="@+id/QRCode"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="微信扫码关注途悦公众号获取更多资讯"
+                android:text="微信扫码关注途悦公众号获取解锁码"
                 android:textColor="@color/registGenderGray"
                 android:textSize="15sp" />
         </RelativeLayout>
