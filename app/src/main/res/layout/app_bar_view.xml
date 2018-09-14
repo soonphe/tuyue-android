@@ -21,11 +21,10 @@
             android:background="?android:attr/selectableItemBackground"
             android:minWidth="56dp"
             android:scaleType="center"
-            android:src="@mipmap/icon_fanhui"
+            android:src="@mipmap/icon_back"
             android:visibility="gone"/>
-        <!--fanhui-->
-        <!--back_jiantou-->
-        <!-- ic_arrow_l -->
+        <!--icon_fanhui-->
+        <!--icon_back-->
 
 
         <TextView

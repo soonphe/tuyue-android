@@ -91,7 +91,7 @@ public class BookActivity extends BaseActivity implements BookContract.BookView,
         banner.setImageLoader(new GlideImageLoader());
 
         bookAdapter = new BookAdapter(R.layout.item_book);
-        rvList.setLayoutManager(new GridLayoutManager(getContext(), 5));
+        rvList.setLayoutManager(new GridLayoutManager(this, 5));
         rvList.addItemDecoration(new SpaceDecoration(10));
         rvList.setAdapter(bookAdapter);
         rvList.setNestedScrollingEnabled(false);
@@ -192,7 +192,7 @@ public class BookActivity extends BaseActivity implements BookContract.BookView,
         long stayDataTime = TimeUtils.getTimeSpan(stayTime, System.currentTimeMillis(), TimeConstants.SEC);
         String phone = SPUtils.getInstance().getString(Constants.REGIST_PHONE, "");
         //判断这里是否存在用户，如果存在则要记录数据
-        if (!StringUtils.isEmpty(phone)) {
+        if (!"111111".equals(phone)) {
             //判断今天是否创建过统计数据——有数据则更新数据+1
             TStats tOpen = LitePal.where("phone = ?", phone + "").order("id desc").findFirst(TStats.class);
             if (tOpen != null) {

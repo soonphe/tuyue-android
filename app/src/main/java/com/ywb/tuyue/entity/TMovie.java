@@ -4,13 +4,15 @@ import com.google.gson.annotations.SerializedName;
 
 import org.litepal.crud.LitePalSupport;
 
+import java.io.Serializable;
+
 /**
  * @Author soonphe
  * @Date 2018-08-29 10:24
  * @Descprition 1905电影
  */
 
-public class TMovie extends LitePalSupport {
+public class TMovie extends LitePalSupport implements Serializable {
 
 
     /**

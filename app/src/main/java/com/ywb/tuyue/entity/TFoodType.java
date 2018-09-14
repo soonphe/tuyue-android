@@ -4,12 +4,14 @@ import com.google.gson.annotations.SerializedName;
 
 import org.litepal.crud.LitePalSupport;
 
+import java.io.Serializable;
+
 /**
  * @Author soonphe
  * @Date 2018-08-21 09:48
  * @Description 餐饮类型
  */
-public class TFoodType  extends LitePalSupport {
+public class TFoodType  extends LitePalSupport implements Serializable {
     /**
      * id : 1
      * name : 锁屏广告

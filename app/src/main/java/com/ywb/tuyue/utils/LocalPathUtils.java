@@ -21,6 +21,10 @@ public class LocalPathUtils {
     public static String getFileName(String fileUrl) {
         return fileUrl.substring(fileUrl.lastIndexOf("/") + 1, fileUrl.length());
     }
+    @NonNull
+    public static String getLastDotFileName(String fileUrl) {
+        return fileUrl.substring(fileUrl.lastIndexOf(".") + 1, fileUrl.length());
+    }
 
     /**
      * 创建文件路径

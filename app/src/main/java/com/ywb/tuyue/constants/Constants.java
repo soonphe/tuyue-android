@@ -38,12 +38,13 @@ public class Constants {
     public static final int REGIST_SCREEN = 5 * 60 * 1000;
     //黑屏页面倒计时时间间隔，1分钟（接受回调）
     public static final int REGIST_SCREEN_COUNT = 60 * 1000;
+    //锁屏时间key
+    public static final String LOCK_SCREEN_TIME = "LOCK_SCREEN_TIME";
     //高德定位
     public static final String AMAP_LOCATION = "AMAP_LOCATION";
 
     //bugly
-    public static String BUGLY_APPID = "13b1fdb50f";//buglyid
-    public static String DCS_KEY = "http://dcsapi.com/?k=181751184&url=";//永中云转换
+    public static String BUGLY_APPID = "4449ffc54b";//buglyid
 
     public static final String NIGHT_THEME = "THEME";
     public static final String USER_TOKEN = "USER_TOKEN";
@@ -78,7 +79,8 @@ public class Constants {
     public static final String SDPATHLIST = SDCardUtils.getSDCardPaths().toString();
     public static final String SDPATH = SDPATHLIST.substring(1, SDPATHLIST.length() - 1);
     public static final String DOWNLOAD_PATH = SDPATH + "/Download";
-//    public static final String DOWNLOAD_PATH = SDPATH + "/Download" + "/"+ PROJECT_ROOT;
+    //    public static final String DOWNLOAD_PATH = SDPATH + "/Download" + "/"+ PROJECT_ROOT;
+    public static final String DOWNLOAD_PATH2 = Environment.getExternalStorageDirectory().getPath() + "/Download";
 
     //图片压缩地址
     public static String SAVED_IMAGE_DIR_PATH = Environment.getExternalStorageDirectory().getPath()

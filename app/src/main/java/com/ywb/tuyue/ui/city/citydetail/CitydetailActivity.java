@@ -121,7 +121,7 @@ public class CitydetailActivity extends BaseActivity implements CitydetailContra
         });
 
         cityArticleAdapter = new CityArticleAdapter(R.layout.item_city_article);
-        rvList.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        rvList.setLayoutManager(new GridLayoutManager(this, 2));
         rvList.addItemDecoration(new SpaceDecoration(10));
         rvList.setAdapter(cityArticleAdapter);
         rvList.setNestedScrollingEnabled(false);

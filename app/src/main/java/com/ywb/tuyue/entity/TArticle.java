@@ -4,12 +4,14 @@ import com.google.gson.annotations.SerializedName;
 
 import org.litepal.crud.LitePalSupport;
 
+import java.io.Serializable;
+
 /**
  * @Author soonphe
  * @Date 2018-08-21 09:54
  * @Descprition 城铁文章
  */
-public class TArticle extends LitePalSupport {
+public class TArticle extends LitePalSupport implements Serializable {
 
     /**
      * id : 12

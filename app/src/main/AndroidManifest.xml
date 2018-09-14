@@ -106,10 +106,10 @@
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|adjustPan" />
 
-        <!-- Bugly升级SDK配置开始 -->
-        <activity
-            android:name="com.tencent.bugly.beta.ui.BetaActivity"
-            android:theme="@android:style/Theme.Translucent" />
+        <!--&lt;!&ndash; Bugly升级SDK配置开始 &ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name="com.tencent.bugly.beta.ui.BetaActivity"-->
+            <!--android:theme="@android:style/Theme.Translucent" />-->
 
         <activity
             android:name=".ui.unlock.UnlockActivity"
@@ -178,6 +178,7 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".ui.article.ArticleActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="landscape" />
         <activity
             android:name=".ui.article.article.ArticleContentActivity"

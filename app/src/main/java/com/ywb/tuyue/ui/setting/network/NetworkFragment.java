@@ -356,12 +356,12 @@ public class NetworkFragment extends BaseFragmentV4 implements NetworkContract.V
     @Override
     public void onPause() {
         super.onPause();
-        getActivity().unregisterReceiver(mWifiReceiver);
         SPUtils.getInstance().put(Constants.SWITCH_BTN_STATE, mSwitchButton.isChecked());
     }
 
     @Override
     public void onDestroy() {
+        getActivity().unregisterReceiver(mWifiReceiver);
         super.onDestroy();
     }
 

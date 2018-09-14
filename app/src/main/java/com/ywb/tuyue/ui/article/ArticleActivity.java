@@ -41,6 +41,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import cn.jzvd.JZVideoPlayer;
 import cn.jzvd.JZVideoPlayerStandard;
 
 
@@ -102,19 +103,19 @@ public class ArticleActivity extends BaseActivity implements ArticleContract.Vie
         stayTime = System.currentTimeMillis();
 
         articleAdapter = new ArticleAdapter(R.layout.item_article);
-        rvList.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        rvList.setLayoutManager(new GridLayoutManager(this, 2));
         rvList.addItemDecoration(new SpaceDecoration(10));
         rvList.setAdapter(articleAdapter);
         rvList.setNestedScrollingEnabled(false);
         articleAdapter.setOnItemClickListener((adapter, view1, position) -> {
             TArticle tArticle = ((TArticle) adapter.getItem(position));
             //如果为视频直接全屏播放
-            if (tArticle.getClassify() == 1){
+            if (tArticle.getClassify() == 1) {
                 JZVideoPlayerStandard.startFullscreen(this,
                         JZVideoPlayerStandard.class,
                         tArticle.getDownloadFile() + "",
-                        tArticle.getTitle());
-            }else{
+                        tArticle.getTitle() + "");
+            } else {
                 mOperation.addParameter("article", ((TArticle) adapter.getItem(position)).getId());
                 mOperation.forward(ArticleContentActivity.class);
             }
@@ -187,10 +188,11 @@ public class ArticleActivity extends BaseActivity implements ArticleContract.Vie
         long stayDataTime = TimeUtils.getTimeSpan(stayTime, System.currentTimeMillis(), TimeConstants.SEC);
         String phone = SPUtils.getInstance().getString(Constants.REGIST_PHONE, "");
         //判断这里是否存在用户，如果存在则要记录数据
-        if (!StringUtils.isEmpty(phone)) {
+        if (!"111111".equals(phone)) {
             //判断今天是否创建过统计数据——有数据则更新数据+1
             TStats tOpen = LitePal.where("phone = ?", phone + "").order("id desc").findFirst(TStats.class);
             if (tOpen != null) {
+                tOpen.setSubway(tOpen.getSubway() + 1);
                 tOpen.setSubwaytime((int) (tOpen.getSubwaytime() + stayDataTime));
                 boolean result = tOpen.save();
                 //判断当前网络可用且用户数据保存成功
@@ -207,6 +209,19 @@ public class ArticleActivity extends BaseActivity implements ArticleContract.Vie
         LogUtils.e("书吧停留上传成功");
     }
 
+    @Override
+    public void onBackPressed() {
+        if (JZVideoPlayerStandard.backPress()) {
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JZVideoPlayerStandard.releaseAllVideos();
+    }
 
 
 

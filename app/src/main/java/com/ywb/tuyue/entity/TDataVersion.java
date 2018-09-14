@@ -4,13 +4,15 @@ import com.google.gson.annotations.SerializedName;
 
 import org.litepal.crud.LitePalSupport;
 
+import java.io.Serializable;
+
 /**
  * @Author soonphe
  * @Date 2018-08-22 11:46
  * @Descprition 数据版本
  */
 
-public class TDataVersion  extends LitePalSupport {
+public class TDataVersion  extends LitePalSupport implements Serializable {
 
 
     /**

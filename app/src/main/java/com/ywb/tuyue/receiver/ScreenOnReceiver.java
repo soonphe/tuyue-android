@@ -4,14 +4,21 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.CountDownTimer;
+import android.text.TextUtils;
 import android.util.Log;
 
+import com.blankj.utilcode.constant.TimeConstants;
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.TimeUtils;
 import com.ywb.tuyue.MyApplication;
 import com.ywb.tuyue.constants.Constants;
+import com.ywb.tuyue.services.hotspot.ServiceUtil;
 import com.ywb.tuyue.ui.mvp.BaseActivity;
+import com.ywb.tuyue.ui.mvp.BaseApplication;
 import com.ywb.tuyue.ui.unlock.UnlockActivity;
+import com.ywb.tuyue.utils.ActivityManager;
 
 /**
  * @Author soonphe
@@ -41,29 +48,34 @@ public class ScreenOnReceiver extends BroadcastReceiver {
 
         if (Intent.ACTION_SCREEN_ON.equals(action)) {
             Log.e("onReceive()", "---开屏---");
-            //如果倒计时在走，取消
-            if (timer != null) {
-                timer.cancel();
+            long time = SPUtils.getInstance().getLong(Constants.LOCK_SCREEN_TIME, 1);
+            long min = TimeUtils.getTimeSpan(System.currentTimeMillis(), time, TimeConstants.MIN);
+            // 锁屏时间超过5分钟，清空Sp中存放的注册用户数据
+            if (min >= 5) {
+                SPUtils.getInstance().put(Constants.REGIST_PHONE, "");
             }
-            if (!context.getClass().getName().contains("UnlockActivity")) {
+            //如果倒计时在走，取消
+//            if (timer != null) {
+//                timer.cancel();
+//            }
+            if (!ActivityUtils.getTopActivity().getClass().getName().contains("UnlockActivity")) {
                 LogUtils.e("当前页面的activity不是UnlockActivity");
                 Intent i = new Intent(context, UnlockActivity.class);
                 context.startActivity(i);
             }
-//            if (!AppManager.getAppManager().currentActivity().getClass().getName().contains("SplashActivity")) {
+//            if (!ActivityManager.getActivityManager().currentActivity().getClass().getName().contains("UnlockActivity")) {
+//                LogUtils.e("当前页面的activity不是UnlockActivity");
 //                Intent i = new Intent(context, UnlockActivity.class);
 //                context.startActivity(i);
 //            }
         } else if (Intent.ACTION_SCREEN_OFF.equals(action)) {
             // 锁屏
             Log.e("onReceive()", "---锁屏---");
-            // 锁屏时间超过30分钟，进入主页面页面弹出注册页面
-//            String time = SPUtils.getInstance().getString( Constants.REGIST, "");
-//            if (!TextUtils.isEmpty(time)) {
-//                if (Long.parseLong(time) > 0) {
-            timer.start();
-//                }
-//            }
+            //保存锁屏时间戳
+            SPUtils.getInstance().put(Constants.LOCK_SCREEN_TIME, System.currentTimeMillis());
+
+//            timer.start();
+
 //            //锁屏后取消热点设置中的返回按钮
 //            if (ServiceUtil.isIntentNotNull()) {
 //                ServiceUtil.stopService();

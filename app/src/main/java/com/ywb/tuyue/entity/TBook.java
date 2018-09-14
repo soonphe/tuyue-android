@@ -5,12 +5,14 @@ import com.google.gson.annotations.SerializedName;
 
 import org.litepal.crud.LitePalSupport;
 
+import java.io.Serializable;
+
 /**
  * @Author soonphe
  * @Date 2018-08-21 09:57
  * @Description 小说
  */
-public class TBook  extends LitePalSupport {
+public class TBook  extends LitePalSupport implements Serializable {
 
     /**
      * id : 44

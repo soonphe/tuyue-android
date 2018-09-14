@@ -217,9 +217,10 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     /**
      * 获取当前Activity
      *
+     * protected-public
      * @return
      */
-    protected Activity getContext() {
+    public Activity getContext() {
         if (null != mContextWR)
             return mContextWR.get();
         else

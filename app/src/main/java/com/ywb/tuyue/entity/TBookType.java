@@ -4,12 +4,14 @@ import com.google.gson.annotations.SerializedName;
 
 import org.litepal.crud.LitePalSupport;
 
+import java.io.Serializable;
+
 /**
  * @Author soonphe
  * @Date 2018-08-21 09:48
  * @Description 小说类型
  */
-public class TBookType  extends LitePalSupport {
+public class TBookType  extends LitePalSupport implements Serializable {
     /**
      * id : 1
      * name : 锁屏广告

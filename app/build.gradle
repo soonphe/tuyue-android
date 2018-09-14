@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+//apply from 'tinkerpatch.gradle'
 
 
 android {
@@ -16,9 +16,9 @@ android {
     buildToolsVersion '26.0.3'
     defaultConfig {
         applicationId "com.ywb.tuyue"
-        versionCode 60
-        versionName "60.0.1"
-        minSdkVersion 16
+        versionCode 71
+        versionName "2018.71.0.1"
+        minSdkVersion 19
         targetSdkVersion 26
 //        minSdkVersion externalMinSdkVersion
 //        targetSdkVersion externalTargetSdkVersion
@@ -109,6 +109,9 @@ dependencies {
     implementation externalAlibabaFastjson
     implementation externalTencentBuglyCrashreport
     implementation externalTencentBuglyNativecrashreport
+    // 若使用annotation需要单独引用,对于tinker的其他库都无需再引用
+//    provided("com.tinkerpatch.tinker:tinker-android-anno:1.9.8")
+//    implementation externalTinkerpatch
     implementation externalJakewhartonButterknife
     annotationProcessor externalJakewhartonButterknifeCompiler
     implementation externalRxjava2
@@ -157,7 +160,7 @@ dependencies {
     implementation externalBottomNavigationView
     implementation externalPhotoView
     implementation externalTxtReader
-    implementation externalPDF
+//    implementation externalPDF
     implementation externalSwitchButton
     implementation project(':matiss')
     implementation project(':1905DrmServiceLib')

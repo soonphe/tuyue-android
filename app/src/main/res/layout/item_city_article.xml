@@ -17,7 +17,7 @@
         <ImageView
             android:id="@+id/city_item_image"
             android:layout_width="586dp"
-            android:layout_height="295dp"
+            android:layout_height="300dp"
             android:scaleType="fitXY"></ImageView>
        <RelativeLayout
            android:layout_width="wrap_content"

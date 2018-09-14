@@ -112,7 +112,7 @@ public class CinemaActivity extends BaseActivity implements CinemaContract.View,
         pMenus.add(new PMenu(0, "电影"));
         pMenus.add(new PMenu(1, "小视频"));
         menuAdapter = new MenuAdapter(R.layout.item_menu, pMenus);
-        movieRecyclerMenu.setLayoutManager(new LinearLayoutManager(getContext()));
+        movieRecyclerMenu.setLayoutManager(new LinearLayoutManager(this));
         movieRecyclerMenu.addItemDecoration(new SpaceDecoration(1));
         movieRecyclerMenu.setAdapter(menuAdapter);
         movieRecyclerMenu.setNestedScrollingEnabled(false);
@@ -150,17 +150,17 @@ public class CinemaActivity extends BaseActivity implements CinemaContract.View,
         //停留时长统计:单位S
         long movieTime = TimeUtils.getTimeSpan(mMovieTime, System.currentTimeMillis(), TimeConstants.SEC);
         String phone = SPUtils.getInstance().getString(Constants.REGIST_PHONE, "");
-        //判断这里是否存在用户，如果存在则要记录数据
-        if (!StringUtils.isEmpty(phone)) {
-            //判断今天是否创建过统计数据——有数据则更新数据+1
-            TStats tOpen = LitePal.where("phone = ?", phone + "").order("id desc").findFirst(TStats.class);
-            if (tOpen != null) {
-                tOpen.setMoviestime((int) (tOpen.getMoviestime() + movieTime));
-                boolean result = tOpen.save();
+        //判断是否为管理员
+        if (!"111111".equals(phone)) {
+            //获取统计信息
+            TStats tStats = LitePal.where("phone = ?", phone + "").order("id desc").findFirst(TStats.class);
+            if (tStats != null) {
+                tStats.setMoviestime((int) (tStats.getMoviestime() + movieTime));
+                boolean result = tStats.save();
                 //判断当前网络可用且用户数据保存成功
                 if (result) {
                     //上传所有数据
-                    dataPresenter.uploadData(tOpen);
+                    dataPresenter.uploadData(tStats);
                 }
             }
         }

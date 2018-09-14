@@ -7,17 +7,11 @@ ext {
     externalBuildToolsVersion = '26.0.3'
     externalMinSdkVersion = 19
     externalTargetSdkVersion = 26
-    projectVersionCode = 14
-    projectVersionName = '14.0.1-20180417'
+    projectVersionCode = 71
+    projectVersionName = '71.0.1-20180913'
 
-    //gradle-android Plugin
+    //Plugin
     externalAndroidBuildGradlePlugin = 'com.android.tools.build:gradle:3.0.1'
-    //tencent bugly
-  //    externalTencentBugly = 'com.tencent.bugly:symtabfileuploader:latest.release'
-    // tinkersupport插件, 其中lastest.release指拉取最新版本，也可以指定明确版本号，例如1.0.4
-    externalTinker = "com.tencent.bugly:tinker-support:latest.release"
-    //retrolambda
-    externalRetrolambda = 'me.tatarka:gradle-retrolambda:3.2.0'
 
     //test
     externalJunit = 'junit:junit:4.12'
@@ -57,9 +51,12 @@ ext {
     externalGreenrobotEventbus = 'org.greenrobot:eventbus:3.0.0'
     // fastjson
     externalAlibabaFastjson = 'com.alibaba:fastjson:1.1.61.android'
-    // TencentBugly
-    externalTencentBuglyCrashreport = 'com.tencent.bugly:crashreport_upgrade:latest.release'
+    // TencentBugly SDK
+    externalTencentBuglyCrashreport = 'com.tencent.bugly:crashreport:latest.release'
+    // TencentBugly NDK（前提必须先集成SDK）
     externalTencentBuglyNativecrashreport = 'com.tencent.bugly:nativecrashreport:latest.release'
+    //tinkerpatch
+    externalTinkerpatch = 'com.tinkerpatch.sdk:tinkerpatch-android-sdk:1.2.8'
     // butterknife
     externalJakewhartonButterknife = 'com.jakewharton:butterknife:8.7.0'
     externalJakewhartonButterknifeCompiler = 'com.jakewharton:butterknife-compiler:8.7.0'
@@ -71,7 +68,7 @@ ext {
     externalRetrofit2Rxjava2Adapter = 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
 
     // 郭霖 Litepal 数据库存储
-    externalLitepal ='org.litepal.android:core:2.0.0'
+    externalLitepal = 'org.litepal.android:core:2.0.0'
     // 表单验证
     externalSaripaar = 'com.mobsandgeeks:android-saripaar:2.0.3'
     // luban 图片压缩
@@ -91,8 +88,7 @@ ext {
     //jiaozi播放器
     externalJiaoziVideoPlayer = 'cn.jzvd:jiaozivideoplayer:6.2.12'
     //jsoup解析html
-    externalJsoup='org.jsoup:jsoup:1.9.2'
-
+    externalJsoup = 'org.jsoup:jsoup:1.9.2'
 
     //View library
     //    compile 'com.qmuiteam:qmui:1.0.0'
@@ -135,7 +131,8 @@ ext {
     //刷新smartRefresh
     //1.0.5 为 1.0.4 与 1.1.0 的过度版，其中API改动过大，老用户升级需谨慎
     externalSmartRefreshLayout = 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
-    externalSmartRefreshLayoutHeader = 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.5.1'//没有使用特殊Header，可以不加这行
+    externalSmartRefreshLayoutHeader = 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.5.1'
+//没有使用特殊Header，可以不加这行
     //图片放大photoView
     externalPhotoView = 'com.github.chrisbanes:PhotoView:2.0.0'
     //底部导航
@@ -147,9 +144,9 @@ ext {
     //小说阅读
     externalTxtReader = 'com.github.bifan-wei:HwTxtReader:V1.3.9'
     //PDF阅读
-    externalPDF='com.github.barteksc:android-pdf-viewer:3.0.0-beta.5'
+    externalPDF = 'com.github.barteksc:android-pdf-viewer:3.0.0-beta.5'
     //switchButton
-    externalSwitchButton='com.github.zcweng:switch-button:0.0.3@aar'
+    externalSwitchButton = 'com.github.zcweng:switch-button:0.0.3@aar'
 
     //else
 //    externalAndroidAsyncHttp = 'com.loopj.android:android-async-http:1.4.9'

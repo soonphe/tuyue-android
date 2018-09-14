@@ -13,11 +13,7 @@ import com.ywb.tuyue.R;
 import com.ywb.tuyue.constants.Constants;
 import com.ywb.tuyue.entity.TAdvert;
 import com.ywb.tuyue.entity.TDataVersion;
-import com.ywb.tuyue.entity.TMovie;
-import com.ywb.tuyue.entity.TStats;
-import com.ywb.tuyue.entity.TVersion;
 import com.ywb.tuyue.ui.mvp.BaseFragmentV4;
-import com.ywb.tuyue.utils.DeviceUtils;
 
 import java.util.List;
 
@@ -26,7 +22,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-import static com.ywb.tuyue.constants.Constants.IS_MOBILE;
 import static com.ywb.tuyue.constants.Constants.NETWORK_AVAILABLE;
 
 /**
@@ -45,6 +40,8 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
     TextView tvAdvertVersion;
     @BindView(R.id.syncData)
     TextView syncData;
+    @BindView(R.id.syncMovie)
+    TextView syncMovie;
     @BindView(R.id.uploadData)
     TextView uploadData;
 
@@ -65,7 +62,8 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
 
     @Override
     public void onError(String error) {
-        ToastUtils.showShort(error);
+        LogUtils.e(error + "");
+//        ToastUtils.showShort(error);
     }
 
     @Override
@@ -102,13 +100,21 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
         getComponent().inject(this);
     }
 
-    @OnClick({R.id.syncData, R.id.uploadData})
+    @OnClick({R.id.syncData, R.id.syncMovie, R.id.uploadData})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.syncData:
                 //判断当前网络可用
                 if (SPUtils.getInstance().getBoolean(NETWORK_AVAILABLE)) {
                     presenter.getDataVersion();
+                } else {
+                    ToastUtils.showShort("请检查网络是否连接");
+                }
+                break;
+            case R.id.syncMovie:
+                //判断当前网络可用
+                if (SPUtils.getInstance().getBoolean(NETWORK_AVAILABLE)) {
+                    presenter.getMovieData();
                 } else {
                     ToastUtils.showShort("请检查网络是否连接");
                 }
@@ -161,7 +167,6 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
         dataVersion = SPUtils.getInstance().getInt(Constants.DATA_VERSION, 0);
         advertVersion = SPUtils.getInstance().getInt(Constants.ADVERT_VERSION, 0);
         //判断数据版本和广告版本是否一致
-        this.startLoading();
         if (tDataVersion.getAdvertversion() == advertVersion && tDataVersion.getDataversion() == dataVersion) {
             //这里应该弹出最新数据的提示
             presenter.getAdvertList();
@@ -177,8 +182,8 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
                 presenter.getOtherData();
             }
         }
-        //获取1905数据
-        presenter.getMovieData();
+//        //获取1905数据
+//        presenter.getMovieData();
 
     }
 
@@ -204,11 +209,13 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
 
     @Override
     public void uploadUserDataSuccess() {
+
         LogUtils.e("用户数据上传成功");
     }
 
     @Override
     public void uploadStatsDataSuccess() {
+        ToastUtils.showShort("统计数据上传成功");
         LogUtils.e("统计数据上传成功");
     }
 }

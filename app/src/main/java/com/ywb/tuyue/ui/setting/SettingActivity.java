@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.blankj.utilcode.util.BarUtils;
 import com.jude.easyrecyclerview.decoration.SpaceDecoration;
@@ -14,6 +15,7 @@ import com.ywb.tuyue.R;
 import com.ywb.tuyue.entity.PMenu;
 import com.ywb.tuyue.ui.adapter.MenuAdapter;
 import com.ywb.tuyue.ui.adapter.ViewPagerAdapter;
+import com.ywb.tuyue.ui.setting.download.DownloadAllFragment;
 import com.ywb.tuyue.ui.mvp.BaseActivity;
 import com.ywb.tuyue.ui.setting.aboutus.AboutUsFragment;
 import com.ywb.tuyue.ui.setting.gaindata.GainDataFragment;
@@ -84,6 +86,8 @@ public class SettingActivity extends BaseActivity implements SettingContract.Vie
 
         BarUtils.setStatusBarAlpha(this, 0);
         setTouchDissIm(true);
+        //设置不锁屏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         presenter.attachView(this);
         mFragments.add(new GainDataFragment());
@@ -91,8 +95,9 @@ public class SettingActivity extends BaseActivity implements SettingContract.Vie
         mFragments.add(new NetworkFragment());
         mFragments.add(new HotspotFragment());
         mFragments.add(new AboutUsFragment());
+        mFragments.add(new DownloadAllFragment());
         mypager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), mFragments));
-        mypager.setOffscreenPageLimit(5); //设置ViewPager的缓存界面数，每一侧的界面数(默认是缓存相邻的)
+        mypager.setOffscreenPageLimit(6); //设置ViewPager的缓存界面数，每一侧的界面数(默认是缓存相邻的)
         mypager.setCurrentItem(0);
 
         //创建左部菜单
@@ -101,8 +106,9 @@ public class SettingActivity extends BaseActivity implements SettingContract.Vie
         pMenus.add(new PMenu(2, "网络设置"));
         pMenus.add(new PMenu(4, "热点设置"));
         pMenus.add(new PMenu(5, "关于我们"));
+        pMenus.add(new PMenu(6, "下载管理"));
         menuAdapter = new MenuAdapter(R.layout.item_menu, pMenus);
-        recyclerMenu.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerMenu.setLayoutManager(new LinearLayoutManager(this));
         recyclerMenu.addItemDecoration(new SpaceDecoration(1));
         recyclerMenu.setAdapter(menuAdapter);
         recyclerMenu.setNestedScrollingEnabled(false);

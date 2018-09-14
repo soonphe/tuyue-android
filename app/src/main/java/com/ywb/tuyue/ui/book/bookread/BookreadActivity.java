@@ -15,7 +15,6 @@ import com.bifan.txtreaderlib.main.TxtReaderView;
 import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.EmptyUtils;
 import com.blankj.utilcode.util.LogUtils;
-import com.github.barteksc.pdfviewer.PDFView;
 import com.ywb.tuyue.R;
 import com.ywb.tuyue.entity.TBook;
 import com.ywb.tuyue.ui.mvp.BaseActivity;
@@ -36,8 +35,8 @@ public class BookreadActivity extends BaseActivity implements BookreadContract.V
 
     @BindView(R.id.app_title_id)
     AppTitle appTitle;
-    @BindView(R.id.pdfView)
-    PDFView pdfView;
+//    @BindView(R.id.pdfView)
+//    PDFView pdfView;
     @BindView(R.id.activity_hwtxtplay_readerView)
     TxtReaderView activityHwtxtplayReaderView;
     @BindView(R.id.show_qq)

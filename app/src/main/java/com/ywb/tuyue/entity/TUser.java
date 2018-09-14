@@ -3,13 +3,15 @@ package com.ywb.tuyue.entity;
 import org.litepal.annotation.Column;
 import org.litepal.crud.LitePalSupport;
 
+import java.io.Serializable;
+
 /**
  * @Author soonphe
  * @Date 2018-08-30 18:03
  * @Descprition 平板注册用户
  */
 
-public class TUser extends LitePalSupport {
+public class TUser extends LitePalSupport implements Serializable {
 
 
     /**

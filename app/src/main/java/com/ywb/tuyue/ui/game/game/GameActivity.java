@@ -113,7 +113,7 @@ public class GameActivity extends BaseActivity implements GameContract.View, Dat
 
 
         gameAdapter = new GameAdapter(R.layout.item_game);
-        rvList.setLayoutManager(new GridLayoutManager(getContext(), 3));
+        rvList.setLayoutManager(new GridLayoutManager(this, 3));
         rvList.addItemDecoration(new SpaceDecoration(10));
         rvList.setAdapter(gameAdapter);
         rvList.setNestedScrollingEnabled(false);
@@ -199,7 +199,7 @@ public class GameActivity extends BaseActivity implements GameContract.View, Dat
         long stayDataTime = TimeUtils.getTimeSpan(stayTime, System.currentTimeMillis(), TimeConstants.SEC);
         String phone = SPUtils.getInstance().getString(Constants.REGIST_PHONE, "");
         //判断这里是否存在用户，如果存在则要记录数据
-        if (!StringUtils.isEmpty(phone)) {
+        if (!"111111".equals(phone)) {
             //判断今天是否创建过统计数据——有数据则更新数据+1
             TStats tOpen = LitePal.where("phone = ?", phone + "").order("id desc").findFirst(TStats.class);
             if (tOpen != null) {

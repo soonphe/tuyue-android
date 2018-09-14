@@ -106,6 +106,7 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, D
 
     List<TAdvert> list;
     public static boolean isForeground = false; //receiver接收消息时使用
+    MaterialDialog materialDialog;
 
     @Override
     public int bindLayout() {
@@ -167,6 +168,9 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, D
     @Override
     protected void onResume() {
         isForeground = true;
+        if (materialDialog != null && materialDialog.isShowing()) {
+            materialDialog.dismiss();
+        }
         super.onResume();
     }
 
@@ -182,9 +186,6 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, D
                 mOperation.forward(SettingActivity.class);
                 break;
             case R.id.advertise1:
-                // TODO: 2018-09-03 这里需要提供测试用户数据清除
-                //清空用户手机号
-//                SPUtils.getInstance().remove(Constants.REGIST_PHONE);
                 mOperation.addParameter("advert", list.get(0).getId());
                 mOperation.forward(AdvertContentActivity.class);
                 break;
@@ -202,44 +203,48 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, D
      */
     @OnClick({R.id.ll_movie, R.id.ll_game, R.id.ll_book, R.id.ll_food, R.id.ll_city, R.id.ll_subway})
     public void onViewClicked(View view) {
+        TStats tStats;
+        //判断这里是否存在用户，如果存在则要记录本次操作数据
         String phone = SPUtils.getInstance().getString(Constants.REGIST_PHONE, "");
-
-        //获取该手机号最新一条统计信息
-        TStats tStats = LitePal.where("phone = ? ", phone).order("id desc").findFirst(TStats.class);
-        //判断用户注册是否过期&&数据库不存在此手机号
-        if (StringUtils.isEmpty(phone) || tStats == null) {
+        if (StringUtils.isEmpty(phone)) {
             //如果没有数据，则直接弹窗注册
             onDialog();
-
+            return;
+        } else if ("111111".equals(phone)) {
+            //如果是管理员账户——创建一个新的用户
+            tStats = new TStats();
         } else {
-            switch (view.getId()) {
-                case R.id.ll_movie:
-                    //更新统计信息+跳转activity
-                    tStats.setMovies(tStats.getMovies() + 1);
-                    forwardActivity(tStats, CinemaActivity.class);
-                    break;
-                case R.id.ll_game:
-                    tStats.setGame(tStats.getGame() + 1);
-                    forwardActivity(tStats, GameActivity.class);
-                    break;
-                case R.id.ll_book:
-                    tStats.setBook(tStats.getBook() + 1);
-                    forwardActivity(tStats, BookActivity.class);
-                    break;
-                case R.id.ll_food:
-                    tStats.setFood(tStats.getFood() + 1);
-                    forwardActivity(tStats, FoodActivity.class);
-                    break;
-                case R.id.ll_city:
-                    tStats.setCity(tStats.getCity() + 1);
-                    forwardActivity(tStats, CityActivity.class);
-                    break;
-                case R.id.ll_subway:
-                    tStats.setSubway(tStats.getSubway() + 1);
-                    forwardActivity(tStats, ArticleActivity.class);
-                    break;
-            }
+            //获取该手机号最新一条统计信息
+            tStats = LitePal.where("phone = ? ", phone).order("id desc").findFirst(TStats.class);
         }
+        switch (view.getId()) {
+            case R.id.ll_movie:
+                //更新统计信息+跳转activity
+                tStats.setMovies(tStats.getMovies() + 1);
+                forwardActivity(tStats, CinemaActivity.class);
+                break;
+            case R.id.ll_game:
+                tStats.setGame(tStats.getGame() + 1);
+                forwardActivity(tStats, GameActivity.class);
+                break;
+            case R.id.ll_book:
+                tStats.setBook(tStats.getBook() + 1);
+                forwardActivity(tStats, BookActivity.class);
+                break;
+            case R.id.ll_food:
+                tStats.setFood(tStats.getFood() + 1);
+                forwardActivity(tStats, FoodActivity.class);
+                break;
+            case R.id.ll_city:
+                tStats.setCity(tStats.getCity() + 1);
+                forwardActivity(tStats, CityActivity.class);
+                break;
+            case R.id.ll_subway:
+                tStats.setSubway(tStats.getSubway() + 1);
+                forwardActivity(tStats, ArticleActivity.class);
+                break;
+        }
+
     }
 
     /**
@@ -248,11 +253,15 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, D
      * @param activity
      */
     public void forwardActivity(TStats tStats, Class activity) {
-        boolean result = tStats.save();
-        //判断当前网络可用且统计数据保存成功
-        if (result) {
-            //上传所有数据
-            dataPresenter.uploadData(tStats);
+        String phone = SPUtils.getInstance().getString(Constants.REGIST_PHONE, "");
+        //判断是否为管理员账户
+        if (!"111111".equals(phone)) {
+            boolean result = tStats.save();
+            //判断当前网络可用且统计数据保存成功
+            if (result) {
+                //上传所有数据
+                dataPresenter.uploadData(tStats);
+            }
         }
         mOperation.forward(activity);
     }
@@ -274,7 +283,7 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, D
         int[] gender = {0};//1男2女
         int[] age = {0};//0：20以下，1:20-40，2:40-60,3:60以上
 
-        MaterialDialog materialDialog = mOperation
+        materialDialog = mOperation
                 .showCustomerDialog("", R.layout.dialog_register, true);
         //不允许点击外侧关闭
         materialDialog.setCanceledOnTouchOutside(false);
@@ -336,19 +345,20 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, D
             String phone = etPhone.getText().toString();
             String code = etCode.getText().toString();
             //管理员账户
-            if ("111111" .equals(phone)) {
+            if ("111111".equals(phone)) {
                 materialDialog.cancel();
+                SPUtils.getInstance().put(Constants.REGIST_PHONE, phone + "");
                 return;
             } else if (phone.length() != 11 || code.length() != 6) {
                 ToastUtils.showShort("输入格式不正确，请重新输入");
                 return;
             }
             //微信验证码
-            if ("973570" .equals(code)
-                    || "217560" .equals(code)
-                    || "285973" .equals(code)
-                    || "579134" .equals(code)
-                    || "497186" .equals(code)) {
+            if ("973570".equals(code)
+                    || "217560".equals(code)
+                    || "285973".equals(code)
+                    || "579134".equals(code)
+                    || "497186".equals(code)) {
                 SPUtils.getInstance().put(Constants.REGIST_PHONE, phone);
 
                 String date = TimeUtils.millis2String(System.currentTimeMillis(),

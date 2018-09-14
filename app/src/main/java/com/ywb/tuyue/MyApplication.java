@@ -16,10 +16,8 @@ import com.lzy.okgo.OkGo;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
-import com.tencent.bugly.Bugly;
-import com.tencent.bugly.beta.Beta;
-import com.tencent.bugly.beta.interfaces.BetaPatchListener;
-import com.tencent.bugly.beta.upgrade.UpgradeStateListener;
+
+import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.smtt.sdk.QbSdk;
 import com.ywb.tuyue.constants.Constants;
 import com.ywb.tuyue.di.component.ApplicationComponent;
@@ -105,92 +103,23 @@ public class MyApplication extends BaseApplication {
         FileUtils.createOrExistsDir(Constants.DOWNLOAD_PATH);
         //初始化litepal数据库
         LitePal.initialize(this);
-
-
-        // 设置是否开启热更新能力，默认为true
-        Beta.enableHotfix = true;
-        // 设置是否自动下载补丁
-        Beta.canAutoDownloadPatch = true;
-        // 设置是否提示用户重启
-        Beta.canNotifyUserRestart = true;
-        // 设置是否自动合成补丁
-        Beta.canAutoPatch = true;
-
-        /**
-         *  全量升级状态回调
-         */
-        Beta.upgradeStateListener = new UpgradeStateListener() {
-            @Override
-            public void onUpgradeFailed(boolean b) {
-
-            }
-
-            @Override
-            public void onUpgradeSuccess(boolean b) {
-
-            }
-
-            @Override
-            public void onUpgradeNoVersion(boolean b) {
-//                Toast.makeText(getApplicationContext(), "最新版本", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onUpgrading(boolean b) {
-                Toast.makeText(getApplicationContext(), "onUpgrading", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onDownloadCompleted(boolean b) {
-
-            }
-        };
-
-        /**
-         * 补丁回调接口，可以监听补丁接收、下载、合成的回调
-         */
-        Beta.betaPatchListener = new BetaPatchListener() {
-            @Override
-            public void onPatchReceived(String patchFileUrl) {
-                Toast.makeText(getApplicationContext(), patchFileUrl, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onDownloadReceived(long savedLength, long totalLength) {
-                Toast.makeText(getApplicationContext(), String.format(Locale.getDefault(),
-                        "%s %d%%",
-                        Beta.strNotificationDownloading,
-                        (int) (totalLength == 0 ? 0 : savedLength * 100 / totalLength)), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onDownloadSuccess(String patchFilePath) {
-                Toast.makeText(getApplicationContext(), patchFilePath, Toast.LENGTH_SHORT).show();
-//                Beta.applyDownloadedPatch();
-            }
-
-            @Override
-            public void onDownloadFailure(String msg) {
-                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onApplySuccess(String msg) {
-                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onApplyFailure(String msg) {
-                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onPatchRollback() {
-                Toast.makeText(getApplicationContext(), "onPatchRollback", Toast.LENGTH_SHORT).show();
-            }
-        };
         //腾讯bugfly
-        Bugly.init(this, BUGLY_APPID, true);//bugly
+        CrashReport.initCrashReport(this,BUGLY_APPID, false);
+//        Bugly.init(this, BUGLY_APPID, true);//bugly
+
+        // 我们可以从这里获得Tinker加载过程的信息
+//        tinkerApplicationLike = TinkerPatchApplicationLike.getTinkerPatchApplicationLike();
+//
+//        // 初始化TinkerPatch SDK, 更多配置可参照API章节中的,初始化SDK
+//        TinkerPatch.init(tinkerApplicationLike)
+//                .reflectPatchLibrary()
+//                .setPatchRollbackOnScreenOff(true)
+//                .setPatchRestartOnSrceenOff(true)
+//                .setFetchPatchIntervalByHours(3);
+//
+//        // 每隔3个小时(通过setFetchPatchIntervalByHours设置)去访问后台时候有更新,通过handler实现轮训的效果
+//        TinkerPatch.with().fetchPatchUpdateAndPollWithInterval();
+
 
         QbSdk.initX5Environment(this, new QbSdk.PreInitCallback() {
             @Override
