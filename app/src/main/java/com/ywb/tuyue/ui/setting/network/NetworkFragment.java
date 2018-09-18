@@ -286,7 +286,7 @@ public class NetworkFragment extends BaseFragmentV4 implements NetworkContract.V
                     wifiListSet(connectedWifiInfo.getSSID(), mConnectType);
                 }
             } else if (WifiManager.SCAN_RESULTS_AVAILABLE_ACTION.equals(intent.getAction())) {
-                Log.d(TAG, "网络列表变化了");
+//                Log.d(TAG, "网络列表变化了");
                 wifiListChange();
             }
         }

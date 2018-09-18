@@ -56,7 +56,7 @@ public class SplashActivity extends BaseActivity implements AdvertContract.View,
     TextView splashCountdown;
 
     Timer timer = new Timer();
-    int currentSecond = 3;
+    int currentSecond = 4;
     int minTime = 0;
 
 
@@ -99,10 +99,10 @@ public class SplashActivity extends BaseActivity implements AdvertContract.View,
 
     @Override
     public void getAdvertListSuccess(List<TAdvert> list) {
-        if (list.size()>0){
+        if (list.size() > 0) {
             //这里只选取最新的1张
-            GlideUtils.loadImageView(this,
-                    list.get(0).getDownloadPic(), ivFlash);
+            GlideUtils.loadImageViewLoding(this,
+                    list.get(0).getDownloadPic(), ivFlash, R.mipmap.home_start, R.mipmap.home_start);
         }
 
         //判断这里是否存在用户，如果存在则要记录本次解锁数据
@@ -113,7 +113,7 @@ public class SplashActivity extends BaseActivity implements AdvertContract.View,
             if (tOpen != null) {
                 tOpen.setOpenlock(tOpen.getOpenlock() + 1);
                 boolean result = tOpen.save();
-                if ( result) {
+                if (result) {
                     //上传所有数据
                     dataPresenter.uploadData(tOpen);
                 }

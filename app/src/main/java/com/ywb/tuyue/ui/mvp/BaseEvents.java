@@ -9,7 +9,7 @@ public interface BaseEvents {
     Object getObj();
 
     enum CommonEvent implements BaseEvents {
-        UPDATE_LIST,UPDATE_PCALSS;
+        START_DOWNLOAD, FINISH_DOWNLOAD, DOWNLOAD_ALL_FINISH;
 
         private Object object;
 

@@ -183,6 +183,9 @@
         <activity
             android:name=".ui.article.article.ArticleContentActivity"
             android:screenOrientation="landscape" />
+        <activity
+            android:name=".ui.setting.download.DownloadAllActivity"
+            android:screenOrientation="landscape" />
 
 
 

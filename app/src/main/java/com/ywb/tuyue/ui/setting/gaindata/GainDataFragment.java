@@ -3,17 +3,24 @@ package com.ywb.tuyue.ui.setting.gaindata;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.lzy.okserver.OkDownload;
 import com.ywb.tuyue.R;
 import com.ywb.tuyue.constants.Constants;
 import com.ywb.tuyue.entity.TAdvert;
 import com.ywb.tuyue.entity.TDataVersion;
+import com.ywb.tuyue.ui.mvp.BaseEvents;
 import com.ywb.tuyue.ui.mvp.BaseFragmentV4;
+import com.ywb.tuyue.ui.setting.download.DownloadAllActivity;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -42,6 +49,8 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
     TextView syncData;
     @BindView(R.id.syncMovie)
     TextView syncMovie;
+    @BindView(R.id.downAll)
+    TextView downAll;
     @BindView(R.id.uploadData)
     TextView uploadData;
 
@@ -52,7 +61,7 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
 
     @Override
     public void startLoading() {
-        mOperation.showProgress("正在更新数据...", false);
+        mOperation.showProgress("正在更新数据...", true);
     }
 
     @Override
@@ -100,7 +109,7 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
         getComponent().inject(this);
     }
 
-    @OnClick({R.id.syncData, R.id.syncMovie, R.id.uploadData})
+    @OnClick({R.id.syncData, R.id.syncMovie, R.id.downAll, R.id.uploadData})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.syncData:
@@ -118,6 +127,9 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
                 } else {
                     ToastUtils.showShort("请检查网络是否连接");
                 }
+                break;
+            case R.id.downAll:
+                mOperation.forward(DownloadAllActivity.class);
                 break;
             case R.id.uploadData:
                 //点击上传数据库数据
@@ -217,5 +229,34 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
     public void uploadStatsDataSuccess() {
         ToastUtils.showShort("统计数据上传成功");
         LogUtils.e("统计数据上传成功");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+
+    @Subscribe
+    public void finishDownload(BaseEvents.CommonEvent commonEvent) {
+        LogUtils.e("接收到单个完成下载eventBus事件");
+        if (commonEvent == BaseEvents.CommonEvent.FINISH_DOWNLOAD) {
+            //结束加载动画
+            if (mOperation.getDialog() != null) {
+                endLoading();
+            }
+        }
+    }
+
+    @Subscribe
+    public void finishAll(BaseEvents.CommonEvent commonEvent) {
+        LogUtils.e("接收到全部完成下载eventBus事件");
     }
 }

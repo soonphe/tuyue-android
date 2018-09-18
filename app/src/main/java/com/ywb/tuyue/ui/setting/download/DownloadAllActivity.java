@@ -7,16 +7,19 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.blankj.utilcode.util.BarUtils;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.jude.rollviewpager.Util;
 import com.lzy.okserver.OkDownload;
 import com.lzy.okserver.task.XExecutor;
 import com.ywb.tuyue.R;
 import com.ywb.tuyue.constants.Constants;
+import com.ywb.tuyue.ui.mvp.BaseActivity;
 import com.ywb.tuyue.ui.mvp.BaseEvents;
 import com.ywb.tuyue.ui.mvp.BaseFragmentV4;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -27,7 +30,7 @@ import butterknife.OnClick;
  * @Date 2018-08-28 13:54
  * @Description 全局下载管理Fragment
  */
-public class DownloadAllFragment extends BaseFragmentV4 implements XExecutor.OnAllTaskEndListener {
+public class DownloadAllActivity extends BaseActivity implements XExecutor.OnAllTaskEndListener {
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -41,7 +44,7 @@ public class DownloadAllFragment extends BaseFragmentV4 implements XExecutor.OnA
     }
 
     @Override
-    public void initParams(Bundle params) {
+    public void initParms(Bundle parms) {
 
     }
 
@@ -53,6 +56,7 @@ public class DownloadAllFragment extends BaseFragmentV4 implements XExecutor.OnA
 
     @Override
     public void initView(View view) {
+        BarUtils.setStatusBarAlpha(this, 0);
 
     }
 
@@ -60,8 +64,9 @@ public class DownloadAllFragment extends BaseFragmentV4 implements XExecutor.OnA
     public void doBusiness(Context mContext) {
         okDownload = OkDownload.getInstance();
         okDownload.setFolder(Constants.DOWNLOAD_PATH2); //设置全局下载目录
-        okDownload.getThreadPool().setCorePoolSize(8);  //设置同时下载数据
+        okDownload.getThreadPool().setCorePoolSize(2);  //设置同时下载数据
         okDownload.addOnAllTaskEndListener(this);   //设置所有任务监听
+
 
         adapter = new DownloadAdapter(getContext());
         adapter.updateData(DownloadAdapter.TYPE_ALL);
@@ -78,13 +83,9 @@ public class DownloadAllFragment extends BaseFragmentV4 implements XExecutor.OnA
     }
 
     @Override
-    public void lazyInitBusiness(Context mContext) {
-
-    }
-
-    @Override
     public void onAllTaskEnd() {
-        EventBus.getDefault().postSticky(BaseEvents.CommonEvent.UPDATE_LIST);
+        System.out.println("onFinish:发出消息onAllTaskEnd " );
+        EventBus.getDefault().postSticky(BaseEvents.CommonEvent.DOWNLOAD_ALL_FINISH);
     }
 
     @Override

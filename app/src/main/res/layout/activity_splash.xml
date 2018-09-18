@@ -7,8 +7,7 @@
         android:id="@+id/iv_flash"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/home_start" />
+        android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/splash_countdown"

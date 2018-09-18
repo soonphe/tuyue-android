@@ -153,10 +153,10 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHo
                     netSpeed.setText("暂停中");
                     download.setText("继续");
                     break;
-//                case Progress.ERROR:
-//                    netSpeed.setText("下载出错");
-//                    download.setText("出错");
-//                    break;
+                case Progress.ERROR:
+                    netSpeed.setText("下载出错");
+                    download.setText("出错");
+                    break;
                 case Progress.WAITING:
                     netSpeed.setText("等待中");
                     download.setText("等待");

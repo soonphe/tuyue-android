@@ -36,8 +36,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:scaleType="fitXY"
-            android:src="@mipmap/main_header_01"/>
+            android:scaleType="fitXY" />
 
         <ImageView
             android:id="@+id/advertise2"
@@ -45,8 +44,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="15dp"
             android:layout_weight="1"
-            android:scaleType="fitXY"
-            android:src="@mipmap/main_header_01"/>
+            android:scaleType="fitXY" />
 
     </LinearLayout>
 

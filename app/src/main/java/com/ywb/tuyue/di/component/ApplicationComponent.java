@@ -13,6 +13,7 @@ import com.ywb.tuyue.ui.mvp.BaseActivity;
 import javax.inject.Singleton;
 
 import dagger.Component;
+import okhttp3.OkHttpClient;
 
 /**
  * @Author anna
@@ -27,7 +28,6 @@ public interface ApplicationComponent {
     LayoutInflater getLayoutInflater();
 
     AppApi getAccountApi();
-
 
     void inject(MyApplication mApplication);
 

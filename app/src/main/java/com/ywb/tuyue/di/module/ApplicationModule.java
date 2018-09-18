@@ -42,24 +42,30 @@ public class ApplicationModule {
     @Provides
     @Singleton
     OkHttpClient provideOkHttpClient() {
-        OkHttpClient.Builder builder = new OkHttpClient.Builder().connectTimeout(10, TimeUnit.SECONDS)
+        OkHttpClient.Builder builder = new OkHttpClient.Builder()
+                //全局的连接超时时间，默认60秒
+                .connectTimeout(10, TimeUnit.SECONDS)
+                //全局的读取超时时间
                 .readTimeout(10, TimeUnit.SECONDS)
+                //全局的写入超时时间
                 .writeTimeout(10, TimeUnit.SECONDS)
                 .retryOnConnectionFailure(true);
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        //log打印级别，决定了log显示的详细程度
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+        //添加stetho网络请求监控
         builder.addNetworkInterceptor(new StethoInterceptor());
         builder.addInterceptor(logging);
         //请求header拦截器——存在userId/token即添加
         builder.addInterceptor(
                 chain -> {
                     Request originalRequest = chain.request();
-                    if (StringUtils.isEmpty(CacheUtils.getInstance().getString(Constants.USER_ID)+"") || StringUtils.isEmpty(CacheUtils.getInstance().getString(Constants.USER_TOKEN))) {
+                    if (StringUtils.isEmpty(CacheUtils.getInstance().getString(Constants.USER_ID) + "") || StringUtils.isEmpty(CacheUtils.getInstance().getString(Constants.USER_TOKEN))) {
                         return chain.proceed(originalRequest);
                     }
                     Request authorised = originalRequest.newBuilder()
                             .addHeader("userId", CacheUtils.getInstance().getString(Constants.USER_ID).toString())
-                            .addHeader("token", CacheUtils.getInstance().getString(Constants.USER_TOKEN)+"")
+                            .addHeader("token", CacheUtils.getInstance().getString(Constants.USER_TOKEN) + "")
                             .build();
                     return chain.proceed(authorised);
                 }

@@ -32,6 +32,8 @@ public class Constants {
     public static final String NETWORK_AVAILABLE = "NETWORK_AVAILABLE";
     //是否为4G设备
     public static final String IS_MOBILE = "IS_MOBILE";
+    //注册用户点击二维码次数
+    public static final String REGIST_CLICK = "REGIST_CLICK";
     //注册用户
     public static final String REGIST_PHONE = "REGIST";
     //黑屏注册页面失效时间倒计时，5分钟

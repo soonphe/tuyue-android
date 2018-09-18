@@ -57,7 +57,7 @@
         android:id="@+id/syncData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/btn_red_shape_no_solid"
         android:paddingBottom="8dp"
         android:paddingLeft="12dp"
@@ -71,7 +71,7 @@
         android:id="@+id/syncMovie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/btn_red_shape_no_solid"
         android:paddingBottom="8dp"
         android:paddingLeft="12dp"
@@ -82,10 +82,24 @@
         android:textSize="@dimen/sp_14" />
 
     <TextView
+        android:id="@+id/downAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/btn_red_shape_no_solid"
+        android:paddingBottom="8dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="8dp"
+        android:text="查看下载"
+        android:textColor="@color/text_red"
+        android:textSize="@dimen/sp_14" />
+
+    <TextView
         android:id="@+id/uploadData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/btn_red_shape_no_solid"
         android:paddingBottom="8dp"
         android:paddingLeft="12dp"

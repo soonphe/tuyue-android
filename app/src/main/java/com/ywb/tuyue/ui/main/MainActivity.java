@@ -54,7 +54,6 @@ import com.ywb.tuyue.utils.DeviceUtils;
 import com.ywb.tuyue.utils.GlideUtils;
 import com.ywb.tuyue.utils.ShowPushMessageUtils;
 import com.ywb.tuyue.widget.AppTitle;
-import com.ywb.tuyue.widget.head.HeaderView;
 
 import org.json.JSONObject;
 import org.litepal.LitePal;
@@ -149,10 +148,10 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, D
         if (list.size() > 0) {
             this.list = list;
             //这里只选取最新的两张图片
-            GlideUtils.loadImageView(this,
-                    list.get(0).getDownloadPic(), advertise1);
-            GlideUtils.loadImageView(this,
-                    list.get(1).getDownloadPic(), advertise2);
+            GlideUtils.loadImageViewLoding(this,
+                    list.get(0).getDownloadPic(), advertise1, R.mipmap.main_header_01, R.mipmap.main_header_01);
+            GlideUtils.loadImageViewLoding(this,
+                    list.get(1).getDownloadPic(), advertise2, R.mipmap.main_header_02, R.mipmap.main_header_02);
         }
 
     }
@@ -301,6 +300,17 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, D
         TextView etPhone = materialDialog.getCustomView().findViewById(R.id.et_phone);
         TextView etCode = materialDialog.getCustomView().findViewById(R.id.et_Code);
         Button button = materialDialog.getCustomView().findViewById(R.id.bt_Save);
+        ImageView imageView = materialDialog.getCustomView().findViewById(R.id.QRCode);
+        imageView.setOnClickListener(v -> {
+            int click = SPUtils.getInstance().getInt(Constants.REGIST_CLICK, 0);
+            SPUtils.getInstance().put(Constants.REGIST_CLICK, click + 1);
+            //如果点击为5的倍数，则为管理员操作
+            if ((click + 1) % 5 == 0) {
+                KeyboardUtils.hideSoftInput(v);
+                materialDialog.cancel();
+                SPUtils.getInstance().put(Constants.REGIST_PHONE, "111111");
+            }
+        });
         chMan.setOnClickListener(v -> {
             chMan.setChecked(true);
             chWoman.setChecked(false);

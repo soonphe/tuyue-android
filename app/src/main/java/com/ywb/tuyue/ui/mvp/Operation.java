@@ -39,6 +39,10 @@ public class Operation {
     private final static String        TAG          = Operation.class.getSimpleName();
     private MaterialDialog dialog;
 
+    public MaterialDialog getDialog() {
+        return dialog;
+    }
+
     public Operation(Activity mContext) {
         this.mContext = mContext;
         mApplication = (MyApplication) this.mContext.getApplicationContext();

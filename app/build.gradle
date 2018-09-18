@@ -16,8 +16,8 @@ android {
     buildToolsVersion '26.0.3'
     defaultConfig {
         applicationId "com.ywb.tuyue"
-        versionCode 71
-        versionName "2018.71.0.1"
+        versionCode 73
+        versionName "2018.73.0.1"
         minSdkVersion 19
         targetSdkVersion 26
 //        minSdkVersion externalMinSdkVersion

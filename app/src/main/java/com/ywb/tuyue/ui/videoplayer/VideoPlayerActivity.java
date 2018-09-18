@@ -257,8 +257,8 @@ public class VideoPlayerActivity extends BaseActivity implements AdvertContract.
         if (list.size() > 0) {
             this.list = list;
             //这里只选取最新的一张图片
-            GlideUtils.loadImageView(this,
-                    list.get(0).getDownloadPic(), advert);
+            GlideUtils.loadImageViewLoding(this,
+                    list.get(0).getDownloadPic(), advert, R.mipmap.play_advert, R.mipmap.play_advert);
         }
     }
 }

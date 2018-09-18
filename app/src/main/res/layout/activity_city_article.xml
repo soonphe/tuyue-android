@@ -24,6 +24,8 @@
         android:id="@+id/fl_web"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingLeft="160dp"
+        android:paddingRight="160dp"
         android:layout_gravity="center_horizontal"
         />
 </LinearLayout>

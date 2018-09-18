@@ -103,8 +103,8 @@ public class UnlockActivity extends BaseActivity implements AdvertContract.View,
     public void getAdvertListSuccess(List<TAdvert> list) {
         if (list.size() > 0) {
             //这里只选取最新的1张
-            GlideUtils.loadImageView(this,
-                    list.get(0).getDownloadPic(), unlockBgAdvert);
+            GlideUtils.loadImageViewLoding(this,
+                    list.get(0).getDownloadPic(), unlockBgAdvert,R.mipmap.unlock_bg,R.mipmap.unlock_bg);
         }
     }
 

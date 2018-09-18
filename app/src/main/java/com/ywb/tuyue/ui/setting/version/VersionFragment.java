@@ -119,11 +119,11 @@ public class VersionFragment extends BaseFragmentV4 implements VersionContract.V
 
         File file = new File(filepath);
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        //判断是否是AndroidN以及更高的版本
+//        判断是否是AndroidN以及更高的版本
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             Uri contentUri = FileProvider.getUriForFile(getActivity(),
-                    BuildConfig.APPLICATION_ID + ".fileProvider", file);
+                    BuildConfig.APPLICATION_ID + ".fileprovider", file);
             intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
         } else {
             intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
