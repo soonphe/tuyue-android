@@ -12,6 +12,7 @@ import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.TimeUtils;
+import com.bumptech.glide.Glide;
 import com.ywb.tuyue.R;
 import com.ywb.tuyue.constants.Constants;
 import com.ywb.tuyue.entity.TAdvert;
@@ -83,6 +84,7 @@ public class UnlockActivity extends BaseActivity implements AdvertContract.View,
         BarUtils.setStatusBarAlpha(this, 0);
         advertPresenter.attachView(this);
         presenter.attachView(this);
+        Glide.with(this).load(R.mipmap.unlock_bg).into(unlockBgAdvert);
 
         //这里调用初始化litepal
         SQLiteDatabase db = LitePal.getDatabase();

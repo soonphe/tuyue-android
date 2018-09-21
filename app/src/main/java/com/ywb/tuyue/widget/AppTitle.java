@@ -15,7 +15,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.ConvertUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.ywb.tuyue.R;
 import com.ywb.tuyue.utils.ResourceUtils;
@@ -23,18 +25,19 @@ import com.ywb.tuyue.utils.StatusBarUtil;
 import com.ywb.tuyue.widget.head.CustomStatusBar;
 
 
-/**自定义Title
- * Created by wushange on 2016/12/19.
+/**
+ * @Author soonphe
+ * @Date 2018-08-30 10:41
+ * @Description 自定义title——左部返回，中间文件/图片，右部文字/图片
  */
-
-public class AppTitle extends RelativeLayout implements View.OnClickListener, View.OnLongClickListener{
+public class AppTitle extends RelativeLayout implements View.OnClickListener, View.OnLongClickListener {
 
     private Context mContext;
-    private ImageButton  appBarBack;
-    private TextView     appBarTitle;
-    private ImageButton  appBarBtn1;
-    private ImageButton  appBarBtn2;
-    private TextView     appBarRightTv;
+    private ImageButton appBarBack;
+    private TextView appBarTitle;
+    private ImageButton appBarBtn1;
+    private ImageButton appBarBtn2;
+    private TextView appBarRightTv;
     private LinearLayout titleRoot;
 
     private CustomStatusBar statusLine;
@@ -43,7 +46,7 @@ public class AppTitle extends RelativeLayout implements View.OnClickListener, Vi
 
     public AppTitle(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mContext=context;
+        mContext = context;
         initView(context);
         initAttrs(context, attrs);
 
@@ -73,16 +76,47 @@ public class AppTitle extends RelativeLayout implements View.OnClickListener, Vi
         appBarBtn2.setOnLongClickListener(this);
         appBarRightTv.setOnLongClickListener(this);
 
-        double statusBarHeight = Math.ceil(25 * mContext.getResources().getDisplayMetrics().density);
-        Log.e("状态栏高度", statusBarHeight + "");
-        if (statusBarHeight > 25) {
-            statusLine.setVisibility(View.GONE);
-            StatusBarUtil.immersive((Activity) mContext);
-            StatusBarUtil.buildStatuSpace(mContext, statusLine);
-        } else {
-            statusLine.setVisibility(View.VISIBLE);
-        }
+        //获取屏幕分辨率（Math.ceil向上取整）
+        //高度heightPixel，宽度widthPixel，密度density
+        //dpi       ：dots per inch ， 直接来说就是一英寸多少个像素点。常见取值 120，160，240。也称作像素密度，简称密度
+        //density ： 直接翻译的话貌似叫 密度。常见取值 1.5 ， 1.0 。和标准dpi的比例（160px/inc）
+//        double statusBarHeight = Math.ceil(25 * mContext.getResources().getDisplayMetrics().density);
+//        LogUtils.e("屏幕大小"
+//                + mContext.getResources().getDisplayMetrics()
+//                + "屏幕密度"
+//                + mContext.getResources().getDisplayMetrics().density);
 
+        /**
+         * 二代平板存放路径：7.0
+         /storage/emulated/0/download/
+         分辨率：1280x800 160dpi
+
+         原始平板存放路径：系统5.1
+         /storage/sdcard0/Download/ctcy.mp4
+         分辨率：1280x800 160dpi
+
+         4G平板：
+         状态栏高度：48
+         分辨率：1920x1200 320dpi
+         */
+
+        /**
+         * 获取状态栏高度
+         */
+        int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            //dp转px
+//            result = context.getResources().getDimensionPixelSize(resourceId);
+            LogUtils.e("屏幕高度大于0");
+            statusLine.setVisibility(View.VISIBLE);
+        } else {
+            LogUtils.e("未获取到的屏幕高度");
+            statusLine.setVisibility(View.GONE);
+            //设置状态栏透明
+            BarUtils.setStatusBarAlpha((Activity) mContext);
+//            StatusBarUtil.immersive((Activity) mContext);
+//            StatusBarUtil.buildStatuSpace(mContext, statusLine);
+        }
 
     }
 
@@ -182,6 +216,7 @@ public class AppTitle extends RelativeLayout implements View.OnClickListener, Vi
 
     /**
      * 统一左上角返回
+     *
      * @param view
      */
     @Override

@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.NetworkUtils;
 import com.ywb.tuyue.R;
 import com.ywb.tuyue.utils.NetWorkUtils;
 
@@ -28,10 +29,10 @@ import java.util.Date;
 import static android.content.Context.WIFI_SERVICE;
 
 /**
- * Created by penghao on 2018/2/9.
- * description：自定义状态栏
+ * @Author soonphe
+ * @Date 2018-08-30 10:41
+ * @Description 自定义状态栏——时间，wifi，电量百分比，电池图标，电池状态
  */
-
 public class CustomStatusBar extends LinearLayout {
     private static final String TAG = "MyCustomStatusBar";
     private final String NETWORK_STATE_CHANGE = "android.net.conn.CONNECTIVITY_CHANGE";
@@ -45,8 +46,10 @@ public class CustomStatusBar extends LinearLayout {
     private WifiInfo wifiInfo;
     private TimeChangeReceiver timeChangeReceiver;
 
-    int[] wifiStateImgs = new int[]{R.drawable.wifi0,
-            R.drawable.wifi1, R.drawable.wifi2,
+    int[] wifiStateImgs = new int[]{
+            R.drawable.wifi0,
+            R.drawable.wifi1,
+            R.drawable.wifi2,
             R.drawable.wifi3};
 
     public CustomStatusBar(Context context) {
@@ -90,14 +93,18 @@ public class CustomStatusBar extends LinearLayout {
     }
 
     private void initWifiService() {
-        WifiManager wifi_service = (WifiManager) c.getSystemService(WIFI_SERVICE);
-        wifiInfo = wifi_service.getConnectionInfo();
+//        WifiManager wifi_service = (WifiManager) c.getSystemService(WIFI_SERVICE);
+//        wifiInfo = wifi_service.getConnectionInfo();
         IntentFilter wifiIntentFilter = new IntentFilter();
-        wifiIntentFilter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
-        wifiIntentFilter.addAction(NETWORK_STATE_CHANGE);
-        wifiIntentFilter.addAction(WifiManager.RSSI_CHANGED_ACTION);
+        wifiIntentFilter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);  //wifi状态变化
+        //判断网络状态是否改变：NETWORK_STATE_CHANGE
+        wifiIntentFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);   //网络状态变化
+        wifiIntentFilter.addAction(WifiManager.RSSI_CHANGED_ACTION);    //wifi信号强度
         c.registerReceiver(wifiIntentReceiver, wifiIntentFilter);
-        //0到-100的区间值，是一个int型数据，其中0到-50表示信号最好，-50到-70表示信号偏差，小于-70表示最差，有可能连接不上或者掉线。
+        //0到-100的区间值，是一个int型数据，
+        // 其中0到-50表示信号最好，
+        // -50到-70表示信号偏差，
+        // 小于-70表示最差，有可能连接不上或者掉线。
     }
 
     private void initTimeService() {
@@ -118,13 +125,10 @@ public class CustomStatusBar extends LinearLayout {
             int level = extras.getInt(BatteryManager.EXTRA_LEVEL/*当前电量*/, 0);
             int total = extras.getInt(BatteryManager.EXTRA_SCALE/*总电量*/, 100);
             int levelPercent = (int) (((float) level / total) * 100);
-
-            //电池温度温度
+            //电池温度
             int temperature = extras.getInt(BatteryManager.EXTRA_TEMPERATURE/*电池温度*/);
-
             Log.d(TAG, "温度: " + temperature + "");
             Log.d(TAG, "当前电量: " + levelPercent + "%");
-            Log.d(TAG, "总电量: " + total + "");
             int resId = 0;
             if (levelPercent > 90) {
                 resId = R.drawable.baterry5;
@@ -163,23 +167,22 @@ public class CustomStatusBar extends LinearLayout {
                 default:
                     break;
             }
-
             //电池健康程度
-            int health = extras.getInt(BatteryManager.EXTRA_HEALTH);
-            switch (health) {
-                case BatteryManager.BATTERY_HEALTH_GOOD://健康状态
-                    Log.d(TAG, "健康状态好");
-                    break;
-                case BatteryManager.BATTERY_HEALTH_OVERHEAT://过热
-                    Log.d(TAG, "过热");
-                    break;
-                case BatteryManager.BATTERY_HEALTH_COLD://过冷
-                    break;
-                case BatteryManager.BATTERY_HEALTH_OVER_VOLTAGE://电压过高
-                    break;
-                default://其他三个放在default中。dead、unknown、unspecial failure
-                    break;
-            }
+//            int health = extras.getInt(BatteryManager.EXTRA_HEALTH);
+//            switch (health) {
+//                case BatteryManager.BATTERY_HEALTH_GOOD://健康状态
+//                    Log.d(TAG, "健康状态好");
+//                    break;
+//                case BatteryManager.BATTERY_HEALTH_OVERHEAT://过热
+//                    Log.d(TAG, "过热");
+//                    break;
+//                case BatteryManager.BATTERY_HEALTH_COLD://过冷
+//                    break;
+//                case BatteryManager.BATTERY_HEALTH_OVER_VOLTAGE://电压过高
+//                    break;
+//                default://其他三个放在default中。dead、unknown、unspecial failure
+//                    break;
+//            }
         }
     }
 
@@ -187,16 +190,15 @@ public class CustomStatusBar extends LinearLayout {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            Log.d(TAG, "action: " + action);
-            if (action.equals(NETWORK_STATE_CHANGE)) {
-                boolean isNetOK = NetWorkUtils.hasNetWork(c);
-                Log.d(TAG, "网络状态发生变化,是否可用：" + isNetOK);
-                if (isNetOK) {
+            if (action.equals(WifiManager.NETWORK_STATE_CHANGED_ACTION)) {
+//                boolean isNetOK = NetWorkUtils.hasNetWork(c);
+//                Log.d(TAG, "网络状态发生变化,是否可用：" + isNetOK);
+                //判断wifi是否连接
+                if (NetworkUtils.isWifiConnected()) {
                     initWifiState();
                 } else {
                     wifi_image.setBackgroundResource(R.drawable.wifi0);
                 }
-
             } else if (action.equals(WifiManager.WIFI_STATE_CHANGED_ACTION)) {
                 int wifistate = intent.getIntExtra(
                         WifiManager.EXTRA_WIFI_STATE,
@@ -221,8 +223,39 @@ public class CustomStatusBar extends LinearLayout {
         }
     }
 
+    /**
+     * 初始化wifi
+     */
+    public void initWifiState() {
+        ConnectivityManager manager = (ConnectivityManager) c.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = manager
+                .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        Log.d(TAG, "info.isConnected(): " + info.isConnected());
+        if (info.isConnected()) {
+            updateWifiStrength();
+        } else {
+            wifi_image.setBackgroundResource(R.drawable.wifi0);
+        }
+    }
+
+    /**
+     * 更新wifi图标
+     */
+    public void updateWifiStrength() {
+        int strength = getStrength(c);
+        if (strength >= 0 && strength <= 3)
+            wifi_image.setBackgroundResource(wifiStateImgs[strength]);
+        Log.d(TAG, "wifi strength: " + strength);
+    }
+
+
+    /**
+     * 获取wifi强度
+     * @param context
+     * @return
+     */
     public int getStrength(Context context) {
-        WifiManager wifiManager = (WifiManager) context
+        WifiManager wifiManager = (WifiManager) context.getApplicationContext()
                 .getSystemService(Context.WIFI_SERVICE);
         WifiInfo info = wifiManager.getConnectionInfo();
         if (info.getBSSID() != null) {
@@ -239,25 +272,6 @@ public class CustomStatusBar extends LinearLayout {
         return 0;
     }
 
-    public void initWifiState() {
-
-        ConnectivityManager manager = (ConnectivityManager) c.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo info = manager
-                .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-        Log.d(TAG, "info.isConnected(): " + info.isConnected());
-        if (info.isConnected()) {
-            updateWifiStrength();
-        } else {
-            wifi_image.setBackgroundResource(R.drawable.wifi0);
-        }
-    }
-
-    public void updateWifiStrength() {
-        int strength = getStrength(c);
-        if (strength >= 0 && strength <= 3)
-            wifi_image.setBackgroundResource(wifiStateImgs[strength]);
-        Log.d(TAG, "wifi strength: " + strength);
-    }
 
     /**
      * 释放广播

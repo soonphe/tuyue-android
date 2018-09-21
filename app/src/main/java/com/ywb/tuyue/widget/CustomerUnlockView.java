@@ -78,6 +78,11 @@ public class CustomerUnlockView extends View {
     private float textSize = 24;
 
 
+    /**
+     * 设置监听回调
+     *
+     * @param onLockListener
+     */
     public void setOnLockListener(OnLockListener onLockListener) {
         this.onLockListener = onLockListener;
     }
@@ -96,7 +101,6 @@ public class CustomerUnlockView extends View {
         initScreen();
         initView();
     }
-
 
 
     /**
@@ -122,17 +126,17 @@ public class CustomerUnlockView extends View {
         rightBitmap = BitmapUtls.getBitmapFromAsset(context, "icon_unlock.png");
         roadBitmap = BitmapUtls.getBitmapFromAsset(context, "bg_lock_road.png");
 
-        //设置缩放比例 屏幕的一半
+        //设置缩放比例 屏幕的一半（移位运算符 >> 可以理解为除2）
         float scale = (screenWidth >> 1) * 1.0f / roadBitmap.getWidth();
         roadBitmap = BitmapUtls.zoomImg(roadBitmap, scale);
         leftBitmap = BitmapUtls.zoomImg(leftBitmap, scale);
         rightBitmap = BitmapUtls.zoomImg(rightBitmap, scale);
 
 
-        //滑道的x,y坐标
+        //滑道的x,y坐标（在左部起始位置的X，Y坐标）——所有的图片都以滑道为参考线
         roadX = (screenWidth - roadBitmap.getWidth()) >> 1;
         roadY = screenHeight * 0.6f;
-        //初始图片的x,y坐标
+        //初始图片的x,y坐标（这里等于第一次左部图片启动的位置）
         startX = ((screenWidth - roadBitmap.getWidth()) >> 1) + 13;
         startY = (roadBitmap.getHeight() - leftBitmap.getHeight()) / 2 + roadY - 2;
         //左边图片的x,y坐标
@@ -161,7 +165,7 @@ public class CustomerUnlockView extends View {
         float x = event.getX();
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                //第一次点击区域限制
+                //第一次点击区域限制（获取点击点到左边点的中心距离——勾股定理实现）
                 float distance = (float) Math.sqrt(Math.pow(x - leftX, 2) + Math.pow(Math.abs(y - leftY), 2));
                 if (distance < leftBitmap.getWidth()) {
                     isInside = true;
@@ -183,7 +187,7 @@ public class CustomerUnlockView extends View {
                 }
                 //监听是否解锁 true代表解锁
                 if (onLockListener != null) {
-                    onLockListener.onLockListener(isOk);
+                    onLockListener.onLockListener(isOk);    //回调监听结果
                 }
                 isInside = false;
                 break;
@@ -196,20 +200,22 @@ public class CustomerUnlockView extends View {
         if (leftX > rightX) {
             leftX = rightX;
         }
-        postInvalidate();
+        postInvalidate();   //请求重新绘制view树
         return true;
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        //使用canvas绘画（bitmap，宽，高，画笔）
         canvas.drawBitmap(roadBitmap, roadX, roadY, paint);
+//        canvas.drawCircle();  //绘画一个圆形
         paint.setColor(getResources().getColor(R.color.unlock_text_color));
         paint.setTextSize(textSize);
         paint.setTextAlign(Paint.Align.CENTER);//设置锚点
-        canvas.drawText(hintText, textX, textY, paint);
-        paint.reset();
-        paint.setAntiAlias(true);
+        canvas.drawText(hintText, textX, textY, paint); //绘制中间的提示文字
+        paint.reset();  //画笔重置
+        paint.setAntiAlias(true);   //抗锯齿
         canvas.drawBitmap(rightBitmap, rightX, rightY, paint);
         canvas.drawBitmap(leftBitmap, leftX, leftY, paint);
 

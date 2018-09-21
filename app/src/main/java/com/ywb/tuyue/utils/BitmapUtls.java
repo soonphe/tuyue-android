@@ -33,7 +33,13 @@ public class BitmapUtls {
         return bitmap;
     }
 
-    // 等比缩放图片
+    /**
+     * 等比缩放图片
+     *
+     * @param bm 图片
+     * @param scale 缩放比例
+     * @return
+     */
     public static Bitmap zoomImg(Bitmap bm, float scale) {
         // 获得图片的宽高
         int width = bm.getWidth();

@@ -12,6 +12,7 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
+import com.bumptech.glide.Glide;
 import com.ywb.tuyue.R;
 import com.ywb.tuyue.constants.Constants;
 import com.ywb.tuyue.entity.TAdvert;
@@ -75,6 +76,8 @@ public class SplashActivity extends BaseActivity implements AdvertContract.View,
         BarUtils.setStatusBarAlpha(this, 0);
         advertPresenter.attachView(this);
         dataPresenter.attachView(this);
+
+        Glide.with(this).load(R.mipmap.home_start).into(ivFlash);
 
         //判断网络是否可用
         if (NetworkUtils.isAvailableByPing()) {

@@ -31,6 +31,7 @@ import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.TimeUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.bumptech.glide.Glide;
 import com.ywb.tuyue.R;
 import com.ywb.tuyue.constants.Constants;
 import com.ywb.tuyue.entity.TAdvert;
@@ -131,6 +132,9 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, D
         advertPresenter.attachView(this);
         dataPresenter.attachView(this);
         presenter.attachView(this);
+
+        Glide.with(this).load(R.mipmap.main_header_01).into(advertise1);
+        Glide.with(this).load(R.mipmap.main_header_02).into(advertise2);
 
 //        advertise1.setImageResource(R.mipmap.main_header_01);
 //        advertise2.setImageResource(R.mipmap.main_header_02);

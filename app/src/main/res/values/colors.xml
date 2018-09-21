@@ -54,16 +54,11 @@
 
 
 
-
-
     <!--途悦中使用到的颜色 -->
     <color name="unlock_text_color">#b8a300</color>  <!--解锁屏字体颜色 -->
-
-
     <!--导航 -->
     <color name="my_black">#686868</color>
     <color name="hint_color">#999999</color>
-
     <!--注册-->
     <color name="registRed">#FF2645</color>
     <color name="registBlack">#000000</color>

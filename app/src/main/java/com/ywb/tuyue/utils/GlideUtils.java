@@ -36,6 +36,11 @@ public class GlideUtils {
         Glide.with(mContext).load(path).into(mImageView);
     }
 
+    //默认加载（加载资源）
+    public static void loadImageView(Context mContext, int resource, ImageView mImageView) {
+        Glide.with(mContext).load(resource).into(mImageView);
+    }
+
     //加载本地图片
     public static void loadLocalImageView(Context mContext, String path, ImageView mImageView) {
         Glide.with(mContext).load(new File(path + "")).into(mImageView);
