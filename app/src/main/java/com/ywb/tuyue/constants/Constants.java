@@ -80,7 +80,7 @@ public class Constants {
     public static final String PROJECT_ROOT = "tuyue";
     public static final String SDPATHLIST = SDCardUtils.getSDCardPaths().toString();
     public static final String SDPATH = SDPATHLIST.substring(1, SDPATHLIST.length() - 1);
-    public static final String DOWNLOAD_PATH = SDPATH + "/Download";
+    public static final String DOWNLOAD_PATH = "/storage/sdcard0/Download";
     //    public static final String DOWNLOAD_PATH = SDPATH + "/Download" + "/"+ PROJECT_ROOT;
     public static final String DOWNLOAD_PATH2 = Environment.getExternalStorageDirectory().getPath() + "/Download";
 

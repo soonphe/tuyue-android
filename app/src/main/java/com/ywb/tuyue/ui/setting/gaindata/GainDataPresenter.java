@@ -1,11 +1,13 @@
 package com.ywb.tuyue.ui.setting.gaindata;
 
 import android.net.Uri;
+import android.util.Log;
 
 import com.blankj.utilcode.util.DeviceUtils;
 import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.FileCallback;
@@ -49,6 +51,7 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 
 import static com.ywb.tuyue.constants.Constants.DOWNLOAD_COUNT;
+import static com.ywb.tuyue.constants.Constants.DOWNLOAD_PATH;
 import static com.ywb.tuyue.constants.Constants.DOWNLOAD_PATH2;
 
 @PerActivity
@@ -189,6 +192,10 @@ public class GainDataPresenter extends BasePresenter<GainDataContract.View> impl
                         }
                         downloadFile(tMovie, 0, tMovie.getFace_pic() + "");
                         downloadFile(tMovie, 1, uri.toString() + "");
+                        //②：这里下载本地服务器资源
+//                        String fileName = tMovie.getFile_path();
+//                        downloadFile2(tMovie, 1,
+//                                Constants.BASE_IMAGE_URL + "/movie/" + fileName.substring(fileName.lastIndexOf("/") + 1, fileName.length()) + "");
 
 //                        }
                     }
@@ -205,7 +212,7 @@ public class GainDataPresenter extends BasePresenter<GainDataContract.View> impl
      * @param type
      * @param downpath
      */
-    public void downloadFile(LitePalSupport object, int type, String downpath) {
+    public void downloadFile2(LitePalSupport object, int type, String downpath) {
         String destFileName = null;
         /**
          * 1905需要设置电影返回名称，否则保存为ts文件
@@ -251,13 +258,13 @@ public class GainDataPresenter extends BasePresenter<GainDataContract.View> impl
      * @param type
      * @param downpath
      */
-    public void downloadFile2(LitePalSupport object, int type, String downpath) {
+    public void downloadFile(LitePalSupport object, int type, String downpath) {
         //截取最后的文件名和尾缀
-        String localFilePath = DOWNLOAD_PATH2 + downpath.substring(downpath.lastIndexOf("/"), downpath.length());
+        String localFilePath = DOWNLOAD_PATH2 + downpath.substring(downpath.lastIndexOf("/"), downpath.length()) + "";
 
         LogUtils.e("要判断的文件地址" + localFilePath);
         //判断本地文件是否存在
-        if (false && FileUtils.isFileExists(localFilePath)) {
+        if (FileUtils.isFileExists(localFilePath)) {
             LogUtils.e("本地文件存在" + localFilePath);
             if (object instanceof TAdvert) {
                 LogUtils.e("设置广告文件");
@@ -321,11 +328,28 @@ public class GainDataPresenter extends BasePresenter<GainDataContract.View> impl
                     ((TArticle) object).setDownloadFile(localFilePath);
                 }
                 (object).update(((TArticle) object).getId());
+            } else if (object instanceof TMovie) {
+                LogUtils.e("设置电影文件");
+                if (type == 0) {
+                    ((TMovie) object).setDownloadPic(localFilePath);
+                } else {
+                    ((TMovie) object).setDownloadFile(localFilePath);
+                }
+                (object).update(((TMovie) object).getId());
             }
         } else {
+
+            LogUtils.e("本地文件不存在" + localFilePath);
+            String destFileName = null;
+            //针对电影文件特殊处理文件名
+            if ((object instanceof TMovie && type == 1)) {
+                //取文件名+尾缀
+                destFileName = ((TMovie) object).getFile_name() + "." + FileUtils.getFileExtension(downpath);
+            }
+
             OkGo.<File>get(downpath)
                     .tag(this)
-                    .execute(new FileCallback() {
+                    .execute(new FileCallback(destFileName) {
                         @Override
                         public void onSuccess(Response<File> response) {
                             LogUtils.e("获取到的文件路径为：" + response.body().getPath());
@@ -376,7 +400,7 @@ public class GainDataPresenter extends BasePresenter<GainDataContract.View> impl
                                 }
                                 (object).update(((TCity) object).getId());
                             } else if (object instanceof TCityArticle) {
-                                LogUtils.e("设置城市文件");
+                                LogUtils.e("设置城市文章文件");
                                 if (type == 0) {
                                     ((TCityArticle) object).setDownloadPic(response.body().getPath());
                                 } else {
@@ -391,6 +415,14 @@ public class GainDataPresenter extends BasePresenter<GainDataContract.View> impl
                                     ((TArticle) object).setDownloadFile(response.body().getPath());
                                 }
                                 (object).update(((TArticle) object).getId());
+                            } else if (object instanceof TMovie) {
+                                LogUtils.e("设置电影文件");
+                                if (type == 0) {
+                                    ((TMovie) object).setDownloadPic(response.body().getPath());
+                                } else {
+                                    ((TMovie) object).setDownloadFile(response.body().getPath());
+                                }
+                                (object).update(((TMovie) object).getId());
                             }
                         }
 

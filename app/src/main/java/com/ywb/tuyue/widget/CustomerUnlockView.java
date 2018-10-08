@@ -200,16 +200,17 @@ public class CustomerUnlockView extends View {
         if (leftX > rightX) {
             leftX = rightX;
         }
-        postInvalidate();   //请求重新绘制view树
+        postInvalidate();   //请求重新绘制view树,可以在UI线程和工作线程执行
+//        invalidate(); //只能在UI线程执行
         return true;
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        //使用canvas绘画（bitmap，宽，高，画笔）
+        //使用canvas绘画（bitmap，宽，高，画笔  ）
         canvas.drawBitmap(roadBitmap, roadX, roadY, paint);
-//        canvas.drawCircle();  //绘画一个圆形
+//        canvas.drawCircle();  //绘画一个圆形（中心点的横，纵，半径，画笔）
         paint.setColor(getResources().getColor(R.color.unlock_text_color));
         paint.setTextSize(textSize);
         paint.setTextAlign(Paint.Align.CENTER);//设置锚点

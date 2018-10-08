@@ -122,11 +122,11 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
                 break;
             case R.id.syncMovie:
                 //判断当前网络可用
-                if (SPUtils.getInstance().getBoolean(NETWORK_AVAILABLE)) {
-                    presenter.getMovieData();
-                } else {
-                    ToastUtils.showShort("请检查网络是否连接");
-                }
+//                if (SPUtils.getInstance().getBoolean(NETWORK_AVAILABLE)) {
+//                    presenter.getMovieData();
+//                } else {
+//                    ToastUtils.showShort("请检查网络是否连接");
+//                }
                 break;
             case R.id.downAll:
                 mOperation.forward(DownloadAllActivity.class);
@@ -195,7 +195,7 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
             }
         }
 //        //获取1905数据
-//        presenter.getMovieData();
+        presenter.getMovieData();
 
     }
 
