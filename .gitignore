@@ -11,7 +11,5 @@ gradlew
 gradlew.bat
 /captures
 .externalNativeBuild
-config.gradle
 app/release/
-
 
