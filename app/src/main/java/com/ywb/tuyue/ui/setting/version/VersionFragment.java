@@ -3,28 +3,19 @@ package com.ywb.tuyue.ui.setting.version;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.ta.utdid2.android.utils.SystemUtils;
 import com.ywb.tuyue.BuildConfig;
 import com.ywb.tuyue.R;
-import com.ywb.tuyue.constants.Constants;
 import com.ywb.tuyue.entity.TVersion;
 import com.ywb.tuyue.ui.mvp.BaseFragmentV4;
 
@@ -33,9 +24,7 @@ import java.io.File;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 import static com.ywb.tuyue.constants.Constants.NETWORK_AVAILABLE;
 

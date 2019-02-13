@@ -12,14 +12,14 @@ android {
         }
     }
 
-    compileSdkVersion 26
-    buildToolsVersion '26.0.3'
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "com.ywb.tuyue"
         versionCode 74
         versionName "20180927.74.0.1"
         minSdkVersion 19
-        targetSdkVersion 26
+        targetSdkVersion 28
 //        minSdkVersion externalMinSdkVersion
 //        targetSdkVersion externalTargetSdkVersion
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -128,11 +128,10 @@ dependencies {
     implementation externalJpush
     implementation externalJcore
     implementation externalPinyin
-    implementation externalRxTools
     implementation externalJiaoziVideoPlayer
     implementation externalJsoup
     //View library
-    //    compile 'com.qmuiteam:qmui:1.0.0'
+    //    implementation 'com.qmuiteam:qmui:1.0.0'
     implementation externalFlipboardBottomsheet
     implementation externalFlipboardBottomsheetCommons
     implementation externalBaseRecyclerViewAdapterHelper
@@ -145,7 +144,6 @@ dependencies {
     implementation externalRecyclerviewAnimators
     implementation externalJudeRollviewpager
     implementation externalCircleimageview
-    implementation externalNiceSpinner
     //    implementation externalBottomNavigationView
     implementation externalRatingBar
     //底部滚筒选择
@@ -163,5 +161,4 @@ dependencies {
 //    implementation externalPDF
     implementation externalSwitchButton
     implementation project(':1905DrmServiceLib')
-    //    implementation files('libs/tbs_sdk_thirdapp_v3.2.0.1104_43200_sharewithdownload_withfilereader_withoutGame_obfs_20170609_115346.jar')
 }
