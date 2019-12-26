@@ -3,20 +3,18 @@ package com.ywb.tuyue.ui.setting.gaindata;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.lzy.okserver.OkDownload;
 import com.ywb.tuyue.R;
 import com.ywb.tuyue.constants.Constants;
+import com.ywb.tuyue.constants.enums.DownloadEventEnum;
 import com.ywb.tuyue.entity.TAdvert;
 import com.ywb.tuyue.entity.TDataVersion;
-import com.ywb.tuyue.ui.mvp.BaseEvents;
-import com.ywb.tuyue.ui.mvp.BaseFragmentV4;
+import com.ywb.tuyue.base.BaseFragmentV4;
 import com.ywb.tuyue.ui.setting.download.DownloadAllActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -66,7 +64,7 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
 
     @Override
     public void endLoading() {
-        mOperation.dissMissDialog();
+        mOperation.dismissDialog();
     }
 
     @Override
@@ -245,18 +243,18 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
 
 
     @Subscribe
-    public void finishDownload(BaseEvents.CommonEvent commonEvent) {
+    public void finishDownload(DownloadEventEnum commonEvent) {
         LogUtils.e("接收到单个完成下载eventBus事件");
-        if (commonEvent == BaseEvents.CommonEvent.FINISH_DOWNLOAD) {
+        if (commonEvent == DownloadEventEnum.FINISH_DOWNLOAD) {
             //结束加载动画
-            if (mOperation.getDialog() != null) {
-                endLoading();
-            }
+//            if (mOperation.getDialog() != null) {
+//                endLoading();
+//            }
         }
     }
 
     @Subscribe
-    public void finishAll(BaseEvents.CommonEvent commonEvent) {
+    public void finishAll(DownloadEventEnum commonEvent) {
         LogUtils.e("接收到全部完成下载eventBus事件");
     }
 }

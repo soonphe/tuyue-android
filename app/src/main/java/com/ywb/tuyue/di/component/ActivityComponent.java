@@ -26,7 +26,7 @@ import dagger.Component;
 
 
 /**
- * @Author anna
+ * @Author soonphe
  * @Date 2017-11-21 10:52
  * @Description 获取依赖对象，dependencies声明依赖关系
  */
@@ -42,7 +42,6 @@ public interface ActivityComponent {
      *
      * @param activity
      */
-
     void inject(MainActivity activity);//主界面
 
     void inject(SplashActivity activity);//欢迎页

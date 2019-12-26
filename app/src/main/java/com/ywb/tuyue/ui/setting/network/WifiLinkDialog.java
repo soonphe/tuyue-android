@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.net.wifi.WifiConfiguration;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.StyleRes;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -14,9 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.StyleRes;
 
 import com.blankj.utilcode.util.KeyboardUtils;
 import com.ywb.tuyue.R;

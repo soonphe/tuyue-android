@@ -3,16 +3,17 @@ package com.ywb.tuyue.ui.video.movie;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.jude.easyrecyclerview.decoration.SpaceDecoration;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.ywb.tuyue.R;
+import com.ywb.tuyue.base.BaseFragmentV4;
 import com.ywb.tuyue.entity.TMovie;
 import com.ywb.tuyue.ui.adapter.MovieAdapter;
-import com.ywb.tuyue.ui.mvp.BaseFragmentV4;
 import com.ywb.tuyue.ui.videoplayer.VideoPlayerActivity;
 
 import java.util.List;

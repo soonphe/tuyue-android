@@ -1,7 +1,7 @@
 package com.ywb.tuyue.ui.setting.version;
 
 import com.ywb.tuyue.entity.TVersion;
-import com.ywb.tuyue.ui.mvp.BasePView;
+import com.ywb.tuyue.base.mvp.BasePView;
 
 
 public class VersionContract {

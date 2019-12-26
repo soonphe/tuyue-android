@@ -4,9 +4,7 @@ package com.ywb.tuyue.widget;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.StringRes;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,13 +13,14 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.StringRes;
+
 import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.ywb.tuyue.R;
 import com.ywb.tuyue.utils.ResourceUtils;
-import com.ywb.tuyue.utils.StatusBarUtil;
 import com.ywb.tuyue.widget.head.CustomStatusBar;
 
 

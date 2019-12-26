@@ -1,7 +1,6 @@
 package com.ywb.tuyue.ui.splash;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -22,7 +21,7 @@ import com.ywb.tuyue.ui.advert.AdvertPresenter;
 import com.ywb.tuyue.ui.data.DataContract;
 import com.ywb.tuyue.ui.data.DataPresenter;
 import com.ywb.tuyue.ui.main.MainActivity;
-import com.ywb.tuyue.ui.mvp.BaseActivity;
+import com.ywb.tuyue.base.BaseActivity;
 import com.ywb.tuyue.utils.GlideUtils;
 
 import org.litepal.LitePal;

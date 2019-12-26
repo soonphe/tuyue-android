@@ -3,7 +3,6 @@ package com.ywb.tuyue.api;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import com.ywb.tuyue.components.okhttp.HttpLoggingInterceptor;
 import com.ywb.tuyue.constants.Constants;
 import com.ywb.tuyue.dto.TStatsDto;
 import com.ywb.tuyue.dto.TUserDto;
@@ -21,8 +20,6 @@ import com.ywb.tuyue.entity.TFoodType;
 import com.ywb.tuyue.entity.TGame;
 import com.ywb.tuyue.entity.TGameType;
 import com.ywb.tuyue.entity.TMovieBean;
-import com.ywb.tuyue.entity.TStats;
-import com.ywb.tuyue.entity.TUser;
 import com.ywb.tuyue.entity.TVersion;
 import com.ywb.tuyue.entity.TVideo;
 import com.ywb.tuyue.entity.TVideoType;
@@ -30,32 +27,56 @@ import com.ywb.tuyue.entity.TVideoType;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * @Author anna
+ * @Author soonphe
  * @Date 2017-11-20 18:04
- * @Description 网络请求
+ * @Description API
  */
 
 public class AppApi implements AppApiService {
+
+    @Inject
+    OkHttpClient okHttpClient;
+
     private AppApiService service;
 
     public AppApi(OkHttpClient mOkHttpClient) {
         Retrofit retrofit =
                 new Retrofit.Builder()
                         .client(mOkHttpClient)
-                        .baseUrl(Constants.BASE_API_URL) //http://192.168.9.145:8080/api/
+                        .baseUrl(Constants.BASE_API_URL)
                         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                         .addConverterFactory(com.ywb.tuyue.components.retrofit.GsonConverterFactory.create())
                         .build();
         service = retrofit.create(AppApiService.class);
+    }
+
+    /**
+     * 自定义请求路径
+     *
+     * @param baseUrl 自定义请求路径
+     */
+    public AppApiService getAppApi(String baseUrl) {
+        Retrofit retrofit =
+                new Retrofit.Builder()
+                        .client(okHttpClient)
+                        .baseUrl(baseUrl)
+                        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                        //这里使用的是默认json解析
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+        return retrofit.create(AppApiService.class);
     }
 
     /**

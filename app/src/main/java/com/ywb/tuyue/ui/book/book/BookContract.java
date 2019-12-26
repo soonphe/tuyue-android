@@ -3,7 +3,7 @@ package com.ywb.tuyue.ui.book.book;
 import com.ywb.tuyue.entity.TAdvert;
 import com.ywb.tuyue.entity.TBook;
 import com.ywb.tuyue.entity.TBookType;
-import com.ywb.tuyue.ui.mvp.BasePView;
+import com.ywb.tuyue.base.mvp.BasePView;
 
 import java.util.List;
 

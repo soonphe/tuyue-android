@@ -1,13 +1,11 @@
 package com.ywb.tuyue.ui.main;
 
 import com.blankj.utilcode.util.SPUtils;
-import com.blankj.utilcode.util.Utils;
 import com.ywb.tuyue.api.AppApi;
 import com.ywb.tuyue.di.PerActivity;
 import com.ywb.tuyue.dto.TUserDto;
-import com.ywb.tuyue.entity.TStats;
 import com.ywb.tuyue.entity.TUser;
-import com.ywb.tuyue.ui.mvp.BasePresenter;
+import com.ywb.tuyue.base.mvp.BasePresenter;
 
 import javax.inject.Inject;
 

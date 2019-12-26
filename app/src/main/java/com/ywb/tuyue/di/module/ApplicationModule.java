@@ -4,11 +4,9 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.view.LayoutInflater;
 
-import com.blankj.utilcode.util.CacheUtils;
-import com.blankj.utilcode.util.StringUtils;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
-import com.ywb.tuyue.components.okhttp.HttpLoggingInterceptor;
-import com.ywb.tuyue.constants.Constants;
+import com.ywb.tuyue.BuildConfig;
+import com.ywb.tuyue.components.okhttp.InterceptorUtils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -17,10 +15,9 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
 
 /**
- * @Author anna
+ * @Author soonphe
  * @Date 2017-11-21 10:56
  * @Description 提供Context，OkHttpClient，LayoutInflater，NotificationManager
  */
@@ -50,26 +47,13 @@ public class ApplicationModule {
                 //全局的写入超时时间
                 .writeTimeout(10, TimeUnit.SECONDS)
                 .retryOnConnectionFailure(true);
-        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-        //log打印级别，决定了log显示的详细程度
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-        //添加stetho网络请求监控
+        //日志拦截器
+        builder.addInterceptor(InterceptorUtils.getHttpLoggingInterceptor(BuildConfig.DEBUG));
+        //缓存拦截器
+        builder.addInterceptor(InterceptorUtils.getCacheInterceptor());
+        //Stetho网络监控拦截器
         builder.addNetworkInterceptor(new StethoInterceptor());
-        builder.addInterceptor(logging);
-        //请求header拦截器——存在userId/token即添加
-        builder.addInterceptor(
-                chain -> {
-                    Request originalRequest = chain.request();
-                    if (StringUtils.isEmpty(CacheUtils.getInstance().getString(Constants.USER_ID) + "") || StringUtils.isEmpty(CacheUtils.getInstance().getString(Constants.USER_TOKEN))) {
-                        return chain.proceed(originalRequest);
-                    }
-                    Request authorised = originalRequest.newBuilder()
-                            .addHeader("userId", CacheUtils.getInstance().getString(Constants.USER_ID).toString())
-                            .addHeader("token", CacheUtils.getInstance().getString(Constants.USER_TOKEN) + "")
-                            .build();
-                    return chain.proceed(authorised);
-                }
-        );
+        //...其他拦截器
         return builder.build();
     }
 

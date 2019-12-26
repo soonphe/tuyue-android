@@ -1,4 +1,4 @@
-package com.ywb.tuyue.ui.mvp;
+package com.ywb.tuyue.base;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -10,10 +10,9 @@ import android.view.View;
 import android.view.WindowManager;
 
 /**
- * 自定义控件基础类
- * 
- * @version 1.0
- * 
+ * @Author soonphe
+ * @Date 2017-12-01 15:13
+ * @Description 自定义控件基础类
  */
 public abstract class BaseView extends View {
 

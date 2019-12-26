@@ -2,22 +2,21 @@ package com.ywb.tuyue.ui.video;
 
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.text.format.DateUtils;
 import android.view.View;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.constant.TimeConstants;
 import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
-import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.TimeUtils;
 import com.jude.easyrecyclerview.decoration.SpaceDecoration;
 import com.ywb.tuyue.R;
+import com.ywb.tuyue.base.BaseActivity;
 import com.ywb.tuyue.constants.Constants;
 import com.ywb.tuyue.entity.PMenu;
 import com.ywb.tuyue.entity.TStats;
@@ -27,7 +26,6 @@ import com.ywb.tuyue.ui.data.DataContract;
 import com.ywb.tuyue.ui.data.DataPresenter;
 import com.ywb.tuyue.ui.video.movie.MovieFragment;
 import com.ywb.tuyue.ui.video.video.VideoFragment;
-import com.ywb.tuyue.ui.mvp.BaseActivity;
 import com.ywb.tuyue.widget.AppTitle;
 import com.ywb.tuyue.widget.MyViewPager;
 
@@ -39,9 +37,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-
-import static com.blankj.utilcode.util.CacheUtils.SEC;
-import static com.ywb.tuyue.constants.Constants.NETWORK_AVAILABLE;
 
 
 /**

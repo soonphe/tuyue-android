@@ -6,28 +6,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.KeyboardUtils;
-import com.blankj.utilcode.util.SPUtils;
-import com.blankj.utilcode.util.ToastUtils;
 import com.ywb.tuyue.R;
 import com.ywb.tuyue.constants.Constants;
 import com.ywb.tuyue.services.hotspot.ServiceUtil;
-import com.ywb.tuyue.ui.mvp.BaseFragmentV4;
+import com.ywb.tuyue.base.BaseFragmentV4;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
-
-import static com.ywb.tuyue.constants.Constants.NETWORK_AVAILABLE;
 
 
 /**

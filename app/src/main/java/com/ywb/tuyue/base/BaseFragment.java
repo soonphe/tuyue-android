@@ -1,4 +1,4 @@
-package com.ywb.tuyue.ui.mvp;
+package com.ywb.tuyue.base;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

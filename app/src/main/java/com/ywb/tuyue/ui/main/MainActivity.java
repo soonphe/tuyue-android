@@ -1,27 +1,21 @@
 package com.ywb.tuyue.ui.main;
 
-import android.app.Activity;
-import android.app.Dialog;
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
-import android.support.v4.content.LocalBroadcastManager;
-import android.util.DisplayMetrics;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.RequiresApi;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.blankj.utilcode.util.BarUtils;
@@ -33,6 +27,7 @@ import com.blankj.utilcode.util.TimeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.ywb.tuyue.R;
+import com.ywb.tuyue.base.BaseActivity;
 import com.ywb.tuyue.constants.Constants;
 import com.ywb.tuyue.entity.TAdvert;
 import com.ywb.tuyue.entity.TStats;
@@ -48,7 +43,6 @@ import com.ywb.tuyue.ui.data.DataPresenter;
 import com.ywb.tuyue.ui.food.FoodActivity;
 import com.ywb.tuyue.ui.game.game.GameActivity;
 import com.ywb.tuyue.ui.jpush.ExampleUtil;
-import com.ywb.tuyue.ui.mvp.BaseActivity;
 import com.ywb.tuyue.ui.setting.SettingActivity;
 import com.ywb.tuyue.ui.video.CinemaActivity;
 import com.ywb.tuyue.utils.DeviceUtils;
@@ -65,7 +59,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.ywb.tuyue.constants.Constants.IS_MOBILE;
@@ -154,8 +147,8 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, D
             //这里只选取最新的两张图片
             GlideUtils.loadImageViewLoding(this,
                     list.get(0).getDownloadPic(), advertise1, R.mipmap.main_header_01, R.mipmap.main_header_01);
-            GlideUtils.loadImageViewLoding(this,
-                    list.get(1).getDownloadPic(), advertise2, R.mipmap.main_header_02, R.mipmap.main_header_02);
+//            GlideUtils.loadImageViewLoding(this,
+//                    list.get(1).getDownloadPic(), advertise2, R.mipmap.main_header_02, R.mipmap.main_header_02);
         }
 
     }
@@ -282,12 +275,19 @@ public class MainActivity extends BaseActivity implements AdvertContract.View, D
     /**
      * 展示注册对话框
      */
+    @SuppressLint("ResourceAsColor")
     public void onDialog() {
         int[] gender = {0};//1男2女
         int[] age = {0};//0：20以下，1:20-40，2:40-60,3:60以上
 
-        materialDialog = mOperation
-                .showCustomerDialog("", R.layout.dialog_register, true);
+        materialDialog = new MaterialDialog.Builder(this)
+//                .content(content)
+//                .positiveText(R.string.ok)
+//                .negativeText(R.string.cancel)
+                .autoDismiss(false)
+                .customView(R.layout.dialog_register, true)
+                .backgroundColor(R.color.transparent)
+                .show();
         //不允许点击外侧关闭
         materialDialog.setCanceledOnTouchOutside(false);
         //        设置关闭监听

@@ -15,17 +15,6 @@
  */
 package com.ywb.tuyue.data;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.PixelFormat;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
@@ -47,6 +36,19 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.PixelFormat;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+
+import com.blankj.utilcode.util.ZipUtils;
+
 /**
  * @author Michael Yang（www.yangfuhai.com） update at 2013.08.07
  */
@@ -54,8 +56,6 @@ public class ACache {
 	public static final int TIME_HOUR = 60 * 60;
 	public static final int TIME_DAY = TIME_HOUR * 24;
 	private static final int MAX_SIZE = 1000 * 1000 * 50; // 50 mb
-
-
 	private static final int MAX_COUNT = Integer.MAX_VALUE; // 不限制存放数据的数量
 	private static Map<String, ACache> mInstanceMap = new HashMap<String, ACache>();
 	private ACacheManager mCache;

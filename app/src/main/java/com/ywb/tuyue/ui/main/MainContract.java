@@ -1,8 +1,7 @@
 package com.ywb.tuyue.ui.main;
 
-import com.ywb.tuyue.entity.TStats;
 import com.ywb.tuyue.entity.TUser;
-import com.ywb.tuyue.ui.mvp.BasePView;
+import com.ywb.tuyue.base.mvp.BasePView;
 
 
 public class MainContract {

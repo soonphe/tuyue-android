@@ -1,23 +1,28 @@
-package com.ywb.tuyue.ui.mvp;
+package com.ywb.tuyue.base.mvp;
 
 
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
- * 创建presenter的时候 继承这个传入泛型View 主要做绑定view 和 一些初始化操作
- * Created by wushange on  2016/07/27.
+ * @Author soonphe
+ * @Date 2017-12-01 15:13
+ * @Description BasePresenter 持有View对象
  */
 public abstract class BasePresenter<T> {
     public    T                   mView;//View
     protected CompositeDisposable mDisposable;
 
-
+    /**
+     * 添加view引用和订阅事件
+     */
     public void attachView(T view) {
         this.mView = view;
         mDisposable = new CompositeDisposable();
     }
 
-
+    /**
+     * 切断view引用和订阅事件
+     */
     public void detachView() {
         mView = null;
         mDisposable.clear();

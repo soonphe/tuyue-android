@@ -1,4 +1,4 @@
-package com.ywb.tuyue.ui.mvp;
+package com.ywb.tuyue.base;
 
 import android.app.Activity;
 import android.app.Application;
@@ -13,25 +13,11 @@ import java.util.Stack;
 
 
 /**
- * 整个应用程序Applicaiton
- *
- * @version 1.0 继承LitePalApplication
- * 使用数据库：extends LitePalApplication 不能多继承TinkerApplication
- * public abstract class BaseApplication extends LitePalApplication
- * 这里使用litepal2，则可以直接继承Application
+ * @Author soonphe
+ * @Date 2017-12-01 15:13
+ * @Description BaseApplication
  */
 public abstract class BaseApplication extends Application {
-
-//    /**
-//     参数1：tinkerFlags 表示Tinker支持的类型 dex only、library only or all suuport，default: TINKER_ENABLE_ALL
-//     参数2：delegateClassName Application代理类 这里填写你自定义的ApplicationLike
-//     参数3：loaderClassName Tinker的加载器，使用默认即可
-//     参数4：tinkerLoadVerifyFlag 加载dex或者lib是否验证md5，默认为false
-//     */
-//    public BaseApplication() {
-//        super(ShareConstants.TINKER_ENABLE_ALL, MyApplication.class.getCanonicalName(),
-//                "com.tencent.tinker.loader.TinkerLoader", false);
-//    }
 
     /**
      * 对外提供整个应用生命周期的Context
@@ -53,7 +39,9 @@ public abstract class BaseApplication extends Application {
      * 整个应用全局可访问数据集合
      **/
     private static Map<String, Object> gloableData = new HashMap<String, Object>();
-    /***寄存整个应用Activity**/
+    /**
+     * 寄存整个应用Activity
+     */
     private final Stack<WeakReference<Activity>> activitys = new Stack<WeakReference<Activity>>();
     /**
      * 日志输出标志

@@ -2,10 +2,7 @@ package com.ywb.tuyue.ui.setting.gaindata;
 
 import com.ywb.tuyue.entity.TAdvert;
 import com.ywb.tuyue.entity.TDataVersion;
-import com.ywb.tuyue.entity.TMovie;
-import com.ywb.tuyue.entity.TStats;
-import com.ywb.tuyue.entity.TVersion;
-import com.ywb.tuyue.ui.mvp.BasePView;
+import com.ywb.tuyue.base.mvp.BasePView;
 
 import java.util.List;
 

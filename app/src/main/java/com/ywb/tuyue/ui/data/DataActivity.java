@@ -5,7 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
-import com.ywb.tuyue.ui.mvp.BaseActivity;
+import com.ywb.tuyue.base.BaseActivity;
 
 
 /**

@@ -1,6 +1,4 @@
 apply plugin: 'com.android.application'
-//apply from 'tinkerpatch.gradle'
-
 
 android {
     signingConfigs {
@@ -20,17 +18,8 @@ android {
         versionName "20180927.74.0.1"
         minSdkVersion 19
         targetSdkVersion 28
-//        minSdkVersion externalMinSdkVersion
-//        targetSdkVersion externalTargetSdkVersion
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
-
-        ndk{
-            //设置支持的so库架构，过滤 so文件
-            //音视频通话组件 CallLib 仅支持 armeabi-v7a 和 x86 架构 CPU：abiFilters "armeabi-v7a", "x86"
-            abiFilters "armeabi-v7a", "x86"
-//            abiFilters  'armeabi' , 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
-        }
         //极光key
         manifestPlaceholders = [
                 JPUSH_PKGNAME : applicationId,
@@ -47,8 +36,12 @@ android {
         release {
             //不显示log
             buildConfigField "boolean" ,"LOG_DEBUG" ,"false"
+            //混淆
             minifyEnabled false
+            //Zipalign优化
             zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
         }
@@ -83,35 +76,26 @@ dependencies {
     //base
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation externalJunit
-    //    androidTestImplementation externalAndroidTestRunner
     androidTestImplementation(externalAndroidTestEspressoCore, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    //option
+
     implementation externalAndroidMultiDex
+    implementation (externalAndroidAppCompatV7){
+            exclude module: "support-v4"
+            exclude module: "support-annotations"
+    }
     implementation externalAndroidSupportV4
-    implementation externalAndroidAppCompatV7
+    implementation externalAndroidSupportV13
+    implementation externalAnnotations
     implementation externalAndroidDesign
-    implementation externalAndroidCardView
+    implementation externalAndroidCardViewV7
     implementation externalAndroidConstrainLayout
     //Tools library
     implementation externalFacebookStetho
     implementation externalFacebookStethoOkhttp
-    implementation externalYouthBanner
     implementation externalGoogleDagger
     annotationProcessor externalGoogleDaggerCompiler
-    implementation externalOrhanobutLogger
-    implementation externalRxpermissions2
-    implementation externalOkgo
-    implementation externalOkserver
-    implementation externalBumptechGlide
-    implementation externalGreenrobotEventbus
-    implementation externalAlibabaFastjson
-    implementation externalTencentBuglyCrashreport
-    implementation externalTencentBuglyNativecrashreport
-    // 若使用annotation需要单独引用,对于tinker的其他库都无需再引用
-//    provided("com.tinkerpatch.tinker:tinker-android-anno:1.9.8")
-//    implementation externalTinkerpatch
     implementation externalJakewhartonButterknife
     annotationProcessor externalJakewhartonButterknifeCompiler
     implementation externalRxjava2
@@ -119,19 +103,28 @@ dependencies {
     implementation externalRetrofit2
     implementation externalRetrofit2ConverterGson
     implementation externalRetrofit2Rxjava2Adapter
+    implementation externalOkHttp
+    implementation externalOkHttpLogging
+    implementation externalOkgo
+    implementation externalOkserver
+    implementation externalOrhanobutLogger
+    implementation externalRxpermissions2
+    implementation externalBumptechGlide
+    implementation externalGreenrobotEventbus
+    implementation externalAlibabaFastjson
+    implementation externalTencentBuglyCrashreport
+    implementation externalTencentBuglyNativecrashreport
     implementation externalLitepal
     implementation externalSaripaar
     implementation externalLuban
     implementation externalBlankjUtilcode
-    //    provided externalLombok
-    //    implementation externalJavaxAnnotation
     implementation externalJpush
     implementation externalJcore
     implementation externalPinyin
     implementation externalJiaoziVideoPlayer
     implementation externalJsoup
     //View library
-    //    implementation 'com.qmuiteam:qmui:1.0.0'
+    implementation externalYouthBanner
     implementation externalFlipboardBottomsheet
     implementation externalFlipboardBottomsheetCommons
     implementation externalBaseRecyclerViewAdapterHelper
@@ -144,12 +137,6 @@ dependencies {
     implementation externalRecyclerviewAnimators
     implementation externalJudeRollviewpager
     implementation externalCircleimageview
-    //    implementation externalBottomNavigationView
-    implementation externalRatingBar
-    //底部滚筒选择
-    implementation('cn.qqtheme.framework:WheelPicker:latest.release') {
-        exclude group: 'com.android.support'
-    }
     implementation externalCitypicker
     implementation externalBadgeView
     implementation externalFlycoTabLayout
@@ -158,7 +145,5 @@ dependencies {
     implementation externalBottomNavigationView
     implementation externalPhotoView
     implementation externalTxtReader
-//    implementation externalPDF
     implementation externalSwitchButton
-    implementation project(':1905DrmServiceLib')
 }

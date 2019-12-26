@@ -10,7 +10,6 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.BatteryManager;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,14 +18,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+
 import com.blankj.utilcode.util.NetworkUtils;
 import com.ywb.tuyue.R;
-import com.ywb.tuyue.utils.NetWorkUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import static android.content.Context.WIFI_SERVICE;
 
 /**
  * @Author soonphe

@@ -1,14 +1,7 @@
 package com.ywb.tuyue.ui.setting.gaindata;
 
-import android.net.Uri;
-import android.util.Log;
-
-import com.blankj.utilcode.util.DeviceUtils;
 import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.LogUtils;
-import com.blankj.utilcode.util.SPUtils;
-import com.blankj.utilcode.util.StringUtils;
-import com.blankj.utilcode.util.ToastUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.FileCallback;
 import com.lzy.okgo.model.Progress;
@@ -16,7 +9,6 @@ import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
 import com.lzy.okserver.OkDownload;
 import com.lzy.okserver.download.DownloadTask;
-import com.micro.player.service.DrmService;
 import com.ywb.tuyue.api.AppApi;
 import com.ywb.tuyue.constants.Constants;
 import com.ywb.tuyue.di.PerActivity;
@@ -34,8 +26,8 @@ import com.ywb.tuyue.entity.TMovie;
 import com.ywb.tuyue.entity.TStats;
 import com.ywb.tuyue.entity.TUser;
 import com.ywb.tuyue.entity.TVideo;
+import com.ywb.tuyue.base.mvp.BasePresenter;
 import com.ywb.tuyue.ui.setting.download.LogDownloadListener;
-import com.ywb.tuyue.ui.mvp.BasePresenter;
 import com.ywb.tuyue.utils.HTMLFormatUtils;
 
 import org.litepal.LitePal;
@@ -50,8 +42,6 @@ import javax.inject.Inject;
 
 import io.reactivex.Observable;
 
-import static com.ywb.tuyue.constants.Constants.DOWNLOAD_COUNT;
-import static com.ywb.tuyue.constants.Constants.DOWNLOAD_PATH;
 import static com.ywb.tuyue.constants.Constants.DOWNLOAD_PATH2;
 
 @PerActivity
@@ -162,47 +152,48 @@ public class GainDataPresenter extends BasePresenter<GainDataContract.View> impl
     @Override
     public void getMovieData() {
         mView.startLoading();
-        mDisposable.add(api.getMovieList().subscribe(result -> {
-                    //存储所有结果集
-                    if (LitePal.findFirst(TMovie.class) != null) {
-                        LitePal.deleteAll(TMovie.class);
-                    }
-                    List<TMovie> list = result.getData().getData().getVideos();
-                    LitePal.saveAll(list);
-
-                    SPUtils.getInstance().put(DOWNLOAD_COUNT, list.size());
-                    //获取drm服务对象
-                    DrmService drmService = DrmService.getService();
-                    boolean isStartService = drmService.startService();
-                    if (!drmService.initDrmdecoder()) {  // 初始化
-                        ToastUtils.showShort("解密模块启动失败，请重启电视盒子或联系管理员");
-                    }
-                    for (TMovie tMovie : list) {
-//                        if (tMovie == list.get(0)) {
-                        //根据位置获取当前点击的视频播放url
-                        Uri uri = null;
-                        if (isStartService) {
-                            //获取的url为已解密的直接可播放地址
-                            uri = DrmService.getService().getUrl(
-                                    tMovie.getSave_name(),
-                                    DeviceUtils.getMacAddress(), //传入一个房间或者是盒子的唯一标识
-                                    "192.168.1.6",//服务器端的ip
-                                    "" //订单标识
-                            );
-                        }
-                        downloadFile(tMovie, 0, tMovie.getFace_pic() + "");
-                        downloadFile(tMovie, 1, uri.toString() + "");
-                        //②：这里下载本地服务器资源
-//                        String fileName = tMovie.getFile_path();
-//                        downloadFile2(tMovie, 1,
-//                                Constants.BASE_IMAGE_URL + "/movie/" + fileName.substring(fileName.lastIndexOf("/") + 1, fileName.length()) + "");
-
+        mView.getMovieDataSuccess();
+//        mDisposable.add(api.getMovieList().subscribe(result -> {
+//                    //存储所有结果集
+//                    if (LitePal.findFirst(TMovie.class) != null) {
+//                        LitePal.deleteAll(TMovie.class);
+//                    }
+//                    List<TMovie> list = result.getData().getData().getVideos();
+//                    LitePal.saveAll(list);
+//
+//                    SPUtils.getInstance().put(DOWNLOAD_COUNT, list.size());
+//                    //获取drm服务对象
+//                    DrmService drmService = DrmService.getService();
+//                    boolean isStartService = drmService.startService();
+//                    if (!drmService.initDrmdecoder()) {  // 初始化
+//                        ToastUtils.showShort("解密模块启动失败，请重启电视盒子或联系管理员");
+//                    }
+//                    for (TMovie tMovie : list) {
+////                        if (tMovie == list.get(0)) {
+//                        //根据位置获取当前点击的视频播放url
+//                        Uri uri = null;
+//                        if (isStartService) {
+//                            //获取的url为已解密的直接可播放地址
+//                            uri = DrmService.getService().getUrl(
+//                                    tMovie.getSave_name(),
+//                                    DeviceUtils.getMacAddress(), //传入一个房间或者是盒子的唯一标识
+//                                    "192.168.1.6",//服务器端的ip
+//                                    "" //订单标识
+//                            );
 //                        }
-                    }
-                    mView.getMovieDataSuccess();
-                },
-                throwable -> mView.onError(throwable.getMessage()))
-        );
+//                        downloadFile(tMovie, 0, tMovie.getFace_pic() + "");
+//                        downloadFile(tMovie, 1, uri.toString() + "");
+//                        //②：这里下载本地服务器资源
+////                        String fileName = tMovie.getFile_path();
+////                        downloadFile2(tMovie, 1,
+////                                Constants.BASE_IMAGE_URL + "/movie/" + fileName.substring(fileName.lastIndexOf("/") + 1, fileName.length()) + "");
+//
+////                        }
+//                    }
+//                    mView.getMovieDataSuccess();
+//                },
+//                throwable -> mView.onError(throwable.getMessage()))
+//        );
     }
 
     /**

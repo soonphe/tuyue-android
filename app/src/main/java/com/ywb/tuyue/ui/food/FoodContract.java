@@ -2,7 +2,7 @@ package com.ywb.tuyue.ui.food;
 
 import com.ywb.tuyue.entity.TFood;
 import com.ywb.tuyue.entity.TFoodType;
-import com.ywb.tuyue.ui.mvp.BasePView;
+import com.ywb.tuyue.base.mvp.BasePView;
 
 import java.util.List;
 

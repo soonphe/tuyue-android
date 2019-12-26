@@ -1,9 +1,6 @@
 package com.ywb.tuyue.ui.unlock;
 
-import com.ywb.tuyue.entity.TStats;
-import com.ywb.tuyue.ui.mvp.BasePView;
-
-import java.util.List;
+import com.ywb.tuyue.base.mvp.BasePView;
 
 /**
  * @Author anna

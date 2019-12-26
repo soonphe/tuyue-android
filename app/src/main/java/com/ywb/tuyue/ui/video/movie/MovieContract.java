@@ -1,7 +1,7 @@
 package com.ywb.tuyue.ui.video.movie;
 
 import com.ywb.tuyue.entity.TMovie;
-import com.ywb.tuyue.ui.mvp.BasePView;
+import com.ywb.tuyue.base.mvp.BasePView;
 
 import java.util.List;
 

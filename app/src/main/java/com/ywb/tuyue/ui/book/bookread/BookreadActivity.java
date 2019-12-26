@@ -17,7 +17,7 @@ import com.blankj.utilcode.util.EmptyUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.ywb.tuyue.R;
 import com.ywb.tuyue.entity.TBook;
-import com.ywb.tuyue.ui.mvp.BaseActivity;
+import com.ywb.tuyue.base.BaseActivity;
 import com.ywb.tuyue.widget.AppTitle;
 
 import org.litepal.LitePal;

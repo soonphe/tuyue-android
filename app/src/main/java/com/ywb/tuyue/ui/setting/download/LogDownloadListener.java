@@ -12,9 +12,7 @@ import com.ywb.tuyue.entity.TFood;
 import com.ywb.tuyue.entity.TGame;
 import com.ywb.tuyue.entity.TMovie;
 import com.ywb.tuyue.entity.TVideo;
-import com.ywb.tuyue.ui.mvp.BaseEvents;
 
-import org.greenrobot.eventbus.EventBus;
 import org.litepal.crud.LitePalSupport;
 
 import java.io.File;

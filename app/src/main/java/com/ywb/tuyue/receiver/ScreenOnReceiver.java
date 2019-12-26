@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.CountDownTimer;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.blankj.utilcode.constant.TimeConstants;
@@ -12,13 +11,8 @@ import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.TimeUtils;
-import com.ywb.tuyue.MyApplication;
 import com.ywb.tuyue.constants.Constants;
-import com.ywb.tuyue.services.hotspot.ServiceUtil;
-import com.ywb.tuyue.ui.mvp.BaseActivity;
-import com.ywb.tuyue.ui.mvp.BaseApplication;
 import com.ywb.tuyue.ui.unlock.UnlockActivity;
-import com.ywb.tuyue.utils.ActivityManager;
 
 /**
  * @Author soonphe

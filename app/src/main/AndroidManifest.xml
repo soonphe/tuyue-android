@@ -18,8 +18,6 @@
     <uses-permission android:name="android.permission.READ_LOGS"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <!-- 用于获取运营商信息，用于支持提供运营商信息相关的接口 -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!-- 用于访问wifi网络信息 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <!-- 用于获取wifi的获取权限 -->
@@ -59,16 +57,10 @@
         tools:ignore="ProtectedPermissions" />
     <!-- 录音 -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <!-- 控制振动器 -->
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <!-- 防止设备休眠 -->
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
     <!-- 获取联系人信息，demo中演示发送通讯录消息 -->
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-
 
     <application
         android:name=".MyApplication"
@@ -91,7 +83,7 @@
 
         <!--其他的配置项-->
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="com.ywb.tuyue.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">

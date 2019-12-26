@@ -10,7 +10,7 @@ import dagger.Provides;
 import okhttp3.OkHttpClient;
 
 /**
- * @Author anna
+ * @Author soonphe
  * @Date 2017-11-21 20:46
  * @Description  传入OkHttpClient用以提供Retrofit
  */

@@ -3,9 +3,10 @@ package com.ywb.tuyue.ui.city.citydetail;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.EmptyUtils;
@@ -16,12 +17,12 @@ import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.jude.easyrecyclerview.decoration.SpaceDecoration;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.ywb.tuyue.R;
+import com.ywb.tuyue.base.BaseActivity;
 import com.ywb.tuyue.entity.TCity;
 import com.ywb.tuyue.entity.TCityArticle;
 import com.ywb.tuyue.entity.TabEntity;
 import com.ywb.tuyue.ui.adapter.CityArticleAdapter;
 import com.ywb.tuyue.ui.city.cityarticle.CityArticleActivity;
-import com.ywb.tuyue.ui.mvp.BaseActivity;
 import com.ywb.tuyue.widget.AppTitle;
 
 import org.litepal.LitePal;

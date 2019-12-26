@@ -7,38 +7,23 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.blankj.utilcode.util.BarUtils;
-import com.blankj.utilcode.util.LogUtils;
-import com.blankj.utilcode.util.NetworkUtils;
-import com.blankj.utilcode.util.SPUtils;
-import com.blankj.utilcode.util.StringUtils;
-import com.blankj.utilcode.util.TimeUtils;
 import com.bumptech.glide.Glide;
 import com.ywb.tuyue.R;
-import com.ywb.tuyue.constants.Constants;
 import com.ywb.tuyue.entity.TAdvert;
-import com.ywb.tuyue.entity.TStats;
 import com.ywb.tuyue.ui.advert.AdvertContract;
 import com.ywb.tuyue.ui.advert.AdvertPresenter;
-import com.ywb.tuyue.ui.data.DataContract;
-import com.ywb.tuyue.ui.data.DataPresenter;
-import com.ywb.tuyue.ui.mvp.BaseActivity;
+import com.ywb.tuyue.base.BaseActivity;
 import com.ywb.tuyue.ui.splash.SplashActivity;
-import com.ywb.tuyue.utils.DeviceUtils;
 import com.ywb.tuyue.utils.GlideUtils;
 import com.ywb.tuyue.widget.CustomerUnlockView;
 
 import org.litepal.LitePal;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
-
-import static com.ywb.tuyue.constants.Constants.IS_MOBILE;
-import static com.ywb.tuyue.constants.Constants.NETWORK_AVAILABLE;
 
 public class UnlockActivity extends BaseActivity implements AdvertContract.View, UnlockContract.UnlockView {
 

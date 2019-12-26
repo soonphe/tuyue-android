@@ -19,7 +19,7 @@ import com.ywb.tuyue.entity.TMovie;
 import com.ywb.tuyue.entity.TVideo;
 import com.ywb.tuyue.ui.advert.AdvertContract;
 import com.ywb.tuyue.ui.advert.AdvertPresenter;
-import com.ywb.tuyue.ui.mvp.BaseActivity;
+import com.ywb.tuyue.base.BaseActivity;
 import com.ywb.tuyue.utils.GlideUtils;
 
 import org.litepal.LitePal;
@@ -30,11 +30,8 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.jzvd.JZMediaManager;
-import cn.jzvd.JZUserAction;
-import cn.jzvd.JZVideoPlayer;
 import cn.jzvd.JZVideoPlayerStandard;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -48,8 +45,6 @@ import static cn.jzvd.JZVideoPlayer.CURRENT_STATE_AUTO_COMPLETE;
 import static cn.jzvd.JZVideoPlayer.CURRENT_STATE_NORMAL;
 import static cn.jzvd.JZVideoPlayer.CURRENT_STATE_PAUSE;
 import static cn.jzvd.JZVideoPlayer.CURRENT_STATE_PLAYING;
-import static cn.jzvd.JZVideoPlayer.CURRENT_STATE_PREPARING;
-import static cn.jzvd.JZVideoPlayer.releaseAllVideos;
 
 /**
  * @Author soonphe

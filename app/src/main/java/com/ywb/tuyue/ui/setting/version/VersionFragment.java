@@ -6,18 +6,19 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.content.FileProvider;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.core.content.FileProvider;
 
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ywb.tuyue.BuildConfig;
 import com.ywb.tuyue.R;
+import com.ywb.tuyue.base.BaseFragmentV4;
 import com.ywb.tuyue.entity.TVersion;
-import com.ywb.tuyue.ui.mvp.BaseFragmentV4;
 
 import java.io.File;
 
@@ -59,7 +60,7 @@ public class VersionFragment extends BaseFragmentV4 implements VersionContract.V
 
     @Override
     public void endLoading() {
-        mOperation.dissMissDialog();
+        mOperation.dismissDialog();
     }
 
     @Override
@@ -124,13 +125,13 @@ public class VersionFragment extends BaseFragmentV4 implements VersionContract.V
 
     @OnClick(R.id.tv_update)
     public void onViewClicked() {
-        mOperation.showBasicDialog("版本升级",
-                "检测到最新版本" + tVersion.getVersioncode() + "，更新内容：" + tVersion.getContent() + "，是否更新？",
-                "更新",
-                "以后再说",
-                (dialog, which) -> {
-                    presenter.downloadApk(tVersion);
-                });
+//        mOperation.showBasicDialog("版本升级",
+//                "检测到最新版本" + tVersion.getVersioncode() + "，更新内容：" + tVersion.getContent() + "，是否更新？",
+//                "更新",
+//                "以后再说",
+//                (dialog, which) -> {
+//                    presenter.downloadApk(tVersion);
+//                });
     }
 
     @Override

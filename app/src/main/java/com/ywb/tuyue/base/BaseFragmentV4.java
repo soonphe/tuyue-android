@@ -1,16 +1,16 @@
-package com.ywb.tuyue.ui.mvp;
+package com.ywb.tuyue.base;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+
 import com.ywb.tuyue.MyApplication;
-import com.ywb.tuyue.di.HasComponent;
 import com.ywb.tuyue.di.component.ApplicationComponent;
 import com.ywb.tuyue.di.component.DaggerFragmentComponent;
 import com.ywb.tuyue.di.component.FragmentComponent;
@@ -22,9 +22,9 @@ import io.reactivex.disposables.CompositeDisposable;
 
 
 /**
- * Fragment基类(V4包)
- *
- * @version 1.0
+ * @Author soonphe
+ * @Date 2017-12-01 15:13
+ * @Description BaseFragment(V4)
  */
 public abstract class BaseFragmentV4 extends Fragment implements IBaseFragment, IBaseConstant {
     protected CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -44,6 +44,7 @@ public abstract class BaseFragmentV4 extends Fragment implements IBaseFragment, 
      * 日志输出标志
      **/
     protected final String TAG = this.getClass().getSimpleName();
+    // ButterKnife绑定
     Unbinder unbinder;
     protected boolean isVisible;
     protected boolean isPrepared;
@@ -66,6 +67,7 @@ public abstract class BaseFragmentV4 extends Fragment implements IBaseFragment, 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d(TAG, "BaseFragmentV4-->onCreateView()");
+        //运行依赖注入
         initInjector();
         // 渲染视图View
         if (null == mContextView) {
@@ -74,8 +76,9 @@ public abstract class BaseFragmentV4 extends Fragment implements IBaseFragment, 
             if (null == parms) {
                 parms = new Bundle();
             }
+            // 初始化参数
             initParams(parms);
-
+            //绑定视图View
             View mView = bindView();
             if (null == mView) {
                 isFirstLoad = true;
@@ -83,6 +86,7 @@ public abstract class BaseFragmentV4 extends Fragment implements IBaseFragment, 
             } else {
                 mContextView = mView;
             }
+            //ButterKnife注解绑定
             unbinder = ButterKnife.bind(this, mContextView);//初始化黄油刀
             // 控件初始化
             initView(mContextView);
@@ -92,12 +96,17 @@ public abstract class BaseFragmentV4 extends Fragment implements IBaseFragment, 
             // 业务处理
             doBusiness(getActivity());
         }
-
         return mContextView;
     }
 
+    /**
+     * dagger依赖注入（onCreate方法中调用）
+     */
     public abstract void initInjector();
 
+    /**
+     * 懒加载，判断页面是否准备完毕，是否可见，bindView为空
+     */
     protected void lazyLoad() {
         if (!isPrepared || !isVisible || !isFirstLoad) {
             return;
@@ -111,9 +120,11 @@ public abstract class BaseFragmentV4 extends Fragment implements IBaseFragment, 
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (getUserVisibleHint()) {
+            //界面可见
             isVisible = true;
             onVisible();
         } else {
+            //界面不可见
             isVisible = false;
             onInvisible();
         }
@@ -138,17 +149,18 @@ public abstract class BaseFragmentV4 extends Fragment implements IBaseFragment, 
     protected void onInvisible() {
     }
 
-    @SuppressWarnings("unchecked")
-    protected <C> C getComponent(Class<C> componentType) {
-        return componentType.cast(((HasComponent<C>) getActivity()).getFragmentComponent());
+//    protected <C> C getComponent(Class<C> componentType) {
+//        return componentType.cast(((HasComponent<C>) getActivity()).getFragmentComponent());
         //获取FragmentComponent 原理同上
 //        FragmentComponent.class.cast(((HasComponent<FragmentComponent>) getActivity()).getFragmentComponent()).inject(this);
         //或者DaggerFragmentComponent 作用同上
 //        DaggerFragmentComponent.builder().applicationComponent((ApplicationComponent)getActivity()).
 //                build().inject(this);
-    }
+//    }
 
-    /*FragmentComponent提供依赖*/
+    /**
+     * 初始化FragmentComponent
+     */
     public FragmentComponent getComponent() {
         return DaggerFragmentComponent.builder()
                 .activityModule(getActivityModule())
@@ -156,10 +168,12 @@ public abstract class BaseFragmentV4 extends Fragment implements IBaseFragment, 
                 .build();
     }
 
+    /*** 获取ApplicationComponent **/
     protected ApplicationComponent getApplicationComponent() {
         return ((MyApplication) getActivity().getApplication()).getApplicationComponent();
     }
 
+    /*** 构造ActivityModule **/
     protected ActivityModule getActivityModule() {
         return new ActivityModule(getActivity());
     }

@@ -14,7 +14,7 @@ import com.ywb.tuyue.ui.setting.version.VersionFragment;
 import dagger.Component;
 
 /**
- * @Author anna
+ * @Author soonphe
  * @Date 2017-11-21 10:53
  * @Description 需要dagger注入的fragment
  */

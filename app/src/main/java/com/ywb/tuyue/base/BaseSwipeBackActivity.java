@@ -1,4 +1,4 @@
-package com.ywb.tuyue.ui.mvp;
+package com.ywb.tuyue.base;
 
 import android.os.Bundle;
 import android.view.View;

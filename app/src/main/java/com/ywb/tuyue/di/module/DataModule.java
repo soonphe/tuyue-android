@@ -13,7 +13,7 @@ import dagger.Module;
 import dagger.Provides;
 
 /**
- * @Author anna
+ * @Author soonphe
  * @Date 2017-11-22 10:18
  * @Descprition 提供SQLiteDatabase ，SharedPreferences
  */

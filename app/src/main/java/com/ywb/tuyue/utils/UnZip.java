@@ -1,8 +1,9 @@
 package com.ywb.tuyue.utils;
 
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.util.Log;
+
+import androidx.annotation.RequiresApi;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,7 +17,6 @@ import java.util.zip.ZipInputStream;
  * Created by penghao on 2018/3/20.
  * description：
  */
-
 public class UnZip {
 
     private static final String TAG = "ZipUtils";

@@ -10,9 +10,8 @@ import com.lzy.okgo.model.Response;
 import com.ywb.tuyue.api.AppApi;
 import com.ywb.tuyue.constants.Constants;
 import com.ywb.tuyue.di.PerActivity;
-import com.ywb.tuyue.entity.TMovie;
 import com.ywb.tuyue.entity.TVersion;
-import com.ywb.tuyue.ui.mvp.BasePresenter;
+import com.ywb.tuyue.base.mvp.BasePresenter;
 
 import org.litepal.LitePal;
 

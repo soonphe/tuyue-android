@@ -1,13 +1,11 @@
 package com.ywb.tuyue.ui.data;
 
-import android.content.Context;
-
 import com.blankj.utilcode.util.SPUtils;
 import com.ywb.tuyue.api.AppApi;
 import com.ywb.tuyue.di.PerActivity;
 import com.ywb.tuyue.dto.TStatsDto;
 import com.ywb.tuyue.entity.TStats;
-import com.ywb.tuyue.ui.mvp.BasePresenter;
+import com.ywb.tuyue.base.mvp.BasePresenter;
 
 import javax.inject.Inject;
 

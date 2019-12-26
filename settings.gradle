@@ -1,1 +1,1 @@
-include ':app', ':1905DrmServiceLib'
+include ':app'

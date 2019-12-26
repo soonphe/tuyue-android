@@ -1,7 +1,7 @@
 package com.ywb.tuyue.ui.city.citydetail;
 
 import com.ywb.tuyue.entity.TCityArticle;
-import com.ywb.tuyue.ui.mvp.BasePView;
+import com.ywb.tuyue.base.mvp.BasePView;
 
 import java.util.List;
 

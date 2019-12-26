@@ -1,6 +1,6 @@
 package com.ywb.tuyue.ui.game.gameplay;
 
-import com.ywb.tuyue.ui.mvp.BasePView;
+import com.ywb.tuyue.base.mvp.BasePView;
 
 /**
  * @Author soonphe

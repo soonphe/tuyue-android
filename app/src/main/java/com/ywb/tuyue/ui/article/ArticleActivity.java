@@ -5,15 +5,15 @@ import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.constant.TimeConstants;
 import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
-import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.TimeUtils;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
@@ -21,6 +21,7 @@ import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.jude.easyrecyclerview.decoration.SpaceDecoration;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.ywb.tuyue.R;
+import com.ywb.tuyue.base.BaseActivity;
 import com.ywb.tuyue.constants.Constants;
 import com.ywb.tuyue.entity.TArticle;
 import com.ywb.tuyue.entity.TArticleType;
@@ -30,7 +31,6 @@ import com.ywb.tuyue.ui.adapter.ArticleAdapter;
 import com.ywb.tuyue.ui.article.article.ArticleContentActivity;
 import com.ywb.tuyue.ui.data.DataContract;
 import com.ywb.tuyue.ui.data.DataPresenter;
-import com.ywb.tuyue.ui.mvp.BaseActivity;
 import com.ywb.tuyue.widget.AppTitle;
 
 import org.litepal.LitePal;
@@ -41,7 +41,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import cn.jzvd.JZVideoPlayer;
 import cn.jzvd.JZVideoPlayerStandard;
 
 

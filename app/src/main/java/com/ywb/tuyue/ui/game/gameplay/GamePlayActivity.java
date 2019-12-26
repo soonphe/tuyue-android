@@ -4,9 +4,10 @@ package com.ywb.tuyue.ui.game.gameplay;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.widget.FrameLayout;
+
+import androidx.annotation.RequiresApi;
 
 import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.EmptyUtils;
@@ -14,9 +15,8 @@ import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.just.library.AgentWeb;
 import com.ywb.tuyue.R;
-import com.ywb.tuyue.entity.TCityArticle;
+import com.ywb.tuyue.base.BaseActivity;
 import com.ywb.tuyue.entity.TGame;
-import com.ywb.tuyue.ui.mvp.BaseActivity;
 import com.ywb.tuyue.utils.UnZip;
 import com.ywb.tuyue.widget.AppTitle;
 

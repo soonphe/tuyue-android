@@ -3,9 +3,10 @@ package com.ywb.tuyue.ui.setting.download;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.BarUtils;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
@@ -13,13 +14,11 @@ import com.jude.rollviewpager.Util;
 import com.lzy.okserver.OkDownload;
 import com.lzy.okserver.task.XExecutor;
 import com.ywb.tuyue.R;
+import com.ywb.tuyue.base.BaseActivity;
 import com.ywb.tuyue.constants.Constants;
-import com.ywb.tuyue.ui.mvp.BaseActivity;
-import com.ywb.tuyue.ui.mvp.BaseEvents;
-import com.ywb.tuyue.ui.mvp.BaseFragmentV4;
+import com.ywb.tuyue.constants.enums.DownloadEventEnum;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -85,7 +84,7 @@ public class DownloadAllActivity extends BaseActivity implements XExecutor.OnAll
     @Override
     public void onAllTaskEnd() {
         System.out.println("onFinish:发出消息onAllTaskEnd " );
-        EventBus.getDefault().postSticky(BaseEvents.CommonEvent.DOWNLOAD_ALL_FINISH);
+        EventBus.getDefault().postSticky(DownloadEventEnum.DOWNLOAD_ALL_FINISH);
     }
 
     @Override
@@ -105,12 +104,12 @@ public class DownloadAllActivity extends BaseActivity implements XExecutor.OnAll
     public void onClicked(View view) {
         switch (view.getId()) {
             case R.id.removeAll:
-                mOperation.showBasicDialog("删除所有及本地文件？", (dialog, which) -> {
-                    dialog.dismiss();
-                    okDownload.removeAll();
-                    adapter.updateData(DownloadAdapter.TYPE_ALL);
-                    adapter.notifyDataSetChanged();
-                });
+//                mOperation.showBasicDialog("删除所有及本地文件？", (dialog, which) -> {
+//                    dialog.dismiss();
+//                    okDownload.removeAll();
+//                    adapter.updateData(DownloadAdapter.TYPE_ALL);
+//                    adapter.notifyDataSetChanged();
+//                });
                 break;
             case R.id.pauseAll:
                 okDownload.pauseAll();

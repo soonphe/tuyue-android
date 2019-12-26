@@ -3,19 +3,20 @@ package com.ywb.tuyue.ui.setting;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.WindowManager;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.BarUtils;
 import com.jude.easyrecyclerview.decoration.SpaceDecoration;
 import com.ywb.tuyue.R;
+import com.ywb.tuyue.base.BaseActivity;
 import com.ywb.tuyue.entity.PMenu;
 import com.ywb.tuyue.ui.adapter.MenuAdapter;
 import com.ywb.tuyue.ui.adapter.ViewPagerAdapter;
-import com.ywb.tuyue.ui.mvp.BaseActivity;
 import com.ywb.tuyue.ui.setting.aboutus.AboutUsFragment;
 import com.ywb.tuyue.ui.setting.gaindata.GainDataFragment;
 import com.ywb.tuyue.ui.setting.hotspot.HotspotFragment;

@@ -4,7 +4,7 @@ import com.ywb.tuyue.api.AppApi;
 import com.ywb.tuyue.di.PerActivity;
 import com.ywb.tuyue.entity.TFood;
 import com.ywb.tuyue.entity.TFoodType;
-import com.ywb.tuyue.ui.mvp.BasePresenter;
+import com.ywb.tuyue.base.mvp.BasePresenter;
 
 import org.litepal.LitePal;
 

@@ -8,7 +8,7 @@ import dagger.Module;
 import dagger.Provides;
 
 /**
- * @Author anna
+ * @Author soonphe
  * @Date 2017-11-21 20:45
  * @Description 提供activity，@Module声明组建，  @Provides提供对象，  @PerActivity自定义注解，限定注解作用域
  */

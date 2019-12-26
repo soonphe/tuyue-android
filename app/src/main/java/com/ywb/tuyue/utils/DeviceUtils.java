@@ -9,9 +9,10 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+
+import androidx.core.app.ActivityCompat;
 
 import java.io.IOException;
 import java.io.InputStreamReader;

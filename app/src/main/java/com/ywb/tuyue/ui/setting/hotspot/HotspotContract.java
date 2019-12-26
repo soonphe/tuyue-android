@@ -1,10 +1,6 @@
 package com.ywb.tuyue.ui.setting.hotspot;
 
-import android.content.Context;
-
-import com.ywb.tuyue.ui.mvp.BasePView;
-import com.ywb.tuyue.ui.mvp.BasePresenter;
-import com.ywb.tuyue.ui.mvp.BaseView;
+import com.ywb.tuyue.base.mvp.BasePView;
 
 
 public class HotspotContract {

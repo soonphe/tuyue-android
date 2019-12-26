@@ -1,8 +1,9 @@
 package com.ywb.tuyue.widget.swipebacklayout.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.ywb.tuyue.widget.swipebacklayout.SwipeBackLayout;
 import com.ywb.tuyue.widget.swipebacklayout.Utils;

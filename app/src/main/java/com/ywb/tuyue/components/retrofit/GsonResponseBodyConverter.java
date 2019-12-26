@@ -15,8 +15,9 @@
  */
 package com.ywb.tuyue.components.retrofit;
 
-import android.support.annotation.NonNull;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.StringUtils;
@@ -49,7 +50,6 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody, T> {
             Log.e("body",body);
             JSONObject json = new JSONObject(body);
             String   resultCode = json.optString("resultCode");
-
             String   msg  = json.optString("message", "");
             if ("200".equals(resultCode)) {
 
@@ -86,7 +86,7 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody, T> {
         }
     }
 
-    public static boolean isJson(String json) {
+    private static boolean isJson(String json) {
         if (StringUtils.isEmpty(json)) {
             return false;
         }

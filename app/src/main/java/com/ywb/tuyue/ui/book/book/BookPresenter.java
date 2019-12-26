@@ -5,7 +5,7 @@ import com.ywb.tuyue.di.PerActivity;
 import com.ywb.tuyue.entity.TAdvert;
 import com.ywb.tuyue.entity.TBook;
 import com.ywb.tuyue.entity.TBookType;
-import com.ywb.tuyue.ui.mvp.BasePresenter;
+import com.ywb.tuyue.base.mvp.BasePresenter;
 
 import org.litepal.LitePal;
 

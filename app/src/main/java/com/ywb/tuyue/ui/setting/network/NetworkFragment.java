@@ -7,7 +7,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.net.NetworkInfo;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
@@ -16,30 +15,26 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
+
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SPUtils;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.facebook.stetho.common.LogUtil;
 import com.suke.widget.SwitchButton;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.ywb.tuyue.R;
+import com.ywb.tuyue.base.BaseFragmentV4;
 import com.ywb.tuyue.constants.Constants;
 import com.ywb.tuyue.entity.WifiBean;
 import com.ywb.tuyue.ui.adapter.WifiListAdapter;
-import com.ywb.tuyue.ui.mvp.BaseFragmentV4;
 import com.ywb.tuyue.utils.CollectionUtils;
 import com.ywb.tuyue.utils.WifiSupport;
 
@@ -48,8 +43,6 @@ import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * @Author soonphe

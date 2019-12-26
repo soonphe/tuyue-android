@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.ywb.tuyue.R;
-import com.ywb.tuyue.ui.mvp.BaseFragmentV4;
+import com.ywb.tuyue.base.BaseFragmentV4;
 
 /**
  * @Author soonphe

@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.ywb.tuyue.R;
-import com.ywb.tuyue.ui.mvp.BaseActivity;
+import com.ywb.tuyue.base.BaseActivity;
 
 import butterknife.BindView;
 

@@ -5,9 +5,9 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Build;
 import android.os.StrictMode;
-import android.support.annotation.RequiresApi;
-import android.support.multidex.MultiDex;
-import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
+import androidx.multidex.MultiDex;
 
 import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.Utils;
@@ -17,25 +17,16 @@ import com.lzy.okgo.cache.CacheMode;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
-
 import com.tencent.bugly.crashreport.CrashReport;
-import com.tencent.smtt.sdk.QbSdk;
-import com.ywb.tuyue.api.AppApi;
+import com.ywb.tuyue.base.BaseApplication;
 import com.ywb.tuyue.constants.Constants;
 import com.ywb.tuyue.di.component.ApplicationComponent;
 import com.ywb.tuyue.di.component.DaggerApplicationComponent;
 import com.ywb.tuyue.di.module.ApplicationModule;
-import com.ywb.tuyue.ui.mvp.BaseApplication;
 
 import org.litepal.LitePal;
 
-import java.util.Locale;
-import java.util.concurrent.TimeUnit;
-
-import javax.inject.Inject;
-
 import cn.jpush.android.api.JPushInterface;
-import okhttp3.OkHttpClient;
 
 import static com.ywb.tuyue.constants.Constants.BUGLY_APPID;
 
@@ -48,9 +39,6 @@ import static com.ywb.tuyue.constants.Constants.BUGLY_APPID;
 public class MyApplication extends BaseApplication {
 
     private ApplicationComponent mApplicationComponent;
-
-    @Inject
-    OkHttpClient okHttpClient;
 
     /**
      * 全局下拉刷新，上拉加载更多
@@ -72,17 +60,12 @@ public class MyApplication extends BaseApplication {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(base);
-
-        // 安装tinker
-        // TinkerManager.installTinker(this); 替换成下面Bugly提供的方法
-//        Beta.installTinker();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
     public void onCreate() {
         super.onCreate();
-        //debug版本使用严苛模式
         if (BuildConfig.DEBUG) {
             //StrictMode严苛模式,检测:一个是线程策略，即TreadPolicy，另一个是VM策略，即VmPolicy。
             StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
@@ -98,23 +81,12 @@ public class MyApplication extends BaseApplication {
         }
         //dagger依赖注入
         initComponent();
-        //blankJ 工具类init
-        Utils.init(this);
-        //极光初始化
-        JPushInterface.setDebugMode(false);    // 设置开启日志,发布时请关闭日志
-        JPushInterface.init(this);
-
-        //facebook调试工具
+        //facebook Stetho
         Stetho.initializeWithDefaults(this);
-
-//        OkHttpClient.Builder builder = new OkHttpClient.Builder()
-//                //全局的读取超时时间 默认DEFAULT_MILLISECONDS 60000 60秒
-//                .readTimeout(60000, TimeUnit.MILLISECONDS)
-//                //全局的写入超时时间
-//                .writeTimeout(60000, TimeUnit.MILLISECONDS)
-//                //全局的连接超时时间
-//                .connectTimeout(60000, TimeUnit.MILLISECONDS)
-//                .retryOnConnectionFailure(true);
+        //blankJ
+        Utils.init(this);
+        //litepal
+        LitePal.initialize(this);
         //初始化okgo
         OkGo.getInstance().init(this)
                 //okgo全局配置的okhttpclient
@@ -124,40 +96,12 @@ public class MyApplication extends BaseApplication {
                 .setRetryCount(10);
         //创建下载文件夹
         FileUtils.createOrExistsDir(Constants.DOWNLOAD_PATH);
-        //初始化litepal数据库
-        LitePal.initialize(this);
+        //极光初始化
+        JPushInterface.setDebugMode(false);    // 设置开启日志,发布时请关闭日志
+        JPushInterface.init(this);
         //腾讯bugfly
         CrashReport.initCrashReport(this, BUGLY_APPID, false);
 //        Bugly.init(this, BUGLY_APPID, true);//bugly
-
-        // 我们可以从这里获得Tinker加载过程的信息
-//        tinkerApplicationLike = TinkerPatchApplicationLike.getTinkerPatchApplicationLike();
-//
-//        // 初始化TinkerPatch SDK, 更多配置可参照API章节中的,初始化SDK
-//        TinkerPatch.init(tinkerApplicationLike)
-//                .reflectPatchLibrary()
-//                .setPatchRollbackOnScreenOff(true)
-//                .setPatchRestartOnSrceenOff(true)
-//                .setFetchPatchIntervalByHours(3);
-//
-//        // 每隔3个小时(通过setFetchPatchIntervalByHours设置)去访问后台时候有更新,通过handler实现轮训的效果
-//        TinkerPatch.with().fetchPatchUpdateAndPollWithInterval();
-
-
-        QbSdk.initX5Environment(this, new QbSdk.PreInitCallback() {
-            @Override
-            public void onCoreInitFinished() {
-                //x5内核初始化完成回调接口，此接口回调并表示已经加载起来了x5，有可能特殊情况下x5内核加载失败，切换到系统内核。
-
-            }
-
-            @Override
-            public void onViewInitFinished(boolean b) {
-                //x5內核初始化完成的回调，为true表示x5内核加载成功，否则表示x5内核加载失败，会自动切换到系统内核。
-
-            }
-        });
-
 
     }
 

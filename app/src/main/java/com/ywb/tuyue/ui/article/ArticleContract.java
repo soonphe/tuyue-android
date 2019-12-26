@@ -2,7 +2,7 @@ package com.ywb.tuyue.ui.article;
 
 import com.ywb.tuyue.entity.TArticle;
 import com.ywb.tuyue.entity.TArticleType;
-import com.ywb.tuyue.ui.mvp.BasePView;
+import com.ywb.tuyue.base.mvp.BasePView;
 
 import java.util.List;
 
