@@ -1,6 +1,7 @@
 package com.ywb.tuyue.api;
 
 
+import com.blankj.utilcode.util.LogUtils;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.ywb.tuyue.constants.Constants;
@@ -23,6 +24,7 @@ import com.ywb.tuyue.entity.TMovieBean;
 import com.ywb.tuyue.entity.TVersion;
 import com.ywb.tuyue.entity.TVideo;
 import com.ywb.tuyue.entity.TVideoType;
+import com.ywb.tuyue.entity.TWorkBench;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -43,15 +45,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * @Date 2017-11-20 18:04
  * @Description API
  */
-
 public class AppApi implements AppApiService {
 
-    @Inject
     OkHttpClient okHttpClient;
 
     private AppApiService service;
 
     public AppApi(OkHttpClient mOkHttpClient) {
+        this.okHttpClient = mOkHttpClient;
         Retrofit retrofit =
                 new Retrofit.Builder()
                         .client(mOkHttpClient)
@@ -80,34 +81,6 @@ public class AppApi implements AppApiService {
     }
 
     /**
-     * 动态请求路径+默认json解析
-     *
-     * @param baseUrl
-     */
-    public AppApiService getDynamicAppApi(String baseUrl) {
-
-        OkHttpClient.Builder builder = new OkHttpClient.Builder().connectTimeout(10, TimeUnit.SECONDS)
-                .readTimeout(10, TimeUnit.SECONDS)
-                .writeTimeout(10, TimeUnit.SECONDS)
-                .retryOnConnectionFailure(true);
-        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-        builder.addNetworkInterceptor(new StethoInterceptor());
-        builder.addInterceptor(logging);
-
-        Retrofit retrofit =
-                new Retrofit.Builder()
-                        .client(builder.build())
-                        .baseUrl(baseUrl)
-                        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                        //使用默认Gson解析
-                        .addConverterFactory(GsonConverterFactory.create())
-//                        .addConverterFactory(com.ywb.tuyue.components.retrofit.GsonConverterFactory.create())
-                        .build();
-        return retrofit.create(AppApiService.class);
-    }
-
-    /**
      * 封装.subscribeOn(Schedulers.io()).
      * observeOn(AndroidSchedulers.mainThread());
      *
@@ -122,7 +95,12 @@ public class AppApi implements AppApiService {
 
     @Override
     public Observable<TMovieBean> getMovieList() {
-        return getDynamicAppApi("http://192.168.1.6:8087/index.php/").getMovieList().compose(bindUntil());
+        return getAppApi("http://192.168.1.6:8087/index.php/").getMovieList().compose(bindUntil());
+    }
+
+    @Override
+    public Observable<TWorkBench> getWorkBenchData() {
+        return getAppApi("https://jz-amp.daojia-inc.com/mock/459/").getWorkBenchData().compose(bindUntil());
     }
 
     @Override
@@ -182,7 +160,7 @@ public class AppApi implements AppApiService {
 
     @Override
     public Observable<List<TCityArticle>> getCityArticleList(int typeId, int pageSize) {
-        return service.getCityArticleList(typeId,pageSize).compose(bindUntil());
+        return service.getCityArticleList(typeId, pageSize).compose(bindUntil());
     }
 
     @Override
@@ -207,8 +185,8 @@ public class AppApi implements AppApiService {
     }
 
     @Override
-    public Observable<Object> uploadUser(String captcher,TUserDto tUser) {
-        return service.uploadUser( captcher,tUser).compose(bindUntil());
+    public Observable<Object> uploadUser(String captcher, TUserDto tUser) {
+        return service.uploadUser(captcher, tUser).compose(bindUntil());
     }
 
     @Override
@@ -220,7 +198,6 @@ public class AppApi implements AppApiService {
     public Observable<Object> uploadStatsList(List<TStatsDto> list) {
         return service.uploadStatsList(list).compose(bindUntil());
     }
-
 
 
 }

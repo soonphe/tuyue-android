@@ -2,15 +2,14 @@ package com.ywb.tuyue.constants;
 
 
 /**
- * @Author：luoxiaosheng
- * @Date：2017-11-11 17:14
- * @Description：基础状态码枚举
+ * @Author soonphe
+ * @Date 2018-08-21 09:41
+ * @Description 状态码常量
  */
-
 public enum CodeEnum {
 
     //通用
-//    SUCCESS("200", "获取成功"),
+    SUCCESS("200", "获取成功"),
     NOHTTP("201", "您的网络状况存在问题，调用服务失败！"),
     FAIL("1001", "获取信息失败"),
     PARAMFAIL("1002", "参数为空或所传参数类型不正确"),
@@ -47,7 +46,7 @@ public enum CodeEnum {
         this.message = message;
     }
 
-    public static CodeEnum stateOf(String authCode){
+    public static CodeEnum valOf(String authCode){
         for (CodeEnum codeEnum :values()){
             if (codeEnum.getCode().equals(authCode+"")){
                 return codeEnum;

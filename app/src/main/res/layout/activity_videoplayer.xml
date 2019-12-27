@@ -56,7 +56,7 @@
                         android:layout_height="wrap_content"
                         android:text="速度与激情8"
                         android:textColor="#FFFFF8F9"
-                        android:textSize="@dimen/sp_25" />
+                        android:textSize="@dimen/sp_24" />
 
                 </LinearLayout>
 

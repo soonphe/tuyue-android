@@ -21,7 +21,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 /**
  * @Author soonphe
  * @Date 2017-11-20 18:04
- * @Description logger拦截器操作工具
+ * @Description Okhttp3拦截器工具包
  */
 public class InterceptorUtils {
 

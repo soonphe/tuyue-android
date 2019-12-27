@@ -180,7 +180,7 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
         if (tDataVersion.getAdvertversion() == advertVersion && tDataVersion.getDataversion() == dataVersion) {
             //这里应该弹出最新数据的提示
             presenter.getAdvertList();
-            presenter.getOtherData();
+//            presenter.getOtherData();
         } else {
             //分别判断更新广告版本和数据版本
             if (tDataVersion.getAdvertversion() > advertVersion) {
@@ -193,7 +193,7 @@ public class GainDataFragment extends BaseFragmentV4 implements GainDataContract
             }
         }
 //        //获取1905数据
-        presenter.getMovieData();
+//        presenter.getMovieData();
 
     }
 

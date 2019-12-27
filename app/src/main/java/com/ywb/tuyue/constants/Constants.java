@@ -15,7 +15,7 @@ public class Constants {
     public static final String LOCAL_SERVER_IP = "192.168.1.6";
     //服务器IP
     public static final String SERVER_IP = "47.98.121.127";
-    public static final String SERVER_PORT = "8081";  //8087
+    public static final String SERVER_PORT = "80";
     public static final String HOST = "http://" + SERVER_IP + ":" + SERVER_PORT;//服务器地址
     public static final String BASE_URL = HOST + "/tuyue/";  // /ltcx/
     public static final String BASE_API_URL = BASE_URL + "api/";    //API请求地址

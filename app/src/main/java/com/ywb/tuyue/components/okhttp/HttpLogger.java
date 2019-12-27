@@ -7,7 +7,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 /**
  * @Author soonphe
  * @Date 2017-11-20 18:04
- * @Description 基于HttpLoggingInterceptor自定义log打印
+ * @Description 自定义HttpLogger
  */
 public class HttpLogger implements HttpLoggingInterceptor.Logger {
 

@@ -10,7 +10,6 @@ import org.litepal.annotation.Column;
  * @Date 2018-08-31 19:12
  * @Descprition 统计数据传输DTO
  */
-
 public class TStatsDto {
 
     private String createdate;//创建时间yyyy-MM-dd

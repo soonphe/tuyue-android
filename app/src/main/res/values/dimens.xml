@@ -1,7 +1,13 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="nav_bar_height">58dp</dimen>
+    <dimen name="nav_bar_height_more">30dp</dimen>
+    <dimen name="back_width">60dp</dimen>
+    <dimen name="back_height">40dp</dimen>
+    <dimen name="highlightSize">18sp</dimen>
+    <dimen name="defaultSize">15sp</dimen>
+
+    <!-- dp -->
     <dimen name="text_inactive">10dp</dimen>
     <dimen name="text_active">12dp</dimen>
     <dimen name="text_size_23">23sp</dimen>
@@ -19,56 +25,44 @@
     <dimen name="text_size_10">10sp</dimen>
     <dimen name="item_height">56dip</dimen>
 
-    <dimen name="grid_expected_size">120dp</dimen>
-
-    <integer name="HomePageHeaderColumn">5</integer>
-
-
-    <!--Tuyue特定的尺寸 -->
-    <dimen name="dp_1">1dp</dimen>
+    <!-- dp -->
+    <dimen name="line_height">2dp</dimen>
     <dimen name="dp_2">2dp</dimen>
     <dimen name="dp_3">3dp</dimen>
     <dimen name="dp_4">4dp</dimen>
     <dimen name="dp_5">5dp</dimen>
-    <dimen name="dp_6">61dp</dimen>
-    <dimen name="dp_7">7dp</dimen>
+    <dimen name="dp_6">6dp</dimen>
     <dimen name="dp_8">8dp</dimen>
-    <dimen name="dp_9">9dp</dimen>
     <dimen name="dp_10">10dp</dimen>
-    <dimen name="dp_11">11dp</dimen>
     <dimen name="dp_12">12dp</dimen>
-    <dimen name="dp_13">13dp</dimen>
     <dimen name="dp_14">14dp</dimen>
     <dimen name="dp_15">15dp</dimen>
     <dimen name="dp_16">16dp</dimen>
-    <dimen name="dp_17">17dp</dimen>
     <dimen name="dp_18">18dp</dimen>
-    <dimen name="dp_19">19dp</dimen>
     <dimen name="dp_20">20dp</dimen>
-    <dimen name="dp_21">21dp</dimen>
     <dimen name="dp_22">22dp</dimen>
-    <dimen name="dp_23">23dp</dimen>
     <dimen name="dp_24">24dp</dimen>
-    <dimen name="dp_25">25dp</dimen>
     <dimen name="dp_26">26dp</dimen>
-
-    <!--特定-->
-    <dimen name="header_height">60dp</dimen>
-    <dimen name="back_width">60dp</dimen>
-    <dimen name="back_height">40dp</dimen>
-    <dimen name="sp_20">20sp</dimen>
-    <dimen name="card_cn_size">20sp</dimen>
-    <dimen name="card_en_size">15sp</dimen>
-    <dimen name="line_height">2dp</dimen>
-    <dimen name="sp_25">20sp</dimen>
-    <dimen name="sp_18">18sp</dimen>
-    <dimen name="sp_16">16sp</dimen>
-    <dimen name="sp_14">14sp</dimen>
-    <dimen name="sp_12">12sp</dimen>
-    <dimen name="sp_10">10sp</dimen>
+    <dimen name="dp_28">28dp</dimen>
     <dimen name="dp_30">30dp</dimen>
     <dimen name="dp_40">40dp</dimen>
     <dimen name="dp_50">50dp</dimen>
     <dimen name="dp_60">60dp</dimen>
     <dimen name="dp_70">70dp</dimen>
+
+    <!-- sp -->
+    <dimen name="sp_6">6sp</dimen>
+    <dimen name="sp_8">8sp</dimen>
+    <dimen name="sp_10">10sp</dimen>
+    <dimen name="sp_12">12sp</dimen>
+    <dimen name="sp_14">14sp</dimen>
+    <dimen name="sp_16">16sp</dimen>
+    <dimen name="sp_18">18sp</dimen>
+    <dimen name="sp_20">20sp</dimen>
+    <dimen name="sp_22">22sp</dimen>
+    <dimen name="sp_24">24sp</dimen>
+    <dimen name="sp_26">26sp</dimen>
+    <dimen name="sp_28">28sp</dimen>
+    <dimen name="sp_30">30sp</dimen>
+
 </resources>

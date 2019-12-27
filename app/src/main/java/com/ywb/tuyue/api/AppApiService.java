@@ -22,6 +22,7 @@ import com.ywb.tuyue.entity.TUser;
 import com.ywb.tuyue.entity.TVersion;
 import com.ywb.tuyue.entity.TVideo;
 import com.ywb.tuyue.entity.TVideoType;
+import com.ywb.tuyue.entity.TWorkBench;
 
 import java.util.List;
 
@@ -33,11 +34,10 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
- * @Author anna
- * @Date 2017-12-01 11:44
- * @Description
+ * @Author soonphe
+ * @Date 2017-11-20 18:04
+ * @Description API接口
  */
-
 public interface AppApiService {
 
     /**
@@ -47,6 +47,13 @@ public interface AppApiService {
      */
     @GET("Home/Interface/index?class=HallUse&method=getVideoList")
     Observable<TMovieBean> getMovieList();
+
+    /**
+     * 测试okhttp动态
+     * @return
+     */
+    @GET("workBench/getBenchData")
+    Observable<TWorkBench> getWorkBenchData();
 
     /**
      * 获取广告类型

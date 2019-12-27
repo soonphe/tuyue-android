@@ -15,8 +15,6 @@
  */
 package com.ywb.tuyue.components.retrofit;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 import com.blankj.utilcode.util.LogUtils;
@@ -25,11 +23,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
 import com.google.gson.TypeAdapter;
+import com.ywb.tuyue.constants.CodeEnum;
 
 import org.json.JSONObject;
-
-import java.io.IOException;
-import java.util.ArrayList;
 
 import okhttp3.ResponseBody;
 import retrofit2.Converter;
@@ -44,41 +40,23 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody, T> {
     }
 
     @Override
-    public T convert(@NonNull ResponseBody value) throws IOException {
+    public T convert(@NonNull ResponseBody value) {
         try {
-            String     body = value.string();
-            Log.e("body",body);
+            String body = value.string();
             JSONObject json = new JSONObject(body);
-            String   resultCode = json.optString("resultCode");
-            String   msg  = json.optString("message", "");
-            if ("200".equals(resultCode)) {
-
-                if (json.has("data")) {
-                    Object data = json.get("data");
-
-                    if (data==null||data.toString().equals("null")){
-                        return (T) new Object();
-                    }
-                    //判断是否为json，String类型直接返回
-                    if (isJson(data.toString())){
-                        return adapter.fromJson(data.toString());
-                    }else{
-                        return (T)data.toString();
-                    }
-                } else {
-                    throw new RuntimeException(msg);
+            String resultCode = json.optString("resultCode");
+            if (CodeEnum.SUCCESS.getCode().equals(resultCode)) {
+                Object data = json.opt("data");
+                if (data == null || data.toString().equals("null")) {
+                    return (T) new Object();
                 }
-            } else if("1".equals(resultCode)){
-                return (T) new ArrayList<>();
+                return (T)adapter.fromJson(data.toString());
+            } else {
+                String msg = json.optString("message", "");
+                LogUtils.e("resultCode not equals 200,msg-" + msg);
+                throw new RuntimeException(msg);
             }
-//            else if(CodeEnum.stateOf(code)!=null){
-//                return (T) new Object();
-//            }
-            else {
-                    LogUtils.e("-" + msg);
-                    throw new RuntimeException(msg);
-                }
-            } catch (Exception e) {
+        } catch (Exception e) {
             LogUtils.e("-" + e.getMessage());
             throw new RuntimeException(e.getMessage());
         } finally {
@@ -86,6 +64,12 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody, T> {
         }
     }
 
+    /**
+     * 验证字符串是否为json格式
+     *
+     * @param json 字符串
+     * @return
+     */
     private static boolean isJson(String json) {
         if (StringUtils.isEmpty(json)) {
             return false;

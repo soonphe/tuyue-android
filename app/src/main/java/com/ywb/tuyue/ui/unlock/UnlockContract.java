@@ -1,6 +1,9 @@
 package com.ywb.tuyue.ui.unlock;
 
 import com.ywb.tuyue.base.mvp.BasePView;
+import com.ywb.tuyue.entity.TAdvert;
+
+import java.util.List;
 
 /**
  * @Author anna
@@ -10,10 +13,8 @@ import com.ywb.tuyue.base.mvp.BasePView;
 public interface UnlockContract {
 
     interface UnlockView extends BasePView {
-
     }
 
     interface UnlockPresenter {
-
     }
 }

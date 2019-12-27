@@ -33,7 +33,7 @@
             android:layout_centerInParent="true"
             android:text=""
             android:textColor="@color/white"
-            android:textSize="@dimen/sp_25" />
+            android:textSize="@dimen/sp_24" />
 
         <ImageView
             android:id="@+id/iv_title"

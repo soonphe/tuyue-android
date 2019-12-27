@@ -16,7 +16,6 @@ import javax.inject.Inject;
 @PerActivity
 public class FoodPresenter extends BasePresenter<FoodContract.View> implements FoodContract.Presenter {
 
-
     private AppApi api;
 
     @Inject

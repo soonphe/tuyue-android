@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.blankj.utilcode.util.BarUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.bumptech.glide.Glide;
 import com.ywb.tuyue.R;
 import com.ywb.tuyue.entity.TAdvert;
@@ -73,7 +74,7 @@ public class UnlockActivity extends BaseActivity implements AdvertContract.View,
 
         //这里调用初始化litepal
         SQLiteDatabase db = LitePal.getDatabase();
-
+        //自定义view回调监听
         unlockView.setOnLockListener(isLocked -> {
             if (isLocked) {
                 mOperation.forwardAndFinish(SplashActivity.class);
@@ -91,7 +92,7 @@ public class UnlockActivity extends BaseActivity implements AdvertContract.View,
         if (list.size() > 0) {
             //这里只选取最新的1张
             GlideUtils.loadImageViewLoding(this,
-                    list.get(0).getDownloadPic(), unlockBgAdvert,R.mipmap.unlock_bg,R.mipmap.unlock_bg);
+                    list.get(0).getDownloadPic(), unlockBgAdvert, R.mipmap.unlock_bg, R.mipmap.unlock_bg);
         }
     }
 

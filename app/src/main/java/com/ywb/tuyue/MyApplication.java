@@ -17,7 +17,6 @@ import com.lzy.okgo.cache.CacheMode;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
-import com.tencent.bugly.crashreport.CrashReport;
 import com.ywb.tuyue.base.BaseApplication;
 import com.ywb.tuyue.constants.Constants;
 import com.ywb.tuyue.di.component.ApplicationComponent;
@@ -27,8 +26,6 @@ import com.ywb.tuyue.di.module.ApplicationModule;
 import org.litepal.LitePal;
 
 import cn.jpush.android.api.JPushInterface;
-
-import static com.ywb.tuyue.constants.Constants.BUGLY_APPID;
 
 
 /**
@@ -100,7 +97,7 @@ public class MyApplication extends BaseApplication {
         JPushInterface.setDebugMode(false);    // 设置开启日志,发布时请关闭日志
         JPushInterface.init(this);
         //腾讯bugfly
-        CrashReport.initCrashReport(this, BUGLY_APPID, false);
+//        CrashReport.initCrashReport(this, BUGLY_APPID, false);
 //        Bugly.init(this, BUGLY_APPID, true);//bugly
 
     }

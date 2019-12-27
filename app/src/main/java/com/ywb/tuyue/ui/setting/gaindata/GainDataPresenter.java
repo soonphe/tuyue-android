@@ -62,7 +62,6 @@ public class GainDataPresenter extends BasePresenter<GainDataContract.View> impl
                     }
                     list.save();
                     mView.getDataVersionSuccess(list);
-
                 },
                 throwable -> mView.onError(throwable.getMessage()))
         );

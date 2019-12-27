@@ -9,7 +9,6 @@ import org.litepal.annotation.Column;
  * @Date 2018-08-31 19:12
  * @Descprition 用户数据传输DTO
  */
-
 public class TUserDto {
 
     private String phone;

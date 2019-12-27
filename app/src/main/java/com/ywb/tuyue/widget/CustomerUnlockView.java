@@ -12,15 +12,15 @@ import android.view.WindowManager;
 
 import androidx.annotation.Nullable;
 
+import com.blankj.utilcode.util.ImageUtils;
 import com.ywb.tuyue.R;
 import com.ywb.tuyue.ui.unlock.OnLockListener;
-import com.ywb.tuyue.utils.BitmapUtls;
 
 /**
- * Description:
- * Created by wcystart on 2018/6/20.
+ * @Author soonphe
+ * @Date 2018-08-30 10:41
+ * @Description 自定义解锁页View
  */
-
 public class CustomerUnlockView extends View {
     private final Context context;
     /**
@@ -123,15 +123,21 @@ public class CustomerUnlockView extends View {
         paint = new Paint();
         paint.setAntiAlias(true);//抗锯齿
 
-        leftBitmap = BitmapUtls.getBitmapFromAsset(context, "icon_key.png");
-        rightBitmap = BitmapUtls.getBitmapFromAsset(context, "icon_unlock.png");
-        roadBitmap = BitmapUtls.getBitmapFromAsset(context, "bg_lock_road.png");
 
-        //设置缩放比例 屏幕的一半（移位运算符 >> 可以理解为除2）
-        float scale = (screenWidth >> 1) * 1.0f / roadBitmap.getWidth();
-        roadBitmap = BitmapUtls.zoomImg(roadBitmap, scale);
-        leftBitmap = BitmapUtls.zoomImg(leftBitmap, scale);
-        rightBitmap = BitmapUtls.zoomImg(rightBitmap, scale);
+        roadBitmap = ImageUtils.getBitmap(R.drawable.bg_lock_road,screenWidth >> 1,screenHeight >> 1);
+        leftBitmap = ImageUtils.getBitmap(R.drawable.icon_key,screenWidth >> 1,screenHeight >> 1);
+        rightBitmap = ImageUtils.getBitmap(R.drawable.icon_unlock,screenWidth >> 1,screenHeight >> 1);
+
+        //读取本地Bitmap图片
+//        leftBitmap = BitmapUtls.getBitmapFromAsset(context, "icon_key.png");
+//        rightBitmap = BitmapUtls.getBitmapFromAsset(context, "icon_unlock.png");
+//        roadBitmap = BitmapUtls.getBitmapFromAsset(context, "bg_lock_road.png");
+//
+//        //设置缩放比例 屏幕的一半（移位运算符 >> 可以理解为除2）
+//        float scale = (screenWidth >> 1) * 1.0f / roadBitmap.getWidth();
+//        roadBitmap = BitmapUtls.zoomImg(roadBitmap, scale);
+//        leftBitmap = BitmapUtls.zoomImg(leftBitmap, scale);
+//        rightBitmap = BitmapUtls.zoomImg(rightBitmap, scale);
 
 
         //滑道的x,y坐标（在左部起始位置的X，Y坐标）——所有的图片都以滑道为参考线
@@ -154,6 +160,11 @@ public class CustomerUnlockView extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
+
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed,left,top,right,bottom);
     }
 
     @Override

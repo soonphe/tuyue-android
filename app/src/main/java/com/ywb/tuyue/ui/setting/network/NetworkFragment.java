@@ -35,7 +35,6 @@ import com.ywb.tuyue.base.BaseFragmentV4;
 import com.ywb.tuyue.constants.Constants;
 import com.ywb.tuyue.entity.WifiBean;
 import com.ywb.tuyue.ui.adapter.WifiListAdapter;
-import com.ywb.tuyue.utils.CollectionUtils;
 import com.ywb.tuyue.utils.WifiSupport;
 
 import java.util.ArrayList;
@@ -149,7 +148,7 @@ public class NetworkFragment extends BaseFragmentV4 implements NetworkContract.V
                                 }
                             });
                         }
-                    }else{
+                    } else {
                         //关闭wifi
                         NetworkUtils.setWifiEnabled(false);
                     }
@@ -207,7 +206,8 @@ public class NetworkFragment extends BaseFragmentV4 implements NetworkContract.V
         mWifiManager.startScan();
         List<ScanResult> scanResults = WifiSupport.noSameName(WifiSupport.getWifiScanResult(getActivity()));
         mWifiList.clear();
-        if (!CollectionUtils.isNullOrEmpty(scanResults)) {
+
+        if (null != scanResults && !scanResults.isEmpty()) {
             for (int i = 0; i < scanResults.size(); i++) {
                 WifiBean wifiBean = new WifiBean();
                 wifiBean.setWifiName(scanResults.get(i).SSID);
@@ -305,7 +305,7 @@ public class NetworkFragment extends BaseFragmentV4 implements NetworkContract.V
     public void wifiListSet(String wifiName, int type) {
         int index = -1;
         WifiBean wifiInfo = new WifiBean();
-        if (CollectionUtils.isNullOrEmpty(mWifiList)) {
+        if (null == mWifiList || mWifiList.isEmpty()) {
             return;
         }
         for (int i = 0; i < mWifiList.size(); i++) {
@@ -337,6 +337,7 @@ public class NetworkFragment extends BaseFragmentV4 implements NetworkContract.V
 
     /**
      * 之前没配置过该网络， 弹出输入密码界面
+     *
      * @param position
      */
     private void noConfigurationWifi(int position) {
