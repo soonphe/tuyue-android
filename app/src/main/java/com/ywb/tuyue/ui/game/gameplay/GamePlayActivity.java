@@ -13,11 +13,11 @@ import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.EmptyUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
+import com.blankj.utilcode.util.ZipUtils;
 import com.just.library.AgentWeb;
 import com.ywb.tuyue.R;
 import com.ywb.tuyue.base.BaseActivity;
 import com.ywb.tuyue.entity.TGame;
-import com.ywb.tuyue.utils.UnZip;
 import com.ywb.tuyue.widget.AppTitle;
 
 import org.litepal.LitePal;
@@ -67,7 +67,8 @@ public class GamePlayActivity extends BaseActivity implements GamePlayContract.V
         if (StringUtils.isEmpty(SPUtils.getInstance().getString(GAME_UNZIP + tGame.getTid(), ""))) {
             //解压压缩包(压缩包路径，解压后路径)
             try {
-                UnZip.UnZipFolder(tGame.getDownloadFile(), "/storage/emulated/0/download/" + "game" + tGame.getTid());
+                ZipUtils.unzipFile(tGame.getDownloadFile(),"/storage/emulated/0/download/" + "game" + tGame.getTid());
+//                UnZip.UnZipFolder(tGame.getDownloadFile(), "/storage/emulated/0/download/" + "game" + tGame.getTid());
                 SPUtils.getInstance().put(GAME_UNZIP + tGame.getTid(), "/storage/emulated/0/download/" + "game" + tGame.getTid());
             } catch (Exception e) {
                 e.printStackTrace();

@@ -163,7 +163,7 @@ public abstract class BaseFragmentV4 extends Fragment implements IBaseFragment, 
      */
     public FragmentComponent getComponent() {
         return DaggerFragmentComponent.builder()
-                .activityModule(getActivityModule())
+//                .activityModule(getActivityModule())
                 .applicationComponent(getApplicationComponent())
                 .build();
     }

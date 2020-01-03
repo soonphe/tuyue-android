@@ -5,9 +5,10 @@ import android.content.res.TypedArray;
 import android.os.Build;
 
 /**
- * Created by wushange on 2017/7/19.
+ * @Author soonphe
+ * @Date 2018-08-21 13:16
+ * @Description 资源文件操作工具类
  */
-
 public class ResourceUtils {
     public static int getResourceId(
             TypedArray typedArray,

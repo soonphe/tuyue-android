@@ -21,14 +21,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * 验证数据合法性
- *
- * @author venshine
+ * @Author soonphe
+ * @Date 2018-08-21 13:16
+ * @Description 正则验证工具类
  */
 public class VerifyUtils {
 
     /**
-     * verify whether email is valid
+     * 邮件格式验证
      *
      * @param email
      * @return
@@ -42,7 +42,7 @@ public class VerifyUtils {
     }
 
     /**
-     * verify whether email is valid
+     * 邮件格式验证（字符串格式匹配）
      *
      * @param email
      * @return
@@ -53,7 +53,7 @@ public class VerifyUtils {
     }
 
     /**
-     * verify whether mobile number is valid
+     * 手机号格式验证
      *
      * @param number
      * @return
@@ -65,7 +65,7 @@ public class VerifyUtils {
     }
 
     /**
-     * verify whether url is valid
+     * url格式验证
      *
      * @param url
      * @return
@@ -78,7 +78,7 @@ public class VerifyUtils {
     }
 
     /**
-     * verify whether number and letter are only contained
+     * 验证字符串是否仅为字母或数字
      *
      * @param data
      * @return
@@ -89,7 +89,7 @@ public class VerifyUtils {
     }
 
     /**
-     * verify whether number is only contained
+     * 验证字符串是否仅为数字
      *
      * @param data
      * @return
@@ -100,7 +100,7 @@ public class VerifyUtils {
     }
 
     /**
-     * verify whether letter is only contained
+     * 验证字符串是否仅为字母
      *
      * @param data
      * @return
@@ -111,7 +111,7 @@ public class VerifyUtils {
     }
 
     /**
-     * verify whether Chinese is only contained
+     * 验证字符串是否仅为中文
      *
      * @param data
      * @return
@@ -122,7 +122,7 @@ public class VerifyUtils {
     }
 
     /**
-     * verify whether Chinese is contained
+     * 验证字符串是否包含中文
      *
      * @param data
      * @return
@@ -142,7 +142,7 @@ public class VerifyUtils {
     }
 
     /**
-     * verify whether chinese identity card is valid
+     * 验证字符串是否为中国身份证号
      *
      * @param data
      * @return
@@ -153,7 +153,7 @@ public class VerifyUtils {
     }
 
     /**
-     * verify whether post code is valid
+     * 邮政编码验证
      *
      * @param data
      * @return

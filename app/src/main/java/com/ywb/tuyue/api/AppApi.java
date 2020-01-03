@@ -51,6 +51,11 @@ public class AppApi implements AppApiService {
 
     private AppApiService service;
 
+    /**
+     * 默认请求（统一请求前缀，统一自定义json解析）
+     *
+     * @param mOkHttpClient
+     */
     public AppApi(OkHttpClient mOkHttpClient) {
         this.okHttpClient = mOkHttpClient;
         Retrofit retrofit =

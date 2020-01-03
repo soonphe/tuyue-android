@@ -49,7 +49,7 @@ public class InterceptorUtils {
      *
      * @return
      */
-    public static Interceptor getRequestHeader() {
+    public static Interceptor getRequestHeaderInterceptor() {
         Interceptor headerInterceptor = chain -> {
             Request originalRequest = chain.request();
             //这里可以添加判断逻辑或直接返回chain.proceed

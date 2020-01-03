@@ -113,8 +113,6 @@ public class AppTitle extends RelativeLayout implements View.OnClickListener, Vi
             statusLine.setVisibility(View.GONE);
             //设置状态栏透明
             BarUtils.setStatusBarAlpha((Activity) mContext);
-//            StatusBarUtil.immersive((Activity) mContext);
-//            StatusBarUtil.buildStatuSpace(mContext, statusLine);
         }
 
     }
